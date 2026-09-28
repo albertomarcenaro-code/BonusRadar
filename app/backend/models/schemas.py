@@ -1,6 +1,139 @@
+"""Pydantic v2 models — mirrored by hand in frontend/src/lib/types.ts."""
 
-Action: create_file({"file_text":"\"\"\"Pydantic v2 models — mirrored by hand in frontend/src/lib/types.ts.\"\"\"\n\nimport uuid\nfrom datetime import datetime, timezone\nfrom typing import Literal\n\nfrom pydantic import BaseModel, Field\n\n\ndef now_utc() -> datetime:\n    return datetime.now(timezone.utc)\n\n\ndef new_id() -> str:\n    return str(uuid.uuid4())\n\n\n# ---------- Profile ----------\nclass FamilyMember(BaseModel):\n    name: str = \"\"\n    relation: str = \"\"  # coniuge, figlio, genitore, altro\n    birth_date: str = \"\"\n    fiscal_code: str = \"\"\n    disabled: bool = False\n    student: bool = False\n    dependent: bool = True\n\n\nclass ProfileIn(BaseModel):\n    full_name: str\n    fiscal_code: str = \"\"\n    birth_date: str = \"\"\n    birth_place: str = \"\"\n    gender: str = \"\"\n    address: str = \"\"\n    city: str = \"\"\n    province: str = \"\"\n    region: str = \"\"\n    postal_code: str = \"\"\n    phone: str = \"\"\n    email: str = \"\"\n    iban: str = \"\"\n    employment_status: str = \"\"\n    annual_income: float | None = None\n    isee_value: float | None = None\n    housing: str = \"\"  # proprietario, affitto, altro\n    family_members: list[FamilyMember] = []\n    interests: list[str] = []\n    notes: str = \"\"\n\n\nclass Profile(ProfileIn):\n    updated_at: datetime = Field(default_factory=now_utc)\n\n\n# ---------- Sources ----------\nclass SourceIn(BaseModel):\n    name: str\n    url: str\n\n\nclass Source(SourceIn):\n    id: str = Field(default_factory=new_id)\n    created_at: datetime = Field(default_factory=now_utc)\n    last_scanned_at: datetime | None = None\n    last_status: str = \"mai scansionata\"\n    bonus_found: int = 0\n\n\nclass ScanStatus(BaseModel):\n    running: bool = False\n    phase: str = \"\"\n    last_run_at: datetime | None = None\n    next_run_at: datetime | None = None\n    log: list[str] = []\n\n\n# ---------- Bonus ----------\nEligibility = Literal[\"eligible\", \"maybe\", \"not_eligible\", \"unknown\"]\n\n\nclass Bonus(BaseModel):\n    id: str = Field(default_factory=new_id)\n    title: str\n    authority: str = \"\"\n    category: str = \"altro\"\n    amount: str = \"\"\n    deadline: str = \"\"\n    summary: str = \"\"\n    requirements: list[str] = []\n    required_documents: list[str] = []\n    source_url: str = \"\"\n    source_name: str = \"\"\n    eligibility: Eligibility = \"unknown\"\n    eligibility_reason: str = \"\"\n    discovered_at: datetime = Field(default_factory=now_utc)\n    is_new: bool = True\n\n\n# ---------- Documents ----------\nDocStatus = Literal[\"da_firmare\", \"firmato\", \"inviato\", \"approvato\"]\n\n\nclass DocumentFile(BaseModel):\n    name: str\n    kind: Literal[\"pdf\", \"docx\"]\n\n\nclass DocumentFolder(BaseModel):\n    id: str = Field(default_factory=new_id)\n    bonus_id: str\n    bonus_title: str\n    authority: str = \"\"\n    created_at: datetime = Field(default_factory=now_utc)\n    status: DocStatus = \"da_firmare\"\n    files: list[DocumentFile] = []\n    attachments: list[str] = []\n    submission_notes: str = \"\"\n\n\nclass DocumentCreate(BaseModel):\n    bonus_id: str\n\n\nclass DocumentStatusUpdate(BaseModel):\n    status: DocStatus\n\n\nclass Dashboard(BaseModel):\n    has_profile: bool\n    profile_name: str = \"\"\n    bonus_total: int\n    bonus_eligible: int\n    bonus_maybe: int\n    bonus_new: int\n    documents_total: int\n    documents_to_sign: int\n    sources_total: int\n    scan: ScanStatus\n","path":"/app/backend/models/schemas.py"})
-Observation: Create successful: /app/backend/models/schemas.py
+import uuid
+from datetime import datetime, timezone
+from typing import Literal
+
+from pydantic import BaseModel, Field
 
 
-app/backend/models/schemas.py
+def now_utc() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+def new_id() -> str:
+    return str(uuid.uuid4())
+
+
+# ---------- Profile ----------
+class FamilyMember(BaseModel):
+    name: str = ""
+    relation: str = ""  # coniuge, figlio, genitore, altro
+    birth_date: str = ""
+    fiscal_code: str = ""
+    disabled: bool = False
+    student: bool = False
+    dependent: bool = True
+
+
+class ProfileIn(BaseModel):
+    full_name: str
+    fiscal_code: str = ""
+    birth_date: str = ""
+    birth_place: str = ""
+    gender: str = ""
+    address: str = ""
+    city: str = ""
+    province: str = ""
+    region: str = ""
+    postal_code: str = ""
+    phone: str = ""
+    email: str = ""
+    iban: str = ""
+    employment_status: str = ""
+    annual_income: float | None = None
+    isee_value: float | None = None
+    housing: str = ""  # proprietario, affitto, altro
+    family_members: list[FamilyMember] = []
+    interests: list[str] = []
+    notes: str = ""
+
+
+class Profile(ProfileIn):
+    updated_at: datetime = Field(default_factory=now_utc)
+
+
+# ---------- Sources ----------
+class SourceIn(BaseModel):
+    name: str
+    url: str
+
+
+class Source(SourceIn):
+    id: str = Field(default_factory=new_id)
+    created_at: datetime = Field(default_factory=now_utc)
+    last_scanned_at: datetime | None = None
+    last_status: str = "mai scansionata"
+    bonus_found: int = 0
+
+
+class ScanStatus(BaseModel):
+    running: bool = False
+    phase: str = ""
+    last_run_at: datetime | None = None
+    next_run_at: datetime | None = None
+    log: list[str] = []
+
+
+# ---------- Bonus ----------
+Eligibility = Literal["eligible", "maybe", "not_eligible", "unknown"]
+
+
+class Bonus(BaseModel):
+    id: str = Field(default_factory=new_id)
+    title: str
+    authority: str = ""
+    category: str = "altro"
+    amount: str = ""
+    deadline: str = ""
+    summary: str = ""
+    requirements: list[str] = []
+    required_documents: list[str] = []
+    source_url: str = ""
+    source_name: str = ""
+    eligibility: Eligibility = "unknown"
+    eligibility_reason: str = ""
+    discovered_at: datetime = Field(default_factory=now_utc)
+    is_new: bool = True
+
+
+# ---------- Documents ----------
+DocStatus = Literal["da_firmare", "firmato", "inviato", "approvato"]
+
+
+class DocumentFile(BaseModel):
+    name: str
+    kind: Literal["pdf", "docx"]
+
+
+class DocumentFolder(BaseModel):
+    id: str = Field(default_factory=new_id)
+    bonus_id: str
+    bonus_title: str
+    authority: str = ""
+    created_at: datetime = Field(default_factory=now_utc)
+    status: DocStatus = "da_firmare"
+    files: list[DocumentFile] = []
+    attachments: list[str] = []
+    submission_notes: str = ""
+
+
+class DocumentCreate(BaseModel):
+    bonus_id: str
+
+
+class DocumentStatusUpdate(BaseModel):
+    status: DocStatus
+
+
+class Dashboard(BaseModel):
+    has_profile: bool
+    profile_name: str = ""
+    bonus_total: int
+    bonus_eligible: int
+    bonus_maybe: int
+    bonus_new: int
+    documents_total: int
+    documents_to_sign: int
+    sources_total: int
+    scan: ScanStatus
