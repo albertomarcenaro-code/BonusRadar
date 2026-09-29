@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-29T21:26:25Z",
+  "generated_at": "2026-09-29T21:51:52Z",
   "source": "BonusRadar scraper v1",
   "count": 12,
   "bonuses": [
@@ -18,7 +18,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T21:26:25Z"
+      "discovered_at": "2026-09-29T21:51:52Z"
     },
     {
       "id": "scr-edd316e2cdce",
@@ -35,7 +35,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T21:26:25Z"
+      "discovered_at": "2026-09-29T21:51:52Z"
     },
     {
       "id": "scr-9349a241ef54",
@@ -52,7 +52,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T21:26:25Z"
+      "discovered_at": "2026-09-29T21:51:52Z"
     },
     {
       "id": "scr-6dffd98b5acb",
@@ -69,7 +69,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T21:26:25Z"
+      "discovered_at": "2026-09-29T21:51:52Z"
     },
     {
       "id": "scr-8cb60b8c8d5d",
@@ -86,7 +86,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T21:26:25Z"
+      "discovered_at": "2026-09-29T21:51:52Z"
     },
     {
       "id": "scr-0ec5258ac5e9",
@@ -103,7 +103,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T21:26:25Z"
+      "discovered_at": "2026-09-29T21:51:52Z"
     },
     {
       "id": "scr-42b84603a16a",
@@ -120,7 +120,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T21:26:25Z"
+      "discovered_at": "2026-09-29T21:51:52Z"
     },
     {
       "id": "scr-a8a43e260f44",
@@ -137,7 +137,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T21:26:25Z"
+      "discovered_at": "2026-09-29T21:51:52Z"
     },
     {
       "id": "scr-98331bac676b",
@@ -154,7 +154,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T21:26:25Z"
+      "discovered_at": "2026-09-29T21:51:52Z"
     },
     {
       "id": "scr-3a5019de96cb",
@@ -171,7 +171,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T21:26:25Z"
+      "discovered_at": "2026-09-29T21:51:52Z"
     },
     {
       "id": "scr-d86321cd7f93",
@@ -188,7 +188,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T21:26:25Z"
+      "discovered_at": "2026-09-29T21:51:52Z"
     },
     {
       "id": "scr-8b87b8f1c2cf",
@@ -205,7 +205,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T21:26:25Z"
+      "discovered_at": "2026-09-29T21:51:52Z"
     }
   ]
 }
