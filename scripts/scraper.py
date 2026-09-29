@@ -2,9 +2,10 @@
 """
 BonusRadar Italia — scraper automatico delle fonti ufficiali di bonus.
 
-Visita i portali istituzionali (incentivi.gov.it, INPS, Agenzia delle Entrate;
-estendibile a portali regionali/comunali), individua gli avvisi che sembrano
-segnalare bonus/bandi attivi ed estrae per ciascuno:
+Visita i portali istituzionali — nazionali (incentivi.gov.it, INPS,
+Agenzia delle Entrate) e locali liguri (Comune di Genova, Regione
+Liguria) — individua gli avvisi che sembrano segnalare bonus/bandi
+attivi ed estrae per ciascuno:
 
   - titolo, descrizione sintetica, ente erogatore
   - requisiti principali (ISEE, residenza, età, …) via euristica lessicale
@@ -53,6 +54,12 @@ USER_AGENT = (
     "Mozilla/5.0 (compatible; BonusRadarBot/1.0; "
     "+https://github.com/albertomarcenaro-code/BonusRadar)"
 )
+# User-Agent da browser: alcuni portali (es. Agenzia delle Entrate) filtrano
+# gli UA "bot": in caso di 403/406 si riprova una volta con questo.
+BROWSER_UA = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+)
 REQUEST_TIMEOUT = 20          # secondi
 DELAY_BETWEEN_REQUESTS = 1.0  # richiesta educata tra una fonte e l'altra
 MAX_ITEMS_PER_SOURCE = 12
@@ -62,7 +69,12 @@ DEFAULT_JSON_PATH = os.environ.get(
 )
 
 # Fonti ufficiali monitorate. `list_url` è la pagina indice da cui si
-# estraggono i link; `known_root` serve a rendere assoluti i link relativi.
+# estraggono i link; `base_url` serve a rendere assoluti i link relativi.
+# `topics` (opzionale): filtro tematico — solo i link il cui testo contiene
+# una di queste parole sono candidati (deduzione locale mirata).
+# `residency` (opzionale): requisito di residenza da aggiungere alle schede
+# estratte dalla fonte (Comune di Genova → residenza comunale, Regione
+# Liguria → residenza regionale).
 SOURCES: list[dict] = [
     {
         "name": "incentivi.gov.it",
@@ -82,6 +94,45 @@ SOURCES: list[dict] = [
         "list_url": "https://www.agenziaentrate.gov.it/portale/web/guest/area-stampa/novita",
         "base_url": "https://www.agenziaentrate.gov.it/",
     },
+    # ---------------- Fonti locali prioritarie ----------------
+    {
+        "name": "Comune di Genova",
+        "authority": "Comune di Genova",
+        "list_url": "https://www.comune.genova.it/novita/avvisi",
+        "base_url": "https://www.comune.genova.it/",
+        "residency": "Residenza nel Comune di Genova",
+        "topics": (
+            # contributi casa/affitto
+            "affitto", "casa", "abitaz", "alloggi", "ristrutturaz", "ediliz",
+            # mobilità sostenibile
+            "mobilit", "biciclett", "bike", "consegna a domicilio",
+            # agevolazioni famiglie
+            "famiglia", "figli", "nido", "asilo", "maternit", "genitori",
+            # scuola/nidi
+            "scuola", "mensa", "student",
+            # commercio/imprese locali
+            "commercio", "commerc", "esercizi", "imprese", "negoz", "tessuto economico",
+        ),
+    },
+    {
+        "name": "Regione Liguria",
+        "authority": "Regione Liguria",
+        "list_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetitions.html",
+        "base_url": "https://www.regione.liguria.it/",
+        "residency": "Residenza in Liguria",
+        "topics": (
+            # efficientamento energetico
+            "energet", "efficientament", "fotovoltaic", "caldaia", "isolament",
+            "riqualificaz",
+            # sostegno alla famiglia
+            "famiglia", "figli", "nido", "maternit", "assegno",
+            # trasporti
+            "trasport", "mobilit", "abbonament", "ferrovi", "treno",
+            # formazione/lavoro
+            "formazion", "lavoro", "occupabilit", "apprendistat", "impresa",
+            "inoccup", "corsi", "borse", "student", "iscrizion",
+        ),
+    },
 ]
 
 # Parole-chiave: un link è candidato "bonus" se il testo le contiene.
@@ -93,9 +144,9 @@ BONUS_KEYWORDS = (
 # mappa categoria → parole-chiave (vocabolario identico a CATEGORY_LABEL
 # in app/frontend/src/lib/format.ts)
 CATEGORY_KEYWORDS: dict[str, tuple[str, ...]] = {
-    "casa": ("ristrutturaz", "affitto", "casa", "ediliz", "mutuo", "immobilia", "abitaz"),
-    "famiglia": ("figli", "nido", "famiglia", "maternit", "assegno unico", "nucleo"),
-    "lavoro": ("lavoro", "impresa", "assunzion", "apprendistat", "dipendente", "autonom"),
+    "casa": ("ristrutturaz", "affitto", "casa", "ediliz", "mutuo", "immobilia", "abitaz", "alloggi"),
+    "famiglia": ("figli", "nido", "asilo", "famiglia", "maternit", "assegno unico", "nucleo", "scuola", "mensa"),
+    "lavoro": ("lavoro", "impresa", "assunzion", "apprendistat", "dipendente", "autonom", "formazion", "occupabilit", "commerc"),
     "mobilita": ("mobilità", "mobilita", "auto", "scooter", "veicol", "trasporti"),
     "studio": ("student", "universit", "bors", "merito", "scuola", "libri"),
     "salute": ("psicolog", "salute", "sanitar", "medic", "dentista"),
@@ -113,6 +164,15 @@ DOCUMENT_PATTERNS = (
 )
 
 RE_AMOUNT = re.compile(r"(?:fino a |da |detrazione )?\d[\d.,]*\s*(?:€|euro)", re.IGNORECASE)
+RE_DEADLINE_CARD = re.compile(
+    # "Scadenza: ore 12.00 del giorno 12 ottobre 2026", "Chiusura: 30/09/2026",
+    # "Termine presentazione domande: 15 ottobre 2026", "entro il 30/09/2026"
+    r"(?:scadenza|chiusura|termine|entro il?)[^\n]{0,140}?"
+    r"(?:\d{1,2}[/-]\d{1,2}[/-]\d{2,4}"
+    r"|\d{1,2}\s+(?:gennaio|febbraio|marzo|aprile|maggio|giugno|"
+    r"luglio|agosto|settembre|ottobre|novembre|dicembre)\s+\d{4})",
+    re.IGNORECASE,
+)
 RE_DATE = re.compile(
     r"\b\d{1,2}[/-]\d{1,2}[/-]\d{2,4}\b"                      # 31/12/2026
     r"|\b\d{1,2}\s+(?:gennaio|febbraio|marzo|aprile|maggio|giugno|"
@@ -152,14 +212,89 @@ class LinkParser(HTMLParser):
             self._text = []
 
 
-def fetch(url: str) -> str:
+class CardParser(HTMLParser):
+    """Estrae le 'card' dei notiziari istituzionali: ciascuna ha un titolo
+    (h2/h3/h4 con class~title), un link "leggi tutto" e un'eventuale data.
+    Usata per Comune di Genova e Regione Liguria, dove il link ha testo
+    generico ("Vai alla notizia") e il titolo vero sta nell'heading sopra."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.cards: list[dict] = []
+        self._heading: str | None = None     # titolo in accumulo
+        self._in_heading = False
+        self._href: str | None = None        # href correntemente aperto
+        self._href_text: list[str] = []
+        self._time_attr: str | None = None
+        self._card_text: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str]]) -> None:
+        a = dict(attrs)
+        if tag in ("h2", "h3", "h4"):
+            self._heading = ""
+            self._in_heading = True
+            cls = a.get("class", "")
+            if "card-title" in cls:
+                self._card_text = []
+        elif tag == "a" and self._heading is not None:
+            self._href = a.get("href")
+            self._href_text = []
+        elif tag == "time" and self._heading is not None:
+            self._time_attr = a.get("datetime")
+
+    def handle_data(self, data: str) -> None:
+        if self._in_heading:
+            self._heading += data
+        if self._href is not None:
+            self._href_text.append(data)
+        if self._heading is not None:
+            self._card_text.append(data)
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag in ("h2", "h3", "h4") and self._in_heading:
+            self._in_heading = False
+        elif tag == "a" and self._href is not None:
+            link_text = re.sub(r"\s+", " ", " ".join(self._href_text)).strip()
+            title = re.sub(r"\s+", " ", (self._heading or "")).strip()
+            generic = link_text.lower() in ("", "vai alla notizia", "vai alla pagina della notizia", "leggi tutto", "read more", "continua")
+            if not generic and link_text:
+                title = title or link_text
+            if title and self._href:
+                self.cards.append({
+                    "title": title,
+                    "href": self._href,
+                    "time": self._time_attr,
+                    "text": re.sub(r"\s+", " ", " ".join(self._card_text)).strip(),
+                })
+            self._href = None
+            self._href_text = []
+            self._time_attr = None
+            if not self._in_heading:
+                self._heading = None
+                self._card_text = []
+
+
+class FetchError(Exception):
+    """Errore di scaricamento: permette il retry con User-Agent da browser."""
+
+    def __init__(self, status: int | None, detail: str):
+        super().__init__(f"HTTP {status}: {detail}" if status else detail)
+        self.status = status
+
+
+def fetch(url: str, user_agent: str = USER_AGENT) -> str:
     """Scarica una pagina HTTP(S) restituendo l'HTML come testo."""
     req = urllib.request.Request(
-        url, headers={"User-Agent": USER_AGENT, "Accept": "text/html,application/xhtml+xml"}
+        url, headers={"User-Agent": user_agent, "Accept": "text/html,application/xhtml+xml"}
     )
-    with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as resp:
-        charset = resp.headers.get_content_charset() or "utf-8"
-        return resp.read().decode(charset, errors="replace")
+    try:
+        with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as resp:
+            charset = resp.headers.get_content_charset() or "utf-8"
+            return resp.read().decode(charset, errors="replace")
+    except urllib.error.HTTPError as exc:
+        raise FetchError(exc.code, exc.reason) from exc
+    except (urllib.error.URLError, TimeoutError, OSError) as exc:
+        raise FetchError(None, str(exc)) from exc
 
 
 def extract_links(html: str, base_url: str) -> list[tuple[str, str]]:
@@ -184,14 +319,44 @@ def extract_links(html: str, base_url: str) -> list[tuple[str, str]]:
     return result
 
 
+def extract_items(html: str, base_url: str) -> list[dict]:
+    """Estrae gli elementi di un notiziario provando prima il parser di card
+    (titolo vero + link + data), poi ricadendo sui link classici con testo
+    significativo. Ogni elemento: {url, title, text}.
+    """
+    card_parser = CardParser()
+    try:
+        card_parser.feed(html)
+    except Exception:
+        pass
+
+    items: list[dict] = []
+    seen: set[str] = set()
+    for card in card_parser.cards:
+        absolute = urljoin(base_url, card["href"])
+        if not absolute.startswith("http") or absolute in seen:
+            continue
+        seen.add(absolute)
+        items.append({"url": absolute, "title": card["title"], "text": card["text"]})
+
+    if items:  # notiziario a card riconosciuto
+        return items
+
+    # Fallback: link con testo proprio significativo (pagine a elenco semplice)
+    for absolute, text in extract_links(html, base_url):
+        if len(text) >= 20:
+            items.append({"url": absolute, "title": text, "text": text})
+    return items
+
+
 # ---------------------------------------------------------------
 # Estrazione dei campi del bonus
 # ---------------------------------------------------------------
 
 def clean_title(text: str) -> str:
-    """Ripulisce il testo del link per usarlo come titolo."""
-    text = re.sub(r"^(avviso|bando|comunicato|nota|scadenza)[:\s-]*", "", text, flags=re.IGNORECASE)
-    text = text.strip(" .|—–-")
+    """Ripulisce il testo per usarlo come titolo (senza troncare prefissi
+    come 'Avviso di concorso…', che fanno parte del titolo stesso)."""
+    text = re.sub(r"\s+", " ", text).strip(" .|—–-|")
     return text[:160]
 
 
@@ -223,15 +388,38 @@ def stable_id(norm_title: str) -> str:
     return f"scr-{digest}"
 
 
-def build_bonus(source: dict, url: str, raw_title: str) -> dict | None:
-    """Costruisce la scheda bonus a partire da un link candidato."""
+def build_bonus(source: dict, url: str, raw_title: str, extra_text: str = "") -> dict | None:
+    """Costruisce la scheda bonus a partire da un elemento candidato.
+    `extra_text` è il testo della card: arricchisce importo, scadenza,
+    requisiti e documenti senza sostituire il titolo."""
     title = clean_title(raw_title)
     if len(title) < 12:
         return None
 
-    summary = title if len(title) > 40 else f"Avviso pubblicato su {source['name']}: apri la fonte per i dettagli."
-    amount_match = RE_AMOUNT.search(title)
-    deadline_match = RE_DATE.search(title)
+    full_text = f"{title} {extra_text}"
+    summary = (extra_text.strip() or title) if len(title) > 40 else f"Avviso pubblicato su {source['name']}: apri la fonte per i dettagli."
+    if len(summary) > 400:
+        summary = summary[:397].rstrip() + "…"
+    amount_match = RE_AMOUNT.search(full_text)
+    # Scadenza: nelle card solo da frasi esplicite ("Scadenza: …") — la data
+    # generica della card è la pubblicazione, non la scadenza. Nei link semplici
+    # (extra_text vuoto) la data nel titolo è di solito la scadenza reale.
+    if extra_text:
+        card_deadline = RE_DEADLINE_CARD.search(extra_text)
+        if card_deadline:
+            inner = RE_DATE.search(card_deadline.group(0))
+            deadline_text = inner.group(0) if inner else card_deadline.group(0).strip()
+        else:
+            deadline_text = ""
+    else:
+        date_match = RE_DATE.search(title)
+        deadline_text = date_match.group(0) if date_match else ""
+
+    requirements = extract_requirements(full_text)
+    # Requisito di residenza dichiarato dalla fonte (fonti locali).
+    residency = source.get("residency")
+    if residency and residency not in requirements:
+        requirements.append(residency)
 
     return {
         "id": stable_id(normalize_title(title)),
@@ -239,9 +427,9 @@ def build_bonus(source: dict, url: str, raw_title: str) -> dict | None:
         "authority": source["authority"],
         "category": guess_category(f"{title} {url}"),
         "amount": amount_match.group(0).strip() if amount_match else "",
-        "deadline": deadline_match.group(0) if deadline_match else "",
+        "deadline": deadline_text,
         "summary": summary,
-        "requirements": extract_requirements(title),
+        "requirements": requirements,
         "required_documents": extract_documents(title),
         "source_url": url,
         "source_name": source["name"],
@@ -254,20 +442,29 @@ def build_bonus(source: dict, url: str, raw_title: str) -> dict | None:
 def scrape_source(source: dict) -> list[dict]:
     """Scarica la pagina indice di una fonte e restituisce le schede bonus."""
     print(f"→ Fonte: {source['name']} ({source['list_url']})")
-    try:
-        html = fetch(source["list_url"])
-    except Exception as exc:
-        print(f"  ⚠︎ scaricamento fallito: {exc}")
+    html: str | None = None
+    for ua, label in ((USER_AGENT, "UA bot"), (BROWSER_UA, "UA browser")):
+        try:
+            html = fetch(source["list_url"], user_agent=ua)
+            break
+        except FetchError as exc:
+            print(f"  ⚠︎ {label} fallito: {exc}")
+    if html is None:
+        print("  ⚠︎ fonte saltata (non raggiungibile): le altre proseguono")
         return []
 
+    topics = source.get("topics")
     items: list[dict] = []
-    for url, text in extract_links(html, source["base_url"]):
+    for element in extract_items(html, source["base_url"]):
         if len(items) >= MAX_ITEMS_PER_SOURCE:
             break
-        low = text.lower()
-        if not any(k in low for k in BONUS_KEYWORDS):
+        hay = f"{element['title']} {element['text']}".lower()
+        if not any(k in hay for k in BONUS_KEYWORDS):
             continue
-        bonus = build_bonus(source, url, text)
+        # Filtro tematico delle fonti locali: solo gli avvisi in tema.
+        if topics and not any(t in hay for t in topics):
+            continue
+        bonus = build_bonus(source, element["url"], element["title"], element["text"])
         if bonus:
             items.append(bonus)
 
