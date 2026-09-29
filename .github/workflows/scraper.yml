@@ -53,4 +53,4 @@ jobs:
           else
             git commit -m "Aggiornamento automatico catalogo bonus (scraper settimanale)"
             git push
-          fi
+          fi 
