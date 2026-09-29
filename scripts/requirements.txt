@@ -1,0 +1,11 @@
+# BonusRadar scraper — dipendenze Python
+#
+# Lo script scripts/scraper.py usa esclusivamente la libreria standard di
+# Python 3.10+ (urllib, html, json, re, hashlib): nessuna installazione
+# è necessaria, né in locale né nella GitHub Action.
+#
+# Se in futuro si aggiungono dipendenze (es. beautifulsoup4, requests),
+# elencarle qui sotto con versione bloccata:
+#
+# beautifulsoup4==4.12.3
+# requests==2.32.3

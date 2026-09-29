@@ -42,6 +42,20 @@ export function resetDemo(): void {
   localStorage.removeItem(KEY);
 }
 
+// Cache del catalogo JSON generato dallo scraper (null = non disponibile).
+let scraperCatalogCache: Bonus[] | null = null;
+
+async function loadScraperCatalog(): Promise<Bonus[] | null> {
+  try {
+    const res = await fetch("/data/bonuses.json", { cache: "no-cache" });
+    if (!res.ok) return null;
+    const file = (await res.json()) as { bonuses?: Bonus[] };
+    return Array.isArray(file.bonuses) && file.bonuses.length > 0 ? file.bonuses : null;
+  } catch {
+    return null; // file assente: si ricade sul catalogo demo
+  }
+}
+
 export const demoStore = {
   getUser(): DemoUser | null {
     return read().user;
@@ -107,8 +121,12 @@ export const demoStore = {
     write({ ...s, documents: s.documents.filter((d) => d.id !== id) });
   },
 
-  bonuses(): Bonus[] {
-    return DEMO_BONUSES;
+  async bonuses(): Promise<Bonus[]> {
+    // Priorità al catalogo generato dallo scraper (public/data/bonuses.json):
+    // in demo è l'unico modo per mostrare i bonus realmente estratti dalle
+    // fonti ufficiali. In mancanza si usa il catalogo statico.
+    if (!scraperCatalogCache) scraperCatalogCache = await loadScraperCatalog();
+    return scraperCatalogCache ?? DEMO_BONUSES;
   },
   sources(): Source[] {
     return [];

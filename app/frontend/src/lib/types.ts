@@ -78,6 +78,14 @@ export interface Bonus {
   is_new: boolean;
 }
 
+/** File JSON generato dallo scraper (public/data/bonuses.json). */
+export interface BonusCatalogFile {
+  generated_at: string;
+  source: string;
+  count: number;
+  bonuses: Bonus[];
+}
+
 export type DocStatus = "da_firmare" | "firmato" | "inviato" | "approvato";
 
 export interface DocumentFile {
@@ -108,4 +116,6 @@ export interface Dashboard {
   documents_to_sign: number;
   sources_total: number;
   scan: ScanStatus;
+  /** Data dell'ultima scansione dello scraper (dal catalogo JSON). */
+  last_scan_at: string | null;
 }

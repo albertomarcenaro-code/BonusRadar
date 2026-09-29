@@ -1,0 +1,56 @@
+name: Scraper fonti bonus
+
+# Scraping settimanale dei portali istituzionali (INPS, incentivi.gov.it,
+# Agenzia delle Entrate) e aggiornamento del catalogo:
+#  - tabella `bonuses` su Supabase (se configurato un key con permesso di
+#    scrittura: consigliata SUPABASE_SERVICE_ROLE_KEY)
+#  - file di fallback app/frontend/public/data/bonuses.json (commit sul repo)
+
+on:
+  schedule:
+    # Ogni lunedì alle 08:00 UTC (09:00 ora italiana, CET/CEST)
+    - cron: "0 8 * * 1"
+  workflow_dispatch: {} # avvio manuale da tab Actions
+
+permissions:
+  contents: write # necessario per il commit automatico del file JSON
+
+concurrency:
+  group: scraper
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Esegui scraper
+        env:
+          # Credenziali Supabase dai secrets del repository.
+          # Il frontend usa i prefissi VITE_; lo scraper accetta entrambi.
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python3 scripts/scraper.py
+
+      - name: Commit catalogo JSON (se cambiato)
+        run: |
+          git config user.name "bonusradar-scraper-bot"
+          git config user.email "bonusradar-scraper-bot@users.noreply.github.com"
+          git add app/frontend/public/data/bonuses.json
+          if git diff --cached --quiet; then
+            echo "Nessuna modifica al catalogo: nessun commit."
+          else
+            git commit -m "Aggiornamento automatico catalogo bonus (scraper settimanale)"
+            git push
+          fi

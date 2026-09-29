@@ -14,7 +14,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { DOCUMENTS_BUCKET, documentObjectPath, isSupabaseConfigured, supabase } from "@/lib/supabase";
 import { demoStore } from "@/lib/demoStore";
 import { buildHtml, makeFileNames, openPrintWindow } from "@/lib/docgen";
-import type { Bonus, Dashboard, DocStatus, DocumentFolder, Profile, ProfileIn, ScanStatus, Source } from "@/lib/types";
+import type { Bonus, BonusCatalogFile, Dashboard, DocStatus, DocumentFolder, Profile, ProfileIn, ScanStatus, Source } from "@/lib/types";
 
 export class DataError extends Error {}
 
@@ -123,13 +123,29 @@ export async function recordQuestionnaire(p: ProfileIn): Promise<void> {
 // Bonuses + favorites
 // ============================================================
 export async function listBonuses(): Promise<Bonus[]> {
-  if (!isSupabaseConfigured) return demoStore.bonuses();
+  if (!isSupabaseConfigured) return demoStore.bonuses(); // demo: catalogo scraper se presente, altrimenti statico
   const { data, error } = await requireSupabase()
     .from("bonuses")
     .select("*")
     .order("created_at", { ascending: true });
   dbx(error);
   return ((data ?? []) as BonusRow[]).map(mapBonus);
+}
+
+/**
+ * Catalogo JSON generato dallo scraper (public/data/bonuses.json).
+ * Raggiungibile anche da utenti NON autenticati (la RLS non permette loro
+ * di leggere la tabella bonuses): è la fonte pubblica dell'ultima scansione.
+ */
+export async function fetchScraperCatalog(): Promise<BonusCatalogFile | null> {
+  try {
+    const res = await fetch("/data/bonuses.json", { cache: "no-cache" });
+    if (!res.ok) return null;
+    const file = (await res.json()) as BonusCatalogFile;
+    return Array.isArray(file.bonuses) ? file : null;
+  } catch {
+    return null; // file assente (es. deploy senza catalogo): nessun errore UI
+  }
 }
 
 export async function listFavorites(): Promise<string[]> {
@@ -312,7 +328,13 @@ export const scan = {
 // Dashboard aggregata
 // ============================================================
 export async function getDashboard(): Promise<Dashboard> {
-  const [, profile, bonuses, docs] = await Promise.all([auth.getUser(), getProfile().catch(() => null), listBonuses().catch(() => []), listDocuments().catch(() => [])]);
+  const [, profile, bonuses, catalog, docs] = await Promise.all([
+    auth.getUser(),
+    getProfile().catch(() => null),
+    listBonuses().catch(() => []),
+    fetchScraperCatalog(),
+    listDocuments().catch(() => []),
+  ]);
   return {
     has_profile: Boolean(profile),
     profile_name: profile?.full_name ?? "",
@@ -324,5 +346,6 @@ export async function getDashboard(): Promise<Dashboard> {
     documents_to_sign: docs.filter((d) => d.status === "da_firmare").length,
     sources_total: 0,
     scan: await scan.status(),
+    last_scan_at: catalog?.generated_at ?? null,
   };
 }

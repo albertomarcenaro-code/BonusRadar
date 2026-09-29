@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { CalendarClock, ExternalLink, FileText, Heart, Loader2, Search } from "lucide-react";
+import { CalendarClock, ExternalLink, FileText, Heart, Loader2, RefreshCw, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import PageHeader from "@/components/PageHeader";
-import { useBonuses, useDashboard, useDocuments, useFavorites, useGenerateDocs, useProfile, useScanStatus, useToggleFavorite } from "@/lib/queries";
-import { CATEGORY_LABEL, ELIGIBILITY_CLASS, ELIGIBILITY_LABEL } from "@/lib/format";
+import { useBonuses, useDashboard, useDocuments, useFavorites, useGenerateDocs, useProfile, useScanStatus, useScraperCatalog, useToggleFavorite } from "@/lib/queries";
+import { CATEGORY_LABEL, ELIGIBILITY_CLASS, ELIGIBILITY_LABEL, fmtDateTime } from "@/lib/format";
 import type { Bonus, Eligibility } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -18,6 +18,7 @@ const FILTERS: { key: "all" | Eligibility; label: string }[] = [
 ];
 
 export default function BonusCatalog() {
+  const { data: catalog } = useScraperCatalog();
   const { data: scan } = useScanStatus();
   const running = scan?.running ?? false;
   const { data: bonuses, isError } = useBonuses(running);
@@ -56,6 +57,16 @@ export default function BonusCatalog() {
           </Button>
         }
       />
+
+      {catalog?.generated_at && (
+        <p className="mb-4 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-xs text-slate-500" data-testid="bonus-last-update">
+          <RefreshCw className="size-3.5" />
+          <span>
+            Ultimo aggiornamento: <span className="font-medium text-slate-700">{fmtDateTime(catalog.generated_at)}</span>
+          </span>
+          <span className="text-slate-400">· scansione automatica delle fonti ufficiali (ogni lunedì)</span>
+        </p>
+      )}
 
       {dash && !dash.has_profile && (
         <div className="mb-6 flex flex-col gap-3 rounded-xl border border-[#FDE68A] bg-[#FFFBEB] p-4 sm:flex-row sm:items-center sm:justify-between" data-testid="bonus-no-profile-banner">

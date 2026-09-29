@@ -4,6 +4,7 @@ import {
   auth,
   DataError,
   deleteDocument,
+  fetchScraperCatalog,
   generateDocuments,
   getDashboard,
   getFileUrl,
@@ -36,6 +37,15 @@ export const useProfile = () =>
 
 export const useSources = () =>
   useQuery({ queryKey: ["sources"], queryFn: listSources, retry: false });
+
+/** Catalogo JSON dello scraper: espone generated_at per l'indicatore UI. */
+export const useScraperCatalog = () =>
+  useQuery({
+    queryKey: ["scraper-catalog"],
+    queryFn: fetchScraperCatalog,
+    retry: false,
+    staleTime: 5 * 60_000,
+  });
 
 export const useBonuses = (poll = false) =>
   useQuery({
