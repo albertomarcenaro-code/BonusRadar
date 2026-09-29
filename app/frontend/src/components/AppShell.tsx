@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { FolderArchive, Globe, LayoutDashboard, Radar, Sparkles, UserCheck } from "lucide-react";
+import { CloudOff, FolderArchive, Globe, LayoutDashboard, Radar, Sparkles, UserCheck } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
-import { useScanStatus } from "@/lib/queries";
+import { useDashboard, useScanStatus } from "@/lib/queries";
 import { fmtDate } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
@@ -15,6 +15,7 @@ const LINKS = [
 
 export default function AppShell() {
   const { data: scan } = useScanStatus();
+  const { isError: backendDown } = useDashboard();
   return (
     <div className="min-h-svh bg-background">
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col bg-sidebar text-sidebar-foreground lg:flex">
@@ -63,6 +64,18 @@ export default function AppShell() {
         <p className="font-heading font-bold">BonusRadar Italia</p>
         {scan?.running && <span className="ml-auto size-2 animate-pulse-dot rounded-full bg-amber-500" />}
       </header>
+
+      {backendDown && (
+        <div
+          className="flex items-center justify-center gap-2 bg-[#FFFBEB] px-4 py-2.5 text-sm text-[#92400E]"
+          data-testid="backend-offline-banner"
+        >
+          <CloudOff className="size-4 shrink-0" />
+          <span>
+            Backend non raggiungibile — i dati non sono disponibili. Controlla che FastAPI e MongoDB siano attivi.
+          </span>
+        </div>
+      )}
 
       <main className="pb-24 lg:pb-0 lg:pl-64">
         <div className="mx-auto max-w-6xl px-4 py-6 sm:px-8 lg:py-10">
