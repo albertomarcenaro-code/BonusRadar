@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { CloudOff, FolderArchive, Globe, LayoutDashboard, Radar, Sparkles, UserCheck } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
-import { useDashboard, useScanStatus } from "@/lib/queries";
+import { isSupabaseConfigured, useScanStatus } from "@/lib/queries";
 import { fmtDate } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
@@ -15,7 +15,7 @@ const LINKS = [
 
 export default function AppShell() {
   const { data: scan } = useScanStatus();
-  const { isError: backendDown } = useDashboard();
+  const demoMode = !isSupabaseConfigured;
   return (
     <div className="min-h-svh bg-background">
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col bg-sidebar text-sidebar-foreground lg:flex">
@@ -65,14 +65,15 @@ export default function AppShell() {
         {scan?.running && <span className="ml-auto size-2 animate-pulse-dot rounded-full bg-amber-500" />}
       </header>
 
-      {backendDown && (
+      {demoMode && (
         <div
           className="flex items-center justify-center gap-2 bg-[#FFFBEB] px-4 py-2.5 text-sm text-[#92400E]"
-          data-testid="backend-offline-banner"
+          data-testid="demo-mode-banner"
         >
           <CloudOff className="size-4 shrink-0" />
           <span>
-            Backend non raggiungibile — i dati non sono disponibili. Controlla che FastAPI e MongoDB siano attivi.
+            Modalità demo — i dati sono salvati solo in questo browser. Configura Supabase (VITE_SUPABASE_URL e
+            VITE_SUPABASE_ANON_KEY) per salvare tutto nel cloud.
           </span>
         </div>
       )}

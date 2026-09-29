@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2, FileSignature, Globe, Radar, Sparkles, UserCheck } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { Button } from "@/components/ui/button";
-import { useBonuses, useDashboard, useScanStatus, useTriggerScan } from "@/lib/queries";
+import { useBonuses, useDashboard, useScanStatus } from "@/lib/queries";
 import { ELIGIBILITY_CLASS, ELIGIBILITY_LABEL, fmtDateTime } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
@@ -10,7 +10,6 @@ export default function Dashboard() {
   const { data: d } = useDashboard();
   const { data: scan } = useScanStatus();
   const { data: bonuses } = useBonuses(false);
-  const scanMut = useTriggerScan();
   const top = (bonuses ?? []).filter((b) => b.eligibility === "eligible" || b.eligibility === "maybe").slice(0, 4);
   const running = scan?.running ?? false;
 
@@ -52,12 +51,12 @@ export default function Dashboard() {
             <Button
               variant="outline"
               size="lg"
-              disabled={running || scanMut.isPending}
-              onClick={() => scanMut.mutate()}
+              disabled
+              title="La scansione AI settimanale richiede il backend; disponibile a breve"
               data-testid="btn-dashboard-scan"
             >
               <Radar className={cn("size-4", running && "animate-radar")} />
-              {running ? "Scansione in corso…" : "Avvia scansione ora"}
+              Scansione settimanale automatica
             </Button>
           </div>
           {running && (

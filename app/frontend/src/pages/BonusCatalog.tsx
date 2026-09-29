@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { CalendarClock, ExternalLink, FileText, Loader2, RefreshCw, Search } from "lucide-react";
+import { CalendarClock, ExternalLink, FileText, Heart, Loader2, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import PageHeader from "@/components/PageHeader";
-import { useBonuses, useDashboard, useDocuments, useEvaluate, useGenerateDocs, useScanStatus } from "@/lib/queries";
+import { useBonuses, useDashboard, useDocuments, useFavorites, useGenerateDocs, useProfile, useScanStatus, useToggleFavorite } from "@/lib/queries";
 import { CATEGORY_LABEL, ELIGIBILITY_CLASS, ELIGIBILITY_LABEL } from "@/lib/format";
 import type { Bonus, Eligibility } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -23,7 +23,7 @@ export default function BonusCatalog() {
   const { data: bonuses, isError } = useBonuses(running);
   const { data: dash } = useDashboard();
   const { data: docs } = useDocuments();
-  const evaluate = useEvaluate();
+  const { data: favorites } = useFavorites();
   const [filter, setFilter] = useState<"all" | Eligibility>("all");
   const [category, setCategory] = useState("tutte");
   const [q, setQ] = useState("");
@@ -48,12 +48,11 @@ export default function BonusCatalog() {
           <Button
             variant="outline"
             className="h-11"
-            disabled={running || evaluate.isPending || !dash?.has_profile}
-            onClick={() => evaluate.mutate()}
+            disabled
+            title="La valutazione AI dell'idoneità arriva con il motore di scansione"
             data-testid="btn-reevaluate"
           >
-            <RefreshCw className={cn("size-4", running && "animate-spin")} />
-            {running ? "Valutazione in corso…" : "Ricalcola idoneità"}
+            Valutazione AI in arrivo
           </Button>
         }
       />
@@ -115,7 +114,14 @@ export default function BonusCatalog() {
       {isError && <p className="text-sm text-slate-500">Catalogo non disponibile al momento.</p>}
       <div className="grid gap-4 md:grid-cols-2" data-testid="bonus-list">
         {list.map((b, i) => (
-          <BonusCard key={b.id} bonus={b} index={i} hasProfile={!!dash?.has_profile} hasDocs={docBonusIds.has(b.id)} />
+          <BonusCard
+            key={b.id}
+            bonus={b}
+            index={i}
+            hasProfile={!!dash?.has_profile}
+            hasDocs={docBonusIds.has(b.id)}
+            isFavorite={(favorites ?? []).includes(b.id)}
+          />
         ))}
         {bonuses && list.length === 0 && (
           <div className="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-500 md:col-span-2" data-testid="bonus-empty">
@@ -127,8 +133,22 @@ export default function BonusCatalog() {
   );
 }
 
-function BonusCard({ bonus: b, index, hasProfile, hasDocs }: { bonus: Bonus; index: number; hasProfile: boolean; hasDocs: boolean }) {
+function BonusCard({
+  bonus: b,
+  index,
+  hasProfile,
+  hasDocs,
+  isFavorite,
+}: {
+  bonus: Bonus;
+  index: number;
+  hasProfile: boolean;
+  hasDocs: boolean;
+  isFavorite: boolean;
+}) {
   const gen = useGenerateDocs();
+  const profileQ = useProfile();
+  const fav = useToggleFavorite();
   const [open, setOpen] = useState(false);
   return (
     <article
@@ -197,19 +217,35 @@ function BonusCard({ bonus: b, index, hasProfile, hasDocs }: { bonus: Bonus; ind
       )}
 
       <div className="mt-auto flex items-center justify-between gap-2 pt-5">
-        {b.source_url ? (
-          <a href={b.source_url} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-xs text-slate-500 hover:text-slate-900" data-testid="bonus-source-link">
-            <ExternalLink className="size-3" /> Fonte
-          </a>
-        ) : <span />}
+        <div className="flex items-center gap-1">
+          <button
+            className={cn(
+              "flex h-8 items-center gap-1 rounded-md px-2 text-xs transition-colors duration-150",
+              isFavorite ? "text-red-600" : "text-slate-500 hover:text-red-600",
+            )}
+            onClick={() => fav.mutate(b.id)}
+            aria-label={isFavorite ? "Rimuovi dai preferiti" : "Aggiungi ai preferiti"}
+            data-testid="btn-toggle-favorite"
+          >
+            <Heart className={cn("size-4", isFavorite && "fill-current")} />
+            {isFavorite ? "Preferito" : "Preferito"}
+          </button>
+          {b.source_url ? (
+            <a href={b.source_url} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-xs text-slate-500 hover:text-slate-900" data-testid="bonus-source-link">
+              <ExternalLink className="size-3" /> Fonte
+            </a>
+          ) : null}
+        </div>
         <Button
           disabled={!hasProfile || gen.isPending || b.eligibility === "not_eligible"}
-          onClick={() => gen.mutate(b.id)}
+          onClick={() => {
+            if (profileQ.data) gen.mutate({ bonus: b, profile: profileQ.data });
+          }}
           className="h-10"
           data-testid="btn-generate-docs"
         >
           {gen.isPending ? <Loader2 className="size-4 animate-spin" /> : <FileText className="size-4" />}
-          {gen.isPending ? "Compilazione AI…" : hasDocs ? "Rigenera documenti" : "Prepara documenti"}
+          {gen.isPending ? "Compilazione…" : hasDocs ? "Rigenera documenti" : "Prepara documenti"}
         </Button>
       </div>
     </article>

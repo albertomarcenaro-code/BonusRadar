@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { Download, FileArchive, FileText, FileType2, FolderOpen, Trash2 } from "lucide-react";
+import { Download, FileText, FileType2, FolderOpen, Trash2 } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import PageHeader from "@/components/PageHeader";
-import { useDeleteDoc, useDocuments, useUpdateDocStatus } from "@/lib/queries";
+import { useDeleteDoc, useDownloadDoc, useDocuments, useUpdateDocStatus } from "@/lib/queries";
 import { DOC_STATUS_LABEL, fmtDate } from "@/lib/format";
 import type { DocStatus, DocumentFolder } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -41,6 +41,7 @@ export default function Documents() {
 function FolderCard({ doc: d }: { doc: DocumentFolder }) {
   const upd = useUpdateDocStatus();
   const del = useDeleteDoc();
+  const dl = useDownloadDoc();
   return (
     <article className="rounded-xl border border-slate-200 bg-white p-5 animate-rise" data-testid="document-folder-card">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
@@ -70,22 +71,19 @@ function FolderCard({ doc: d }: { doc: DocumentFolder }) {
       <div className="mt-4 grid gap-4 lg:grid-cols-[1fr_1fr]">
         <div className="flex flex-col gap-2">
           {d.files.map((f) => (
-            <a
+            <button
               key={f.name}
-              href={`/api/documents/${d.id}/file/${f.kind}`}
-              download={f.name}
-              className="group flex items-center gap-3 rounded-lg border border-slate-200 px-3 py-2.5 transition-colors duration-150 hover:border-[#0056B3] hover:bg-[#F5F9FE]"
+              onClick={() => dl.mutate({ doc: d, kind: f.kind })}
+              disabled={dl.isPending}
+              className="group flex items-center gap-3 rounded-lg border border-slate-200 px-3 py-2.5 text-left transition-colors duration-150 hover:border-[#0056B3] hover:bg-[#F5F9FE]"
               data-testid={f.kind === "pdf" ? "btn-download-pdf" : "btn-download-docx"}
             >
               {f.kind === "pdf" ? <FileText className="size-5 text-red-700" /> : <FileType2 className="size-5 text-[#0056B3]" />}
               <span className="min-w-0 flex-1 truncate font-mono text-sm">{f.name}</span>
               <Download className="size-4 text-slate-400 group-hover:text-[#0056B3]" />
-            </a>
+            </button>
           ))}
           <div className="mt-1 flex flex-wrap gap-2">
-            <a href={`/api/documents/${d.id}/zip`} className={buttonVariants({ variant: "outline" })} data-testid="btn-download-all-zip">
-              <FileArchive className="size-4" /> Scarica cartella ZIP
-            </a>
             <Button
               variant="ghost"
               className="text-red-700"

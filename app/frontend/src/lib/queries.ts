@@ -1,128 +1,125 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { ApiError, apiDelete, apiGet, apiPatch, apiPost, apiPut } from "@/lib/api";
-import type {
-  Bonus,
-  Dashboard,
-  DocStatus,
-  DocumentFolder,
-  Profile,
-  ProfileIn,
-  ScanStatus,
-  Source,
-  SourceIn,
-} from "@/lib/types";
+import {
+  auth,
+  DataError,
+  deleteDocument,
+  generateDocuments,
+  getDashboard,
+  getFileUrl,
+  getProfile,
+  listBonuses,
+  listDocuments,
+  listFavorites,
+  listSources,
+  recordQuestionnaire,
+  saveProfile as apiSaveProfile,
+  scan,
+  toggleFavorite,
+  updateDocumentStatus,
+} from "@/lib/api";
+import type { Bonus, DocStatus, ProfileIn } from "@/lib/types";
+
+export { isSupabaseConfigured } from "@/lib/supabase";
 
 export function errMsg(e: unknown): string {
-  if (e instanceof ApiError) {
-    const d = (e.body as { detail?: unknown } | null)?.detail;
-    if (typeof d === "string") return d;
-    return `Errore ${e.status}`;
-  }
-  return "Connessione non riuscita";
+  if (e instanceof DataError) return e.message;
+  if (e instanceof Error) return e.message;
+  return "Operazione non riuscita";
 }
 
 export const useDashboard = () =>
-  useQuery({ queryKey: ["dashboard"], queryFn: () => apiGet<Dashboard>("/dashboard"), retry: false });
+  useQuery({ queryKey: ["dashboard"], queryFn: getDashboard, retry: false });
 
 export const useProfile = () =>
-  useQuery({ queryKey: ["profile"], queryFn: () => apiGet<Profile | null>("/profile"), retry: false });
+  useQuery({ queryKey: ["profile"], queryFn: getProfile, retry: false });
 
 export const useSources = () =>
-  useQuery({ queryKey: ["sources"], queryFn: () => apiGet<Source[]>("/sources"), retry: false });
+  useQuery({ queryKey: ["sources"], queryFn: listSources, retry: false });
 
-export const useBonuses = (poll: boolean) =>
+export const useBonuses = (poll = false) =>
   useQuery({
     queryKey: ["bonus"],
-    queryFn: () => apiGet<Bonus[]>("/bonus"),
+    queryFn: listBonuses,
     retry: false,
-    refetchInterval: poll ? 4000 : false,
+    refetchInterval: poll ? 8000 : false,
   });
 
-export const useDocuments = () =>
-  useQuery({ queryKey: ["documents"], queryFn: () => apiGet<DocumentFolder[]>("/documents"), retry: false });
+export const useFavorites = () =>
+  useQuery({ queryKey: ["favorites"], queryFn: listFavorites, retry: false });
 
-export function useScanStatus() {
+export function useToggleFavorite() {
   const qc = useQueryClient();
-  return useQuery({
-    queryKey: ["scan"],
-    queryFn: async () => {
-      const prev = qc.getQueryData<ScanStatus>(["scan"]);
-      const st = await apiGet<ScanStatus>("/scan/status");
-      if (prev?.running && !st.running) {
-        qc.invalidateQueries({ queryKey: ["bonus"] });
-        qc.invalidateQueries({ queryKey: ["sources"] });
-        qc.invalidateQueries({ queryKey: ["dashboard"] });
-      }
-      return st;
+  return useMutation({
+    mutationFn: (bonusId: string) => toggleFavorite(bonusId),
+    onSuccess: (nowFavorite) => {
+      toast.success(nowFavorite ? "Aggiunto ai preferiti" : "Rimosso dai preferiti");
+      qc.invalidateQueries({ queryKey: ["favorites"] });
     },
-    retry: false,
-    refetchInterval: (q) => (q.state.data?.running ? 2500 : 30000),
+    onError: (e) => toast.error(errMsg(e)),
   });
 }
+
+export const useDocuments = () =>
+  useQuery({ queryKey: ["documents"], queryFn: listDocuments, retry: false });
+
+export const useScanStatus = () =>
+  useQuery({ queryKey: ["scan"], queryFn: () => scan.status(), retry: false, refetchInterval: 60000 });
 
 export function useInvalidateAll() {
   const qc = useQueryClient();
   return () => {
-    for (const k of ["dashboard", "scan", "bonus", "sources", "documents", "profile"]) qc.invalidateQueries({ queryKey: [k] });
+    for (const k of ["dashboard", "scan", "bonus", "sources", "documents", "profile", "favorites"]) {
+      qc.invalidateQueries({ queryKey: [k] });
+    }
   };
 }
 
 export function useSaveProfile() {
   const inv = useInvalidateAll();
   return useMutation({
-    mutationFn: (p: ProfileIn) => apiPut<Profile>("/profile", p),
+    mutationFn: async (p: ProfileIn) => {
+      const saved = await apiSaveProfile(p);
+      await recordQuestionnaire(p);
+      return saved;
+    },
     onSuccess: () => {
-      toast.success("Profilo salvato. Sto ricalcolando la tua idoneità ai bonus…");
+      toast.success("Profilo salvato.");
       inv();
     },
     onError: (e) => toast.error(errMsg(e)),
   });
 }
 
-export function useAddSource() {
+export function useAuthActions() {
   const inv = useInvalidateAll();
-  return useMutation({
-    mutationFn: (s: SourceIn) => apiPost<Source>("/sources", s),
-    onSuccess: () => {
-      toast.success("Fonte aggiunta al monitoraggio");
-      inv();
-    },
-    onError: (e) => toast.error(errMsg(e)),
-  });
+  return {
+    signIn: useMutation({
+      mutationFn: ({ email, password }: { email: string; password: string }) => auth.signIn(email, password),
+      onSuccess: () => inv(),
+      onError: (e) => toast.error(errMsg(e)),
+    }),
+    signUp: useMutation({
+      mutationFn: ({ email, password }: { email: string; password: string }) => auth.signUp(email, password),
+      onSuccess: () => inv(),
+      onError: (e) => toast.error(errMsg(e)),
+    }),
+    signOut: useMutation({
+      mutationFn: () => auth.signOut(),
+      onSuccess: () => inv(),
+      onError: (e) => toast.error(errMsg(e)),
+    }),
+  };
 }
 
-export function useDeleteSource() {
-  const inv = useInvalidateAll();
+/** Scarica il file della pratica: signed URL su Supabase, toast demo altrimenti. */
+export function useDownloadDoc() {
   return useMutation({
-    mutationFn: (id: string) => apiDelete<{ ok: boolean }>(`/sources/${id}`),
-    onSuccess: () => {
-      toast.success("Fonte rimossa");
-      inv();
-    },
-    onError: (e) => toast.error(errMsg(e)),
-  });
-}
-
-export function useTriggerScan() {
-  const inv = useInvalidateAll();
-  return useMutation({
-    mutationFn: () => apiPost<ScanStatus>("/scan"),
-    onSuccess: () => {
-      toast.success("Scansione AI avviata");
-      inv();
-    },
-    onError: (e) => toast.error(errMsg(e)),
-  });
-}
-
-export function useEvaluate() {
-  const inv = useInvalidateAll();
-  return useMutation({
-    mutationFn: () => apiPost<ScanStatus>("/bonus/evaluate"),
-    onSuccess: () => {
-      toast.success("Valutazione idoneità avviata");
-      inv();
+    mutationFn: ({ doc, kind }: { doc: import("@/lib/types").DocumentFolder; kind: "pdf" | "docx" }) =>
+      getFileUrl(doc, kind),
+    onSuccess: (url) => {
+      if (url) window.open(url, "_blank");
+      else toast.info("In modalità demo il documento si genera e scarica al momento della creazione della pratica.");
     },
     onError: (e) => toast.error(errMsg(e)),
   });
@@ -131,7 +128,8 @@ export function useEvaluate() {
 export function useGenerateDocs() {
   const inv = useInvalidateAll();
   return useMutation({
-    mutationFn: (bonus_id: string) => apiPost<DocumentFolder>("/documents", { bonus_id }),
+    mutationFn: ({ bonus, profile }: { bonus: Bonus; profile: import("@/lib/types").Profile }) =>
+      generateDocuments(bonus, profile),
     onSuccess: (f) => {
       toast.success(`Documenti pronti per la firma: ${f.bonus_title}`);
       inv();
@@ -143,8 +141,7 @@ export function useGenerateDocs() {
 export function useUpdateDocStatus() {
   const inv = useInvalidateAll();
   return useMutation({
-    mutationFn: ({ id, status }: { id: string; status: DocStatus }) =>
-      apiPatch<DocumentFolder>(`/documents/${id}`, { status }),
+    mutationFn: ({ id, status }: { id: string; status: DocStatus }) => updateDocumentStatus(id, status),
     onSuccess: () => {
       toast.success("Stato aggiornato");
       inv();
@@ -156,7 +153,7 @@ export function useUpdateDocStatus() {
 export function useDeleteDoc() {
   const inv = useInvalidateAll();
   return useMutation({
-    mutationFn: (id: string) => apiDelete<{ ok: boolean }>(`/documents/${id}`),
+    mutationFn: (id: string) => deleteDocument(id),
     onSuccess: () => {
       toast.success("Cartella eliminata");
       inv();
