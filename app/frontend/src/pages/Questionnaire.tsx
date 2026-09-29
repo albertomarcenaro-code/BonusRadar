@@ -161,7 +161,7 @@ function QuestionnaireForm({ initial }: { initial: Profile | null }) {
                   />
                   <Select value={m.relation} onValueChange={(v: string) => setMember(i, { relation: v })}>
                     <SelectTrigger className="h-11 w-full bg-white" data-testid={`select-member-relation-${i}`}>
-                      <SelectValue>{(v) => RELATIONS[v as string] ?? "Parentela"}</SelectValue>
+                      <SelectValue placeholder="Parentela" />
                     </SelectTrigger>
                     <SelectContent>
                       {Object.entries(RELATIONS).map(([k, l]) => (
@@ -244,7 +244,7 @@ function QuestionnaireForm({ initial }: { initial: Profile | null }) {
               <Label className="text-xs font-semibold uppercase tracking-wider text-slate-500">Condizione lavorativa</Label>
               <Select value={form.employment_status} onValueChange={(v: string) => set("employment_status", v)}>
                 <SelectTrigger className="h-11 w-full bg-white" data-testid="select-employment-status">
-                  <SelectValue>{(v) => EMPLOYMENT_LABEL[v as string] ?? "Seleziona…"}</SelectValue>
+                  <SelectValue placeholder="Seleziona…" />
                 </SelectTrigger>
                 <SelectContent>
                   {Object.entries(EMPLOYMENT_LABEL).map(([k, l]) => (
@@ -256,9 +256,9 @@ function QuestionnaireForm({ initial }: { initial: Profile | null }) {
             <div className="flex flex-col gap-1.5">
               <Label className="text-xs font-semibold uppercase tracking-wider text-slate-500">Abitazione</Label>
               <Select value={form.housing} onValueChange={(v: string) => set("housing", v)}>
-                <SelectTrigger className="h-11 w-full bg-white" data-testid="select-housing">
-                  <SelectValue>{(v) => HOUSING[v as string] ?? "Seleziona…"}</SelectValue>
-                </SelectTrigger>
+              <SelectTrigger className="h-11 w-full bg-white" data-testid="select-housing">
+                <SelectValue placeholder="Seleziona…" />
+              </SelectTrigger>
                 <SelectContent>
                   {Object.entries(HOUSING).map(([k, l]) => (
                     <SelectItem key={k} value={k}>{l}</SelectItem>

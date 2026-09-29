@@ -1,0 +1,12 @@
+fastapi==0.115.8
+uvicorn[standard]==0.34.0
+motor==3.6.1
+dnspython==2.7.0
+httpx==0.28.1
+beautifulsoup4==4.13.3
+# LLM (non su PyPI pubblico — opzionale, per scansione/valutazione/generazione AI):
+# pip install emergentintegrations --extra-index-url https://packages.emergentagent.com/simple
+reportlab==4.3.1
+python-docx==1.1.2
+pydantic==2.10.6
+python-multipart==0.0.20

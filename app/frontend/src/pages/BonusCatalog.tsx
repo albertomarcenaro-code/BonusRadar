@@ -91,7 +91,7 @@ export default function BonusCatalog() {
         </div>
         <Select value={category} onValueChange={(v: string) => setCategory(v)}>
           <SelectTrigger className="h-11 w-full bg-white lg:w-52" data-testid="bonus-filter-category-select">
-            <SelectValue>{(v) => (v === "tutte" ? "Tutte le categorie" : CATEGORY_LABEL[v as string] ?? v)}</SelectValue>
+            <SelectValue placeholder="Tutte le categorie" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="tutte">Tutte le categorie</SelectItem>

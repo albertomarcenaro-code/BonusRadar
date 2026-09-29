@@ -1,240 +1,237 @@
-
-Action: read({"request":{"path":"/app/design_guidelines.json"}})
-Observation: /app/design_guidelines.json:
-1|{
-2|  "theme": "light",
-3|  "archetype": "ARCHETYPE 4: SWISS & HIGH-CONTRAST with warm Italian GovTech elegance (Warm off-white bone paper background, deep graphite typography, Italian institutional royal azure accent #0056B3, emerald verification #0D8248, amber warning #B76E00, crimson deadline #C92A2A)",
-4|  "language": "it-IT",
-5|  "currency_format": "EUR (€)",
-6|  "date_format": "DD/MM/YYYY",
-7|  "number_format": "1.234,56 €",
-8|  "colors": {
-9|    "surfaces": [
-10|      {
-11|        "name": "page",
-12|        "kind": "solid",
-13|        "bg": "#F8F9FA",
-14|        "on_bg": "#111827",
-15|        "on_bg_muted": "#4B5563",
-16|        "roles": {
-17|          "link": "#0056B3",
-18|          "error": "#B91C1C",
-19|          "success": "#047857",
-20|          "warning": "#B45309"
-21|        }
-22|      },
-23|      {
-24|        "name": "panel",
-25|        "kind": "solid",
-26|        "bg": "#FFFFFF",
-27|        "on_bg": "#111827",
-28|        "on_bg_muted": "#4B5563",
-29|        "roles": {
-30|          "link": "#0056B3",
-31|          "error": "#B91C1C",
-32|          "success": "#047857",
-33|          "warning": "#B45309"
-34|        }
-35|      },
-36|      {
-37|        "name": "panel_subtle",
-38|        "kind": "solid",
-39|        "bg": "#F1F5F9",
-40|        "on_bg": "#0F172A",
-41|        "on_bg_muted": "#475569",
-42|        "roles": {
-43|          "link": "#0284C7"
-44|        }
-45|      },
-46|      {
-47|        "name": "badge_eligible",
-48|        "kind": "solid",
-49|        "bg": "#ECFDF5",
-50|        "on_bg": "#065F46",
-51|        "on_bg_muted": "#047857"
-52|      },
-53|      {
-54|        "name": "badge_maybe",
-55|        "kind": "solid",
-56|        "bg": "#FFFBEB",
-57|        "on_bg": "#92400E",
-58|        "on_bg_muted": "#B45309"
-59|      },
-60|      {
-61|        "name": "badge_not_eligible",
-62|        "kind": "solid",
-63|        "bg": "#FEF2F2",
-64|        "on_bg": "#991B1B",
-65|        "on_bg_muted": "#B91C1C"
-66|      },
-67|      {
-68|        "name": "inverse",
-69|        "kind": "solid",
-70|        "bg": "#0F172A",
-71|        "on_bg": "#F8FAFC",
-72|        "on_bg_muted": "#94A3B8",
-73|        "roles": {
-74|          "link": "#38BDF8",
-75|          "accent": "#60A5FA"
-76|        }
-77|      },
-78|      {
-79|        "name": "hero_glass",
-80|        "kind": "glass",
-81|        "contrast_against": "#F8F9FA",
-82|        "guarantee": "backdrop-blur-md bg-white/85 border border-slate-200/80 shadow-xs",
-83|        "on_bg": "#0F172A",
-84|        "on_bg_muted": "#475569",
-85|        "roles": {
-86|          "link": "#0056B3"
-87|        }
-88|      }
-89|    ],
-90|    "accent": "#0056B3",
-91|    "on_accent": "#FFFFFF",
-92|    "accent_hover": "#004085",
-93|    "border_default": "#E2E8F0",
-94|    "border_strong": "#CBD5E1"
-95|  },
-96|  "typography": {
-97|    "font_family_heading": "Outfit, system-ui, sans-serif",
-98|    "font_family_body": "DM Sans, system-ui, sans-serif",
-99|    "font_family_mono": "IBM Plex Mono, monospace",
-100|    "import_statement": "@import '@fontsource-variable/outfit'; @import '@fontsource-variable/dm-sans'; @import '@fontsource/ibm-plex-mono';",
-101|    "scale_px": {
-102|      "display": 52,
-103|      "h1": 40,
-104|      "h2": 28,
-105|      "h3": 22,
-106|      "h4": 18,
-107|      "body": 16,
-108|      "caption": 14
-109|    },
-110|    "rules": {
-111|      "headings": "font-bold tracking-tight text-slate-900 leading-tight",
-112|      "body": "text-base text-slate-700 leading-relaxed font-normal",
-113|      "labels": "text-xs font-semibold uppercase tracking-wider text-slate-500",
-114|      "code_mono": "font-mono text-sm tracking-normal"
-115|    }
-116|  },
-117|  "entry_surfaces": {
-118|    "/": "editorial overview dashboard — institutional status ribbon top, quick scan summary banner, interactive eligibility filter matrix & document preparation status",
-119|    "/questionnaire": "multi-step guided onboarding card — personal data, family nucleus, ISEE, residence, occupation, category interests with progress indicator",
-120|    "/sources": "monitored sources control room — URL management, AI weekly scan scheduling, manual trigger CTA and scan execution logs",
-121|    "/bonus": "bonus catalogue and intelligence hub — full list with AI eligibility filter (Idoneo, Da verificare, Non idoneo), amount badges, deadlines, and direct document generation action",
-122|    "/documents": "pre-filled documents folder archive — per-bonus folders, PDF/DOCX preview and export, digital signature ready status tracker"
-123|  },
-124|  "layout_and_navigation": {
-125|    "app_name": "BonusRadar Italia",
-126|    "tagline": "Monitoraggio Intelligente Bandi & Compilazione Automatica Documenti",
-127|    "mobile_first_strategy": {
-128|      "viewport_handling": "Optimized for mobile safari/chrome viewport, bottom navigation on mobile with 5 key tabs (Dashboard, Catalogo Bonus, Questionario, Fonti, Documenti), sticky header with scan status trigger.",
-129|      "touch_targets": "Minimum 44px touch targets on buttons and input items, full width modal sheets on mobile, dense tabular cards with clear collapsible accordions."
-130|    },
-131|    "desktop_nav": {
-132|      "type": "Sidebar / Top Nav Hybrid",
-133|      "links": [
-134|        {"label": "Panoramica", "path": "/", "icon": "LayoutDashboard"},
-135|        {"label": "Catalogo Bonus", "path": "/bonus", "icon": "Sparkles"},
-136|        {"label": "I Miei Documenti", "path": "/documents", "icon": "FolderArchive"},
-137|        {"label": "Fonti Monitorate", "path": "/sources", "icon": "Globe"},
-138|        {"label": "Profilo & ISEE", "path": "/questionnaire", "icon": "UserCheck"}
-139|      ]
-140|    }
-141|  },
-142|  "key_features_and_flows": [
-143|    {
-144|      "feature": "Questionario Iniziale & Profilo Fiscale (Onboarding / Edit)",
-145|      "description": "Form modulare in 4 sezioni: 1. Dati Anagrafici & Residenza (Comune, Regione); 2. Nucleo Familiare (Numero componenti, minori, disabili, studenti); 3. Situazione Economica (Valore ISEE ordinario/minorenni, fascia di reddito, occupazione); 4. Aree di Interesse (Casa/Edilizia, Famiglia/Figli, Lavoro/Impresa, Mobilità/Ecoincentivi, Studio/Cultura). Salva lo stato in MongoDB per il calcolo automatico dell'idoneità.",
-146|      "data_testids": [
-147|        "questionnaire-form",
-148|        "input-full-name",
-149|        "input-fiscal-code",
-150|        "input-residence-city",
-151|        "input-residence-region",
-152|        "input-family-members",
-153|        "input-underage-children",
-154|        "input-isee-value",
-155|        "select-employment-status",
-156|        "checkbox-interest-casa",
-157|        "checkbox-interest-famiglia",
-158|        "checkbox-interest-lavoro",
-159|        "checkbox-interest-mobilita",
-160|        "checkbox-interest-studio",
-161|        "btn-save-profile"
-162|      ]
-163|    },
-164|    {
-165|      "feature": "Fonti Monitorate & Trigger Scansione AI",
-166|      "description": "Gestione siti istituzionali (es. INPS, Agenzia delle Entrate, Regione Lombardia/Lazio, GSE, MASE, Invitalia). Visualizzazione frequenza settimanale automatica, data ultima scansione, stato del bot con Claude Sonnet 4.5, e pulsante manuale 'Avvia Scansione Ora' con feedback visivo e progress bar.",
-167|      "data_testids": [
-168|        "sources-table",
-169|        "input-new-source-url",
-170|        "input-new-source-name",
-171|        "btn-add-source",
-172|        "btn-trigger-manual-scan",
-173|        "scan-status-indicator",
-174|        "scan-log-item"
-175|      ]
-176|    },
-177|    {
-178|      "feature": "Catalogo Bonus con AI Eligibility & Spiegazione",
-179|      "description": "Schede bonus con badge di idoneità (Idoneo / In dubbio / Non idoneo), importo massimo (es. 3.000 €), ente erogatore, scadenza bando, e pillole dei requisiti. Sezione espandibile con l'analisi puntuale dell'AI ('Perché sei idoneo: ISEE sotto soglia di 25.000€ e 2 figli a carico...'). Pulsante diretto 'Prepara Documenti'.",
-180|      "data_testids": [
-181|        "bonus-card",
-182|        "bonus-filter-eligibility-all",
-183|        "bonus-filter-eligibility-eligible",
-184|        "bonus-filter-eligibility-maybe",
-185|        "bonus-filter-category-select",
-186|        "bonus-amount-badge",
-187|        "bonus-ai-explanation-box",
-188|        "btn-generate-docs"
-189|      ]
-190|    },
-191|    {
-192|      "feature": "Generatore e Cartella Documenti Compilati (PDF + DOCX)",
-193|      "description": "Genera istantaneamente modulo di domanda pre-compilato con tutti i dati del questionario, dichiarazione sostitutiva dell'atto di notorietà (DPR 445/2000), e checklist allegati richiesti. Permette download singolo (PDF o DOCX) e ZIP cartella bando. Tracker dello stato: 'Da Firmare', 'Firmato', 'Inviato', 'Approvato'.",
-194|      "data_testids": [
-195|        "document-folder-card",
-196|        "btn-download-pdf",
-197|        "btn-download-docx",
-198|        "btn-download-all-zip",
-199|        "select-document-status",
-200|        "document-preview-modal"
-201|      ]
-202|    }
-203|  ],
-204|  "image_urls": {
-205|    "italian_documents_motif": {
-206|      "url": "https://images.unsplash.com/photo-1778080132813-d51b1b36b08e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwxfHxpdGFsaWFuJTIwZG9jdW1lbnRzJTIwZm9sZGVyJTIwc3RhbXB8ZW58MHx8fHwxNzkwMzcxOTQ0fDA&ixlib=rb-4.1.0&q=85",
-207|      "description": "Documento e archivio per texture di intestazione cartella pratiche"
-208|    },
-209|    "family_lifestyle": {
-210|      "url": "https://images.unsplash.com/photo-1606788075819-9574a6edfab3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDR8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBmYW1pbHklMjBsaWZlc3R5bGUlMjBob21lfGVufDB8fHx8MTc5MDM3MTk0NHww&ixlib=rb-4.1.0&q=85",
-211|      "description": "Nucleo familiare e benessere per banner questionario ISEE"
-212|    }
-213|  },
-214|  "motion_and_microinteractions": {
-215|    "engine": "tw-animate-css & motion (Framer Motion)",
-216|    "rules": [
-217|      "Hover su card bonus: transform -translate-y-0.5 transition-transform duration-200 ease-out e bordo più scuro.",
-218|      "Badge idoneità con pulviscolo di stato delicato se 'Nuovo Rilevato'.",
-219|      "Generazione documenti: micro-stepper animato (Analisi requisiti -> Compilazione campi -> Rendering PDF -> Pronto per firma).",
-220|      "Respect 'prefers-reduced-motion': disattivare animazioni complesse per accessibilità."
-221|    ]
-222|  },
-223|  "accessibility": {
-224|    "contrast": "Tutti i testi soddisfano WCAG AA (minimo 4.5:1 per testo normale, 3:1 per elementi grafici e badge).",
-225|    "touch_friendly": "Elementi cliccabili con altezza minima 44px su mobile.",
-226|    "aria_labels": "Attributi aria-label su tutti i bottoni iconici (download, elimina fonte, espandi bando).",
-227|    "keyboard_nav": "Focus-visible evidente con ring blu #0056B3 su tutti i campi del questionario e pulsanti."
-228|  },
-229|  "instructions_to_main_agent": [
-230|    "Costruire l'applicazione con interfaccia interamente in italiano (terminologia istituzionale chiara: ISEE, Nucleo Familiare, Bando, Idoneità, Richiesta, DPR 445/2000, Marca da Bollo, Spid/CIE).",
-231|    "Configurare Tailwind v4 in `frontend/src/index.css` con le palette istituzionali e font Outfit + DM Sans + IBM Plex Mono.",
-232|    "Nel backend FastAPI (`backend/routers/`): creare router `profile.py` (salvataggio questionario), `sources.py` (gestione fonti e trigger scansione simulata/reale), `bonus.py` (catalogo bonus con filtro ISEE/famiglia e calcolo AI di idoneità), `documents.py` (generazione vera di file PDF e DOCX con python-docx/reportlab o templates HTML stampabili e download cartella ZIP).",
-233|    "Fornire dati pre-caricati ricchi in `backend/seed.py` con 8+ bonus italiani reali del 2026 (es. Bonus Asilo Nido 2026, Assegno Unico Universale, Bonus Psicologo, Carta Dedicata a Te, Bonus Ristrutturazioni Casa 50%, Bonus Trasporti & Mobilità Elettrica, Contributo Affitto Giovani, Bando Nuove Imprese / Resto al Sud).",
-234|    "Assicurarsi che ogni elemento interattivo contenga `data-testid` coerente con le specifiche per i test Playwright.",
-235|    "Usare Sonner per feedback immediati su salvataggio profilo, aggiunta fonti e completamento generazione documenti."
-236|  ]
-237|}
+{
+  "theme": "light",
+  "archetype": "ARCHETYPE 4: SWISS & HIGH-CONTRAST with warm Italian GovTech elegance (Warm off-white bone paper background, deep graphite typography, Italian institutional royal azure accent #0056B3, emerald verification #0D8248, amber warning #B76E00, crimson deadline #C92A2A)",
+  "language": "it-IT",
+  "currency_format": "EUR (€)",
+  "date_format": "DD/MM/YYYY",
+  "number_format": "1.234,56 €",
+  "colors": {
+    "surfaces": [
+      {
+        "name": "page",
+        "kind": "solid",
+        "bg": "#F8F9FA",
+        "on_bg": "#111827",
+        "on_bg_muted": "#4B5563",
+        "roles": {
+          "link": "#0056B3",
+          "error": "#B91C1C",
+          "success": "#047857",
+          "warning": "#B45309"
+        }
+      },
+      {
+        "name": "panel",
+        "kind": "solid",
+        "bg": "#FFFFFF",
+        "on_bg": "#111827",
+        "on_bg_muted": "#4B5563",
+        "roles": {
+          "link": "#0056B3",
+          "error": "#B91C1C",
+          "success": "#047857",
+          "warning": "#B45309"
+        }
+      },
+      {
+        "name": "panel_subtle",
+        "kind": "solid",
+        "bg": "#F1F5F9",
+        "on_bg": "#0F172A",
+        "on_bg_muted": "#475569",
+        "roles": {
+          "link": "#0284C7"
+        }
+      },
+      {
+        "name": "badge_eligible",
+        "kind": "solid",
+        "bg": "#ECFDF5",
+        "on_bg": "#065F46",
+        "on_bg_muted": "#047857"
+      },
+      {
+        "name": "badge_maybe",
+        "kind": "solid",
+        "bg": "#FFFBEB",
+        "on_bg": "#92400E",
+        "on_bg_muted": "#B45309"
+      },
+      {
+        "name": "badge_not_eligible",
+        "kind": "solid",
+        "bg": "#FEF2F2",
+        "on_bg": "#991B1B",
+        "on_bg_muted": "#B91C1C"
+      },
+      {
+        "name": "inverse",
+        "kind": "solid",
+        "bg": "#0F172A",
+        "on_bg": "#F8FAFC",
+        "on_bg_muted": "#94A3B8",
+        "roles": {
+          "link": "#38BDF8",
+          "accent": "#60A5FA"
+        }
+      },
+      {
+        "name": "hero_glass",
+        "kind": "glass",
+        "contrast_against": "#F8F9FA",
+        "guarantee": "backdrop-blur-md bg-white/85 border border-slate-200/80 shadow-xs",
+        "on_bg": "#0F172A",
+        "on_bg_muted": "#475569",
+        "roles": {
+          "link": "#0056B3"
+        }
+      }
+    ],
+    "accent": "#0056B3",
+    "on_accent": "#FFFFFF",
+    "accent_hover": "#004085",
+    "border_default": "#E2E8F0",
+    "border_strong": "#CBD5E1"
+  },
+  "typography": {
+    "font_family_heading": "Outfit, system-ui, sans-serif",
+    "font_family_body": "DM Sans, system-ui, sans-serif",
+    "font_family_mono": "IBM Plex Mono, monospace",
+    "import_statement": "@import '@fontsource-variable/outfit'; @import '@fontsource-variable/dm-sans'; @import '@fontsource/ibm-plex-mono';",
+    "scale_px": {
+      "display": 52,
+      "h1": 40,
+      "h2": 28,
+      "h3": 22,
+      "h4": 18,
+      "body": 16,
+      "caption": 14
+    },
+    "rules": {
+      "headings": "font-bold tracking-tight text-slate-900 leading-tight",
+      "body": "text-base text-slate-700 leading-relaxed font-normal",
+      "labels": "text-xs font-semibold uppercase tracking-wider text-slate-500",
+      "code_mono": "font-mono text-sm tracking-normal"
+    }
+  },
+  "entry_surfaces": {
+    "/": "editorial overview dashboard — institutional status ribbon top, quick scan summary banner, interactive eligibility filter matrix & document preparation status",
+    "/questionnaire": "multi-step guided onboarding card — personal data, family nucleus, ISEE, residence, occupation, category interests with progress indicator",
+    "/sources": "monitored sources control room — URL management, AI weekly scan scheduling, manual trigger CTA and scan execution logs",
+    "/bonus": "bonus catalogue and intelligence hub — full list with AI eligibility filter (Idoneo, Da verificare, Non idoneo), amount badges, deadlines, and direct document generation action",
+    "/documents": "pre-filled documents folder archive — per-bonus folders, PDF/DOCX preview and export, digital signature ready status tracker"
+  },
+  "layout_and_navigation": {
+    "app_name": "BonusRadar Italia",
+    "tagline": "Monitoraggio Intelligente Bandi & Compilazione Automatica Documenti",
+    "mobile_first_strategy": {
+      "viewport_handling": "Optimized for mobile safari/chrome viewport, bottom navigation on mobile with 5 key tabs (Dashboard, Catalogo Bonus, Questionario, Fonti, Documenti), sticky header with scan status trigger.",
+      "touch_targets": "Minimum 44px touch targets on buttons and input items, full width modal sheets on mobile, dense tabular cards with clear collapsible accordions."
+    },
+    "desktop_nav": {
+      "type": "Sidebar / Top Nav Hybrid",
+      "links": [
+        {"label": "Panoramica", "path": "/", "icon": "LayoutDashboard"},
+        {"label": "Catalogo Bonus", "path": "/bonus", "icon": "Sparkles"},
+        {"label": "I Miei Documenti", "path": "/documents", "icon": "FolderArchive"},
+        {"label": "Fonti Monitorate", "path": "/sources", "icon": "Globe"},
+        {"label": "Profilo & ISEE", "path": "/questionnaire", "icon": "UserCheck"}
+      ]
+    }
+  },
+  "key_features_and_flows": [
+    {
+      "feature": "Questionario Iniziale & Profilo Fiscale (Onboarding / Edit)",
+      "description": "Form modulare in 4 sezioni: 1. Dati Anagrafici & Residenza (Comune, Regione); 2. Nucleo Familiare (Numero componenti, minori, disabili, studenti); 3. Situazione Economica (Valore ISEE ordinario/minorenni, fascia di reddito, occupazione); 4. Aree di Interesse (Casa/Edilizia, Famiglia/Figli, Lavoro/Impresa, Mobilità/Ecoincentivi, Studio/Cultura). Salva lo stato in MongoDB per il calcolo automatico dell'idoneità.",
+      "data_testids": [
+        "questionnaire-form",
+        "input-full-name",
+        "input-fiscal-code",
+        "input-residence-city",
+        "input-residence-region",
+        "input-family-members",
+        "input-underage-children",
+        "input-isee-value",
+        "select-employment-status",
+        "checkbox-interest-casa",
+        "checkbox-interest-famiglia",
+        "checkbox-interest-lavoro",
+        "checkbox-interest-mobilita",
+        "checkbox-interest-studio",
+        "btn-save-profile"
+      ]
+    },
+    {
+      "feature": "Fonti Monitorate & Trigger Scansione AI",
+      "description": "Gestione siti istituzionali (es. INPS, Agenzia delle Entrate, Regione Lombardia/Lazio, GSE, MASE, Invitalia). Visualizzazione frequenza settimanale automatica, data ultima scansione, stato del bot con Claude Sonnet 4.5, e pulsante manuale 'Avvia Scansione Ora' con feedback visivo e progress bar.",
+      "data_testids": [
+        "sources-table",
+        "input-new-source-url",
+        "input-new-source-name",
+        "btn-add-source",
+        "btn-trigger-manual-scan",
+        "scan-status-indicator",
+        "scan-log-item"
+      ]
+    },
+    {
+      "feature": "Catalogo Bonus con AI Eligibility & Spiegazione",
+      "description": "Schede bonus con badge di idoneità (Idoneo / In dubbio / Non idoneo), importo massimo (es. 3.000 €), ente erogatore, scadenza bando, e pillole dei requisiti. Sezione espandibile con l'analisi puntuale dell'AI ('Perché sei idoneo: ISEE sotto soglia di 25.000€ e 2 figli a carico...'). Pulsante diretto 'Prepara Documenti'.",
+      "data_testids": [
+        "bonus-card",
+        "bonus-filter-eligibility-all",
+        "bonus-filter-eligibility-eligible",
+        "bonus-filter-eligibility-maybe",
+        "bonus-filter-category-select",
+        "bonus-amount-badge",
+        "bonus-ai-explanation-box",
+        "btn-generate-docs"
+      ]
+    },
+    {
+      "feature": "Generatore e Cartella Documenti Compilati (PDF + DOCX)",
+      "description": "Genera istantaneamente modulo di domanda pre-compilato con tutti i dati del questionario, dichiarazione sostitutiva dell'atto di notorietà (DPR 445/2000), e checklist allegati richiesti. Permette download singolo (PDF o DOCX) e ZIP cartella bando. Tracker dello stato: 'Da Firmare', 'Firmato', 'Inviato', 'Approvato'.",
+      "data_testids": [
+        "document-folder-card",
+        "btn-download-pdf",
+        "btn-download-docx",
+        "btn-download-all-zip",
+        "select-document-status",
+        "document-preview-modal"
+      ]
+    }
+  ],
+  "image_urls": {
+    "italian_documents_motif": {
+      "url": "https://images.unsplash.com/photo-1778080132813-d51b1b36b08e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwxfHxpdGFsaWFuJTIwZG9jdW1lbnRzJTIwZm9sZGVyJTIwc3RhbXB8ZW58MHx8fHwxNzkwMzcxOTQ0fDA&ixlib=rb-4.1.0&q=85",
+      "description": "Documento e archivio per texture di intestazione cartella pratiche"
+    },
+    "family_lifestyle": {
+      "url": "https://images.unsplash.com/photo-1606788075819-9574a6edfab3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDR8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBmYW1pbHklMjBsaWZlc3R5bGUlMjBob21lfGVufDB8fHx8MTc5MDM3MTk0NHww&ixlib=rb-4.1.0&q=85",
+      "description": "Nucleo familiare e benessere per banner questionario ISEE"
+    }
+  },
+  "motion_and_microinteractions": {
+    "engine": "tw-animate-css & motion (Framer Motion)",
+    "rules": [
+      "Hover su card bonus: transform -translate-y-0.5 transition-transform duration-200 ease-out e bordo più scuro.",
+      "Badge idoneità con pulviscolo di stato delicato se 'Nuovo Rilevato'.",
+      "Generazione documenti: micro-stepper animato (Analisi requisiti -> Compilazione campi -> Rendering PDF -> Pronto per firma).",
+      "Respect 'prefers-reduced-motion': disattivare animazioni complesse per accessibilità."
+    ]
+  },
+  "accessibility": {
+    "contrast": "Tutti i testi soddisfano WCAG AA (minimo 4.5:1 per testo normale, 3:1 per elementi grafici e badge).",
+    "touch_friendly": "Elementi cliccabili con altezza minima 44px su mobile.",
+    "aria_labels": "Attributi aria-label su tutti i bottoni iconici (download, elimina fonte, espandi bando).",
+    "keyboard_nav": "Focus-visible evidente con ring blu #0056B3 su tutti i campi del questionario e pulsanti."
+  },
+  "instructions_to_main_agent": [
+    "Costruire l'applicazione con interfaccia interamente in italiano (terminologia istituzionale chiara: ISEE, Nucleo Familiare, Bando, Idoneità, Richiesta, DPR 445/2000, Marca da Bollo, Spid/CIE).",
+    "Configurare Tailwind v4 in `frontend/src/index.css` con le palette istituzionali e font Outfit + DM Sans + IBM Plex Mono.",
+    "Nel backend FastAPI (`backend/routers/`): creare router `profile.py` (salvataggio questionario), `sources.py` (gestione fonti e trigger scansione simulata/reale), `bonus.py` (catalogo bonus con filtro ISEE/famiglia e calcolo AI di idoneità), `documents.py` (generazione vera di file PDF e DOCX con python-docx/reportlab o templates HTML stampabili e download cartella ZIP).",
+    "Fornire dati pre-caricati ricchi in `backend/seed.py` con 8+ bonus italiani reali del 2026 (es. Bonus Asilo Nido 2026, Assegno Unico Universale, Bonus Psicologo, Carta Dedicata a Te, Bonus Ristrutturazioni Casa 50%, Bonus Trasporti & Mobilità Elettrica, Contributo Affitto Giovani, Bando Nuove Imprese / Resto al Sud).",
+    "Assicurarsi che ogni elemento interattivo contenga `data-testid` coerente con le specifiche per i test Playwright.",
+    "Usare Sonner per feedback immediati su salvataggio profilo, aggiunta fonti e completamento generazione documenti."
+  ]
+}

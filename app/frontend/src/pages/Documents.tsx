@@ -8,13 +8,6 @@ import { DOC_STATUS_LABEL, fmtDate } from "@/lib/format";
 import type { DocStatus, DocumentFolder } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
-const STATUS_DOT: Record<DocStatus, string> = {
-  da_firmare: "bg-amber-500",
-  firmato: "bg-sky-500",
-  inviato: "bg-[#0056B3]",
-  approvato: "bg-emerald-600",
-};
-
 export default function Documents() {
   const { data: docs, isError } = useDocuments();
   return (
@@ -64,14 +57,7 @@ function FolderCard({ doc: d }: { doc: DocumentFolder }) {
         </div>
         <Select value={d.status} onValueChange={(v: string) => upd.mutate({ id: d.id, status: v as DocStatus })}>
           <SelectTrigger className="h-10 w-full bg-white sm:w-44" data-testid="select-document-status">
-            <SelectValue>
-              {(v) => (
-                <span className="flex items-center gap-2">
-                  <span className={cn("size-2 rounded-full", STATUS_DOT[v as DocStatus])} />
-                  {DOC_STATUS_LABEL[v as DocStatus]}
-                </span>
-              )}
-            </SelectValue>
+            <SelectValue placeholder="Stato" />
           </SelectTrigger>
           <SelectContent>
             {(Object.keys(DOC_STATUS_LABEL) as DocStatus[]).map((k) => (

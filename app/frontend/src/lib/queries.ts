@@ -1,27 +1,166 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
+import { ApiError, apiDelete, apiGet, apiPatch, apiPost, apiPut } from "@/lib/api";
+import type {
+  Bonus,
+  Dashboard,
+  DocStatus,
+  DocumentFolder,
+  Profile,
+  ProfileIn,
+  ScanStatus,
+  Source,
+  SourceIn,
+} from "@/lib/types";
 
-Action: create_file({"file_text":"import { useMutation, useQuery, useQueryClient } from \"@tanstack/react-query\";\nimport { toast } from \"sonner\";\nimport { ApiError, apiDelete, apiGet, apiPatch, apiPost, apiPut } from \"@/lib/api\";\nimport type {\n  Bonus,\n  Dashboard,\n  DocStatus,\n  DocumentFolder,\n  Profile,\n  ProfileIn,\n  ScanStatus,\n  Source,\n  SourceIn,\n} from \"@/lib/types\";\n\nexport function errMsg(e: unknown): string {\n  if (e instanceof ApiError) {\n    const d = (e.body as { detail?: unknown } | null)?.detail;\n    if (typeof d === \"string\") return d;\n    return `Errore ${e.status}`;\n  }\n  return \"Connessione non riuscita\";\n}\n\nexport const useDashboard = () =>\n  useQuery({ queryKey: [\"dashboard\"], queryFn: () => apiGet<Dashboard>(\"/dashboard\"), retry: false });\n\nexport const useProfile = () =>\n  useQuery({ queryKey: [\"profile\"], queryFn: () => apiGet<Profile | null>(\"/profile\"), retry: false });\n\nexport const useSources = () =>\n  useQuery({ queryKey: [\"sources\"], queryFn: () => apiGet<Source[]>(\"/sources\"), retry: false });\n\nexport const useBonuses = (poll: boolean) =>\n  useQuery({\n    queryKey: [\"bonus\"],\n    queryFn: () => apiGet<Bonus[]>(\"/bonus\"),\n    retry: false,\n    refetchInterval: poll ? 4000 : false,\n  });\n\nexport const useDocuments = () =>\n  useQuery({ queryKey: [\"documents\"], queryFn: () => apiGet<DocumentFolder[]>(\"/documents\"), retry: false });\n\nexport function useScanStatus() {\n  const qc = useQueryClient();\n  return useQuery({\n    queryKey: [\"scan\"],\n    queryFn: async () => {\n      const prev = qc.getQueryData<ScanStatus>([\"scan\"]);\n      const st = await apiGet<ScanStatus>(\"/scan/status\");\n      if (prev?.running && !st.running) {\n        qc.invalidateQueries({ queryKey: [\"bonus\"] });\n        qc.invalidateQueries({ queryKey: [\"sources\"] });\n        qc.invalidateQueries({ queryKey: [\"dashboard\"] });\n      }\n      return st;\n    },\n    retry: false,\n    refetchInterval: (q) => (q.state.data?.running ? 2500 : 30000),\n  });\n}\n\nexport function useInvalidateAll() {\n  const qc = useQueryClient();\n  return () => {\n    for (const k of [\"dashboard\", \"scan\", \"bonus\", \"sources\", \"documents\", \"profile\"]) qc.invalidateQueries({ queryKey: [k] });\n  };\n}\n\nexport function useSaveProfile() {\n  const inv = useInvalidateAll();\n  return useMutation({\n    mutationFn: (p: ProfileIn) => apiPut<Profile>(\"/profile\", p),\n    onSuccess: () => {\n      toast.success(\"Profilo salvato. Sto ricalcolando la tua idoneità ai bonus…\");\n      inv();\n    },\n    onError: (e) => toast.error(errMsg(e)),\n  });\n}\n\nexport function useAddSource() {\n  const inv = useInvalidateAll();\n  return useMutation({\n    mutationFn: (s: SourceIn) => apiPost<Source>(\"/sources\", s),\n    onSuccess: () => {\n      toast.success(\"Fonte aggiunta al monitoraggio\");\n      inv();\n    },\n    onError: (e) => toast.error(errMsg(e)),\n  });\n}\n\nexport function useDeleteSource() {\n  const inv = useInvalidateAll();\n  return useMutation({\n    mutationFn: (id: string) => apiDelete<{ ok: boolean }>(`/sources/${id}`),\n    onSuccess: () => {\n      toast.success(\"Fonte rimossa\");\n      inv();\n    },\n    onError: (e) => toast.error(errMsg(e)),\n  });\n}\n\nexport function useTriggerScan() {\n  const inv = useInvalidateAll();\n  return useMutation({\n    mutationFn: () => apiPost<ScanStatus>(\"/scan\"),\n    onSuccess: () => {\n      toast.success(\"Scansione AI avviata\");\n      inv();\n    },\n    onError: (e) => toast.error(errMsg(e)),\n  });\n}\n\nexport function useEvaluate() {\n  const inv = useInvalidateAll();\n  return useMutation({\n    mutationFn: () => apiPost<ScanStatus>(\"/bonus/evaluate\"),\n    onSuccess: () => {\n      toast.success(\"Valutazione idoneità avviata\");\n      inv();\n    },\n    onError: (e) => toast.error(errMsg(e)),\n  });\n}\n\nexport function useGenerateDocs() {\n  const inv = useInvalidateAll();\n  return useMutation({\n    mutationFn: (bonus_id: string) => apiPost<DocumentFolder>(\"/documents\", { bonus_id }),\n    onSuccess: (f) => {\n      toast.success(`Documenti pronti per la firma: ${f.bonus_title}`);\n      inv();\n    },\n    onError: (e) => toast.error(errMsg(e)),\n  });\n}\n\nexport function useUpdateDocStatus() {\n  const inv = useInvalidateAll();\n  return useMutation({\n    mutationFn: ({ id, status }: { id: string; status: DocStatus }) =>\n      apiPatch<DocumentFolder>(`/documents/${id}`, { status }),\n    onSuccess: () => {\n      toast.success(\"Stato aggiornato\");\n      inv();\n    },\n    onError: (e) => toast.error(errMsg(e)),\n  });\n}\n\nexport function useDeleteDoc() {\n  const inv = useInvalidateAll();\n  return useMutation({\n    mutationFn: (id: string) => apiDelete<{ ok: boolean }>(`/documents/${id}`),\n    onSuccess: () => {\n      toast.success(\"Cartella eliminata\");\n      inv();\n    },\n    onError: (e) => toast.error(errMsg(e)),\n  });\n}\n","path":"/app/frontend/src/lib/queries.ts"})
-Observation: Create successful: /app/frontend/src/lib/queries.ts
+export function errMsg(e: unknown): string {
+  if (e instanceof ApiError) {
+    const d = (e.body as { detail?: unknown } | null)?.detail;
+    if (typeof d === "string") return d;
+    return `Errore ${e.status}`;
+  }
+  return "Connessione non riuscita";
+}
 
-Fetching debug logs for frontend
+export const useDashboard = () =>
+  useQuery({ queryKey: ["dashboard"], queryFn: () => apiGet<Dashboard>("/dashboard"), retry: false });
 
-==> /var/log/supervisor/frontend.err.log <==
-9:34:14 PM [vite] (client) Pre-transform error: Failed to load url /src/pages/Home.tsx (resolved id: /app/frontend/src/pages/Home.tsx) in /app/frontend/src/App.tsx. Does the file exist?
-==> /var/log/supervisor/frontend.out.log <==
-yarn run v1.22.22
-$ vite
+export const useProfile = () =>
+  useQuery({ queryKey: ["profile"], queryFn: () => apiGet<Profile | null>("/profile"), retry: false });
 
-  VITE v8.1.5  ready in 1483 ms
+export const useSources = () =>
+  useQuery({ queryKey: ["sources"], queryFn: () => apiGet<Source[]>("/sources"), retry: false });
 
-  ➜  Local:   http://localhost:3000/
-  ➜  Network: http://10.219.6.67:3000/
-9:05:56 PM [vite] (client) [optimizer] bundling dependencies...
-yarn run v1.22.22
-$ vite
+export const useBonuses = (poll: boolean) =>
+  useQuery({
+    queryKey: ["bonus"],
+    queryFn: () => apiGet<Bonus[]>("/bonus"),
+    retry: false,
+    refetchInterval: poll ? 4000 : false,
+  });
 
-  VITE v8.1.5  ready in 1010 ms
+export const useDocuments = () =>
+  useQuery({ queryKey: ["documents"], queryFn: () => apiGet<DocumentFolder[]>("/documents"), retry: false });
 
-  ➜  Local:   http://localhost:3000/
-  ➜  Network: http://10.219.6.67:3000/
-9:34:13 PM [vite] (client) page reload index.html
-9:34:13 PM [vite] (client) hmr update /src/index.css
-9:34:13 PM [vite] (client) hmr update /src/index.css, /src/pages/Home.tsx
+export function useScanStatus() {
+  const qc = useQueryClient();
+  return useQuery({
+    queryKey: ["scan"],
+    queryFn: async () => {
+      const prev = qc.getQueryData<ScanStatus>(["scan"]);
+      const st = await apiGet<ScanStatus>("/scan/status");
+      if (prev?.running && !st.running) {
+        qc.invalidateQueries({ queryKey: ["bonus"] });
+        qc.invalidateQueries({ queryKey: ["sources"] });
+        qc.invalidateQueries({ queryKey: ["dashboard"] });
+      }
+      return st;
+    },
+    retry: false,
+    refetchInterval: (q) => (q.state.data?.running ? 2500 : 30000),
+  });
+}
+
+export function useInvalidateAll() {
+  const qc = useQueryClient();
+  return () => {
+    for (const k of ["dashboard", "scan", "bonus", "sources", "documents", "profile"]) qc.invalidateQueries({ queryKey: [k] });
+  };
+}
+
+export function useSaveProfile() {
+  const inv = useInvalidateAll();
+  return useMutation({
+    mutationFn: (p: ProfileIn) => apiPut<Profile>("/profile", p),
+    onSuccess: () => {
+      toast.success("Profilo salvato. Sto ricalcolando la tua idoneità ai bonus…");
+      inv();
+    },
+    onError: (e) => toast.error(errMsg(e)),
+  });
+}
+
+export function useAddSource() {
+  const inv = useInvalidateAll();
+  return useMutation({
+    mutationFn: (s: SourceIn) => apiPost<Source>("/sources", s),
+    onSuccess: () => {
+      toast.success("Fonte aggiunta al monitoraggio");
+      inv();
+    },
+    onError: (e) => toast.error(errMsg(e)),
+  });
+}
+
+export function useDeleteSource() {
+  const inv = useInvalidateAll();
+  return useMutation({
+    mutationFn: (id: string) => apiDelete<{ ok: boolean }>(`/sources/${id}`),
+    onSuccess: () => {
+      toast.success("Fonte rimossa");
+      inv();
+    },
+    onError: (e) => toast.error(errMsg(e)),
+  });
+}
+
+export function useTriggerScan() {
+  const inv = useInvalidateAll();
+  return useMutation({
+    mutationFn: () => apiPost<ScanStatus>("/scan"),
+    onSuccess: () => {
+      toast.success("Scansione AI avviata");
+      inv();
+    },
+    onError: (e) => toast.error(errMsg(e)),
+  });
+}
+
+export function useEvaluate() {
+  const inv = useInvalidateAll();
+  return useMutation({
+    mutationFn: () => apiPost<ScanStatus>("/bonus/evaluate"),
+    onSuccess: () => {
+      toast.success("Valutazione idoneità avviata");
+      inv();
+    },
+    onError: (e) => toast.error(errMsg(e)),
+  });
+}
+
+export function useGenerateDocs() {
+  const inv = useInvalidateAll();
+  return useMutation({
+    mutationFn: (bonus_id: string) => apiPost<DocumentFolder>("/documents", { bonus_id }),
+    onSuccess: (f) => {
+      toast.success(`Documenti pronti per la firma: ${f.bonus_title}`);
+      inv();
+    },
+    onError: (e) => toast.error(errMsg(e)),
+  });
+}
+
+export function useUpdateDocStatus() {
+  const inv = useInvalidateAll();
+  return useMutation({
+    mutationFn: ({ id, status }: { id: string; status: DocStatus }) =>
+      apiPatch<DocumentFolder>(`/documents/${id}`, { status }),
+    onSuccess: () => {
+      toast.success("Stato aggiornato");
+      inv();
+    },
+    onError: (e) => toast.error(errMsg(e)),
+  });
+}
+
+export function useDeleteDoc() {
+  const inv = useInvalidateAll();
+  return useMutation({
+    mutationFn: (id: string) => apiDelete<{ ok: boolean }>(`/documents/${id}`),
+    onSuccess: () => {
+      toast.success("Cartella eliminata");
+      inv();
+    },
+    onError: (e) => toast.error(errMsg(e)),
+  });
+}
