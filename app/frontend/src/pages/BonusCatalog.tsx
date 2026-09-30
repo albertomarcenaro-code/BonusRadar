@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { CalendarClock, ExternalLink, FileText, Heart, Loader2, RefreshCw, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import PageHeader from "@/components/PageHeader";
+import { MatchBadge, MatchChecks, MatchFallbackCta } from "@/components/match";
+import { calculateBonusMatch } from "@/lib/matching";
+import type { MatchStatus } from "@/lib/matching";
 import { useBonuses, useDashboard, useDocuments, useFavorites, useGenerateDocs, useProfile, useScanStatus, useScraperCatalog, useToggleFavorite } from "@/lib/queries";
-import { CATEGORY_LABEL, ELIGIBILITY_CLASS, ELIGIBILITY_LABEL, fmtDateTime } from "@/lib/format";
-import type { Bonus, Eligibility } from "@/lib/types";
+import { CATEGORY_LABEL, fmtDateTime } from "@/lib/format";
+import type { Bonus, Profile as UserProfile } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
-const FILTERS: { key: "all" | Eligibility; label: string }[] = [
-  { key: "eligible", label: "Idonei" },
+/** Filtri di idoneità basati sul matching con il profilo dell'utente. */
+const FILTERS: { key: "all" | MatchStatus; label: string }[] = [
+  { key: "eligible", label: "Idonei per me" },
   { key: "maybe", label: "Da verificare" },
   { key: "all", label: "Tutti" },
   { key: "not_eligible", label: "Non idonei" },
@@ -25,19 +29,33 @@ export default function BonusCatalog() {
   const { data: dash } = useDashboard();
   const { data: docs } = useDocuments();
   const { data: favorites } = useFavorites();
-  const [filter, setFilter] = useState<"all" | Eligibility>("all");
+  const { data: profile } = useProfile();
+  const [filter, setFilter] = useState<"all" | MatchStatus>("all");
   const [category, setCategory] = useState("tutte");
   const [params] = useSearchParams();
   // La ricerca rapida dalla landing arriva come ?q=...
   const [q, setQ] = useState(params.get("q") ?? "");
 
+  /** Matching calcolato una sola volta per bonus (profilo corrente). */
+  const matchMap = useMemo(() => {
+    const map = new Map<string, ReturnType<typeof calculateBonusMatch>>();
+    for (const b of bonuses ?? []) map.set(b.id, calculateBonusMatch((profile ?? null) as UserProfile | null, b));
+    return map;
+  }, [bonuses, profile]);
+
+  const eligibleCount = useMemo(
+    () => [...matchMap.values()].filter((m) => m.status === "eligible").length,
+    [matchMap],
+  );
+
   const list = (bonuses ?? []).filter(
     (b) =>
-      (filter === "all" || b.eligibility === filter) &&
+      (filter === "all" || matchMap.get(b.id)?.status === filter) &&
       (category === "tutte" || b.category === category) &&
       (q === "" || `${b.title} ${b.authority} ${b.summary}`.toLowerCase().includes(q.toLowerCase())),
   );
-  const count = (k: "all" | Eligibility) => (bonuses ?? []).filter((b) => k === "all" || b.eligibility === k).length;
+  const count = (k: "all" | MatchStatus) =>
+    k === "all" ? (bonuses ?? []).length : [...matchMap.values()].filter((m) => m.status === k).length;
   const docBonusIds = new Set((docs ?? []).map((d) => d.bonus_id));
 
   return (
@@ -45,14 +63,14 @@ export default function BonusCatalog() {
       <PageHeader
         eyebrow="Catalogo bonus"
         title="Bonus filtrati sul tuo profilo"
-        description="L'AI confronta i requisiti di ogni bando con i dati tuoi e della tua famiglia e ti spiega perché sei (o non sei) idoneo."
+        description="Confrontiamo i requisiti di ogni bando con i dati tuoi e della tua famiglia: badge di idoneità, percentuale di affinità e verifiche nel dettaglio."
         testId="bonus-title"
         actions={
           <Button
             variant="outline"
             className="h-11"
             disabled
-            title="La valutazione AI dell'idoneità arriva con il motore di scansione"
+            title="La valutazione AI approfondita arriva con il motore di scansione"
             data-testid="btn-reevaluate"
           >
             Valutazione AI in arrivo
@@ -72,7 +90,7 @@ export default function BonusCatalog() {
 
       {dash && !dash.has_profile && (
         <div className="mb-6 flex flex-col gap-3 rounded-xl border border-[#FDE68A] bg-[#FFFBEB] p-4 sm:flex-row sm:items-center sm:justify-between" data-testid="bonus-no-profile-banner">
-          <p className="text-sm text-[#92400E]">Completa il profilo: senza i tuoi dati non possiamo valutare la tua idoneità.</p>
+          <p className="text-sm text-[#92400E]">Completa il tuo profilo per verificare se hai diritto ai bonus del catalogo.</p>
           <Link to="/profile" className="text-sm font-semibold text-[#0056B3] hover:underline" data-testid="link-to-profile">
             Vai al profilo →
           </Link>
@@ -86,7 +104,7 @@ export default function BonusCatalog() {
       )}
 
       <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-center">
-        <div className="flex flex-wrap gap-1 rounded-lg bg-slate-100 p-1">
+        <div className="flex flex-wrap gap-1 rounded-lg bg-slate-100 p-1" data-testid="bonus-match-filters">
           {FILTERS.map((f) => (
             <button
               key={f.key}
@@ -131,14 +149,17 @@ export default function BonusCatalog() {
             key={b.id}
             bonus={b}
             index={i}
-            hasProfile={!!dash?.has_profile}
+            profile={(profile ?? null) as UserProfile | null}
+            match={matchMap.get(b.id) ?? calculateBonusMatch((profile ?? null) as UserProfile | null, b)}
             hasDocs={docBonusIds.has(b.id)}
             isFavorite={(favorites ?? []).includes(b.id)}
           />
         ))}
         {bonuses && list.length === 0 && (
           <div className="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-500 md:col-span-2" data-testid="bonus-empty">
-            Nessun bonus corrisponde ai filtri selezionati.
+            {filter === "eligible" && eligibleCount === 0
+              ? "Nessun bonus risulta idoneo con i dati attuali del profilo: completa o aggiorna il tuo profilo, oppure esplora tutto il catalogo."
+              : "Nessun bonus corrisponde ai filtri selezionati."}
           </div>
         )}
       </div>
@@ -149,18 +170,19 @@ export default function BonusCatalog() {
 function BonusCard({
   bonus: b,
   index,
-  hasProfile,
+  profile,
+  match,
   hasDocs,
   isFavorite,
 }: {
   bonus: Bonus;
   index: number;
-  hasProfile: boolean;
+  profile: UserProfile | null;
+  match: ReturnType<typeof calculateBonusMatch>;
   hasDocs: boolean;
   isFavorite: boolean;
 }) {
   const gen = useGenerateDocs();
-  const profileQ = useProfile();
   const fav = useToggleFavorite();
   const [open, setOpen] = useState(false);
   return (
@@ -176,12 +198,7 @@ function BonusCard({
           </p>
           <h3 className="mt-1 text-lg font-bold leading-snug text-slate-900" data-testid="bonus-card-title">{b.title}</h3>
         </div>
-        <span
-          className={cn("shrink-0 rounded-full border px-2.5 py-0.5 text-xs font-semibold", ELIGIBILITY_CLASS[b.eligibility])}
-          data-testid="bonus-eligibility-badge"
-        >
-          {ELIGIBILITY_LABEL[b.eligibility]}
-        </span>
+        <MatchBadge result={match} testId="bonus-eligibility-badge" />
       </div>
       <p className="mt-2 text-sm text-slate-600">{b.summary}</p>
       <div className="mt-3 flex flex-wrap gap-2 text-xs">
@@ -198,8 +215,20 @@ function BonusCard({
         {b.is_new && <span className="rounded-md bg-emerald-50 px-2 py-1 font-semibold text-emerald-700">Nuovo</span>}
       </div>
 
+      {/* Dettaglio verifiche sul profilo / invito a completarlo */}
+      {!profile ? (
+        <MatchFallbackCta />
+      ) : (
+        match.checks.length > 0 && (
+          <div className="mt-4 rounded-lg border border-slate-200 bg-slate-50 p-3" data-testid="bonus-match-checks">
+            <p className="mb-1.5 text-xs font-semibold uppercase tracking-wider text-slate-500">Verifiche sul tuo profilo</p>
+            <MatchChecks result={match} />
+          </div>
+        )
+      )}
+
       {b.eligibility_reason && (
-        <div className="mt-4 rounded-lg border-l-2 border-[#0056B3] bg-slate-50 p-3 text-sm text-slate-700" data-testid="bonus-ai-explanation-box">
+        <div className="mt-4 rounded-lg border-l-2 border-[#0056B3] bg-white p-3 text-sm text-slate-700" data-testid="bonus-ai-explanation-box">
           <span className="font-semibold text-slate-900">Analisi AI: </span>
           {b.eligibility_reason}
         </div>
@@ -241,7 +270,7 @@ function BonusCard({
             data-testid="btn-toggle-favorite"
           >
             <Heart className={cn("size-4", isFavorite && "fill-current")} />
-            {isFavorite ? "Preferito" : "Preferito"}
+            Preferito
           </button>
           {b.source_url ? (
             <a href={b.source_url} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-xs text-slate-500 hover:text-slate-900" data-testid="bonus-source-link">
@@ -250,9 +279,9 @@ function BonusCard({
           ) : null}
         </div>
         <Button
-          disabled={!hasProfile || gen.isPending || b.eligibility === "not_eligible"}
+          disabled={!profile || gen.isPending || match.status === "not_eligible"}
           onClick={() => {
-            if (profileQ.data) gen.mutate({ bonus: b, profile: profileQ.data });
+            if (profile) gen.mutate({ bonus: b, profile });
           }}
           className="h-10"
           data-testid="btn-generate-docs"

@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -11,15 +12,42 @@ import {
 } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { Button } from "@/components/ui/button";
-import { useBonuses, useDashboard, useScanStatus } from "@/lib/queries";
-import { ELIGIBILITY_CLASS, ELIGIBILITY_LABEL, fmtDate, fmtDateTime } from "@/lib/format";
+import { MatchBadge } from "@/components/match";
+import { calculateBonusMatch } from "@/lib/matching";
+import { useBonuses, useDashboard, useProfile, useScanStatus } from "@/lib/queries";
+import { fmtDate, fmtDateTime } from "@/lib/format";
+import type { Bonus, Profile as UserProfile } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 export default function Dashboard() {
   const { data: d } = useDashboard();
   const { data: scan } = useScanStatus();
   const { data: bonuses } = useBonuses(false);
-  const top = (bonuses ?? []).filter((b) => b.eligibility === "eligible" || b.eligibility === "maybe").slice(0, 4);
+  const { data: profile } = useProfile();
+
+  /** Matching profilo ↔ catalogo, calcolato una sola volta. */
+  const matches = useMemo(() => {
+    const map = new Map<string, ReturnType<typeof calculateBonusMatch>>();
+    for (const b of bonuses ?? []) map.set(b.id, calculateBonusMatch((profile ?? null) as UserProfile | null, b));
+    return map;
+  }, [bonuses, profile]);
+
+  const eligibleCount = useMemo(
+    () => [...matches.values()].filter((m) => m.status === "eligible").length,
+    [matches],
+  );
+
+  // In evidenza: prima gli idonei, poi i "da verificare", ordinati per affinità.
+  const top = useMemo(() => {
+    const pool = (bonuses ?? []).filter((b) => {
+      const s = matches.get(b.id)?.status;
+      return s === "eligible" || s === "maybe";
+    });
+    const sorted = pool.sort((a, b) => (matches.get(b.id)?.score ?? 0) - (matches.get(a.id)?.score ?? 0));
+    if (sorted.length > 0) return sorted.slice(0, 4);
+    return (bonuses ?? []).slice(0, 4); // senza profilo: mostra comunque gli ultimi inseriti
+  }, [bonuses, matches]);
+
   const running = scan?.running ?? false;
 
   return (
@@ -44,8 +72,8 @@ export default function Dashboard() {
             <span className="text-[#0056B3]">pratiche, preferiti, scadenze.</span>
           </h1>
           <p className="mt-4 text-slate-600">
-            Monitoriamo ogni settimana i siti istituzionali, l'AI filtra solo i bonus compatibili con te e la tua famiglia e
-            prepara le domande precompilate in PDF e Word.
+            Confrontiamo ogni settimana i requisiti dei bandi con il tuo profilo: qui trovi i bonus più compatibili, i
+            preferiti e le scadenze imminenti.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             {d && !d.has_profile ? (
@@ -72,11 +100,25 @@ export default function Dashboard() {
       </section>
 
       <section className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <Stat testId="stat-eligible" label="Bonus idonei" value={d?.bonus_eligible} accent="text-[#047857]" icon={CheckCircle2} />
+        <Stat testId="stat-eligible" label="Idonei per te" value={eligibleCount || d?.bonus_eligible} accent="text-[#047857]" icon={CheckCircle2} />
         <Stat testId="stat-favorites" label="Preferiti salvati" value={d?.favorites_total} accent="text-[#B45309]" icon={Heart} />
         <Stat testId="stat-docs-to-sign" label="Documenti da firmare" value={d?.documents_to_sign} accent="text-[#0056B3]" icon={FileSignature} />
         <Stat testId="stat-bonus-total" label="Bonus nel catalogo" value={d?.bonus_total} accent="text-slate-900" icon={Sparkles} />
       </section>
+
+      {!profile && (
+        <section className="mt-6" data-testid="dashboard-no-profile-banner">
+          <div className="rounded-2xl border border-[#FDE68A] bg-[#FFFBEB] p-4 sm:flex sm:items-center sm:justify-between">
+            <p className="text-sm text-[#92400E]">
+              Completa il tuo profilo per verificare se hai diritto ai bonus del catalogo: ISEE, residenza e nucleo
+              familiare.
+            </p>
+            <Link to="/profile" className="mt-3 block shrink-0 text-sm font-semibold text-[#0056B3] hover:underline sm:mt-0" data-testid="dashboard-link-profile">
+              Completa il profilo →
+            </Link>
+          </div>
+        </section>
+      )}
 
       <section className="mt-8 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
         <div>
@@ -89,26 +131,15 @@ export default function Dashboard() {
           <div className="flex flex-col gap-2" data-testid="dashboard-top-bonus">
             {top.length === 0 && (
               <div className="rounded-xl border border-dashed border-slate-300 bg-white p-6 text-sm text-slate-500">
-                {d?.has_profile
-                  ? "Nessun bonus idoneo ancora: ripassa il catalogo e salva i preferiti."
-                  : "Completa il profilo per scoprire a quali bonus puoi accedere."}
+                Catalogo in aggiornamento: torna tra poco.
               </div>
             )}
             {top.map((b) => (
-              <Link
+              <BonusMatchRow
                 key={b.id}
-                to="/bonus"
-                className="group flex items-center justify-between gap-4 rounded-xl border border-slate-200 bg-white p-4 transition-[transform,border-color] duration-200 hover:-translate-y-0.5 hover:border-slate-400"
-                data-testid={`dashboard-bonus-${b.id}`}
-              >
-                <div className="min-w-0">
-                  <p className="truncate font-medium text-slate-900">{b.title}</p>
-                  <p className="text-sm text-slate-500">{b.authority} · {b.amount || b.category}</p>
-                </div>
-                <span className={cn("shrink-0 rounded-full border px-2.5 py-0.5 text-xs font-medium", ELIGIBILITY_CLASS[b.eligibility])}>
-                  {ELIGIBILITY_LABEL[b.eligibility]}
-                </span>
-              </Link>
+                bonus={b}
+                match={matches.get(b.id) ?? calculateBonusMatch((profile ?? null) as UserProfile | null, b)}
+              />
             ))}
           </div>
         </div>
@@ -124,7 +155,7 @@ export default function Dashboard() {
         </div>
       </section>
 
-      {/* Preferiti */}
+      {/* Preferiti con matching */}
       <section className="mt-8">
         <div className="mb-3 flex items-center justify-between">
           <h2 className="text-xl font-bold">I tuoi preferiti</h2>
@@ -139,18 +170,11 @@ export default function Dashboard() {
             </div>
           ) : (
             d?.favorite_bonuses.map((b) => (
-              <Link
+              <BonusMatchRow
                 key={b.id}
-                to="/bonus"
-                className="group flex items-center justify-between gap-4 rounded-xl border border-slate-200 bg-white p-4 transition-[transform,border-color] duration-200 hover:-translate-y-0.5 hover:border-slate-400"
-                data-testid={`dashboard-favorite-${b.id}`}
-              >
-                <div className="min-w-0">
-                  <p className="truncate font-medium text-slate-900">{b.title}</p>
-                  <p className="text-sm text-slate-500">{b.authority}</p>
-                </div>
-                <Heart className="size-4 shrink-0 fill-[#B45309] text-[#B45309]" />
-              </Link>
+                bonus={b}
+                match={matches.get(b.id) ?? calculateBonusMatch((profile ?? null) as UserProfile | null, b)}
+              />
             ))
           )}
         </div>
@@ -188,6 +212,30 @@ export default function Dashboard() {
         </div>
       </section>
     </div>
+  );
+}
+
+/** Riga bonus con badge di matching e verifica rapida (dashboard). */
+function BonusMatchRow({ bonus: b, match }: { bonus: Bonus; match: ReturnType<typeof calculateBonusMatch> }) {
+  return (
+    <Link
+      to="/bonus"
+      className="group flex items-center justify-between gap-4 rounded-xl border border-slate-200 bg-white p-4 transition-[transform,border-color] duration-200 hover:-translate-y-0.5 hover:border-slate-400"
+      data-testid={`dashboard-bonus-${b.id}`}
+    >
+      <div className="min-w-0">
+        <p className="truncate font-medium text-slate-900">{b.title}</p>
+        <p className="truncate text-sm text-slate-500">
+          {b.authority}
+          {match.checks.length > 0 && (
+            <span className="ml-2 hidden text-xs text-slate-400 sm:inline">
+              · {match.checks[0].label}
+            </span>
+          )}
+        </p>
+      </div>
+      <MatchBadge result={match} />
+    </Link>
   );
 }
 
