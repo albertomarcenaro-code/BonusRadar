@@ -1,6 +1,7 @@
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { CloudOff, LayoutDashboard, Radar, Sparkles, UserCheck } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
+import UserMenu from "@/components/UserMenu";
 import { isSupabaseConfigured, useScanStatus } from "@/lib/queries";
 import { fmtDate } from "@/lib/format";
 import { cn } from "@/lib/utils";
@@ -24,15 +25,18 @@ export default function AppShell() {
   return (
     <div className="min-h-svh bg-background">
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col bg-sidebar text-sidebar-foreground lg:flex">
-        <NavLink to="/" className="flex items-center gap-3 px-6 py-6">
-          <div className="relative grid size-10 place-items-center rounded-lg bg-[#0056B3]">
-            <Radar className="size-5 text-white" />
-          </div>
-          <div>
-            <p className="font-heading text-lg font-bold leading-none" data-testid="app-name">BonusRadar</p>
-            <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-slate-400">Italia</p>
-          </div>
-        </NavLink>
+        <div className="flex items-center justify-between px-5 py-6">
+          <NavLink to="/" className="flex items-center gap-3">
+            <div className="relative grid size-10 place-items-center rounded-lg bg-[#0056B3]">
+              <Radar className="size-5 text-white" />
+            </div>
+            <div>
+              <p className="font-heading text-lg font-bold leading-none" data-testid="app-name">BonusRadar</p>
+              <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-slate-400">Italia</p>
+            </div>
+          </NavLink>
+          <UserMenu />
+        </div>
         <nav className="mt-4 flex flex-col gap-1 px-3" data-testid="sidebar-nav">
           {LINKS.map((l) => (
             <NavLink
@@ -70,6 +74,9 @@ export default function AppShell() {
           <p className="font-heading font-bold">BonusRadar Italia</p>
         </NavLink>
         {scan?.running && <span className="ml-auto size-2 animate-pulse-dot rounded-full bg-amber-500" />}
+        <div className={scan?.running ? "" : "ml-auto"}>
+          <UserMenu />
+        </div>
       </header>
 
       {demoMode && (

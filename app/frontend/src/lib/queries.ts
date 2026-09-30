@@ -84,6 +84,10 @@ export const useScanStatus = () =>
 export const useAttachments = () =>
   useQuery({ queryKey: ["attachments"], queryFn: listAttachments, retry: false });
 
+/** Utente corrente (Supabase Auth o demo). */
+export const useAuthUser = () =>
+  useQuery({ queryKey: ["auth-user"], queryFn: () => auth.getUser(), staleTime: 60_000 });
+
 export function useUploadAttachment() {
   const inv = useInvalidateAll();
   return useMutation({
@@ -123,7 +127,7 @@ export function useOpenAttachment() {
 export function useInvalidateAll() {
   const qc = useQueryClient();
   return () => {
-    for (const k of ["dashboard", "scan", "bonus", "sources", "documents", "profile", "favorites", "attachments", "scraper-catalog"]) {
+    for (const k of ["dashboard", "scan", "bonus", "sources", "documents", "profile", "favorites", "attachments", "scraper-catalog", "auth-user"]) {
       qc.invalidateQueries({ queryKey: [k] });
     }
   };
