@@ -36,3 +36,12 @@ export const DOCUMENTS_BUCKET = "documents";
 export function documentObjectPath(userId: string, folderId: string, fileName: string): string {
   return `${userId}/${folderId}/${fileName}`;
 }
+
+/**
+ * Percorso degli allegati personali (PDF ISEE, carta d'identità, …).
+ * La policy RLS del bucket limita l'accesso alla prima cartella = auth.uid(),
+ * quindi ogni file vive in `<uid>/allegati/`.
+ */
+export function attachmentObjectPath(userId: string, fileName: string): string {
+  return `${userId}/allegati/${fileName}`;
+}

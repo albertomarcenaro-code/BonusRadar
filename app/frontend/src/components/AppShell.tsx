@@ -1,25 +1,30 @@
-import { NavLink, Outlet } from "react-router-dom";
-import { CloudOff, FolderArchive, Globe, LayoutDashboard, Radar, Sparkles, UserCheck } from "lucide-react";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { CloudOff, LayoutDashboard, Radar, Sparkles, UserCheck } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
 import { isSupabaseConfigured, useScanStatus } from "@/lib/queries";
 import { fmtDate } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
-  { to: "/", label: "Panoramica", short: "Home", icon: LayoutDashboard, id: "dashboard" },
-  { to: "/bonus", label: "Catalogo Bonus", short: "Bonus", icon: Sparkles, id: "bonus" },
-  { to: "/documents", label: "I Miei Documenti", short: "Documenti", icon: FolderArchive, id: "documents" },
-  { to: "/sources", label: "Fonti Monitorate", short: "Fonti", icon: Globe, id: "sources" },
-  { to: "/questionnaire", label: "Profilo & ISEE", short: "Profilo", icon: UserCheck, id: "questionnaire" },
+  { to: "/", label: "Home", short: "Home", icon: Radar, id: "home", end: true },
+  { to: "/profile", label: "Mio Profilo & Documenti", short: "Profilo", icon: UserCheck, id: "profile", end: false },
+  { to: "/dashboard", label: "Panoramica", short: "Panoramica", icon: LayoutDashboard, id: "dashboard", end: false },
+  { to: "/bonus", label: "Catalogo Bonus", short: "Bonus", icon: Sparkles, id: "bonus", end: false },
 ];
 
+/**
+ * Shell per le pagine autenticate (/profile, /dashboard, /bonus).
+ * La landing pubblica (/) e /auth vivono fuori dalla shell.
+ */
 export default function AppShell() {
   const { data: scan } = useScanStatus();
   const demoMode = !isSupabaseConfigured;
+  const location = useLocation();
+
   return (
     <div className="min-h-svh bg-background">
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col bg-sidebar text-sidebar-foreground lg:flex">
-        <div className="flex items-center gap-3 px-6 py-6">
+        <NavLink to="/" className="flex items-center gap-3 px-6 py-6">
           <div className="relative grid size-10 place-items-center rounded-lg bg-[#0056B3]">
             <Radar className="size-5 text-white" />
           </div>
@@ -27,13 +32,13 @@ export default function AppShell() {
             <p className="font-heading text-lg font-bold leading-none" data-testid="app-name">BonusRadar</p>
             <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-slate-400">Italia</p>
           </div>
-        </div>
-        <nav className="mt-4 flex flex-col gap-1 px-3">
+        </NavLink>
+        <nav className="mt-4 flex flex-col gap-1 px-3" data-testid="sidebar-nav">
           {LINKS.map((l) => (
             <NavLink
               key={l.to}
               to={l.to}
-              end={l.to === "/"}
+              end={l.end}
               data-testid={`nav-${l.id}`}
               className={({ isActive }) =>
                 cn(
@@ -58,10 +63,12 @@ export default function AppShell() {
       </aside>
 
       <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-border bg-white/85 px-4 py-3 backdrop-blur-md lg:hidden">
-        <div className="grid size-8 place-items-center rounded-md bg-[#0056B3]">
-          <Radar className="size-4 text-white" />
-        </div>
-        <p className="font-heading font-bold">BonusRadar Italia</p>
+        <NavLink to="/" className="flex items-center gap-2">
+          <div className="grid size-8 place-items-center rounded-md bg-[#0056B3]">
+            <Radar className="size-4 text-white" />
+          </div>
+          <p className="font-heading font-bold">BonusRadar Italia</p>
+        </NavLink>
         {scan?.running && <span className="ml-auto size-2 animate-pulse-dot rounded-full bg-amber-500" />}
       </header>
 
@@ -78,18 +85,18 @@ export default function AppShell() {
         </div>
       )}
 
-      <main className="pb-24 lg:pb-0 lg:pl-64">
+      <main className="pb-24 lg:pb-0 lg:pl-64" key={location.pathname}>
         <div className="mx-auto max-w-6xl px-4 py-6 sm:px-8 lg:py-10">
           <Outlet />
         </div>
       </main>
 
-      <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-5 border-t border-border bg-white/95 backdrop-blur-md lg:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-4 border-t border-border bg-white/95 backdrop-blur-md lg:hidden">
         {LINKS.map((l) => (
           <NavLink
             key={l.to}
             to={l.to}
-            end={l.to === "/"}
+            end={l.end}
             data-testid={`mobile-nav-${l.id}`}
             className={({ isActive }) =>
               cn("flex min-h-14 flex-col items-center justify-center gap-1 text-[11px]", isActive ? "text-[#0056B3]" : "text-slate-500")

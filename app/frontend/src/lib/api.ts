@@ -11,10 +11,11 @@
  * italiano già pronto per i toast.
  */
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { DOCUMENTS_BUCKET, documentObjectPath, isSupabaseConfigured, supabase } from "@/lib/supabase";
+import { DOCUMENTS_BUCKET, attachmentObjectPath, documentObjectPath, isSupabaseConfigured, supabase } from "@/lib/supabase";
 import { demoStore } from "@/lib/demoStore";
 import { buildHtml, makeFileNames, openPrintWindow } from "@/lib/docgen";
 import type { Bonus, BonusCatalogFile, Dashboard, DocStatus, DocumentFolder, Profile, ProfileIn, ScanStatus, Source } from "@/lib/types";
+import type { DemoAttachment } from "@/lib/demoStore";
 
 export class DataError extends Error {}
 
@@ -106,8 +107,6 @@ export async function saveProfile(p: ProfileIn): Promise<Profile> {
     .single();
   dbx(error);
   return data as Profile;
-
-  // Questionnaire: registra un audit della compilazione (best-effort)
 }
 
 export async function recordQuestionnaire(p: ProfileIn): Promise<void> {
@@ -303,6 +302,88 @@ export async function deleteDocument(id: string): Promise<void> {
 }
 
 // ============================================================
+// Allegati personali (PDF ISEE, carta d'identità, …)
+// ============================================================
+export type UserAttachment = DemoAttachment;
+
+export async function listAttachments(): Promise<UserAttachment[]> {
+  if (!isSupabaseConfigured) return demoStore.getAttachments();
+  const user = await auth.getUser();
+  if (!user) return [];
+  const { data, error } = await requireSupabase().storage
+    .from(DOCUMENTS_BUCKET)
+    .list("allegati", { search: "" });
+  // Con la policy foldername[1]=uid la listing corretta è nel percorso "<uid>/allegati".
+  if (error) {
+    const alt = await requireSupabase().storage.from(DOCUMENTS_BUCKET).list(`${user.id}/allegati`, { search: "" });
+    if (alt.error) return [];
+    return mapAttachmentEntries(alt.data ?? []);
+  }
+  return mapAttachmentEntries(data ?? []);
+}
+
+function mapAttachmentEntries(entries: { name: string; id?: string | null; created_at?: string | null; metadata?: { size?: number } | Record<string, unknown> | null }[]): UserAttachment[] {
+  return entries
+    .filter((e) => e.name && e.name !== ".emptyFolderPlaceholder")
+    .map((e) => ({
+      id: e.id ?? e.name,
+      name: e.name,
+      label: "",
+      size: typeof e.metadata?.size === "number" ? e.metadata.size : 0,
+      created_at: e.created_at ?? new Date().toISOString(),
+    }));
+}
+
+export async function uploadAttachment(file: File, label: string): Promise<UserAttachment> {
+  if (file.type && file.type !== "application/pdf") {
+    throw new DataError("Sono ammessi solo file PDF.");
+  }
+  if (file.size > 10 * 1024 * 1024) {
+    throw new DataError("Il file supera il limite di 10 MB.");
+  }
+  if (!isSupabaseConfigured) {
+    const att: UserAttachment = {
+      id: crypto.randomUUID(),
+      name: file.name,
+      label,
+      size: file.size,
+      created_at: new Date().toISOString(),
+    };
+    demoStore.addAttachment(att);
+    return att;
+  }
+  const user = await auth.getUser();
+  if (!user) throw new DataError("Accedi per caricare gli allegati");
+  const path = attachmentObjectPath(user.id, file.name);
+  const { error } = await requireSupabase()
+    .storage
+    .from(DOCUMENTS_BUCKET)
+    .upload(path, file, { contentType: "application/pdf", upsert: true });
+  dbx(error);
+  return { id: path, name: file.name, label, size: file.size, created_at: new Date().toISOString() };
+}
+
+/** URL firmato per aprire un allegato caricato. */
+export async function getAttachmentUrl(a: UserAttachment): Promise<string | null> {
+  if (!isSupabaseConfigured) return null;
+  const user = await auth.getUser();
+  if (!user) return null;
+  const path = a.id.includes("/") ? a.id : attachmentObjectPath(user.id, a.name);
+  const { data, error } = await requireSupabase().storage.from(DOCUMENTS_BUCKET).createSignedUrl(path, 300);
+  dbx(error);
+  return data?.signedUrl ?? null;
+}
+
+export async function deleteAttachment(a: UserAttachment): Promise<void> {
+  if (!isSupabaseConfigured) return demoStore.removeAttachment(a.id);
+  const user = await auth.getUser();
+  if (!user) throw new DataError("Accedi per gestire gli allegati");
+  const path = a.id.includes("/") ? a.id : attachmentObjectPath(user.id, a.name);
+  const { error } = await requireSupabase().storage.from(DOCUMENTS_BUCKET).remove([path]);
+  dbx(error);
+}
+
+// ============================================================
 // Sources & scan — richiedono il backend AI; in demo restano stub chiari
 // ============================================================
 export async function listSources(): Promise<Source[]> {
@@ -328,14 +409,29 @@ export const scan = {
 // Dashboard aggregata
 // ============================================================
 export async function getDashboard(): Promise<Dashboard> {
-  const [, profile, bonuses, catalog, docs] = await Promise.all([
+  const [user, profile, bonuses, catalog, docs, favorites] = await Promise.all([
     auth.getUser(),
     getProfile().catch(() => null),
     listBonuses().catch(() => []),
     fetchScraperCatalog(),
     listDocuments().catch(() => []),
+    listFavorites().catch(() => []),
   ]);
+  const favoriteSet = new Set(favorites);
+  const favoritesList = bonuses.filter((b) => favoriteSet.has(b.id));
+
+  // Scadenze imminenti: solo bonus con una data esplicita (entro 60 giorni).
+  const now = Date.now();
+  const upcoming = bonuses
+    .filter((b) => {
+      const parsed = parseItDate(b.deadline);
+      return parsed !== null && parsed >= now && parsed <= now + 60 * 86_400_000;
+    })
+    .sort((a, b) => (parseItDate(a.deadline) ?? 0) - (parseItDate(b.deadline) ?? 0))
+    .slice(0, 5);
+
   return {
+    user_email: user?.email ?? "",
     has_profile: Boolean(profile),
     profile_name: profile?.full_name ?? "",
     bonus_total: bonuses.length,
@@ -347,5 +443,30 @@ export async function getDashboard(): Promise<Dashboard> {
     sources_total: 0,
     scan: await scan.status(),
     last_scan_at: catalog?.generated_at ?? null,
+    favorites_total: favoritesList.length,
+    favorite_bonuses: favoritesList.slice(0, 5),
+    upcoming_deadlines: upcoming,
   };
+}
+
+/** Parse di date come "15/10/2026", "15-10-2026", "15 ottobre 2026" (in iso). */
+function parseItDate(s: string): number | null {
+  if (!s) return null;
+  const m = s.match(/(\d{1,2})[/-](\d{1,2})[/-](\d{2,4})/);
+  if (m) {
+    const y = Number(m[3]) < 100 ? 2000 + Number(m[3]) : Number(m[3]);
+    const t = new Date(y, Number(m[2]) - 1, Number(m[1])).getTime();
+    return Number.isNaN(t) ? null : t;
+  }
+  const mesi = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"];
+  const m2 = s.toLowerCase().match(/(\d{1,2})\s+([a-zà-ù]+)\s+(\d{4})/);
+  if (m2) {
+    const mi = mesi.findIndex((me) => me.startsWith(m2[2].slice(0, 4)));
+    if (mi >= 0) {
+      const t = new Date(Number(m2[3]), mi, Number(m2[1])).getTime();
+      return Number.isNaN(t) ? null : t;
+    }
+  }
+  const t = new Date(s).getTime();
+  return Number.isNaN(t) ? null : t;
 }

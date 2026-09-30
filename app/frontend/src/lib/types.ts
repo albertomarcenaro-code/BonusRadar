@@ -106,6 +106,7 @@ export interface DocumentFolder {
 }
 
 export interface Dashboard {
+  user_email: string;
   has_profile: boolean;
   profile_name: string;
   bonus_total: number;
@@ -118,4 +119,9 @@ export interface Dashboard {
   scan: ScanStatus;
   /** Data dell'ultima scansione dello scraper (dal catalogo JSON). */
   last_scan_at: string | null;
+  /** Bonus salvati tra i preferiti dall'utente. */
+  favorites_total: number;
+  favorite_bonuses: Bonus[];
+  /** Scadenze entro 60 giorni (solo date esplicite). */
+  upcoming_deadlines: Bonus[];
 }

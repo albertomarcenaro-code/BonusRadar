@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { CalendarClock, ExternalLink, FileText, Heart, Loader2, RefreshCw, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,7 +27,9 @@ export default function BonusCatalog() {
   const { data: favorites } = useFavorites();
   const [filter, setFilter] = useState<"all" | Eligibility>("all");
   const [category, setCategory] = useState("tutte");
-  const [q, setQ] = useState("");
+  const [params] = useSearchParams();
+  // La ricerca rapida dalla landing arriva come ?q=...
+  const [q, setQ] = useState(params.get("q") ?? "");
 
   const list = (bonuses ?? []).filter(
     (b) =>
@@ -70,9 +72,9 @@ export default function BonusCatalog() {
 
       {dash && !dash.has_profile && (
         <div className="mb-6 flex flex-col gap-3 rounded-xl border border-[#FDE68A] bg-[#FFFBEB] p-4 sm:flex-row sm:items-center sm:justify-between" data-testid="bonus-no-profile-banner">
-          <p className="text-sm text-[#92400E]">Compila il questionario: senza profilo non posso valutare la tua idoneità.</p>
-          <Link to="/questionnaire" className="text-sm font-semibold text-[#0056B3] hover:underline" data-testid="link-to-questionnaire">
-            Vai al questionario →
+          <p className="text-sm text-[#92400E]">Completa il profilo: senza i tuoi dati non possiamo valutare la tua idoneità.</p>
+          <Link to="/profile" className="text-sm font-semibold text-[#0056B3] hover:underline" data-testid="link-to-profile">
+            Vai al profilo →
           </Link>
         </div>
       )}

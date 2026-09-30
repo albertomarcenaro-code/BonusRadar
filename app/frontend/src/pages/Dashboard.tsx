@@ -1,9 +1,18 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle2, FileSignature, Globe, Radar, Sparkles, UserCheck } from "lucide-react";
+import {
+  ArrowRight,
+  CalendarClock,
+  CheckCircle2,
+  FileSignature,
+  Heart,
+  Radar,
+  Sparkles,
+  UserCheck,
+} from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { Button } from "@/components/ui/button";
 import { useBonuses, useDashboard, useScanStatus } from "@/lib/queries";
-import { ELIGIBILITY_CLASS, ELIGIBILITY_LABEL, fmtDateTime } from "@/lib/format";
+import { ELIGIBILITY_CLASS, ELIGIBILITY_LABEL, fmtDate, fmtDateTime } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
 export default function Dashboard() {
@@ -30,9 +39,9 @@ export default function Dashboard() {
             {d?.profile_name ? `Buongiorno, ${d.profile_name.split(" ")[0]}` : "Benvenuto in BonusRadar"}
           </p>
           <h1 className="mt-3 text-4xl font-bold leading-[1.05] text-slate-900 sm:text-5xl" data-testid="dashboard-title">
-            I bonus a cui hai diritto,
+            La tua panoramica:
             <br />
-            <span className="text-[#0056B3]">già pronti da firmare.</span>
+            <span className="text-[#0056B3]">pratiche, preferiti, scadenze.</span>
           </h1>
           <p className="mt-4 text-slate-600">
             Monitoriamo ogni settimana i siti istituzionali, l'AI filtra solo i bonus compatibili con te e la tua famiglia e
@@ -40,24 +49,19 @@ export default function Dashboard() {
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             {d && !d.has_profile ? (
-              <Link to="/questionnaire" className={buttonVariants({ size: "lg" })} data-testid="cta-start-questionnaire">
-                <UserCheck className="size-4" /> Compila il questionario iniziale
+              <Link to="/profile" className={buttonVariants({ size: "lg" })} data-testid="cta-start-questionnaire">
+                <UserCheck className="size-4" /> Completa il tuo profilo
               </Link>
             ) : (
               <Link to="/bonus" className={buttonVariants({ size: "lg" })} data-testid="cta-view-bonus">
                 <Sparkles className="size-4" /> Vedi i miei bonus
               </Link>
             )}
-            <Button
-              variant="outline"
-              size="lg"
-              disabled
-              title="La scansione AI settimanale richiede il backend; disponibile a breve"
-              data-testid="btn-dashboard-scan"
-            >
-              <Radar className={cn("size-4", running && "animate-radar")} />
-              Scansione settimanale automatica
-            </Button>
+            <Link to="/profile" data-testid="cta-goto-profile">
+              <Button variant="outline" size="lg">
+                <FileSignature className="size-4" /> Profilo &amp; Documenti
+              </Button>
+            </Link>
           </div>
           {running && (
             <p className="mt-3 font-mono text-xs text-slate-500" data-testid="dashboard-scan-phase">
@@ -69,9 +73,9 @@ export default function Dashboard() {
 
       <section className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
         <Stat testId="stat-eligible" label="Bonus idonei" value={d?.bonus_eligible} accent="text-[#047857]" icon={CheckCircle2} />
-        <Stat testId="stat-maybe" label="Da verificare" value={d?.bonus_maybe} accent="text-[#B45309]" icon={Sparkles} />
+        <Stat testId="stat-favorites" label="Preferiti salvati" value={d?.favorites_total} accent="text-[#B45309]" icon={Heart} />
         <Stat testId="stat-docs-to-sign" label="Documenti da firmare" value={d?.documents_to_sign} accent="text-[#0056B3]" icon={FileSignature} />
-        <Stat testId="stat-sources" label="Fonti monitorate" value={d?.sources_total} accent="text-slate-900" icon={Globe} />
+        <Stat testId="stat-bonus-total" label="Bonus nel catalogo" value={d?.bonus_total} accent="text-slate-900" icon={Sparkles} />
       </section>
 
       <section className="mt-8 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
@@ -86,8 +90,8 @@ export default function Dashboard() {
             {top.length === 0 && (
               <div className="rounded-xl border border-dashed border-slate-300 bg-white p-6 text-sm text-slate-500">
                 {d?.has_profile
-                  ? "Nessun bonus idoneo ancora: la valutazione AI potrebbe essere in corso o puoi avviare una scansione."
-                  : "Compila il questionario per scoprire a quali bonus puoi accedere."}
+                  ? "Nessun bonus idoneo ancora: ripassa il catalogo e salva i preferiti."
+                  : "Completa il profilo per scoprire a quali bonus puoi accedere."}
               </div>
             )}
             {top.map((b) => (
@@ -99,7 +103,7 @@ export default function Dashboard() {
               >
                 <div className="min-w-0">
                   <p className="truncate font-medium text-slate-900">{b.title}</p>
-                  <p className="text-sm text-slate-500">{b.authority} · {b.amount}</p>
+                  <p className="text-sm text-slate-500">{b.authority} · {b.amount || b.category}</p>
                 </div>
                 <span className={cn("shrink-0 rounded-full border px-2.5 py-0.5 text-xs font-medium", ELIGIBILITY_CLASS[b.eligibility])}>
                   {ELIGIBILITY_LABEL[b.eligibility]}
@@ -110,13 +114,77 @@ export default function Dashboard() {
         </div>
         <div className="rounded-xl bg-[#0F172A] p-5 text-slate-100" data-testid="dashboard-scan-log">
           <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Registro scansione</p>
-          <p className="mt-1 text-sm">Ultima: {fmtDateTime(scan?.last_run_at)}</p>
+          <p className="mt-1 text-sm">Ultima: {fmtDateTime(d?.last_scan_at ?? scan?.last_run_at)}</p>
           <div className="mt-4 max-h-64 space-y-1 overflow-auto font-mono text-xs text-slate-300">
-            {(scan?.log ?? []).length === 0 && <p className="text-slate-500">Nessuna scansione eseguita.</p>}
+            {(scan?.log ?? []).length === 0 && <p className="text-slate-500">Catalogo aggiornato settimanalmente dallo scraper.</p>}
             {(scan?.log ?? []).slice(-12).map((l, i) => (
               <p key={i}>{l}</p>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Preferiti */}
+      <section className="mt-8">
+        <div className="mb-3 flex items-center justify-between">
+          <h2 className="text-xl font-bold">I tuoi preferiti</h2>
+          <Link to="/bonus" className="flex items-center gap-1 text-sm text-[#0056B3] hover:underline" data-testid="link-favorites-bonus">
+            Gestisci nel catalogo <ArrowRight className="size-4" />
+          </Link>
+        </div>
+        <div className="flex flex-col gap-2" data-testid="dashboard-favorites">
+          {(d?.favorite_bonuses ?? []).length === 0 ? (
+            <div className="rounded-xl border border-dashed border-slate-300 bg-white p-6 text-sm text-slate-500">
+              Nessun preferito salvato: nel catalogo premi l'icona ♥ sui bonus che ti interessano.
+            </div>
+          ) : (
+            d?.favorite_bonuses.map((b) => (
+              <Link
+                key={b.id}
+                to="/bonus"
+                className="group flex items-center justify-between gap-4 rounded-xl border border-slate-200 bg-white p-4 transition-[transform,border-color] duration-200 hover:-translate-y-0.5 hover:border-slate-400"
+                data-testid={`dashboard-favorite-${b.id}`}
+              >
+                <div className="min-w-0">
+                  <p className="truncate font-medium text-slate-900">{b.title}</p>
+                  <p className="text-sm text-slate-500">{b.authority}</p>
+                </div>
+                <Heart className="size-4 shrink-0 fill-[#B45309] text-[#B45309]" />
+              </Link>
+            ))
+          )}
+        </div>
+      </section>
+
+      {/* Scadenze imminenti */}
+      <section className="mt-8">
+        <h2 className="text-xl font-bold">Scadenze imminenti</h2>
+        <div className="mt-3 flex flex-col gap-2" data-testid="dashboard-deadlines">
+          {(d?.upcoming_deadlines ?? []).length === 0 ? (
+            <div className="rounded-xl border border-dashed border-slate-300 bg-white p-6 text-sm text-slate-500">
+              Nessuna scadenza entro 60 giorni con data dichiarata dai bandi.
+            </div>
+          ) : (
+            d?.upcoming_deadlines.map((b) => (
+              <Link
+                key={b.id}
+                to="/bonus"
+                className="flex items-center gap-4 rounded-xl border border-slate-200 bg-white p-4 transition-[transform,border-color] duration-200 hover:-translate-y-0.5 hover:border-slate-400"
+                data-testid={`dashboard-deadline-${b.id}`}
+              >
+                <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-[#FFFBEB]">
+                  <CalendarClock className="size-5 text-[#B45309]" />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate font-medium text-slate-900">{b.title}</p>
+                  <p className="text-sm text-slate-500">{b.authority}</p>
+                </div>
+                <span className="shrink-0 rounded-full border border-[#FDE68A] bg-[#FFFBEB] px-2.5 py-0.5 text-xs font-semibold text-[#92400E]">
+                  entro {fmtDate(b.deadline)}
+                </span>
+              </Link>
+            ))
+          )}
         </div>
       </section>
     </div>
@@ -133,7 +201,7 @@ function Stat({
   label: string;
   value: number | undefined;
   accent: string;
-  icon: typeof Globe;
+  icon: typeof Radar;
   testId: string;
 }) {
   return (

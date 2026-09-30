@@ -3,12 +3,15 @@ import { toast } from "sonner";
 import {
   auth,
   DataError,
+  deleteAttachment,
   deleteDocument,
   fetchScraperCatalog,
   generateDocuments,
+  getAttachmentUrl,
   getDashboard,
   getFileUrl,
   getProfile,
+  listAttachments,
   listBonuses,
   listDocuments,
   listFavorites,
@@ -18,8 +21,10 @@ import {
   scan,
   toggleFavorite,
   updateDocumentStatus,
+  uploadAttachment,
 } from "@/lib/api";
 import type { Bonus, DocStatus, ProfileIn } from "@/lib/types";
+import type { UserAttachment } from "@/lib/api";
 
 export { isSupabaseConfigured } from "@/lib/supabase";
 
@@ -76,10 +81,49 @@ export const useDocuments = () =>
 export const useScanStatus = () =>
   useQuery({ queryKey: ["scan"], queryFn: () => scan.status(), retry: false, refetchInterval: 60000 });
 
+export const useAttachments = () =>
+  useQuery({ queryKey: ["attachments"], queryFn: listAttachments, retry: false });
+
+export function useUploadAttachment() {
+  const inv = useInvalidateAll();
+  return useMutation({
+    mutationFn: ({ file, label }: { file: File; label: string }) => uploadAttachment(file, label),
+    onSuccess: () => {
+      toast.success("Allegato caricato");
+      inv();
+    },
+    onError: (e) => toast.error(errMsg(e)),
+  });
+}
+
+export function useDeleteAttachment() {
+  const inv = useInvalidateAll();
+  return useMutation({
+    mutationFn: (a: UserAttachment) => deleteAttachment(a),
+    onSuccess: () => {
+      toast.success("Allegato eliminato");
+      inv();
+    },
+    onError: (e) => toast.error(errMsg(e)),
+  });
+}
+
+/** Apre un allegato (URL firmato su Supabase; toast informativo in demo). */
+export function useOpenAttachment() {
+  return useMutation({
+    mutationFn: (a: UserAttachment) => getAttachmentUrl(a),
+    onSuccess: (url) => {
+      if (url) window.open(url, "_blank");
+      else toast.info("In modalità demo il file resta in questo browser e non è scaricabile.");
+    },
+    onError: (e) => toast.error(errMsg(e)),
+  });
+}
+
 export function useInvalidateAll() {
   const qc = useQueryClient();
   return () => {
-    for (const k of ["dashboard", "scan", "bonus", "sources", "documents", "profile", "favorites"]) {
+    for (const k of ["dashboard", "scan", "bonus", "sources", "documents", "profile", "favorites", "attachments", "scraper-catalog"]) {
       qc.invalidateQueries({ queryKey: [k] });
     }
   };

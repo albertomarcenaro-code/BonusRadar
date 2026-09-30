@@ -13,11 +13,21 @@ export interface DemoUser {
   email: string;
 }
 
+/** Rappresentazione locale di un allegato caricato dall'utente. */
+export interface DemoAttachment {
+  id: string;
+  name: string;
+  label: string;
+  size: number;
+  created_at: string;
+}
+
 export interface DemoState {
   user: DemoUser | null;
   profile: Profile | null;
   favorites: { bonus_id: string; note: string }[];
   documents: DocumentFolder[];
+  attachments: { id: string; name: string; label: string; size: number; created_at: string }[];
 }
 
 function read(): DemoState {
@@ -31,7 +41,7 @@ function read(): DemoState {
 }
 
 function empty(): DemoState {
-  return { user: null, profile: null, favorites: [], documents: [] };
+  return { user: null, profile: null, favorites: [], documents: [], attachments: [] };
 }
 
 function write(s: DemoState): void {
@@ -119,6 +129,18 @@ export const demoStore = {
   deleteDocument(id: string): void {
     const s = read();
     write({ ...s, documents: s.documents.filter((d) => d.id !== id) });
+  },
+
+  getAttachments(): DemoAttachment[] {
+    return read().attachments;
+  },
+  addAttachment(a: DemoAttachment): void {
+    const s = read();
+    write({ ...s, attachments: [a, ...s.attachments] });
+  },
+  removeAttachment(id: string): void {
+    const s = read();
+    write({ ...s, attachments: s.attachments.filter((a) => a.id !== id) });
   },
 
   async bonuses(): Promise<Bonus[]> {
