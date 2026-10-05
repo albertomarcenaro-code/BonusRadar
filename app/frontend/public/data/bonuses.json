@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-29T22:10:23Z",
+  "generated_at": "2026-10-05T16:47:39Z",
   "source": "BonusRadar scraper v1",
-  "count": 19,
+  "count": 16,
   "bonuses": [
     {
       "id": "scr-c3b461975b1a",
@@ -22,24 +22,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T22:10:23Z"
-    },
-    {
-      "id": "scr-c81f5ca82b62",
-      "title": "Bonus nido: al via la banca dati nazionale delle strutture convenzionate",
-      "authority": "INPS",
-      "category": "famiglia",
-      "amount": "",
-      "deadline": "",
-      "summary": "Bonus nido: al via la banca dati nazionale delle strutture convenzionate",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.09.bonus-nido-al-via-la-banca-dati-nazionale-delle-strutture-convenzionate.html",
-      "source_name": "INPS",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-09-29T22:10:23Z"
+      "discovered_at": "2026-10-05T16:47:39Z"
     },
     {
       "id": "scr-545f1602d987",
@@ -56,7 +39,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T22:10:23Z"
+      "discovered_at": "2026-10-05T16:47:39Z"
     },
     {
       "id": "scr-201e2aef4705",
@@ -73,7 +56,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T22:10:23Z"
+      "discovered_at": "2026-10-05T16:47:39Z"
     },
     {
       "id": "scr-2287458edf86",
@@ -90,7 +73,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T22:10:23Z"
+      "discovered_at": "2026-10-05T16:47:39Z"
     },
     {
       "id": "scr-1b0da47a683b",
@@ -107,7 +90,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T22:10:23Z"
+      "discovered_at": "2026-10-05T16:47:39Z"
     },
     {
       "id": "scr-cf2efc5ae5f5",
@@ -124,7 +107,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T22:10:23Z"
+      "discovered_at": "2026-10-05T16:47:39Z"
     },
     {
       "id": "scr-72c6b5c86c37",
@@ -141,7 +124,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T22:10:23Z"
+      "discovered_at": "2026-10-05T16:47:39Z"
     },
     {
       "id": "scr-11a99c32c2a0",
@@ -158,7 +141,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T22:10:23Z"
+      "discovered_at": "2026-10-05T16:47:39Z"
     },
     {
       "id": "scr-df6acb22620a",
@@ -175,7 +158,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T22:10:23Z"
+      "discovered_at": "2026-10-05T16:47:39Z"
     },
     {
       "id": "scr-067d6f4429e8",
@@ -192,7 +175,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T22:10:23Z"
+      "discovered_at": "2026-10-05T16:47:39Z"
     },
     {
       "id": "scr-af331a1ec0c3",
@@ -209,26 +192,24 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T22:10:23Z"
+      "discovered_at": "2026-10-05T16:47:39Z"
     },
     {
-      "id": "scr-190ab1637fb1",
-      "title": "Fiera di Cornigliano 2026 - Avviso agli operatori commerciali e graduatoria spuntisti",
-      "authority": "Comune di Genova",
-      "category": "lavoro",
+      "id": "scr-9d2775f3fbc9",
+      "title": "Gestione Separata: novità sulla ricongiunzione dei contributi",
+      "authority": "INPS",
+      "category": "altro",
       "amount": "",
       "deadline": "",
-      "summary": "Fiera di Cornigliano 2026 - Avviso agli operatori commerciali e graduatoria spuntisti 24 Settembre 2026 Graduatoria utile ai fini dell'assegnazione del posteggio in spunta Vai alla notizia",
-      "requirements": [
-        "Residenza nel Comune di Genova"
-      ],
+      "summary": "Gestione Separata: novità sulla ricongiunzione dei contributi",
+      "requirements": [],
       "required_documents": [],
-      "source_url": "https://www.comune.genova.it/novita/avvisi/fiera-di-cornigliano-2026-avviso-agli-operatori-commerciali-e-graduatoria-spuntisti",
-      "source_name": "Comune di Genova",
+      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.02.gestione-separata-novit-sulla-ricongiunzione-dei-contributi.html",
+      "source_name": "INPS",
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T22:10:23Z"
+      "discovered_at": "2026-10-05T16:47:39Z"
     },
     {
       "id": "scr-9498772d2e3d",
@@ -237,7 +218,7 @@
       "category": "studio",
       "amount": "",
       "deadline": "19 ottobre 2026",
-      "summary": "Avviso per la selezione di un progetto pilota finalizzato ad avvicinare i giovani al ricco patrimonio marittimo-culturale della liguria, articolato nelle iniziative Scoperta e immersione ed Esplorazione delle opportunità lavorative nel settore marittimo ligure approvato nell'ambito del Progetto giovani 29 Settembre 2026 29 Settembre 2026 19 Ottobre 2026 enti del terzo settore Note: termine pres…",
+      "summary": "Avviso di pubblicazione graduatoria provvisoria per l'assegnazione di alloggi Erp Arte Savona nel Comune di Vado Ligure 01 Ottobre 2026 01 Ottobre 2026 30 Ottobre 2026 CONTRIBUTI contributi a favore delle associazioni di rappresentanza delle cooperative modalità e criteri per la presentazione delle proposte progettuali nell'ambito delle linee di intervento di cui all'articolo 3, comma 1 della l…",
       "requirements": [
         "Residenza in Liguria"
       ],
@@ -247,7 +228,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T22:10:23Z"
+      "discovered_at": "2026-10-05T16:47:39Z"
     },
     {
       "id": "scr-15ae2a0384f0",
@@ -256,7 +237,7 @@
       "category": "studio",
       "amount": "",
       "deadline": "19 ottobre 2026",
-      "summary": "Avviso per la selezione di un progetto pilota finalizzato ad avvicinare i giovani al ricco patrimonio marittimo-culturale della liguria, articolato nelle iniziative Scoperta e immersione ed Esplorazione delle opportunità lavorative nel settore marittimo ligure approvato nell'ambito del Progetto giovani 29 Settembre 2026 29 Settembre 2026 19 Ottobre 2026 enti del terzo settore Note: termine pres…",
+      "summary": "Avviso di pubblicazione graduatoria provvisoria per l'assegnazione di alloggi Erp Arte Savona nel Comune di Vado Ligure 01 Ottobre 2026 01 Ottobre 2026 30 Ottobre 2026 CONTRIBUTI contributi a favore delle associazioni di rappresentanza delle cooperative modalità e criteri per la presentazione delle proposte progettuali nell'ambito delle linee di intervento di cui all'articolo 3, comma 1 della l…",
       "requirements": [
         "Residenza in Liguria"
       ],
@@ -266,7 +247,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T22:10:23Z"
+      "discovered_at": "2026-10-05T16:47:39Z"
     },
     {
       "id": "scr-2c17f33fc188",
@@ -275,7 +256,7 @@
       "category": "studio",
       "amount": "",
       "deadline": "19 ottobre 2026",
-      "summary": "Avviso per la selezione di un progetto pilota finalizzato ad avvicinare i giovani al ricco patrimonio marittimo-culturale della liguria, articolato nelle iniziative Scoperta e immersione ed Esplorazione delle opportunità lavorative nel settore marittimo ligure approvato nell'ambito del Progetto giovani 29 Settembre 2026 29 Settembre 2026 19 Ottobre 2026 enti del terzo settore Note: termine pres…",
+      "summary": "Avviso di pubblicazione graduatoria provvisoria per l'assegnazione di alloggi Erp Arte Savona nel Comune di Vado Ligure 01 Ottobre 2026 01 Ottobre 2026 30 Ottobre 2026 CONTRIBUTI contributi a favore delle associazioni di rappresentanza delle cooperative modalità e criteri per la presentazione delle proposte progettuali nell'ambito delle linee di intervento di cui all'articolo 3, comma 1 della l…",
       "requirements": [
         "Residenza in Liguria"
       ],
@@ -285,7 +266,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T22:10:23Z"
+      "discovered_at": "2026-10-05T16:47:39Z"
     },
     {
       "id": "scr-a98c295fd143",
@@ -294,7 +275,7 @@
       "category": "studio",
       "amount": "",
       "deadline": "19 ottobre 2026",
-      "summary": "Avviso per la selezione di un progetto pilota finalizzato ad avvicinare i giovani al ricco patrimonio marittimo-culturale della liguria, articolato nelle iniziative Scoperta e immersione ed Esplorazione delle opportunità lavorative nel settore marittimo ligure approvato nell'ambito del Progetto giovani 29 Settembre 2026 29 Settembre 2026 19 Ottobre 2026 enti del terzo settore Note: termine pres…",
+      "summary": "Avviso di pubblicazione graduatoria provvisoria per l'assegnazione di alloggi Erp Arte Savona nel Comune di Vado Ligure 01 Ottobre 2026 01 Ottobre 2026 30 Ottobre 2026 CONTRIBUTI contributi a favore delle associazioni di rappresentanza delle cooperative modalità e criteri per la presentazione delle proposte progettuali nell'ambito delle linee di intervento di cui all'articolo 3, comma 1 della l…",
       "requirements": [
         "Residenza in Liguria"
       ],
@@ -304,45 +285,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-09-29T22:10:23Z"
-    },
-    {
-      "id": "scr-1cc12841208d",
-      "title": "Borse di studio per spese di iscrizione e frequenza anno scolastico 2025-2026",
-      "authority": "Regione Liguria",
-      "category": "studio",
-      "amount": "",
-      "deadline": "19 ottobre 2026",
-      "summary": "Avviso per la selezione di un progetto pilota finalizzato ad avvicinare i giovani al ricco patrimonio marittimo-culturale della liguria, articolato nelle iniziative Scoperta e immersione ed Esplorazione delle opportunità lavorative nel settore marittimo ligure approvato nell'ambito del Progetto giovani 29 Settembre 2026 29 Settembre 2026 19 Ottobre 2026 enti del terzo settore Note: termine pres…",
-      "requirements": [
-        "Residenza in Liguria"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetition/4743:borse-frequenza-2025-2026.html",
-      "source_name": "Regione Liguria",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-09-29T22:10:23Z"
-    },
-    {
-      "id": "scr-a584eff355ac",
-      "title": "Bando di concorso per l'assegnazione degli alloggi di edilizia residenziale pubblica siti nel comune di Mignanego (Ge)",
-      "authority": "Regione Liguria",
-      "category": "casa",
-      "amount": "",
-      "deadline": "19 ottobre 2026",
-      "summary": "Avviso per la selezione di un progetto pilota finalizzato ad avvicinare i giovani al ricco patrimonio marittimo-culturale della liguria, articolato nelle iniziative Scoperta e immersione ed Esplorazione delle opportunità lavorative nel settore marittimo ligure approvato nell'ambito del Progetto giovani 29 Settembre 2026 29 Settembre 2026 19 Ottobre 2026 enti del terzo settore Note: termine pres…",
-      "requirements": [
-        "Residenza in Liguria"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetition/4741:alloggi-erp-mignanego-2026.html",
-      "source_name": "Regione Liguria",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-09-29T22:10:23Z"
+      "discovered_at": "2026-10-05T16:47:39Z"
     }
   ]
 }
