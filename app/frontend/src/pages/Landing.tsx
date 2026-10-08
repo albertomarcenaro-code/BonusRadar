@@ -52,7 +52,7 @@ export default function Landing() {
             <span className="grid size-9 place-items-center rounded-lg bg-[#0056B3]">
               <Radar className="size-4.5 text-white" />
             </span>
-            <span className="font-heading text-lg font-bold text-slate-900">BonusRadar Italia</span>
+            <span className="font-heading text-lg font-bold text-slate-900">BonusRadar</span>
           </div>
           <nav className="hidden items-center gap-8 text-sm text-slate-600 md:flex" data-testid="landing-nav">
             <a href="#fonti" className="hover:text-slate-900">Fonti monitorate</a>
@@ -281,7 +281,7 @@ export default function Landing() {
             <span className="grid size-7 place-items-center rounded-md bg-[#0056B3]">
               <Radar className="size-3.5 text-white" />
             </span>
-            <span className="font-heading font-bold text-slate-900">BonusRadar Italia</span>
+            <span className="font-heading font-bold text-slate-900">BonusRadar</span>
           </div>
           <p>Indipendente dalle istituzioni: verifica sempre i bandi sui portali ufficiali.</p>
           <Link to="/auth" className={buttonVariants({ variant: "link", size: "sm" })} data-testid="landing-footer-login">

@@ -71,7 +71,7 @@ export default function AppShell() {
           <div className="grid size-8 place-items-center rounded-md bg-[#0056B3]">
             <Radar className="size-4 text-white" />
           </div>
-          <p className="font-heading font-bold">BonusRadar Italia</p>
+          <p className="font-heading font-bold">BonusRadar</p>
         </NavLink>
         {scan?.running && <span className="ml-auto size-2 animate-pulse-dot rounded-full bg-amber-500" />}
         <div className={scan?.running ? "" : "ml-auto"}>

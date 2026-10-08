@@ -1,7 +1,7 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
 /**
- * Client Supabase per BonusRadar Italia.
+ * Client Supabase per BonusRadar.
  *
  * Letto da import.meta.env (prefisso VITE_ richiesto da Vite):
  *   - VITE_SUPABASE_URL      → URL del progetto (Settings → API)

@@ -34,7 +34,7 @@ export default function Auth() {
           <span className="grid size-9 place-items-center rounded-lg bg-[#0056B3]">
             <Radar className="size-4.5 text-white" />
           </span>
-          <span className="font-heading text-lg font-bold text-slate-900">BonusRadar Italia</span>
+          <span className="font-heading text-lg font-bold text-slate-900">BonusRadar</span>
         </Link>
 
         <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center py-10">
