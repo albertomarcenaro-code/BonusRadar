@@ -17,8 +17,9 @@ jobs:
     steps:
       - name: Ping Supabase REST
         env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          # Stessi secrets già usati dallo scraper settimanale (scraper.yml).
+          SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         run: |
           set -euo pipefail
           code=$(curl -sS --max-time 30 -o /tmp/resp.json -w "%{http_code}" \
