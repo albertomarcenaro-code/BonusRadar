@@ -23,16 +23,16 @@ export default function AppShell() {
   const location = useLocation();
 
   return (
-    <div className="min-h-svh bg-background">
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col bg-sidebar text-sidebar-foreground lg:flex">
+    <div className="min-h-svh bg-canvas text-ink">
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-white/8 bg-canvas-2/70 backdrop-blur-xl lg:flex">
         <div className="flex items-center justify-between px-5 py-6">
           <NavLink to="/" className="flex items-center gap-3">
-            <div className="relative grid size-10 place-items-center rounded-lg bg-[#0056B3]">
-              <Radar className="size-5 text-white" />
+            <div className="relative grid size-10 place-items-center rounded-lg bg-[linear-gradient(180deg,#22d3ee,#2f6bff)]">
+              <Radar className="size-5 text-[#03121b]" />
             </div>
             <div>
-              <p className="font-heading text-lg font-bold leading-none" data-testid="app-name">BonusRadar</p>
-              <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-slate-400">Italia</p>
+              <p className="font-display text-lg font-bold leading-none" data-testid="app-name">BonusRadar</p>
+              <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-dim">Italia</p>
             </div>
           </NavLink>
           <UserMenu />
@@ -46,8 +46,10 @@ export default function AppShell() {
               data-testid={`nav-${l.id}`}
               className={({ isActive }) =>
                 cn(
-                  "flex items-center gap-3 rounded-md px-3 py-2.5 text-sm transition-colors duration-150",
-                  isActive ? "bg-sidebar-accent text-white" : "text-slate-400 hover:bg-sidebar-accent/60 hover:text-white",
+                  "relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors duration-150",
+                  isActive
+                    ? "bg-white/[0.07] text-ink before:absolute before:left-0 before:top-1/2 before:h-4 before:w-[2px] before:-translate-y-1/2 before:rounded-full before:bg-accent before:shadow-[0_0_8px_rgba(34,211,238,0.9)]"
+                    : "text-muted hover:bg-white/[0.04] hover:text-ink",
                 )
               }
             >
@@ -56,24 +58,24 @@ export default function AppShell() {
             </NavLink>
           ))}
         </nav>
-        <div className="mt-auto m-4 rounded-lg border border-sidebar-border bg-sidebar-accent/50 p-4" data-testid="sidebar-scan-status">
-          <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Monitoraggio</p>
-          <div className="mt-2 flex items-center gap-2 text-sm">
-            <span className={cn("size-2 rounded-full", scan?.running ? "animate-pulse-dot bg-amber-400" : "bg-emerald-400")} />
+        <div className="m-4 mt-auto rounded-xl border border-line bg-white/[0.03] p-4" data-testid="sidebar-scan-status">
+          <p className="text-[11px] font-semibold uppercase tracking-wider text-dim">Monitoraggio</p>
+          <div className="mt-2 flex items-center gap-2 text-sm text-ink">
+            <span className={cn("size-2 rounded-full", scan?.running ? "animate-pulse-dot bg-signal" : "bg-positive animate-pulse-dot")} />
             {scan?.running ? "Scansione in corso" : "Attivo · settimanale"}
           </div>
-          <p className="mt-1 font-mono text-xs text-slate-400">Prossima: {fmtDate(scan?.next_run_at) === "—" ? "a breve" : fmtDate(scan?.next_run_at)}</p>
+          <p className="mt-1 font-mono text-xs text-dim">Prossima: {fmtDate(scan?.next_run_at) === "—" ? "a breve" : fmtDate(scan?.next_run_at)}</p>
         </div>
       </aside>
 
-      <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-border bg-white/85 px-4 py-3 backdrop-blur-md lg:hidden">
+      <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-white/10 bg-[#04060d]/85 px-4 py-3 backdrop-blur-xl lg:hidden">
         <NavLink to="/" className="flex items-center gap-2">
-          <div className="grid size-8 place-items-center rounded-md bg-[#0056B3]">
-            <Radar className="size-4 text-white" />
+          <div className="grid size-8 place-items-center rounded-md bg-[linear-gradient(180deg,#22d3ee,#2f6bff)]">
+            <Radar className="size-4 text-[#03121b]" />
           </div>
-          <p className="font-heading font-bold">BonusRadar</p>
+          <p className="font-display font-bold text-ink">BonusRadar</p>
         </NavLink>
-        {scan?.running && <span className="ml-auto size-2 animate-pulse-dot rounded-full bg-amber-500" />}
+        {scan?.running && <span className="ml-auto size-2 animate-pulse-dot rounded-full bg-signal" />}
         <div className={scan?.running ? "" : "ml-auto"}>
           <UserMenu />
         </div>
@@ -81,7 +83,7 @@ export default function AppShell() {
 
       {demoMode && (
         <div
-          className="flex items-center justify-center gap-2 bg-[#FFFBEB] px-4 py-2.5 text-sm text-[#92400E]"
+          className="flex items-center justify-center gap-2 border-b border-amber-400/20 bg-amber-400/[0.07] px-4 py-2.5 text-sm text-amber-200"
           data-testid="demo-mode-banner"
         >
           <CloudOff className="size-4 shrink-0" />
@@ -98,7 +100,7 @@ export default function AppShell() {
         </div>
       </main>
 
-      <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-4 border-t border-border bg-white/95 backdrop-blur-md lg:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-4 border-t border-white/10 bg-[#04060d]/90 backdrop-blur-xl lg:hidden">
         {LINKS.map((l) => (
           <NavLink
             key={l.to}
@@ -106,7 +108,10 @@ export default function AppShell() {
             end={l.end}
             data-testid={`mobile-nav-${l.id}`}
             className={({ isActive }) =>
-              cn("flex min-h-14 flex-col items-center justify-center gap-1 text-[11px]", isActive ? "text-[#0056B3]" : "text-slate-500")
+              cn(
+                "flex min-h-14 flex-col items-center justify-center gap-1 text-[11px] transition-colors duration-150",
+                isActive ? "text-accent [filter:drop-shadow(0_0_6px_rgba(34,211,238,0.7))]" : "text-dim",
+              )
             }
           >
             <l.icon className="size-5" />

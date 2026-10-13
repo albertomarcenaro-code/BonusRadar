@@ -236,8 +236,8 @@ export const MATCH_LABEL: Record<MatchStatus, string> = {
 };
 
 export const MATCH_CLASS: Record<MatchStatus, string> = {
-  eligible: "bg-[#ECFDF5] text-[#065F46] border-[#A7F3D0]",
-  maybe: "bg-[#FFFBEB] text-[#92400E] border-[#FDE68A]",
-  not_eligible: "bg-[#FEF2F2] text-[#991B1B] border-[#FECACA]",
-  unknown: "bg-slate-100 text-slate-600 border-slate-200",
+  eligible: "border-positive/30 bg-positive/10 text-positive",
+  maybe: "border-signal/30 bg-signal/10 text-signal",
+  not_eligible: "border-negative/30 bg-negative/10 text-negative",
+  unknown: "border-line bg-white/5 text-dim",
 };

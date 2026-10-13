@@ -85,7 +85,7 @@ const SECTIONS = [
 
 export default function Profile() {
   const { data, isLoading } = useProfile();
-  if (isLoading) return <div className="h-96 animate-pulse rounded-2xl bg-white" />;
+  if (isLoading) return <div className="h-96 animate-pulse rounded-2xl bg-white/[0.05]" />;
   return <ProfileForm key={data?.updated_at ?? "new"} initial={data ?? null} />;
 }
 
@@ -101,14 +101,14 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
 
   const field = (k: keyof ProfileIn, label: string, props: React.ComponentProps<typeof Input> = {}) => (
     <div className="flex flex-col gap-1.5">
-      <Label htmlFor={k} className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+      <Label htmlFor={k} className="text-xs font-semibold uppercase tracking-wider text-muted">
         {label}
       </Label>
       <Input
         id={k}
         value={(form[k] as string | number | null) ?? ""}
         onChange={(e) => set(k, e.target.value as never)}
-        className="h-11 bg-white"
+        className="h-11 "
         data-testid={`input-${k.replace(/_/g, "-")}`}
         {...props}
       />
@@ -119,11 +119,11 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
     <div>
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between animate-rise">
         <div className="max-w-2xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0056B3]">Il tuo spazio personale</p>
-          <h1 className="mt-2 text-3xl font-bold text-slate-900 sm:text-4xl" data-testid="profile-title">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Il tuo spazio personale</p>
+          <h1 className="mt-2 text-3xl font-bold text-ink sm:text-4xl" data-testid="profile-title">
             Profilo, ISEE &amp; Documenti
           </h1>
-          <p className="mt-2 text-slate-600">
+          <p className="mt-2 text-muted">
             Questi dati servono a valutare la compatibilità con i bonus e a precompilare le domande. Restano nel tuo
             profilo protetto.
           </p>
@@ -148,8 +148,8 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
             className={cn(
               "flex min-h-12 items-center gap-2 rounded-lg border px-3 py-2 text-left text-sm transition-colors duration-150",
               section === s.id
-                ? "border-[#0056B3] bg-[#E8F0FA] font-semibold text-slate-900"
-                : "border-slate-200 bg-white text-slate-600 hover:border-slate-400",
+                ? "border-accent/50 bg-accent/12 font-semibold text-ink shadow-[0_0_20px_-10px_rgba(34,211,238,0.7)]"
+                : "border-line bg-white/[0.03] text-muted hover:border-line-strong hover:text-ink",
             )}
             data-testid={`profile-section-${s.id}`}
           >
@@ -161,11 +161,11 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
 
       {/* Sezione 1: Anagrafica e residenza */}
       {section === 0 && (
-        <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-8" data-testid="profile-section-anagrafica">
+        <section className="panel rounded-2xl p-5 sm:p-8" data-testid="profile-section-anagrafica">
           <h2 className="mb-6 text-xl font-bold">1 · Anagrafica e Residenza</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {field("full_name", "Nome e cognome *", { required: true, placeholder: "Mario Rossi" })}
-            {field("fiscal_code", "Codice fiscale", { placeholder: "RSSMRA80A01H501U", className: "h-11 bg-white font-mono uppercase" })}
+            {field("fiscal_code", "Codice fiscale", { placeholder: "RSSMRA80A01H501U", className: " h-11 font-mono uppercase" })}
             {field("birth_date", "Data di nascita", { type: "date" })}
             {field("birth_place", "Luogo di nascita")}
             {field("address", "Indirizzo di residenza", { placeholder: "Via Roma 1" })}
@@ -176,7 +176,7 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
             {field("phone", "Telefono", { type: "tel" })}
             {field("email", "Email", { type: "email" })}
           </div>
-          <p className="mt-4 rounded-lg bg-[#F5F9FE] p-3 text-sm text-slate-600">
+          <p className="mt-4 rounded-lg border border-line bg-white/[0.03] p-3 text-sm text-muted">
             📍 Molti bandi locali richiedono residenza nel Comune di Genova o in Liguria: indica correttamente comune,
             provincia e regione.
           </p>
@@ -185,25 +185,25 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
 
       {/* Sezione 2: Nucleo familiare */}
       {section === 1 && (
-        <section className="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-5 sm:p-8" data-testid="profile-section-famiglia">
+        <section className="panel flex flex-col gap-4 rounded-2xl p-5 sm:p-8" data-testid="profile-section-famiglia">
           <div>
             <h2 className="text-xl font-bold">2 · Nucleo Familiare e Figli</h2>
-            <p className="mt-1 text-sm text-slate-600">
+            <p className="mt-1 text-sm text-muted">
               Aggiungi i componenti del nucleo oltre a te (coniuge, figli, altri conviventi).
             </p>
           </div>
           {form.family_members.map((m, i) => (
-            <div key={i} className="rounded-xl border border-slate-200 bg-slate-50 p-4" data-testid={`family-member-${i}`}>
+            <div key={i} className="rounded-xl border border-line bg-white/[0.03] p-4" data-testid={`family-member-${i}`}>
               <div className="grid gap-3 sm:grid-cols-4">
                 <Input
                   placeholder="Nome"
                   value={m.name}
                   onChange={(e) => setMember(i, { name: e.target.value })}
-                  className="h-11 bg-white"
+                  className="h-11 "
                   data-testid={`input-member-name-${i}`}
                 />
                 <Select value={m.relation} onValueChange={(v: string) => setMember(i, { relation: v })}>
-                  <SelectTrigger className="h-11 w-full bg-white" data-testid={`select-member-relation-${i}`}>
+                  <SelectTrigger className="h-11 w-full" data-testid={`select-member-relation-${i}`}>
                     <SelectValue placeholder="Parentela" />
                   </SelectTrigger>
                   <SelectContent>
@@ -216,14 +216,14 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
                   type="date"
                   value={m.birth_date}
                   onChange={(e) => setMember(i, { birth_date: e.target.value })}
-                  className="h-11 bg-white"
+                  className="h-11 "
                   data-testid={`input-member-birth-${i}`}
                 />
                 <Input
                   placeholder="Codice fiscale"
                   value={m.fiscal_code}
                   onChange={(e) => setMember(i, { fiscal_code: e.target.value })}
-                  className="h-11 bg-white font-mono uppercase"
+                  className=" h-11 font-mono uppercase"
                   data-testid={`input-member-cf-${i}`}
                 />
               </div>
@@ -242,7 +242,7 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
                   type="button"
                   variant="ghost"
                   size="sm"
-                  className="ml-auto text-red-700"
+                  className="ml-auto text-negative"
                   onClick={() => set("family_members", form.family_members.filter((_, j) => j !== i))}
                   aria-label="Rimuovi componente"
                   data-testid={`btn-remove-member-${i}`}
@@ -261,7 +261,7 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
           >
             <Plus className="size-4" /> Aggiungi componente
           </Button>
-          <p className="font-mono text-xs text-slate-500" data-testid="family-count">
+          <p className="font-mono text-xs text-muted" data-testid="family-count">
             Nucleo: {form.family_members.length + 1} componenti · {form.family_members.filter((m) => m.relation === "figlio").length} figli
           </p>
         </section>
@@ -269,7 +269,7 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
 
       {/* Sezione 3: ISEE e lavoro */}
       {section === 2 && (
-        <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-8" data-testid="profile-section-economia">
+        <section className="panel rounded-2xl p-5 sm:p-8" data-testid="profile-section-economia">
           <h2 className="mb-6 text-xl font-bold">3 · Parametri Economici (ISEE e Lavoro)</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {field("isee_value", "Valore ISEE (€)", {
@@ -287,9 +287,9 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
               onChange: (e) => set("annual_income", num(e.target.value)),
             })}
             <div className="flex flex-col gap-1.5">
-              <Label className="text-xs font-semibold uppercase tracking-wider text-slate-500">Condizione lavorativa</Label>
+              <Label className="text-xs font-semibold uppercase tracking-wider text-muted">Condizione lavorativa</Label>
               <Select value={form.employment_status} onValueChange={(v: string) => set("employment_status", v)}>
-                <SelectTrigger className="h-11 w-full bg-white" data-testid="select-employment-status">
+                <SelectTrigger className="h-11 w-full" data-testid="select-employment-status">
                   <SelectValue placeholder="Seleziona…" />
                 </SelectTrigger>
                 <SelectContent>
@@ -300,9 +300,9 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
               </Select>
             </div>
             <div className="flex flex-col gap-1.5">
-              <Label className="text-xs font-semibold uppercase tracking-wider text-slate-500">Abitazione</Label>
+              <Label className="text-xs font-semibold uppercase tracking-wider text-muted">Abitazione</Label>
               <Select value={form.housing} onValueChange={(v: string) => set("housing", v)}>
-                <SelectTrigger className="h-11 w-full bg-white" data-testid="select-housing">
+                <SelectTrigger className="h-11 w-full" data-testid="select-housing">
                   <SelectValue placeholder="Seleziona…" />
                 </SelectTrigger>
                 <SelectContent>
@@ -313,7 +313,7 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
               </Select>
             </div>
             <div className="sm:col-span-2">
-              {field("iban", "IBAN per l'accredito", { placeholder: "IT60X0542811101000000123456", className: "h-11 bg-white font-mono uppercase" })}
+              {field("iban", "IBAN per l'accredito", { placeholder: "IT60X0542811101000000123456", className: " h-11 font-mono uppercase" })}
             </div>
           </div>
         </section>
@@ -321,7 +321,7 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
 
       {/* Sezione 4: Interessi */}
       {section === 3 && (
-        <section className="flex flex-col gap-5 rounded-2xl border border-slate-200 bg-white p-5 sm:p-8" data-testid="profile-section-interessi">
+        <section className="panel flex flex-col gap-5 rounded-2xl p-5 sm:p-8" data-testid="profile-section-interessi">
           <h2 className="text-xl font-bold">4 · Categorie e Aree d'Interesse</h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {INTERESTS.map((k) => {
@@ -331,7 +331,7 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
                   key={k}
                   className={cn(
                     "flex min-h-12 cursor-pointer items-center gap-3 rounded-lg border px-4 transition-colors duration-150",
-                    on ? "border-[#0056B3] bg-[#E8F0FA]" : "border-slate-200 bg-white hover:border-slate-400",
+                    on ? "border-accent/50 bg-accent/12" : "border-line bg-white/[0.03] hover:border-line-strong",
                   )}
                 >
                   <Checkbox
@@ -347,7 +347,7 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
             })}
           </div>
           <div className="flex flex-col gap-1.5">
-            <Label htmlFor="notes" className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            <Label htmlFor="notes" className="text-xs font-semibold uppercase tracking-wider text-muted">
               Note aggiuntive (situazioni particolari)
             </Label>
             <Textarea
@@ -355,7 +355,6 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
               value={form.notes}
               onChange={(e) => set("notes", e.target.value)}
               placeholder="es. figlio in arrivo, acquisto prima casa, invalidità civile…"
-              className="bg-white"
               data-testid="input-notes"
             />
           </div>
@@ -366,7 +365,7 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
       {section === 4 && <DocumentsSection />}
 
       {/* Navigazione inferiore */}
-      <div className="mt-8 flex items-center justify-between border-t border-slate-100 pt-5">
+      <div className="mt-8 flex items-center justify-between border-t border-line pt-5">
         <Button
           type="button"
           variant="ghost"
@@ -376,7 +375,7 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
         >
           <ArrowLeft className="size-4" /> Precedente
         </Button>
-        <p className="hidden text-xs text-slate-400 sm:block">
+        <p className="hidden text-xs text-dim sm:block">
           Sezione {section + 1} di {SECTIONS.length}
         </p>
         {section < SECTIONS.length - 1 ? (
@@ -400,7 +399,7 @@ function DocumentsSection() {
   const [tab, setTab] = useState<"allegati" | "moduli">("allegati");
 
   return (
-    <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-8" data-testid="profile-section-documenti">
+    <section className="panel rounded-2xl p-5 sm:p-8" data-testid="profile-section-documenti">
       <h2 className="text-xl font-bold">5 · Documenti</h2>
 
       <div className="mt-5 flex gap-2" data-testid="documents-tabs">
@@ -409,7 +408,7 @@ function DocumentsSection() {
           onClick={() => setTab("allegati")}
           className={cn(
             "flex h-10 items-center gap-2 rounded-lg border px-4 text-sm font-semibold transition-colors duration-150",
-            tab === "allegati" ? "border-[#0056B3] bg-[#E8F0FA] text-[#0056B3]" : "border-slate-200 bg-white text-slate-600 hover:border-slate-400",
+            tab === "allegati" ? "border-accent/50 bg-accent/12 text-accent" : "border-line bg-white/[0.03] text-muted hover:border-line-strong hover:text-ink",
           )}
           data-testid="tab-attachments"
         >
@@ -420,7 +419,7 @@ function DocumentsSection() {
           onClick={() => setTab("moduli")}
           className={cn(
             "flex h-10 items-center gap-2 rounded-lg border px-4 text-sm font-semibold transition-colors duration-150",
-            tab === "moduli" ? "border-[#0056B3] bg-[#E8F0FA] text-[#0056B3]" : "border-slate-200 bg-white text-slate-600 hover:border-slate-400",
+            tab === "moduli" ? "border-accent/50 bg-accent/12 text-accent" : "border-line bg-white/[0.03] text-muted hover:border-line-strong hover:text-ink",
           )}
           data-testid="tab-moduli"
         >
@@ -451,10 +450,10 @@ function AttachmentsTab() {
 
   return (
     <div className="flex flex-col gap-4" data-testid="attachments-tab">
-      <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-5">
+      <div className="rounded-xl border border-dashed border-line bg-white/[0.03] p-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
           <div className="flex-1">
-            <Label htmlFor="att-label" className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            <Label htmlFor="att-label" className="text-xs font-semibold uppercase tracking-wider text-muted">
               Tipo di documento
             </Label>
             <Input
@@ -462,7 +461,7 @@ function AttachmentsTab() {
               value={label}
               onChange={(e) => setLabel(e.target.value)}
               placeholder="es. Attestazione ISEE 2026, Carta d'identità…"
-              className="mt-1.5 h-11 bg-white"
+              className="mt-1.5 h-11"
               data-testid="input-attachment-label"
             />
           </div>
@@ -485,26 +484,26 @@ function AttachmentsTab() {
             <Upload className="size-4" /> {upload.isPending ? "Caricamento…" : "Carica PDF"}
           </Button>
         </div>
-        <p className="mt-3 flex items-center gap-1.5 text-xs text-slate-500">
+        <p className="mt-3 flex items-center gap-1.5 text-xs text-muted">
           <Lock className="size-3.5" /> Solo PDF, max 10 MB. I file sono nel tuo archivio privato, visibili solo a te.
         </p>
       </div>
 
       {(attachments ?? []).length === 0 ? (
-        <p className="rounded-xl border border-slate-200 p-6 text-center text-sm text-slate-500" data-testid="attachments-empty">
+        <p className="rounded-xl border border-line p-6 text-center text-sm text-muted" data-testid="attachments-empty">
           Nessun allegato caricato. Carica l'attestazione ISEE e la carta d'identità per averli sempre pronti quando
           presenti una domanda.
         </p>
       ) : (
         <ul className="flex flex-col gap-2" data-testid="attachments-list">
           {(attachments ?? []).map((a) => (
-            <li key={a.id} className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3" data-testid="attachment-row">
-              <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-[#E8F0FA]">
-                <FileText className="size-5 text-[#0056B3]" />
+            <li key={a.id} className="flex items-center gap-3 rounded-xl border border-line bg-white/[0.03] p-3" data-testid="attachment-row">
+              <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-accent/12">
+                <FileText className="size-5 text-accent" />
               </span>
               <div className="min-w-0 flex-1">
-                <p className="truncate font-medium text-slate-900">{a.label || a.name}</p>
-                <p className="truncate font-mono text-xs text-slate-500">
+                <p className="truncate font-medium text-ink">{a.label || a.name}</p>
+                <p className="truncate font-mono text-xs text-muted">
                   {a.name} · {fmtDateTime(a.created_at)}
                   {a.size > 0 ? ` · ${(a.size / 1024).toFixed(0)} KB` : ""}
                 </p>
@@ -515,7 +514,7 @@ function AttachmentsTab() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-red-700"
+                className="text-negative"
                 onClick={() => del.mutate(a)}
                 disabled={del.isPending}
                 aria-label={`Elimina ${a.label || a.name}`}
@@ -537,12 +536,12 @@ function ModuliTab() {
 
   return (
     <div className="flex flex-col gap-4" data-testid="moduli-tab">
-      {isError && <p className="text-sm text-slate-500">Documenti non disponibili al momento.</p>}
+      {isError && <p className="text-sm text-muted">Documenti non disponibili al momento.</p>}
       {docs && docs.length === 0 && (
-        <div className="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center" data-testid="moduli-empty">
-          <FolderOpen className="mx-auto size-10 text-slate-300" />
+        <div className="rounded-xl border border-dashed border-line bg-white/[0.03] p-8 text-center" data-testid="moduli-empty">
+          <FolderOpen className="mx-auto size-10 text-dim" />
           <p className="mt-3 font-medium">Nessuna pratica ancora</p>
-          <p className="mt-1 text-sm text-slate-500">Dal catalogo, premi "Prepara documenti" su un bonus idoneo.</p>
+          <p className="mt-1 text-sm text-muted">Dal catalogo, premi "Prepara documenti" su un bonus idoneo.</p>
           <Link to="/bonus" className={cn(buttonVariants(), "mt-5")} data-testid="moduli-go-bonus">
             Vai al catalogo
           </Link>
@@ -562,21 +561,21 @@ function FolderCard({ doc: d }: { doc: import("@/lib/types").DocumentFolder }) {
   const del = useDeleteDoc();
   const dl = useDownloadDoc();
   return (
-    <article className="rounded-xl border border-slate-200 bg-white p-5 animate-rise" data-testid="document-folder-card">
+    <article className="rounded-xl border border-line bg-white/[0.03] p-5 animate-rise" data-testid="document-folder-card">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex gap-4">
-          <div className="grid size-12 shrink-0 place-items-center rounded-lg bg-[#E8F0FA]">
-            <FolderOpen className="size-6 text-[#0056B3]" />
+          <div className="grid size-12 shrink-0 place-items-center rounded-lg bg-accent/12">
+            <FolderOpen className="size-6 text-accent" />
           </div>
           <div>
             <h3 className="text-lg font-bold leading-snug" data-testid="document-folder-title">{d.bonus_title}</h3>
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-muted">
               {d.authority} · preparata il <span className="font-mono">{fmtDate(d.created_at)}</span>
             </p>
           </div>
         </div>
         <Select value={d.status} onValueChange={(v: string) => upd.mutate({ id: d.id, status: v as import("@/lib/types").DocStatus })}>
-          <SelectTrigger className="h-10 w-full bg-white sm:w-44" data-testid="select-document-status">
+          <SelectTrigger className="h-10 w-full sm:w-44" data-testid="select-document-status">
             <SelectValue placeholder="Stato" />
           </SelectTrigger>
           <SelectContent>
@@ -594,18 +593,18 @@ function FolderCard({ doc: d }: { doc: import("@/lib/types").DocumentFolder }) {
               key={f.name}
               onClick={() => dl.mutate({ doc: d, kind: f.kind })}
               disabled={dl.isPending}
-              className="group flex items-center gap-3 rounded-lg border border-slate-200 px-3 py-2.5 text-left transition-colors duration-150 hover:border-[#0056B3] hover:bg-[#F5F9FE]"
+              className="group flex items-center gap-3 rounded-lg border border-line px-3 py-2.5 text-left transition-colors duration-150 hover:border-accent/50 hover:bg-accent/10"
               data-testid={f.kind === "pdf" ? "btn-download-pdf" : "btn-download-docx"}
             >
-              {f.kind === "pdf" ? <FileText className="size-5 text-red-700" /> : <Download className="size-5 text-[#0056B3]" />}
+              {f.kind === "pdf" ? <FileText className="size-5 text-negative" /> : <Download className="size-5 text-accent" />}
               <span className="min-w-0 flex-1 truncate font-mono text-sm">{f.name}</span>
-              <Download className="size-4 text-slate-400 group-hover:text-[#0056B3]" />
+              <Download className="size-4 text-dim group-hover:text-accent" />
             </button>
           ))}
           <div className="mt-1">
             <Button
               variant="ghost"
-              className="text-red-700"
+              className="text-negative"
               onClick={() => del.mutate(d.id)}
               disabled={del.isPending}
               aria-label="Elimina cartella"
@@ -615,21 +614,21 @@ function FolderCard({ doc: d }: { doc: import("@/lib/types").DocumentFolder }) {
             </Button>
           </div>
         </div>
-        <div className="rounded-lg bg-slate-50 p-4 text-sm">
+        <div className="rounded-lg border border-line bg-white/[0.03] p-4 text-sm">
           {d.attachments.length > 0 && (
             <>
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Allegati da preparare</p>
-              <ul className="mt-2 space-y-1 text-slate-700" data-testid="document-attachments">
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted">Allegati da preparare</p>
+              <ul className="mt-2 space-y-1 text-muted" data-testid="document-attachments">
                 {d.attachments.map((a) => (
-                  <li key={a} className="flex gap-2"><span className="text-slate-400">☐</span>{a}</li>
+                  <li key={a} className="flex gap-2"><span className="text-dim">☐</span>{a}</li>
                 ))}
               </ul>
             </>
           )}
           {d.submission_notes && (
             <>
-              <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-slate-500">Come presentare</p>
-              <p className="mt-1 text-slate-700" data-testid="document-submission-notes">{d.submission_notes}</p>
+              <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-muted">Come presentare</p>
+              <p className="mt-1 text-muted" data-testid="document-submission-notes">{d.submission_notes}</p>
             </>
           )}
         </div>

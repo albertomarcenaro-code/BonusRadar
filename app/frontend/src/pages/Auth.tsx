@@ -31,20 +31,20 @@ export default function Auth() {
       {/* Colonna form */}
       <div className="flex flex-col px-5 py-6 sm:px-10 lg:px-16">
         <Link to="/" className="flex items-center gap-2.5 self-start" data-testid="auth-home-link">
-          <span className="grid size-9 place-items-center rounded-lg bg-[#0056B3]">
-            <Radar className="size-4.5 text-white" />
+          <span className="grid size-9 place-items-center rounded-lg bg-gradient-to-b from-[#8bf3ff] via-accent to-[#0ea5e9] text-[#03121b] shadow-[0_8px_24px_-10px_rgba(34,211,238,0.8)]">
+            <Radar className="size-4.5" />
           </span>
-          <span className="font-heading text-lg font-bold text-slate-900">BonusRadar</span>
+          <span className="font-heading text-lg font-bold text-ink">BonusRadar</span>
         </Link>
 
         <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center py-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0056B3]">
+          <p className="eyebrow">
             {mode === "signin" ? "Bentornato" : "Crea il tuo account"}
           </p>
-          <h1 className="mt-2 font-heading text-3xl font-bold text-slate-900 sm:text-4xl" data-testid="auth-title">
+          <h1 className="mt-2 font-heading text-3xl font-bold text-ink sm:text-4xl" data-testid="auth-title">
             {mode === "signin" ? "Accedi alla tua radar" : "Registrati in 30 secondi"}
           </h1>
-          <p className="mt-2 text-sm text-slate-600">
+          <p className="mt-2 text-sm text-muted">
             {mode === "signin"
               ? "Ritrova preferiti, pratiche pronte e scadenze monitorate."
               : "Profila la tua famiglia, scopri i bonus compatibili e prepara le domande."}
@@ -61,7 +61,7 @@ export default function Auth() {
                 placeholder="mario.rossi@email.it"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="h-11 bg-white"
+                className="h-11"
                 data-testid="auth-email"
               />
             </div>
@@ -76,7 +76,7 @@ export default function Auth() {
                 placeholder="minimo 6 caratteri"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="h-11 bg-white"
+                className="h-11"
                 data-testid="auth-password"
               />
             </div>
@@ -98,12 +98,12 @@ export default function Auth() {
             )}
           </form>
 
-          <p className="mt-6 text-sm text-slate-600" data-testid="auth-switch">
+          <p className="mt-6 text-sm text-muted" data-testid="auth-switch">
             {mode === "signin" ? "Non hai un account?" : "Hai già un account?"}{" "}
             <button
               type="button"
               onClick={() => setMode(mode === "signin" ? "signup" : "signin")}
-              className="font-semibold text-[#0056B3] hover:underline"
+              className="font-semibold text-accent hover:underline"
               data-testid="auth-toggle-mode"
             >
               {mode === "signin" ? "Registrati" : "Accedi"}
@@ -111,29 +111,29 @@ export default function Auth() {
           </p>
         </div>
 
-        <p className="flex items-center gap-2 text-xs text-slate-400">
+        <p className="flex items-center gap-2 text-xs text-dim">
           <ShieldCheck className="size-3.5" /> I tuoi dati restano nel tuo profilo protetto. Nessuna condivisione con terze parti.
         </p>
       </div>
 
       {/* Colonna visuale */}
-      <div className="relative hidden overflow-hidden bg-[#0F172A] lg:block" data-testid="auth-visual">
+      <div className="relative hidden overflow-hidden bg-canvas-2 lg:block" data-testid="auth-visual">
         <div className="bg-grid-paper absolute inset-0 opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/40 to-transparent" />
-        <div className="relative flex h-full flex-col justify-end p-14 text-slate-100">
+        <div className="absolute inset-0 bg-gradient-to-t from-canvas-2 via-canvas-2/40 to-transparent" />
+        <div className="relative flex h-full flex-col justify-end p-14 text-ink">
           <span className="grid size-14 place-items-center rounded-2xl border border-white/15 bg-white/10 backdrop-blur">
-            <Radar className="size-7 text-sky-300" />
+            <Radar className="size-7 text-accent" />
           </span>
           <p className="mt-6 font-heading text-4xl font-bold leading-tight">
             Una radar sui bonus
             <br />
-            <span className="text-sky-300">che lavora per te.</span>
+            <span className="text-gradient">che lavora per te.</span>
           </p>
-          <p className="mt-4 max-w-md text-slate-300">
+          <p className="mt-4 max-w-md text-muted">
             Scansione settimanale dei portali istituzionali, filtraggio sul tuo profilo ISEE e pratiche precompilate pronte
             per la firma.
           </p>
-          <Link to="/" className="mt-8 inline-flex w-fit items-center gap-2 text-sm font-semibold text-sky-300 hover:underline">
+          <Link to="/" className="mt-8 inline-flex w-fit items-center gap-2 text-sm font-semibold text-accent hover:underline">
             Torna alla home <ArrowRight className="size-4" />
           </Link>
         </div>

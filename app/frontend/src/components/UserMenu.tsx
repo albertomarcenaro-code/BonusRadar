@@ -45,30 +45,30 @@ export default function UserMenu() {
     <div ref={rootRef} className="relative">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="flex size-9 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-600 transition-colors duration-150 hover:border-[#0056B3] hover:text-[#0056B3]"
+        className="flex size-9 items-center justify-center rounded-full border border-white/15 bg-white/[0.05] text-muted transition-colors duration-150 hover:border-accent/60 hover:text-accent"
         aria-label="Menu account"
         aria-expanded={open}
         aria-haspopup="menu"
         data-testid="user-menu-button"
       >
         <UserRound className="size-4.5" />
-        <span className="absolute inset-0 rounded-full ring-[#0056B3]/30 ring-offset-2 transition-shadow duration-150" style={{ boxShadow: open ? "0 0 0 2px rgba(0,86,179,0.25)" : undefined }} />
+        <span className="absolute inset-0 rounded-full ring-accent/30 ring-offset-2 transition-shadow duration-150" style={{ boxShadow: open ? "0 0 0 2px rgba(34,211,238,0.3)" : undefined }} />
       </button>
 
       {open && (
         <div
-          className="absolute right-0 top-11 z-50 w-64 rounded-xl border border-slate-200 bg-white p-1.5 shadow-lg"
+          className="absolute right-0 top-11 z-50 w-64 rounded-xl border border-white/12 bg-[#0b1220]/95 p-1.5 shadow-2xl backdrop-blur-xl"
           role="menu"
           data-testid="user-menu"
         >
-          <div className="border-b border-slate-100 px-3 py-2.5">
-            <p className="truncate text-sm font-semibold text-slate-900" data-testid="user-menu-email">
+          <div className="border-b border-white/10 px-3 py-2.5">
+            <p className="truncate text-sm font-semibold text-ink" data-testid="user-menu-email">
               {user.email || "Account locale"}
             </p>
-            <p className="text-xs text-slate-500">Account BonusRadar</p>
+            <p className="text-xs text-dim">Account BonusRadar</p>
           </div>
 
-          <div className="px-3 py-2 text-xs text-slate-500" data-testid="user-menu-info">
+          <div className="px-3 py-2 text-xs text-dim" data-testid="user-menu-info">
             <p className="flex items-start gap-2">
               <Info className="mt-0.5 size-3.5 shrink-0" />
               Profilo, documenti e preferiti sono salvati in questo account.
@@ -77,7 +77,7 @@ export default function UserMenu() {
 
           <button
             onClick={handleSignOut}
-            className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-red-700 transition-colors duration-150 hover:bg-red-50"
+            className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-negative transition-colors duration-150 hover:bg-negative/10"
             role="menuitem"
             data-testid="user-menu-signout"
           >

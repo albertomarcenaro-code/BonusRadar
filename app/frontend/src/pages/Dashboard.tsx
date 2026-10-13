@@ -52,26 +52,26 @@ export default function Dashboard() {
 
   return (
     <div>
-      <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 sm:p-10 animate-rise">
+      <section className="panel relative overflow-hidden p-6 sm:p-10 animate-rise">
         <div className="bg-grid-paper absolute inset-0" />
-        <div className="pointer-events-none absolute -right-24 -top-24 size-80 rounded-full border border-[#0056B3]/15">
-          <div className="absolute inset-8 rounded-full border border-[#0056B3]/15" />
-          <div className="absolute inset-16 rounded-full border border-[#0056B3]/20" />
+        <div className="pointer-events-none absolute -right-24 -top-24 size-80 rounded-full border border-accent/15">
+          <div className="absolute inset-8 rounded-full border border-accent/15" />
+          <div className="absolute inset-16 rounded-full border border-accent/20" />
           <div
             className={cn("absolute inset-0 rounded-full", running && "animate-radar")}
-            style={{ background: "conic-gradient(from 0deg, rgba(0,86,179,0.18), transparent 25%)" }}
+            style={{ background: "conic-gradient(from 0deg, rgba(34,211,238,0.18), transparent 25%)" }}
           />
         </div>
         <div className="relative max-w-2xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0056B3]">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
             {d?.profile_name ? `Buongiorno, ${d.profile_name.split(" ")[0]}` : "Benvenuto in BonusRadar"}
           </p>
-          <h1 className="mt-3 text-4xl font-bold leading-[1.05] text-slate-900 sm:text-5xl" data-testid="dashboard-title">
+          <h1 className="mt-3 font-display text-4xl font-bold leading-[1.05] text-ink sm:text-5xl" data-testid="dashboard-title">
             La tua panoramica:
             <br />
-            <span className="text-[#0056B3]">pratiche, preferiti, scadenze.</span>
+            <span className="text-gradient">pratiche, preferiti, scadenze.</span>
           </h1>
-          <p className="mt-4 text-slate-600">
+          <p className="mt-4 text-muted">
             Confrontiamo ogni settimana i requisiti dei bandi con il tuo profilo: qui trovi i bonus più compatibili, i
             preferiti e le scadenze imminenti.
           </p>
@@ -92,7 +92,7 @@ export default function Dashboard() {
             </Link>
           </div>
           {running && (
-            <p className="mt-3 font-mono text-xs text-slate-500" data-testid="dashboard-scan-phase">
+            <p className="mt-3 font-mono text-xs text-dim" data-testid="dashboard-scan-phase">
               {scan?.phase}
             </p>
           )}
@@ -100,20 +100,20 @@ export default function Dashboard() {
       </section>
 
       <section className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <Stat testId="stat-eligible" label="Idonei per te" value={eligibleCount || d?.bonus_eligible} accent="text-[#047857]" icon={CheckCircle2} />
-        <Stat testId="stat-favorites" label="Preferiti salvati" value={d?.favorites_total} accent="text-[#B45309]" icon={Heart} />
-        <Stat testId="stat-docs-to-sign" label="Documenti da firmare" value={d?.documents_to_sign} accent="text-[#0056B3]" icon={FileSignature} />
-        <Stat testId="stat-bonus-total" label="Bonus nel catalogo" value={d?.bonus_total} accent="text-slate-900" icon={Sparkles} />
+        <Stat testId="stat-eligible" label="Idonei per te" value={eligibleCount || d?.bonus_eligible} accent="text-positive" icon={CheckCircle2} />
+        <Stat testId="stat-favorites" label="Preferiti salvati" value={d?.favorites_total} accent="text-signal" icon={Heart} />
+        <Stat testId="stat-docs-to-sign" label="Documenti da firmare" value={d?.documents_to_sign} accent="text-accent" icon={FileSignature} />
+        <Stat testId="stat-bonus-total" label="Bonus nel catalogo" value={d?.bonus_total} accent="text-ink" icon={Sparkles} />
       </section>
 
       {!profile && (
         <section className="mt-6" data-testid="dashboard-no-profile-banner">
-          <div className="rounded-2xl border border-[#FDE68A] bg-[#FFFBEB] p-4 sm:flex sm:items-center sm:justify-between">
-            <p className="text-sm text-[#92400E]">
+          <div className="rounded-2xl border border-signal/30 bg-signal/10 p-4 sm:flex sm:items-center sm:justify-between">
+            <p className="text-sm text-signal">
               Completa il tuo profilo per verificare se hai diritto ai bonus del catalogo: ISEE, residenza e nucleo
               familiare.
             </p>
-            <Link to="/profile" className="mt-3 block shrink-0 text-sm font-semibold text-[#0056B3] hover:underline sm:mt-0" data-testid="dashboard-link-profile">
+            <Link to="/profile" className="mt-3 block shrink-0 text-sm font-semibold text-accent hover:underline sm:mt-0" data-testid="dashboard-link-profile">
               Completa il profilo →
             </Link>
           </div>
@@ -123,14 +123,14 @@ export default function Dashboard() {
       <section className="mt-8 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
         <div>
           <div className="mb-3 flex items-center justify-between">
-            <h2 className="text-xl font-bold">In evidenza per te</h2>
-            <Link to="/bonus" className="flex items-center gap-1 text-sm text-[#0056B3] hover:underline" data-testid="link-all-bonus">
+            <h2 className="font-display text-xl font-bold text-ink">In evidenza per te</h2>
+            <Link to="/bonus" className="flex items-center gap-1 text-sm text-accent hover:underline" data-testid="link-all-bonus">
               Tutto il catalogo <ArrowRight className="size-4" />
             </Link>
           </div>
           <div className="flex flex-col gap-2" data-testid="dashboard-top-bonus">
             {top.length === 0 && (
-              <div className="rounded-xl border border-dashed border-slate-300 bg-white p-6 text-sm text-slate-500">
+              <div className="rounded-xl border border-dashed border-line bg-white/[0.03] p-6 text-sm text-muted">
                 Catalogo in aggiornamento: torna tra poco.
               </div>
             )}
@@ -143,11 +143,11 @@ export default function Dashboard() {
             ))}
           </div>
         </div>
-        <div className="rounded-xl bg-[#0F172A] p-5 text-slate-100" data-testid="dashboard-scan-log">
-          <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Registro scansione</p>
+        <div className="terminal p-5 text-ink" data-testid="dashboard-scan-log">
+          <p className="text-[11px] font-semibold uppercase tracking-wider text-dim">Registro scansione</p>
           <p className="mt-1 text-sm">Ultima: {fmtDateTime(d?.last_scan_at ?? scan?.last_run_at)}</p>
-          <div className="mt-4 max-h-64 space-y-1 overflow-auto font-mono text-xs text-slate-300">
-            {(scan?.log ?? []).length === 0 && <p className="text-slate-500">Catalogo aggiornato settimanalmente dallo scraper.</p>}
+          <div className="mt-4 max-h-64 space-y-1 overflow-auto font-mono text-xs text-muted">
+            {(scan?.log ?? []).length === 0 && <p className="text-dim">Catalogo aggiornato settimanalmente dallo scraper.</p>}
             {(scan?.log ?? []).slice(-12).map((l, i) => (
               <p key={i}>{l}</p>
             ))}
@@ -158,14 +158,14 @@ export default function Dashboard() {
       {/* Preferiti con matching */}
       <section className="mt-8">
         <div className="mb-3 flex items-center justify-between">
-          <h2 className="text-xl font-bold">I tuoi preferiti</h2>
-          <Link to="/bonus" className="flex items-center gap-1 text-sm text-[#0056B3] hover:underline" data-testid="link-favorites-bonus">
+          <h2 className="font-display text-xl font-bold text-ink">I tuoi preferiti</h2>
+          <Link to="/bonus" className="flex items-center gap-1 text-sm text-accent hover:underline" data-testid="link-favorites-bonus">
             Gestisci nel catalogo <ArrowRight className="size-4" />
           </Link>
         </div>
         <div className="flex flex-col gap-2" data-testid="dashboard-favorites">
           {(d?.favorite_bonuses ?? []).length === 0 ? (
-            <div className="rounded-xl border border-dashed border-slate-300 bg-white p-6 text-sm text-slate-500">
+            <div className="rounded-xl border border-dashed border-line bg-white/[0.03] p-6 text-sm text-muted">
               Nessun preferito salvato: nel catalogo premi l'icona ♥ sui bonus che ti interessano.
             </div>
           ) : (
@@ -182,10 +182,10 @@ export default function Dashboard() {
 
       {/* Scadenze imminenti */}
       <section className="mt-8">
-        <h2 className="text-xl font-bold">Scadenze imminenti</h2>
+        <h2 className="font-display text-xl font-bold text-ink">Scadenze imminenti</h2>
         <div className="mt-3 flex flex-col gap-2" data-testid="dashboard-deadlines">
           {(d?.upcoming_deadlines ?? []).length === 0 ? (
-            <div className="rounded-xl border border-dashed border-slate-300 bg-white p-6 text-sm text-slate-500">
+            <div className="rounded-xl border border-dashed border-line bg-white/[0.03] p-6 text-sm text-muted">
               Nessuna scadenza entro 60 giorni con data dichiarata dai bandi.
             </div>
           ) : (
@@ -193,17 +193,17 @@ export default function Dashboard() {
               <Link
                 key={b.id}
                 to="/bonus"
-                className="flex items-center gap-4 rounded-xl border border-slate-200 bg-white p-4 transition-[transform,border-color] duration-200 hover:-translate-y-0.5 hover:border-slate-400"
+                className="panel interactive flex items-center gap-4 rounded-xl p-4"
                 data-testid={`dashboard-deadline-${b.id}`}
               >
-                <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-[#FFFBEB]">
-                  <CalendarClock className="size-5 text-[#B45309]" />
+                <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-signal/10">
+                  <CalendarClock className="size-5 text-signal" />
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="truncate font-medium text-slate-900">{b.title}</p>
-                  <p className="text-sm text-slate-500">{b.authority}</p>
+                  <p className="truncate font-medium text-ink">{b.title}</p>
+                  <p className="text-sm text-muted">{b.authority}</p>
                 </div>
-                <span className="shrink-0 rounded-full border border-[#FDE68A] bg-[#FFFBEB] px-2.5 py-0.5 text-xs font-semibold text-[#92400E]">
+                <span className="shrink-0 rounded-full border border-signal/30 bg-signal/10 px-2.5 py-0.5 text-xs font-semibold text-signal">
                   entro {fmtDate(b.deadline)}
                 </span>
               </Link>
@@ -220,15 +220,15 @@ function BonusMatchRow({ bonus: b, match }: { bonus: Bonus; match: ReturnType<ty
   return (
     <Link
       to="/bonus"
-      className="group flex items-center justify-between gap-4 rounded-xl border border-slate-200 bg-white p-4 transition-[transform,border-color] duration-200 hover:-translate-y-0.5 hover:border-slate-400"
+      className="panel interactive group flex items-center justify-between gap-4 rounded-xl p-4"
       data-testid={`dashboard-bonus-${b.id}`}
     >
       <div className="min-w-0">
-        <p className="truncate font-medium text-slate-900">{b.title}</p>
-        <p className="truncate text-sm text-slate-500">
+        <p className="truncate font-medium text-ink">{b.title}</p>
+        <p className="truncate text-sm text-muted">
           {b.authority}
           {match.checks.length > 0 && (
-            <span className="ml-2 hidden text-xs text-slate-400 sm:inline">
+            <span className="ml-2 hidden text-xs text-dim sm:inline">
               · {match.checks[0].label}
             </span>
           )}
@@ -253,12 +253,12 @@ function Stat({
   testId: string;
 }) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-4">
+    <div className="panel rounded-xl p-4">
       <div className="flex items-center justify-between">
-        <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">{label}</p>
-        <Icon className="size-4 text-slate-400" />
+        <p className="text-xs font-semibold uppercase tracking-wider text-muted">{label}</p>
+        <Icon className="size-4 text-dim" />
       </div>
-      <p className={cn("mt-3 font-heading text-3xl font-bold", accent)} data-testid={testId}>
+      <p className={cn("mt-3 font-display text-3xl font-bold", accent)} data-testid={testId}>
         {value ?? "—"}
       </p>
     </div>
