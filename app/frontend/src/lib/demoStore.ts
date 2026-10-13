@@ -26,6 +26,8 @@ export interface DemoState {
   user: DemoUser | null;
   profile: Profile | null;
   favorites: { bonus_id: string; note: string }[];
+  /** Bonus scartati dall'utente (nascosti dal catalogo, ripristinabili). */
+  discarded: string[];
   documents: DocumentFolder[];
   attachments: { id: string; name: string; label: string; size: number; created_at: string }[];
 }
@@ -41,7 +43,7 @@ function read(): DemoState {
 }
 
 function empty(): DemoState {
-  return { user: null, profile: null, favorites: [], documents: [], attachments: [] };
+  return { user: null, profile: null, favorites: [], discarded: [], documents: [], attachments: [] };
 }
 
 function write(s: DemoState): void {
@@ -101,7 +103,23 @@ export const demoStore = {
     const s = read();
     const has = s.favorites.some((f) => f.bonus_id === bonusId);
     const favorites = has ? s.favorites.filter((f) => f.bonus_id !== bonusId) : [...s.favorites, { bonus_id: bonusId, note: "" }];
-    write({ ...s, favorites });
+    // Preferiti e scartati sono mutually exclusive: aggiungere ai preferiti
+    // ripristina il bonus se era stato scartato.
+    const discarded = has ? s.discarded : s.discarded.filter((id) => id !== bonusId);
+    write({ ...s, favorites, discarded });
+    return !has;
+  },
+
+  getDiscarded(): string[] {
+    return read().discarded;
+  },
+  toggleDiscarded(bonusId: string): boolean {
+    const s = read();
+    const has = s.discarded.includes(bonusId);
+    const discarded = has ? s.discarded.filter((id) => id !== bonusId) : [...s.discarded, bonusId];
+    // Scartare un bonus lo toglie dai preferiti; ripristinarlo lo lascia neutro.
+    const favorites = has ? s.favorites : s.favorites.filter((f) => f.bonus_id !== bonusId);
+    write({ ...s, discarded, favorites });
     return !has;
   },
 

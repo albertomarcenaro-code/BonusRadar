@@ -13,12 +13,14 @@ import {
   getProfile,
   listAttachments,
   listBonuses,
+  listDiscarded,
   listDocuments,
   listFavorites,
   listSources,
   recordQuestionnaire,
   saveProfile as apiSaveProfile,
   scan,
+  toggleDiscarded,
   toggleFavorite,
   updateDocumentStatus,
   uploadAttachment,
@@ -63,12 +65,30 @@ export const useBonuses = (poll = false) =>
 export const useFavorites = () =>
   useQuery({ queryKey: ["favorites"], queryFn: listFavorites, retry: false });
 
+export const useDiscarded = () =>
+  useQuery({ queryKey: ["discarded"], queryFn: listDiscarded, retry: false });
+
 export function useToggleFavorite() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: (bonusId: string) => toggleFavorite(bonusId),
     onSuccess: (nowFavorite) => {
       toast.success(nowFavorite ? "Aggiunto ai preferiti" : "Rimosso dai preferiti");
+      // le due liste sono mutually exclusive: invalidiamo entrambe
+      qc.invalidateQueries({ queryKey: ["favorites"] });
+      qc.invalidateQueries({ queryKey: ["discarded"] });
+    },
+    onError: (e) => toast.error(errMsg(e)),
+  });
+}
+
+export function useToggleDiscarded() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (bonusId: string) => toggleDiscarded(bonusId),
+    onSuccess: (nowDiscarded) => {
+      toast.success(nowDiscarded ? "Bonus scartato" : "Bonus ripristinato");
+      qc.invalidateQueries({ queryKey: ["discarded"] });
       qc.invalidateQueries({ queryKey: ["favorites"] });
     },
     onError: (e) => toast.error(errMsg(e)),
@@ -127,7 +147,7 @@ export function useOpenAttachment() {
 export function useInvalidateAll() {
   const qc = useQueryClient();
   return () => {
-    for (const k of ["dashboard", "scan", "bonus", "sources", "documents", "profile", "favorites", "attachments", "scraper-catalog", "auth-user"]) {
+    for (const k of ["dashboard", "scan", "bonus", "sources", "documents", "profile", "favorites", "discarded", "attachments", "scraper-catalog", "auth-user"]) {
       qc.invalidateQueries({ queryKey: [k] });
     }
   };

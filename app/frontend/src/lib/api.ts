@@ -151,28 +151,65 @@ export async function listFavorites(): Promise<string[]> {
   if (!isSupabaseConfigured) return demoStore.getFavorites().map((f) => f.bonus_id);
   const user = await auth.getUser();
   if (!user) return [];
-  const { data, error } = await requireSupabase().from("user_bonuses").select("bonus_id").eq("user_id", user.id);
+  const { data, error } = await requireSupabase()
+    .from("user_bonuses")
+    .select("bonus_id")
+    .eq("user_id", user.id)
+    .eq("is_favorite", true);
   dbx(error);
   return ((data ?? []) as { bonus_id: string }[]).map((r) => r.bonus_id);
 }
 
-export async function toggleFavorite(bonusId: string): Promise<boolean> {
-  if (!isSupabaseConfigured) return demoStore.toggleFavorite(bonusId);
+export async function listDiscarded(): Promise<string[]> {
+  if (!isSupabaseConfigured) return demoStore.getDiscarded();
+  const user = await auth.getUser();
+  if (!user) return [];
+  const { data, error } = await requireSupabase()
+    .from("user_bonuses")
+    .select("bonus_id")
+    .eq("user_id", user.id)
+    .eq("is_favorite", false);
+  dbx(error);
+  return ((data ?? []) as { bonus_id: string }[]).map((r) => r.bonus_id);
+}
+
+/**
+ * stato: "favorite" → is_favorite=true, "discarded" → is_favorite=false.
+ * Preferiti e scartati sono mutually exclusive: la stessa riga user_bonuses
+ * passa da una lista all'altra (l'unico (user_id, bonus_id) garantisce
+ * che un bonus non finisce mai in entrambe).
+ */
+async function setBonusFlag(bonusId: string, isFavorite: boolean): Promise<boolean> {
   const sb = requireSupabase();
   const user = await auth.getUser();
-  if (!user) throw new DataError("Accedi per salvare i preferiti");
+  if (!user) throw new DataError(isFavorite ? "Accedi per salvare i preferiti" : "Accedi per scartare i bonus");
   const { data: existing } = await sb
     .from("user_bonuses")
-    .select("id")
+    .select("id, is_favorite")
     .eq("user_id", user.id)
     .eq("bonus_id", bonusId)
     .maybeSingle();
-  if (existing) {
+  if (existing && existing.is_favorite === isFavorite) {
+    // già nello stato richiesto → toggle off (rimosso dalla lista)
     dbx((await sb.from("user_bonuses").delete().eq("id", existing.id)).error);
     return false;
   }
-  dbx((await sb.from("user_bonuses").insert({ user_id: user.id, bonus_id: bonusId })).error);
+  if (existing) {
+    dbx((await sb.from("user_bonuses").update({ is_favorite: isFavorite }).eq("id", existing.id)).error);
+    return true;
+  }
+  dbx((await sb.from("user_bonuses").insert({ user_id: user.id, bonus_id: bonusId, is_favorite: isFavorite })).error);
   return true;
+}
+
+export async function toggleFavorite(bonusId: string): Promise<boolean> {
+  if (!isSupabaseConfigured) return demoStore.toggleFavorite(bonusId);
+  return setBonusFlag(bonusId, true);
+}
+
+export async function toggleDiscarded(bonusId: string): Promise<boolean> {
+  if (!isSupabaseConfigured) return demoStore.toggleDiscarded(bonusId);
+  return setBonusFlag(bonusId, false);
 }
 
 // ============================================================

@@ -1,6 +1,6 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { CalendarClock, ExternalLink, FileText, Heart, Loader2, RefreshCw, Search } from "lucide-react";
+import { CalendarClock, ExternalLink, FileText, Heart, Loader2, RefreshCw, RotateCcw, Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -8,7 +8,7 @@ import PageHeader from "@/components/PageHeader";
 import { MatchBadge, MatchChecks, MatchFallbackCta } from "@/components/match";
 import { calculateBonusMatch } from "@/lib/matching";
 import type { MatchStatus } from "@/lib/matching";
-import { useBonuses, useDashboard, useDocuments, useFavorites, useGenerateDocs, useProfile, useScanStatus, useScraperCatalog, useToggleFavorite } from "@/lib/queries";
+import { useBonuses, useDashboard, useDiscarded, useDocuments, useFavorites, useGenerateDocs, useProfile, useScanStatus, useScraperCatalog, useToggleDiscarded, useToggleFavorite } from "@/lib/queries";
 import { CATEGORY_LABEL, fmtDateTime } from "@/lib/format";
 import type { Bonus, Profile as UserProfile } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -29,7 +29,10 @@ export default function BonusCatalog() {
   const { data: dash } = useDashboard();
   const { data: docs } = useDocuments();
   const { data: favorites } = useFavorites();
+  const { data: discarded } = useDiscarded();
   const { data: profile } = useProfile();
+  const favSet = useMemo(() => new Set(favorites ?? []), [favorites]);
+  const discSet = useMemo(() => new Set(discarded ?? []), [discarded]);
   const [filter, setFilter] = useState<"all" | MatchStatus>("all");
   const [category, setCategory] = useState("tutte");
   const [params] = useSearchParams();
@@ -48,8 +51,10 @@ export default function BonusCatalog() {
     [matchMap],
   );
 
+  // I bonus scartati escono dal griglia del catalogo: restano nel contenitore "Scartati".
   const list = (bonuses ?? []).filter(
     (b) =>
+      !discSet.has(b.id) &&
       (filter === "all" || matchMap.get(b.id)?.status === filter) &&
       (category === "tutte" || b.category === category) &&
       (q === "" || `${b.title} ${b.authority} ${b.summary}`.toLowerCase().includes(q.toLowerCase())),
@@ -57,6 +62,8 @@ export default function BonusCatalog() {
   const count = (k: "all" | MatchStatus) =>
     k === "all" ? (bonuses ?? []).length : [...matchMap.values()].filter((m) => m.status === k).length;
   const docBonusIds = new Set((docs ?? []).map((d) => d.bonus_id));
+  const favoriteBonuses = (bonuses ?? []).filter((b) => favSet.has(b.id));
+  const discardedBonuses = (bonuses ?? []).filter((b) => discSet.has(b.id));
 
   return (
     <div>
@@ -142,6 +149,26 @@ export default function BonusCatalog() {
         </div>
       </div>
 
+      {/* Contenitori: preferiti e scartati, sempre visibili sopra il catalogo */}
+      <div className="mb-6 grid gap-4 md:grid-cols-2" data-testid="bonus-collections">
+        <CollectionPanel
+          title="I tuoi preferiti"
+          icon={<Heart className="size-4" />}
+          tone="favorite"
+          testId="favorites-panel"
+          items={favoriteBonuses}
+          emptyHint="Nessun preferito: tocca il cuoricino su una scheda per salvarlo qui."
+        />
+        <CollectionPanel
+          title="Scartati"
+          icon={<X className="size-4" />}
+          tone="discarded"
+          testId="discarded-panel"
+          items={discardedBonuses}
+          emptyHint="Nessun bonus scartato: puoi escluderli dal catalogo con il pulsante × su ogni scheda."
+        />
+      </div>
+
       {isError && <p className="text-sm text-muted">Catalogo non disponibile al momento.</p>}
       <div className="grid gap-4 md:grid-cols-2" data-testid="bonus-list">
         {list.map((b, i) => (
@@ -152,7 +179,7 @@ export default function BonusCatalog() {
             profile={(profile ?? null) as UserProfile | null}
             match={matchMap.get(b.id) ?? calculateBonusMatch((profile ?? null) as UserProfile | null, b)}
             hasDocs={docBonusIds.has(b.id)}
-            isFavorite={(favorites ?? []).includes(b.id)}
+            isFavorite={favSet.has(b.id)}
           />
         ))}
         {bonuses && list.length === 0 && (
@@ -184,6 +211,7 @@ function BonusCard({
 }) {
   const gen = useGenerateDocs();
   const fav = useToggleFavorite();
+  const discard = useToggleDiscarded();
   const [open, setOpen] = useState(false);
   return (
     <article
@@ -198,7 +226,31 @@ function BonusCard({
           </p>
           <h3 className="mt-1 font-display text-lg font-bold leading-snug text-ink" data-testid="bonus-card-title">{b.title}</h3>
         </div>
-        <MatchBadge result={match} testId="bonus-eligibility-badge" />
+        <div className="flex shrink-0 items-center gap-1">
+          {/* Cuoricino: aggiunge/rimuove dai preferiti */}
+          <button
+            className={cn(
+              "flex size-9 items-center justify-center rounded-full transition-colors duration-150",
+              isFavorite ? "bg-negative/10 text-negative" : "text-dim hover:bg-white/[0.06] hover:text-negative",
+            )}
+            onClick={() => fav.mutate(b.id)}
+            aria-label={isFavorite ? "Rimuovi dai preferiti" : "Aggiungi ai preferiti"}
+            aria-pressed={isFavorite}
+            data-testid="btn-toggle-favorite"
+          >
+            <Heart className={cn("size-4.5", isFavorite && "fill-current")} />
+          </button>
+          {/* Scarta: esclude dal catalogo, resta nel contenitore "Scartati" */}
+          <button
+            className="flex size-9 items-center justify-center rounded-full text-dim transition-colors duration-150 hover:bg-white/[0.06] hover:text-ink"
+            onClick={() => discard.mutate(b.id)}
+            aria-label="Scarta questo bonus"
+            data-testid="btn-toggle-discard"
+          >
+            <X className="size-4.5" />
+          </button>
+          <MatchBadge result={match} testId="bonus-eligibility-badge" />
+        </div>
       </div>
       <p className="mt-2 text-sm text-muted">{b.summary}</p>
       <div className="mt-3 flex flex-wrap gap-2 text-xs">
@@ -260,18 +312,6 @@ function BonusCard({
 
       <div className="mt-auto flex items-center justify-between gap-2 pt-5">
         <div className="flex items-center gap-1">
-          <button
-            className={cn(
-              "flex h-8 items-center gap-1 rounded-md px-2 text-xs transition-colors duration-150",
-              isFavorite ? "text-negative" : "text-dim hover:text-negative",
-            )}
-            onClick={() => fav.mutate(b.id)}
-            aria-label={isFavorite ? "Rimuovi dai preferiti" : "Aggiungi ai preferiti"}
-            data-testid="btn-toggle-favorite"
-          >
-            <Heart className={cn("size-4", isFavorite && "fill-current")} />
-            Preferito
-          </button>
           {b.source_url ? (
             <a href={b.source_url} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-xs text-dim hover:text-ink" data-testid="bonus-source-link">
               <ExternalLink className="size-3" /> Fonte
@@ -291,5 +331,69 @@ function BonusCard({
         </Button>
       </div>
     </article>
+  );
+}
+
+/** Contenitore compatto di preferiti/scartati sopra il catalogo. */
+function CollectionPanel({
+  title,
+  icon,
+  tone,
+  testId,
+  items,
+  emptyHint,
+}: {
+  title: string;
+  icon: ReactNode;
+  tone: "favorite" | "discarded";
+  testId: string;
+  items: Bonus[];
+  emptyHint: string;
+}) {
+  const fav = useToggleFavorite();
+  const discard = useToggleDiscarded();
+  const remove = tone === "favorite" ? fav : discard;
+  return (
+    <section
+      className="rounded-xl border border-line bg-white/[0.03] p-4"
+      data-testid={testId}
+      aria-label={title}
+    >
+      <header className="flex items-center gap-2">
+        <span className={cn("flex size-7 items-center justify-center rounded-md", tone === "favorite" ? "bg-negative/10 text-negative" : "bg-white/[0.06] text-dim")}>
+          {icon}
+        </span>
+        <h2 className="text-sm font-semibold text-ink">{title}</h2>
+        <span className="font-mono text-xs text-dim" data-testid={`${testId}-count`}>{items.length}</span>
+      </header>
+      {items.length === 0 ? (
+        <p className="mt-2 text-xs text-dim">{emptyHint}</p>
+      ) : (
+        <ul className="mt-3 space-y-1.5">
+          {items.map((b) => (
+            <li
+              key={b.id}
+              className="flex min-w-0 items-center gap-2 rounded-lg border border-line/60 bg-white/[0.02] px-3 py-2"
+              data-testid={`${testId}-item`}
+            >
+              <span className="min-w-0 flex-1 truncate text-sm text-ink" title={b.title}>{b.title}</span>
+              <button
+                className={cn(
+                  "flex size-8 shrink-0 items-center justify-center rounded-md transition-colors duration-150",
+                  tone === "favorite"
+                    ? "text-negative hover:bg-negative/10"
+                    : "text-dim hover:bg-white/[0.06] hover:text-ink",
+                )}
+                onClick={() => remove.mutate(b.id)}
+                aria-label={tone === "favorite" ? "Rimuovi dai preferiti" : "Ripristina tra i bonus del catalogo"}
+                data-testid={tone === "favorite" ? "btn-remove-favorite" : "btn-restore-discarded"}
+              >
+                {tone === "favorite" ? <Heart className="size-4 fill-current" /> : <RotateCcw className="size-4" />}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
   );
 }
