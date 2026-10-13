@@ -405,7 +405,7 @@ export default function Landing() {
       <section id="profilo" className="slide section-light" data-testid="landing-profilo">
         <div className="mx-auto w-full max-w-6xl px-4 sm:px-8">
           <div className="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-            <div>
+            <div className="min-w-0">
               <Reveal>
                 <h2 className="font-display text-3xl font-bold leading-[1.1] text-ink sm:text-5xl">
                   Il tuo profilo diventa un filtro intelligente.
@@ -434,7 +434,7 @@ export default function Landing() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-3">
+            <div className="min-w-0 flex flex-col gap-3">
               {profileMatches.map(({ bonus, result }, i) => (
                 <Reveal key={bonus.id} delay={i * 100}>
                   <article className="panel interactive rounded-2xl p-5" data-testid="landing-profile-card">

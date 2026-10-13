@@ -169,7 +169,7 @@ export default function LiveScan({ bonuses }: { bonuses: Bonus[] }) {
       </div>
 
       {/* ---------- Orbe radar + offerte ---------- */}
-      <div className="flex flex-col items-center gap-8">
+      <div className="min-w-0 flex flex-col items-center gap-8">
         <RadarOrb scanning={scanning && lines < LOG_LINES.length} reduced={reduced} />
         <Offers offers={offers} />
       </div>
