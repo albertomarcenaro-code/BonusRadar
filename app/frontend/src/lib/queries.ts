@@ -1,3 +1,4 @@
+import { useCallback, useMemo, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import {
@@ -27,6 +28,8 @@ import {
 } from "@/lib/api";
 import type { Bonus, DocStatus, ProfileIn } from "@/lib/types";
 import type { UserAttachment } from "@/lib/api";
+import type { WebScanResult } from "@/lib/webSearch";
+import { scanWeb } from "@/lib/webSearch";
 
 export { isSupabaseConfigured } from "@/lib/supabase";
 
@@ -93,6 +96,64 @@ export function useToggleDiscarded() {
     },
     onError: (e) => toast.error(errMsg(e)),
   });
+}
+
+/**
+ * Scansione web on-demand dalla ricerca del catalogo: fasi visibili nella UI
+ * (radar in scansione), risultati con badge di idoneità dinamici.
+ */
+export function useWebSearch() {
+  const { data: bonuses } = useBonuses(false);
+  const { data: profile } = useProfile();
+  const [phase, setPhase] = useState<string | null>(null);
+  const [result, setResult] = useState<WebScanResult | null>(null);
+  const [lastQuery, setLastQuery] = useState("");
+  const seq = useRef(0);
+
+  const isScanning = phase !== null;
+
+  const start = useCallback(
+    async (query: string) => {
+      const q = query.trim();
+      if (!q) return;
+      const mySeq = ++seq.current;
+      setPhase("Avvio scansione…");
+      setResult(null);
+      setLastQuery(q);
+      try {
+        const knownIds = new Set((bonuses ?? []).map((b) => b.id));
+        const res = await scanWeb(q, {
+          profile: (profile ?? null) as import("@/lib/types").Profile | null,
+          knownIds,
+          onPhase: (p) => {
+            if (seq.current === mySeq) setPhase(p);
+          },
+        });
+        if (seq.current === mySeq) {
+          setResult(res);
+          setPhase(null);
+        }
+      } catch (e) {
+        if (seq.current === mySeq) {
+          setPhase(null);
+          toast.error(errMsg(e));
+        }
+      }
+    },
+    [bonuses, profile],
+  );
+
+  const reset = useCallback(() => {
+    seq.current++;
+    setPhase(null);
+    setResult(null);
+    setLastQuery("");
+  }, []);
+
+  /** Bonus scoperti dalla scansione, con badge già calcolato. */
+  const webBonuses = useMemo(() => result?.newBonuses ?? [], [result]);
+
+  return { start, reset, isScanning, phase, result, webBonuses, lastQuery };
 }
 
 export const useDocuments = () =>

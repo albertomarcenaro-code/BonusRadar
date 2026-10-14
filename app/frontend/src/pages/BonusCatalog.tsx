@@ -1,6 +1,6 @@
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { CalendarClock, ExternalLink, FileText, Heart, Loader2, RefreshCw, RotateCcw, Search, X } from "lucide-react";
+import { CalendarClock, ExternalLink, FileText, Heart, Loader2, Radar, RefreshCw, RotateCcw, Search, Sparkles, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -8,7 +8,8 @@ import PageHeader from "@/components/PageHeader";
 import { MatchBadge, MatchChecks, MatchFallbackCta } from "@/components/match";
 import { calculateBonusMatch } from "@/lib/matching";
 import type { MatchStatus } from "@/lib/matching";
-import { useBonuses, useDashboard, useDiscarded, useDocuments, useFavorites, useGenerateDocs, useProfile, useScanStatus, useScraperCatalog, useToggleDiscarded, useToggleFavorite } from "@/lib/queries";
+import { searchLocalBonuses } from "@/lib/webSearch";
+import { useBonuses, useDashboard, useDiscarded, useDocuments, useFavorites, useGenerateDocs, useProfile, useScanStatus, useScraperCatalog, useToggleDiscarded, useToggleFavorite, useWebSearch } from "@/lib/queries";
 import { CATEGORY_LABEL, fmtDateTime } from "@/lib/format";
 import type { Bonus, Profile as UserProfile } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -19,6 +20,16 @@ const FILTERS: { key: "all" | MatchStatus; label: string }[] = [
   { key: "maybe", label: "Da verificare" },
   { key: "all", label: "Tutti" },
   { key: "not_eligible", label: "Non idonei" },
+];
+
+/** Ricerche rapide: avviano subito anche la scansione web on-demand. */
+const QUICK_FILTERS = [
+  { label: "Pannelli solari", q: "pannelli solari" },
+  { label: "Ristrutturazioni", q: "ristrutturazione casa" },
+  { label: "Asilo nido", q: "asilo nido" },
+  { label: "Affitto giovani", q: "affitto giovani" },
+  { label: "Disoccupazione", q: "disoccupazione" },
+  { label: "Mobilità elettrica", q: "mobilità elettrica" },
 ];
 
 export default function BonusCatalog() {
@@ -35,9 +46,13 @@ export default function BonusCatalog() {
   const discSet = useMemo(() => new Set(discarded ?? []), [discarded]);
   const [filter, setFilter] = useState<"all" | MatchStatus>("all");
   const [category, setCategory] = useState("tutte");
-  const [params] = useSearchParams();
-  // La ricerca rapida dalla landing arriva come ?q=...
+  const [params, setParams] = useSearchParams();
+  // La ricerca rapida dalla landing arriva come ?q=...; ?bonus=<id> apre il drawer.
   const [q, setQ] = useState(params.get("q") ?? "");
+  const openId = params.get("bonus");
+
+  // Ricerca locale "intelligente" (scoring con sinonimi, ordinata per rilevanza).
+  const localMatches = useMemo(() => searchLocalBonuses(bonuses ?? [], q), [bonuses, q]);
 
   /** Matching calcolato una sola volta per bonus (profilo corrente). */
   const matchMap = useMemo(() => {
@@ -51,19 +66,87 @@ export default function BonusCatalog() {
     [matchMap],
   );
 
-  // I bonus scartati escono dal griglia del catalogo: restano nel contenitore "Scartati".
-  const list = (bonuses ?? []).filter(
-    (b) =>
-      !discSet.has(b.id) &&
-      (filter === "all" || matchMap.get(b.id)?.status === filter) &&
-      (category === "tutte" || b.category === category) &&
-      (q === "" || `${b.title} ${b.authority} ${b.summary}`.toLowerCase().includes(q.toLowerCase())),
-  );
+  // I bonus scartati escono dalla griglia del catalogo: restano nel contenitore "Scartati".
+  // Con una query attiva l'elenco è ordinato per rilevanza decrescente.
+  const list = useMemo(() => {
+    const base = (bonuses ?? []).filter(
+      (b) =>
+        !discSet.has(b.id) &&
+        (filter === "all" || matchMap.get(b.id)?.status === filter) &&
+        (category === "tutte" || b.category === category),
+    );
+    if (!q.trim()) return base;
+    const scored = new Map(localMatches.map((r) => [r.bonus.id, r.relevance]));
+    return base.filter((b) => scored.has(b.id)).sort((a, b) => (scored.get(b.id) ?? 0) - (scored.get(a.id) ?? 0));
+  }, [bonuses, discSet, filter, category, q, localMatches, matchMap]);
+
   const count = (k: "all" | MatchStatus) =>
     k === "all" ? (bonuses ?? []).length : [...matchMap.values()].filter((m) => m.status === k).length;
   const docBonusIds = new Set((docs ?? []).map((d) => d.bonus_id));
   const favoriteBonuses = (bonuses ?? []).filter((b) => favSet.has(b.id));
   const discardedBonuses = (bonuses ?? []).filter((b) => discSet.has(b.id));
+
+  // ------------------------------------------------------------------
+  // Scansione web on-demand
+  // ------------------------------------------------------------------
+  const { start: startWeb, reset: resetWeb, isScanning, phase, result, webBonuses, lastQuery } = useWebSearch();
+
+  // Se la ricerca locale non trova nulla per una query "complessa", la scansione
+  // web parte in background senza che l'utente debba premere nulla.
+  useEffect(() => {
+    const trimmed = q.trim();
+    if (trimmed.length < 8 || isScanning) return;
+    const t = setTimeout(() => {
+      const localCount = searchLocalBonuses(bonuses ?? [], trimmed).filter((r) => !discSet.has(r.bonus.id)).length;
+      if (localCount === 0 && lastQuery !== trimmed) void startWeb(trimmed);
+    }, 900);
+    return () => clearTimeout(t);
+  }, [q, bonuses, discSet, isScanning, lastQuery, startWeb]);
+
+  const runQuickFilter = (value: string) => {
+    setQ(value);
+    void startWeb(value);
+  };
+
+  // ------------------------------------------------------------------
+  // Drawer dettaglio bonus (?bonus=<id>, aperto anche dalla Panoramica)
+  // ------------------------------------------------------------------
+  const openDetail = (id: string) => {
+    const next = new URLSearchParams(params);
+    next.set("bonus", id);
+    setParams(next);
+  };
+  const closeDetail = () => {
+    const next = new URLSearchParams(params);
+    next.delete("bonus");
+    setParams(next, { replace: true });
+  };
+
+  useEffect(() => {
+    if (!openId) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeDetail();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openId, params]);
+
+  /** Bonus aperto nel drawer: dal catalogo locale o dai risultati della scansione web. */
+  const detail = useMemo(() => {
+    if (!openId) return null;
+    const inDb = (bonuses ?? []).find((b) => b.id === openId);
+    if (inDb) {
+      return {
+        bonus: inDb,
+        match: matchMap.get(inDb.id) ?? calculateBonusMatch((profile ?? null) as UserProfile | null, inDb),
+        isLocal: true,
+      };
+    }
+    const inWeb = webBonuses.find((w) => w.bonus.id === openId);
+    if (inWeb) return { bonus: inWeb.bonus, match: inWeb.match, isLocal: false };
+    return null;
+  }, [openId, bonuses, matchMap, profile, webBonuses]);
 
   return (
     <div>
@@ -110,6 +193,167 @@ export default function BonusCatalog() {
         </div>
       )}
 
+      {/* ------------------------------------------------------------
+          Ricerca potenziata: contenitore dedicato + scansione web on-demand
+      */}
+      <div className="mb-4" data-testid="bonus-search-box">
+        <div className="panel flex flex-col gap-3 rounded-2xl p-3 sm:flex-row sm:items-center">
+          <div className="relative flex-1">
+            <Search className="absolute left-4 top-1/2 size-4.5 -translate-y-1/2 text-dim" />
+            <Input
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && q.trim()) void startWeb(q);
+              }}
+              placeholder="Cerca un bando, un argomento o un ente… es. «pannelli solari», «ristrutturazione»"
+              className="h-12 rounded-xl bg-white/[0.04] pl-12 pr-4"
+              aria-label="Cerca bonus nel catalogo e sul web"
+              data-testid="bonus-search-input"
+            />
+          </div>
+          <Button
+            className="h-12 shrink-0"
+            disabled={!q.trim() || isScanning}
+            onClick={() => void startWeb(q)}
+            data-testid="btn-web-scan"
+          >
+            {isScanning ? <Loader2 className="size-4 animate-spin" /> : <Radar className="size-4" />}
+            {isScanning ? "Scansione in corso…" : "Scansione web"}
+          </Button>
+        </div>
+        <div className="mt-3 flex flex-wrap items-center gap-2" data-testid="bonus-quick-filters">
+          <span className="text-xs text-dim">Ricerche rapide:</span>
+          {QUICK_FILTERS.map((f) => (
+            <button
+              key={f.q}
+              onClick={() => runQuickFilter(f.q)}
+              className={cn(
+                "rounded-full border px-3 py-1 text-xs font-medium transition-colors duration-150",
+                q === f.q
+                  ? "border-accent/40 bg-accent/10 text-accent"
+                  : "border-line bg-white/[0.03] text-muted hover:border-accent/30 hover:text-ink",
+              )}
+              data-testid={`bonus-quick-filter-${f.label.toLowerCase().replace(/\s+/g, "-")}`}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Stato di scansione web: radar in azione + fasi + progress bar */}
+      {isScanning && (
+        <div className="panel mb-6 overflow-hidden rounded-2xl p-5" data-testid="bonus-web-scan-status">
+          <div className="flex items-center gap-4">
+            <div className="relative grid size-12 shrink-0 place-items-center">
+              <span className="absolute inset-0 rounded-full border border-accent/25" />
+              <span className="radar-sweep absolute inset-1 rounded-full" />
+              <span className="radar-ping absolute size-3 rounded-full bg-accent/70" />
+              <Radar className="relative size-5 text-accent" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-semibold text-ink">Scansione fonti ufficiali e bandi in corso…</p>
+              <p className="mt-0.5 truncate font-mono text-xs text-accent" data-testid="bonus-web-scan-phase">{phase}</p>
+              <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/[0.06]">
+                <div className="scan-progress-bar h-full w-1/3 rounded-full bg-gradient-to-r from-accent/50 via-accent to-accent/50" />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Risultati della scansione web: nuovi bandi con badge di idoneità dinamici */}
+      {!isScanning && result && (
+        <section className="mb-8" data-testid="bonus-web-results">
+          <div className="mb-3 flex items-center justify-between gap-2">
+            <h2 className="flex items-center gap-2 font-display text-xl font-bold text-ink" data-testid="bonus-web-results-title">
+              <Sparkles className="size-5 text-accent" />
+              Risultati della scansione web
+              <span className="font-mono text-sm font-normal text-dim">({webBonuses.length + result.leads.length})</span>
+            </h2>
+            <button onClick={resetWeb} className="text-sm text-dim hover:text-ink" data-testid="btn-close-web-results">
+              Chiudi risultati
+            </button>
+          </div>
+          {webBonuses.length === 0 && result.leads.length === 0 ? (
+            <div className="rounded-xl border border-dashed border-line bg-white/[0.03] p-6 text-sm text-muted" data-testid="bonus-web-results-empty">
+              La scansione non ha trovato bandi nuovi per «{lastQuery}». Prova a riformulare la ricerca o esplora il catalogo locale.
+            </div>
+          ) : (
+            <>
+              <div className="grid gap-4 md:grid-cols-2">
+                {webBonuses.map(({ bonus: b, match }) => (
+                  <article
+                    key={b.id}
+                    className="panel interactive flex cursor-pointer flex-col rounded-2xl p-5"
+                    onClick={() => openDetail(b.id)}
+                    data-testid="bonus-web-result"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <p className="text-xs font-semibold uppercase tracking-wider text-dim">
+                          {b.authority} · {CATEGORY_LABEL[b.category] ?? b.category}
+                        </p>
+                        <h3 className="mt-1 font-display text-lg font-bold leading-snug text-ink">{b.title}</h3>
+                      </div>
+                      <MatchBadge result={match} size="lg" testId="bonus-web-result-badge" />
+                    </div>
+                    <p className="mt-2 text-sm text-muted">{b.summary}</p>
+                    <div className="mt-3 flex flex-wrap gap-2 text-xs">
+                      {b.amount && <span className="rounded-md bg-accent/10 px-2 py-1 font-mono font-medium text-accent">{b.amount}</span>}
+                      {b.deadline && (
+                        <span className="flex items-center gap-1 rounded-md bg-white/[0.06] px-2 py-1 text-muted">
+                          <CalendarClock className="size-3" /> {b.deadline}
+                        </span>
+                      )}
+                      <span className="rounded-md bg-positive/10 px-2 py-1 font-semibold text-positive">Trovato ora</span>
+                    </div>
+                    <div className="mt-auto flex items-center justify-between gap-2 pt-4">
+                      <span className="text-xs text-dim">Scansione web on-demand</span>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openDetail(b.id);
+                        }}
+                        data-testid="btn-open-web-result"
+                      >
+                        Apri scheda
+                      </Button>
+                    </div>
+                  </article>
+                ))}
+              </div>
+              {result.leads.length > 0 && (
+                <div className="mt-4 rounded-xl border border-line bg-white/[0.03] p-4" data-testid="bonus-web-leads">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-dim">Approfondimenti dal web</p>
+                  <ul className="mt-2 space-y-2">
+                    {result.leads.map((l) => (
+                      <li key={l.url} className="min-w-0">
+                        <a
+                          href={l.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="group flex items-start gap-2 text-sm text-ink hover:text-accent"
+                        >
+                          <ExternalLink className="mt-0.5 size-3.5 shrink-0 text-dim group-hover:text-accent" />
+                          <span className="min-w-0">
+                            <span className="font-medium">{l.title}</span>
+                            {l.snippet && <span className="block truncate text-muted">{l.snippet}</span>}
+                          </span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </>
+          )}
+        </section>
+      )}
+
       <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-center">
         <div className="flex flex-wrap gap-1 rounded-lg bg-white/[0.05] p-1" data-testid="bonus-match-filters">
           {FILTERS.map((f) => (
@@ -137,16 +381,6 @@ export default function BonusCatalog() {
             ))}
           </SelectContent>
         </Select>
-        <div className="relative lg:ml-auto lg:w-72">
-          <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-dim" />
-          <Input
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Cerca bonus o ente…"
-            className="h-11 pl-9"
-            data-testid="bonus-search-input"
-          />
-        </div>
       </div>
 
       {/* Contenitori: preferiti e scartati, sempre visibili sopra il catalogo */}
@@ -180,16 +414,49 @@ export default function BonusCatalog() {
             match={matchMap.get(b.id) ?? calculateBonusMatch((profile ?? null) as UserProfile | null, b)}
             hasDocs={docBonusIds.has(b.id)}
             isFavorite={favSet.has(b.id)}
+            onOpen={() => openDetail(b.id)}
           />
         ))}
         {bonuses && list.length === 0 && (
           <div className="rounded-xl border border-dashed border-line bg-white/[0.03] p-8 text-center text-sm text-muted md:col-span-2" data-testid="bonus-empty">
             {filter === "eligible" && eligibleCount === 0
               ? "Nessun bonus risulta idoneo con i dati attuali del profilo: completa o aggiorna il tuo profilo, oppure esplora tutto il catalogo."
-              : "Nessun bonus corrisponde ai filtri selezionati."}
+              : q.trim()
+                ? `Nessun risultato locale per «${q.trim()}». Premi «Scansione web» per cercare anche nelle fonti ufficiali.`
+                : "Nessun bonus corrisponde ai filtri selezionati."}
           </div>
         )}
       </div>
+
+      {/* Drawer di dettaglio: overlay con backdrop-blur che sfoca il catalogo */}
+      {detail && (
+        <>
+          <div
+            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-md"
+            onClick={closeDetail}
+            aria-hidden
+            data-testid="bonus-detail-backdrop"
+          />
+          <div
+            className="pointer-events-none fixed inset-0 z-50 flex items-start justify-center overflow-y-auto p-4 sm:p-8"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Dettaglio bonus"
+            onClick={closeDetail}
+            data-testid="bonus-detail-drawer"
+          >
+            <BonusDetailPanel
+              bonus={detail.bonus}
+              match={detail.match}
+              isLocal={detail.isLocal}
+              isFavorite={favSet.has(detail.bonus.id)}
+              hasDocs={docBonusIds.has(detail.bonus.id)}
+              profile={(profile ?? null) as UserProfile | null}
+              onClose={closeDetail}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }
@@ -201,6 +468,7 @@ function BonusCard({
   match,
   hasDocs,
   isFavorite,
+  onOpen,
 }: {
   bonus: Bonus;
   index: number;
@@ -208,6 +476,7 @@ function BonusCard({
   match: ReturnType<typeof calculateBonusMatch>;
   hasDocs: boolean;
   isFavorite: boolean;
+  onOpen: () => void;
 }) {
   const gen = useGenerateDocs();
   const fav = useToggleFavorite();
@@ -215,8 +484,9 @@ function BonusCard({
   const [open, setOpen] = useState(false);
   return (
     <article
-      className="panel interactive flex flex-col rounded-2xl p-5 animate-rise"
+      className="panel interactive flex cursor-pointer flex-col rounded-2xl p-5 animate-rise"
       style={{ animationDelay: `${Math.min(index, 8) * 40}ms` }}
+      onClick={onOpen}
       data-testid="bonus-card"
     >
       <div className="flex items-start justify-between gap-3">
@@ -233,7 +503,10 @@ function BonusCard({
               "flex size-9 items-center justify-center rounded-full transition-colors duration-150",
               isFavorite ? "bg-negative/10 text-negative" : "text-dim hover:bg-white/[0.06] hover:text-negative",
             )}
-            onClick={() => fav.mutate(b.id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              fav.mutate(b.id);
+            }}
             aria-label={isFavorite ? "Rimuovi dai preferiti" : "Aggiungi ai preferiti"}
             aria-pressed={isFavorite}
             data-testid="btn-toggle-favorite"
@@ -243,7 +516,10 @@ function BonusCard({
           {/* Scarta: esclude dal catalogo, resta nel contenitore "Scartati" */}
           <button
             className="flex size-9 items-center justify-center rounded-full text-dim transition-colors duration-150 hover:bg-white/[0.06] hover:text-ink"
-            onClick={() => discard.mutate(b.id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              discard.mutate(b.id);
+            }}
             aria-label="Scarta questo bonus"
             data-testid="btn-toggle-discard"
           >
@@ -288,7 +564,10 @@ function BonusCard({
 
       <button
         className="mt-3 self-start text-sm text-accent hover:underline"
-        onClick={() => setOpen(!open)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setOpen(!open);
+        }}
         data-testid="btn-toggle-requirements"
       >
         {open ? "Nascondi requisiti" : `Requisiti e documenti (${b.requirements.length})`}
@@ -313,14 +592,22 @@ function BonusCard({
       <div className="mt-auto flex items-center justify-between gap-2 pt-5">
         <div className="flex items-center gap-1">
           {b.source_url ? (
-            <a href={b.source_url} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-xs text-dim hover:text-ink" data-testid="bonus-source-link">
+            <a
+              href={b.source_url}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-1 text-xs text-dim hover:text-ink"
+              onClick={(e) => e.stopPropagation()}
+              data-testid="bonus-source-link"
+            >
               <ExternalLink className="size-3" /> Fonte
             </a>
           ) : null}
         </div>
         <Button
           disabled={!profile || gen.isPending || match.status === "not_eligible"}
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             if (profile) gen.mutate({ bonus: b, profile });
           }}
           className="h-10"
@@ -331,6 +618,144 @@ function BonusCard({
         </Button>
       </div>
     </article>
+  );
+}
+
+/**
+ * Pannello di dettaglio del bonus nel drawer: badge grande, verifiche,
+ * requisiti/documenti completi e azioni. Per i bandid scoperti dal web
+ * (non ancora nel catalogo locale) mostra la sola CTA alla fonte ufficiale.
+ */
+function BonusDetailPanel({
+  bonus: b,
+  match,
+  isLocal,
+  isFavorite,
+  hasDocs,
+  profile,
+  onClose,
+}: {
+  bonus: Bonus;
+  match: ReturnType<typeof calculateBonusMatch>;
+  isLocal: boolean;
+  isFavorite: boolean;
+  hasDocs: boolean;
+  profile: UserProfile | null;
+  onClose: () => void;
+}) {
+  const gen = useGenerateDocs();
+  const fav = useToggleFavorite();
+  return (
+    <div
+      className="panel pointer-events-auto relative mt-4 w-full max-w-2xl rounded-2xl p-6 animate-rise sm:mt-8"
+      onClick={(e) => e.stopPropagation()}
+      data-testid="bonus-detail-panel"
+    >
+      <button
+        className="absolute right-4 top-4 flex size-9 items-center justify-center rounded-full text-dim transition-colors duration-150 hover:bg-white/[0.06] hover:text-ink"
+        onClick={onClose}
+        aria-label="Chiudi dettaglio"
+        data-testid="btn-close-detail"
+      >
+        <X className="size-5" />
+      </button>
+
+      <p className="pr-12 text-xs font-semibold uppercase tracking-wider text-dim">
+        {b.authority} · {CATEGORY_LABEL[b.category] ?? b.category}
+      </p>
+      <h2 className="mt-1 pr-12 font-display text-2xl font-bold leading-snug text-ink" data-testid="bonus-detail-title">
+        {b.title}
+      </h2>
+
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        <MatchBadge result={match} size="lg" testId="bonus-detail-badge" />
+        {b.amount && <span className="rounded-md bg-accent/10 px-2 py-1 font-mono text-sm font-medium text-accent">{b.amount}</span>}
+        {b.deadline && (
+          <span className="flex items-center gap-1 rounded-md bg-white/[0.06] px-2 py-1 text-sm text-muted">
+            <CalendarClock className="size-3.5" /> {b.deadline}
+          </span>
+        )}
+        {!isLocal && <span className="rounded-md bg-positive/10 px-2 py-1 text-xs font-semibold text-positive">Trovato dalla scansione web</span>}
+      </div>
+
+      <p className="mt-4 text-sm leading-relaxed text-muted">{b.summary}</p>
+
+      {profile && match.checks.length > 0 && (
+        <div className="mt-5 rounded-xl border border-line bg-white/[0.03] p-4" data-testid="bonus-detail-checks">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-dim">Verifiche sul tuo profilo</p>
+          <MatchChecks result={match} />
+        </div>
+      )}
+      {!profile && <MatchFallbackCta />}
+
+      {b.eligibility_reason && (
+        <div className="mt-4 rounded-lg border-l-2 border-accent bg-white/[0.03] p-3 text-sm text-muted">
+          <span className="font-semibold text-ink">Analisi AI: </span>
+          {b.eligibility_reason}
+        </div>
+      )}
+
+      <div className="mt-5 grid gap-4 text-sm sm:grid-cols-2" data-testid="bonus-detail-requirements">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wider text-dim">Requisiti ({b.requirements.length})</p>
+          <ul className="mt-2 list-disc space-y-1 pl-4 text-muted">
+            {b.requirements.length === 0 && <li>Nessun requisito dichiarato nel bando.</li>}
+            {b.requirements.map((r) => <li key={r}>{r}</li>)}
+          </ul>
+        </div>
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wider text-dim">Documenti ({b.required_documents.length})</p>
+          <ul className="mt-2 list-disc space-y-1 pl-4 text-muted">
+            {b.required_documents.length === 0 && <li>Nessun documento dichiarato nel bando.</li>}
+            {b.required_documents.map((r) => <li key={r}>{r}</li>)}
+          </ul>
+        </div>
+      </div>
+
+      <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-line pt-5">
+        {isLocal ? (
+          <>
+            <Button
+              variant={isFavorite ? "default" : "outline"}
+              className="h-10"
+              onClick={() => fav.mutate(b.id)}
+              data-testid="btn-detail-favorite"
+            >
+              <Heart className={cn("size-4", isFavorite && "fill-current")} />
+              {isFavorite ? "Nei preferiti" : "Aggiungi ai preferiti"}
+            </Button>
+            <Button
+              className="h-10"
+              disabled={!profile || gen.isPending || match.status === "not_eligible"}
+              onClick={() => {
+                if (profile) gen.mutate({ bonus: b, profile });
+              }}
+              data-testid="btn-detail-generate-docs"
+            >
+              {gen.isPending ? <Loader2 className="size-4 animate-spin" /> : <FileText className="size-4" />}
+              {gen.isPending ? "Compilazione…" : hasDocs ? "Rigenera documenti" : "Prepara documenti"}
+            </Button>
+          </>
+        ) : (
+          <p className="text-sm text-dim">
+            Bando ancora non presente nel catalogo locale: consultalo sul sito ufficiale dell'ente per candidarti.
+          </p>
+        )}
+        {b.source_url && (
+          <a
+            href={b.source_url}
+            target="_blank"
+            rel="noreferrer"
+            className={cn(
+              "ml-auto flex items-center gap-1.5 rounded-lg border border-line bg-white/[0.04] px-3 py-2 text-sm font-medium text-ink transition-colors duration-150 hover:border-accent/40 hover:text-accent",
+            )}
+            data-testid="btn-detail-source"
+          >
+            <ExternalLink className="size-4" /> Fonte ufficiale
+          </a>
+        )}
+      </div>
+    </div>
   );
 }
 

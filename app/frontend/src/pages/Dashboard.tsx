@@ -99,6 +99,48 @@ export default function Dashboard() {
         </div>
       </section>
 
+      {/* Registro scansione: full-width subito sotto l'hero, su una riga compatta */}
+      <section
+        className="terminal mt-6 flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:gap-6"
+        data-testid="dashboard-scan-log"
+      >
+        <div className="flex shrink-0 items-center gap-2.5">
+          <span className="relative grid size-8 place-items-center rounded-full border border-accent/30">
+            <Radar className={cn("size-4 text-accent", running && "animate-pulse")} />
+          </span>
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-dim">Registro scansione</p>
+            <p className="text-sm text-muted" data-testid="dashboard-last-scan">
+              Ultima: {fmtDateTime(d?.last_scan_at ?? scan?.last_run_at)}
+            </p>
+          </div>
+        </div>
+        <div className="min-w-0 flex-1 border-line sm:border-l sm:pl-6">
+          {running ? (
+            <p className="truncate font-mono text-xs text-accent" data-testid="dashboard-scan-phase">
+              {scan?.phase || "Scansione in corso…"}
+            </p>
+          ) : (scan?.log ?? []).length > 0 ? (
+            <p className="truncate font-mono text-xs text-muted" data-testid="dashboard-scan-last-line">
+              {(scan?.log ?? [])[(scan?.log ?? []).length - 1]}
+            </p>
+          ) : (
+            <p className="truncate font-mono text-xs text-dim" data-testid="dashboard-scan-idle">
+              Monitoraggio automatico attivo · prossima scansione delle fonti ufficiali a breve
+            </p>
+          )}
+        </div>
+        <span
+          className={cn(
+            "shrink-0 self-start rounded-full border px-2.5 py-0.5 text-xs font-semibold sm:self-center",
+            running ? "border-accent/40 bg-accent/10 text-accent" : "border-positive/30 bg-positive/10 text-positive",
+          )}
+          data-testid="dashboard-scan-status"
+        >
+          {running ? "Scansione attiva" : "Attivo · settimanale"}
+        </span>
+      </section>
+
       <section className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
         <Stat testId="stat-eligible" label="Idonei per te" value={eligibleCount || d?.bonus_eligible} accent="text-positive" icon={CheckCircle2} />
         <Stat testId="stat-favorites" label="Preferiti salvati" value={d?.favorites_total} accent="text-signal" icon={Heart} />
@@ -120,38 +162,26 @@ export default function Dashboard() {
         </section>
       )}
 
-      <section className="mt-8 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
-        <div>
-          <div className="mb-3 flex items-center justify-between">
-            <h2 className="font-display text-xl font-bold text-ink">In evidenza per te</h2>
-            <Link to="/bonus" className="flex items-center gap-1 text-sm text-accent hover:underline" data-testid="link-all-bonus">
-              Tutto il catalogo <ArrowRight className="size-4" />
-            </Link>
-          </div>
-          <div className="flex flex-col gap-2" data-testid="dashboard-top-bonus">
-            {top.length === 0 && (
-              <div className="rounded-xl border border-dashed border-line bg-white/[0.03] p-6 text-sm text-muted">
-                Catalogo in aggiornamento: torna tra poco.
-              </div>
-            )}
-            {top.map((b) => (
-              <BonusMatchRow
-                key={b.id}
-                bonus={b}
-                match={matches.get(b.id) ?? calculateBonusMatch((profile ?? null) as UserProfile | null, b)}
-              />
-            ))}
-          </div>
+      <section className="mt-8">
+        <div className="mb-3 flex items-center justify-between">
+          <h2 className="font-display text-xl font-bold text-ink">In evidenza per te</h2>
+          <Link to="/bonus" className="flex items-center gap-1 text-sm text-accent hover:underline" data-testid="link-all-bonus">
+            Tutto il catalogo <ArrowRight className="size-4" />
+          </Link>
         </div>
-        <div className="terminal p-5 text-ink" data-testid="dashboard-scan-log">
-          <p className="text-[11px] font-semibold uppercase tracking-wider text-dim">Registro scansione</p>
-          <p className="mt-1 text-sm">Ultima: {fmtDateTime(d?.last_scan_at ?? scan?.last_run_at)}</p>
-          <div className="mt-4 max-h-64 space-y-1 overflow-auto font-mono text-xs text-muted">
-            {(scan?.log ?? []).length === 0 && <p className="text-dim">Catalogo aggiornato settimanalmente dallo scraper.</p>}
-            {(scan?.log ?? []).slice(-12).map((l, i) => (
-              <p key={i}>{l}</p>
-            ))}
-          </div>
+        <div className="flex flex-col gap-2" data-testid="dashboard-top-bonus">
+          {top.length === 0 && (
+            <div className="rounded-xl border border-dashed border-line bg-white/[0.03] p-6 text-sm text-muted">
+              Catalogo in aggiornamento: torna tra poco.
+            </div>
+          )}
+          {top.map((b) => (
+            <BonusMatchRow
+              key={b.id}
+              bonus={b}
+              match={matches.get(b.id) ?? calculateBonusMatch((profile ?? null) as UserProfile | null, b)}
+            />
+          ))}
         </div>
       </section>
 
@@ -192,7 +222,7 @@ export default function Dashboard() {
             d?.upcoming_deadlines.map((b) => (
               <Link
                 key={b.id}
-                to="/bonus"
+                to={`/bonus?bonus=${b.id}`}
                 className="panel interactive flex items-center gap-4 rounded-xl p-4"
                 data-testid={`dashboard-deadline-${b.id}`}
               >
@@ -215,11 +245,11 @@ export default function Dashboard() {
   );
 }
 
-/** Riga bonus con badge di matching e verifica rapida (dashboard). */
+/** Riga bonus con badge di matching: porta al catalogo aprendo la scheda del bonus. */
 function BonusMatchRow({ bonus: b, match }: { bonus: Bonus; match: ReturnType<typeof calculateBonusMatch> }) {
   return (
     <Link
-      to="/bonus"
+      to={`/bonus?bonus=${b.id}`}
       className="panel interactive group flex items-center justify-between gap-4 rounded-xl p-4"
       data-testid={`dashboard-bonus-${b.id}`}
     >
