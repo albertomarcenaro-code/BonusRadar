@@ -7,7 +7,6 @@ import { fmtDate } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
-  { to: "/", label: "Home", short: "Home", icon: Radar, id: "home", end: true },
   { to: "/profile", label: "Mio Profilo & Documenti", short: "Profilo", icon: UserCheck, id: "profile", end: false },
   { to: "/dashboard", label: "Panoramica", short: "Panoramica", icon: LayoutDashboard, id: "dashboard", end: false },
   { to: "/bonus", label: "Catalogo Bonus", short: "Bonus", icon: Sparkles, id: "bonus", end: false },
@@ -26,7 +25,7 @@ export default function AppShell() {
     <div className="min-h-svh bg-canvas text-ink">
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-white/8 bg-canvas-2/70 backdrop-blur-xl lg:flex">
         <div className="flex items-center justify-between px-5 py-6">
-          <NavLink to="/" className="flex items-center gap-3">
+          <NavLink to="/dashboard" className="flex items-center gap-3">
             <div className="relative grid size-10 place-items-center rounded-lg bg-[linear-gradient(180deg,#22d3ee,#2f6bff)]">
               <Radar className="size-5 text-[#03121b]" />
             </div>
@@ -69,7 +68,7 @@ export default function AppShell() {
       </aside>
 
       <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-white/10 bg-[#04060d]/85 px-4 py-3 backdrop-blur-xl lg:hidden">
-        <NavLink to="/" className="flex items-center gap-2">
+        <NavLink to="/dashboard" className="flex items-center gap-2">
           <div className="grid size-8 place-items-center rounded-md bg-[linear-gradient(180deg,#22d3ee,#2f6bff)]">
             <Radar className="size-4 text-[#03121b]" />
           </div>
@@ -100,7 +99,7 @@ export default function AppShell() {
         </div>
       </main>
 
-      <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-4 border-t border-white/10 bg-[#04060d]/90 backdrop-blur-xl lg:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-3 border-t border-white/10 bg-[#04060d]/90 backdrop-blur-xl lg:hidden">
         {LINKS.map((l) => (
           <NavLink
             key={l.to}
