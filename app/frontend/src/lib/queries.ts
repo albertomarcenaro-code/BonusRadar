@@ -219,7 +219,12 @@ export function useSaveProfile() {
   return useMutation({
     mutationFn: async (p: ProfileIn) => {
       const saved = await apiSaveProfile(p);
-      await recordQuestionnaire(p);
+      // Audit delle risposte: non blocca il salvataggio del profilo se fallisce.
+      try {
+        await recordQuestionnaire(p);
+      } catch {
+        // best-effort
+      }
       return saved;
     },
     onSuccess: () => {

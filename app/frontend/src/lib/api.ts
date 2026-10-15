@@ -32,6 +32,18 @@ function dbx(err: { message: string } | null): void {
   if (err) throw new DataError(err.message);
 }
 
+/**
+ * Utente corrente dalla sessione Supabase già persistita nel browser.
+ * A differenza di auth.getUser() non fa richieste di rete: ogni funzione
+ * del data layer la chiama, e su una dashboard completa evita 4 round-trip
+ * HTTP a Supabase Auth prima di poter leggere i dati.
+ */
+async function currentUser(): Promise<{ id: string; email: string } | null> {
+  const { data } = await requireSupabase().auth.getSession();
+  const u = data.session?.user;
+  return u ? { id: u.id, email: u.email ?? "" } : null;
+}
+
 /** Riga tabella bonuses → tipo usato dalla UI. */
 type BonusRow = Omit<Bonus, "discovered_at"> & { created_at: string };
 function mapBonus(b: BonusRow): Bonus {
@@ -76,6 +88,11 @@ export const auth = {
     const { data, error } = await requireSupabase().auth.signUp({ email, password });
     dbx(error);
     if (!data.user) throw new DataError("Registrazione non riuscita");
+    // Con la conferma email attiva non viene restituita alcuna sessione:
+    // navigare alla dashboard lascerebbe l'utente non autenticato in uno stato vuoto.
+    if (!data.session) {
+      throw new DataError("Account creato. Controlla la tua email e conferma l'indirizzo, poi accedi con le tue credenziali.");
+    }
     return { id: data.user.id, email: data.user.email ?? email };
   },
   async signOut(): Promise<void> {
@@ -89,7 +106,7 @@ export const auth = {
 // ============================================================
 export async function getProfile(): Promise<Profile | null> {
   if (!isSupabaseConfigured) return demoStore.getProfile();
-  const user = await auth.getUser();
+  const user = await currentUser();
   if (!user) return null;
   const { data, error } = await requireSupabase().from("profiles").select("*").eq("id", user.id).maybeSingle();
   dbx(error);
@@ -98,7 +115,7 @@ export async function getProfile(): Promise<Profile | null> {
 
 export async function saveProfile(p: ProfileIn): Promise<Profile> {
   if (!isSupabaseConfigured) return demoStore.saveProfile(p);
-  const user = await auth.getUser();
+  const user = await currentUser();
   if (!user) throw new DataError("Accedi per salvare il profilo");
   const { data, error } = await requireSupabase()
     .from("profiles")
@@ -111,11 +128,15 @@ export async function saveProfile(p: ProfileIn): Promise<Profile> {
 
 export async function recordQuestionnaire(p: ProfileIn): Promise<void> {
   if (!isSupabaseConfigured) return; // demo: il profilo è già lo storico
-  const user = await auth.getUser();
+  const user = await currentUser();
   if (!user) return;
-  await requireSupabase()
-    .from("questionnaires")
-    .insert({ user_id: user.id, status: "completed", answers: p as unknown as Record<string, unknown> });
+  dbx(
+    (
+      await requireSupabase()
+        .from("questionnaires")
+        .insert({ user_id: user.id, status: "completed", answers: p as unknown as Record<string, unknown> })
+    ).error,
+  );
 }
 
 // ============================================================
@@ -149,7 +170,7 @@ export async function fetchScraperCatalog(): Promise<BonusCatalogFile | null> {
 
 export async function listFavorites(): Promise<string[]> {
   if (!isSupabaseConfigured) return demoStore.getFavorites().map((f) => f.bonus_id);
-  const user = await auth.getUser();
+  const user = await currentUser();
   if (!user) return [];
   const { data, error } = await requireSupabase()
     .from("user_bonuses")
@@ -162,7 +183,7 @@ export async function listFavorites(): Promise<string[]> {
 
 export async function listDiscarded(): Promise<string[]> {
   if (!isSupabaseConfigured) return demoStore.getDiscarded();
-  const user = await auth.getUser();
+  const user = await currentUser();
   if (!user) return [];
   const { data, error } = await requireSupabase()
     .from("user_bonuses")
@@ -181,7 +202,7 @@ export async function listDiscarded(): Promise<string[]> {
  */
 async function setBonusFlag(bonusId: string, isFavorite: boolean): Promise<boolean> {
   const sb = requireSupabase();
-  const user = await auth.getUser();
+  const user = await currentUser();
   if (!user) throw new DataError(isFavorite ? "Accedi per salvare i preferiti" : "Accedi per scartare i bonus");
   const { data: existing } = await sb
     .from("user_bonuses")
@@ -217,7 +238,7 @@ export async function toggleDiscarded(bonusId: string): Promise<boolean> {
 // ============================================================
 export async function listDocuments(): Promise<DocumentFolder[]> {
   if (!isSupabaseConfigured) return demoStore.getDocuments();
-  const user = await auth.getUser();
+  const user = await currentUser();
   if (!user) return [];
   const { data, error } = await requireSupabase()
     .from("document_folders")
@@ -258,7 +279,7 @@ export async function generateDocuments(bonus: Bonus, profile: Profile): Promise
   }
 
   const sb = requireSupabase();
-  const user = await auth.getUser();
+  const user = await currentUser();
   if (!user) throw new DataError("Accedi per generare i documenti");
 
   const { data: folder, error } = await sb
@@ -268,7 +289,7 @@ export async function generateDocuments(bonus: Bonus, profile: Profile): Promise
       bonus_id: bonus.id,
       bonus_title: bonus.title,
       authority: bonus.authority,
-      files: files.map((f) => ({ ...f, storage_path: documentObjectPath(user.id, "", f.name) })),
+      files: files.map((f) => ({ name: f.name, kind: f.kind })),
       attachments: bonus.required_documents,
       submission_notes: `Presenta la domanda sul portale ${bonus.authority} con SPID/CIE entro: ${
         bonus.deadline || "scadenza da verificare"
@@ -289,7 +310,14 @@ export async function generateDocuments(bonus: Bonus, profile: Profile): Promise
         .upload(path, blob, { contentType: "application/msword", upsert: true })
     ).error,
   );
-  await sb.from("document_folders").update({ files: files.map((f) => ({ ...f, storage_path: documentObjectPath(user.id, folder.id, f.name) })) }).eq("id", folder.id);
+  dbx(
+    (
+      await sb
+        .from("document_folders")
+        .update({ files: files.map((f) => ({ ...f, storage_path: documentObjectPath(user.id, folder.id, f.name) })) })
+        .eq("id", folder.id)
+    ).error,
+  );
 
   openPrintWindow(html);
   return mapDoc({ ...folder, files: files.map((f) => ({ ...f, storage_path: documentObjectPath(user.id, folder.id, f.name) })) });
@@ -300,7 +328,7 @@ export async function getFileUrl(doc: DocumentFolder, kind: "pdf" | "docx"): Pro
   if (!isSupabaseConfigured) return null; // in demo il download avviene alla generazione
   const f = doc.files.find((x) => x.kind === kind);
   if (!f) return null;
-  const user = await auth.getUser();
+  const user = await currentUser();
   if (!user) return null;
   const sb = requireSupabase();
   const path = documentObjectPath(user.id, doc.id, f.name);
@@ -328,12 +356,15 @@ export async function updateDocumentStatus(id: string, status: DocStatus): Promi
 export async function deleteDocument(id: string): Promise<void> {
   if (!isSupabaseConfigured) return demoStore.deleteDocument(id);
   const sb = requireSupabase();
-  const user = await auth.getUser();
+  const user = await currentUser();
   if (user) {
-    // best-effort: rimuove i file dal bucket
-    await sb.storage.from(DOCUMENTS_BUCKET).remove([
-      `${user.id}/${id}/`,
-    ]);
+    // Best-effort: elimina i file reali della cartella dal bucket.
+    // remove() richiede i path esatti dei file: elenco prima i contenuti
+    // di <uid>/<folder_id> e poi rimuovo ogni voce.
+    const folderPath = `${user.id}/${id}`;
+    const { data: entries } = await sb.storage.from(DOCUMENTS_BUCKET).list(folderPath);
+    const names = (entries ?? []).filter((e) => e.name && e.name !== ".emptyFolderPlaceholder").map((e) => `${folderPath}/${e.name}`);
+    if (names.length > 0) await sb.storage.from(DOCUMENTS_BUCKET).remove(names);
   }
   dbx((await sb.from("document_folders").delete().eq("id", id)).error);
 }
@@ -345,17 +376,14 @@ export type UserAttachment = DemoAttachment;
 
 export async function listAttachments(): Promise<UserAttachment[]> {
   if (!isSupabaseConfigured) return demoStore.getAttachments();
-  const user = await auth.getUser();
+  const user = await currentUser();
   if (!user) return [];
+  // La policy del bucket limita l'accesso a <uid>/…: la listing deve partire
+  // da lì, altrimenti restituisce sempre una lista vuota.
   const { data, error } = await requireSupabase().storage
     .from(DOCUMENTS_BUCKET)
-    .list("allegati", { search: "" });
-  // Con la policy foldername[1]=uid la listing corretta è nel percorso "<uid>/allegati".
-  if (error) {
-    const alt = await requireSupabase().storage.from(DOCUMENTS_BUCKET).list(`${user.id}/allegati`, { search: "" });
-    if (alt.error) return [];
-    return mapAttachmentEntries(alt.data ?? []);
-  }
+    .list(`${user.id}/allegati`);
+  if (error) return [];
   return mapAttachmentEntries(data ?? []);
 }
 
@@ -389,7 +417,7 @@ export async function uploadAttachment(file: File, label: string): Promise<UserA
     demoStore.addAttachment(att);
     return att;
   }
-  const user = await auth.getUser();
+  const user = await currentUser();
   if (!user) throw new DataError("Accedi per caricare gli allegati");
   const path = attachmentObjectPath(user.id, file.name);
   const { error } = await requireSupabase()
@@ -403,7 +431,7 @@ export async function uploadAttachment(file: File, label: string): Promise<UserA
 /** URL firmato per aprire un allegato caricato. */
 export async function getAttachmentUrl(a: UserAttachment): Promise<string | null> {
   if (!isSupabaseConfigured) return null;
-  const user = await auth.getUser();
+  const user = await currentUser();
   if (!user) return null;
   const path = a.id.includes("/") ? a.id : attachmentObjectPath(user.id, a.name);
   const { data, error } = await requireSupabase().storage.from(DOCUMENTS_BUCKET).createSignedUrl(path, 300);
@@ -413,7 +441,7 @@ export async function getAttachmentUrl(a: UserAttachment): Promise<string | null
 
 export async function deleteAttachment(a: UserAttachment): Promise<void> {
   if (!isSupabaseConfigured) return demoStore.removeAttachment(a.id);
-  const user = await auth.getUser();
+  const user = await currentUser();
   if (!user) throw new DataError("Accedi per gestire gli allegati");
   const path = a.id.includes("/") ? a.id : attachmentObjectPath(user.id, a.name);
   const { error } = await requireSupabase().storage.from(DOCUMENTS_BUCKET).remove([path]);
@@ -425,7 +453,7 @@ export async function deleteAttachment(a: UserAttachment): Promise<void> {
 // ============================================================
 export async function listSources(): Promise<Source[]> {
   if (!isSupabaseConfigured) return demoStore.sources();
-  const user = await auth.getUser();
+  const user = await currentUser();
   if (!user) return [];
   const { data, error } = await requireSupabase()
     .from("sources")
@@ -447,7 +475,7 @@ export const scan = {
 // ============================================================
 export async function getDashboard(): Promise<Dashboard> {
   const [user, profile, bonuses, catalog, docs, favorites] = await Promise.all([
-    auth.getUser(),
+    isSupabaseConfigured ? currentUser() : Promise.resolve(demoStore.getUser()),
     getProfile().catch(() => null),
     listBonuses().catch(() => []),
     fetchScraperCatalog(),

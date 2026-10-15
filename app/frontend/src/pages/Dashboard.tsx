@@ -117,7 +117,7 @@ export default function Dashboard() {
         </div>
         <div className="min-w-0 flex-1 border-line sm:border-l sm:pl-6">
           {running ? (
-            <p className="truncate font-mono text-xs text-accent" data-testid="dashboard-scan-phase">
+            <p className="truncate font-mono text-xs text-accent" data-testid="dashboard-scan-phase-log">
               {scan?.phase || "Scansione in corso…"}
             </p>
           ) : (scan?.log ?? []).length > 0 ? (
