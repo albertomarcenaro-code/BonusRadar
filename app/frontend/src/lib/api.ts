@@ -149,7 +149,14 @@ export async function listBonuses(): Promise<Bonus[]> {
     .select("*")
     .order("created_at", { ascending: true });
   dbx(error);
-  return ((data ?? []) as BonusRow[]).map(mapBonus);
+  const rows = (data ?? []) as BonusRow[];
+  if (rows.length > 0) return rows.map(mapBonus);
+  // La tabella può risultare vuota: lo scraper non riesce a scrivere senza una
+  // service-role key (RLS) e la sua action a volte punta una URL sbagliata.
+  // In quel caso il catalogo pubblico JSON è la stessa fonte → usato come
+  // fallback, così il catalogo non presenta mai una griglia vuota.
+  const file = await fetchScraperCatalog();
+  return file?.bonuses ?? [];
 }
 
 /**
