@@ -69,13 +69,19 @@ Comandi configurati su Freebuff (`freebuff-preview set-install` / `set-build`):
 
 ```bash
 cd app/frontend && npm install
-cd app/frontend && npx vite build && mkdir -p ../../dist && cp -R dist/. ../../dist/
+cd app/frontend && unset VITE_SUPABASE_URL VITE_SUPABASE_ANON_KEY && node --env-file=../../.env.local node_modules/vite/bin/vite.js build && mkdir -p ../../dist && cp -R dist/. ../../dist/
 ```
 
-L'output finisce in `dist/` alla radice (mai un server nel build). I valori
-`VITE_SUPABASE_*` di produzione sono definiti in `freebuff-deploy env`
-(sovrascrivono quelli della sandbox al momento del deploy). Verifica con
-`freebuff-deploy check`, poi `freebuff-deploy start`.
+L'output finisce in `dist/` alla radice (mai un server nel build).
+
+⚠️ **Il passo `--env-file=../../.env.local` non è opzionale**: al deploy
+Freebuff fornisce quel file con i valori `VITE_SUPABASE_*` di produzione
+(sovrascrivono quelli della sandbox, vedi `freebuff-deploy env list`). Un
+semplice `vite build` senza quel file produce un bundle **senza** URL Supabase:
+la app va in errore all'avvio (`Invalid supabaseUrl`) ed esce in modalità demo.
+
+Dopo ogni modifica: `freebuff-deploy check` → `freebuff-deploy start` →
+verifica con `BASE_URL=https://bonusradar.freebuff.app npm run test:e2e`.
 
 ## Automazioni GitHub Actions
 

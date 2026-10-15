@@ -14,7 +14,11 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 const url = import.meta.env.VITE_SUPABASE_URL as string | undefined;
 const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
 
-export const isSupabaseConfigured = Boolean(url && anonKey);
+export const isSupabaseConfigured = Boolean(url && anonKey) && /^https?:\/\//.test(url as string);
+
+// Nota: la validazione della forma dell'URL serve perché una build senza le
+// variabili d'ambiente (vedi il build command di deploy) non deve mai arrivare
+// a createClient("…") che esploderebbe a startup: si entra in demo mode.
 
 export const supabase: SupabaseClient | null = isSupabaseConfigured
   ? createClient(url as string, anonKey as string, {
