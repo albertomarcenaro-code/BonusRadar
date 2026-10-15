@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "cd app/frontend && npm run dev",
-    "build": "cd app/frontend && npx vite build && mkdir -p ../dist && cp -R dist/. ../dist/",
+    "build": "cd app/frontend && npx vite build && mkdir -p ../../dist && cp -R dist/. ../../dist/",
     "preview": "cd app/frontend && npm run preview"
   },
   "dependencies": {

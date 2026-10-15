@@ -59,7 +59,9 @@ export default function Landing() {
   const reduced = usePrefersReducedMotion();
   const progress = useScrollProgress();
   const { data: catalog } = useScraperCatalog();
-  const bonuses = catalog?.bonuses ?? [];
+  // Memoizzato: un `?? []` inline creerebbe un array nuovo a ogni render e
+  // invaliderebbe i useMemo dipendenti da `bonuses`.
+  const bonuses = useMemo(() => catalog?.bonuses ?? [], [catalog]);
 
   // Ricerca: il valore iniziale arriva da ?q=
   useEffect(() => {
