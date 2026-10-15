@@ -69,10 +69,12 @@ Comandi configurati su Freebuff (`freebuff-preview set-install` / `set-build`):
 
 ```bash
 cd app/frontend && npm install
-cd app/frontend && unset VITE_SUPABASE_URL VITE_SUPABASE_ANON_KEY && node --env-file=../../.env.local node_modules/vite/bin/vite.js build && mkdir -p ../../dist && cp -R dist/. ../../dist/
+cd app/frontend && unset VITE_SUPABASE_URL VITE_SUPABASE_ANON_KEY && node --env-file=../../.env.local node_modules/vite/bin/vite.js build && rm -rf ../../dist && mkdir -p ../../dist && cp -R dist/. ../../dist/
 ```
 
-L'output finisce in `dist/` alla radice (mai un server nel build).
+L'output finisce in `dist/` alla radice (mai un server nel build); la cartella
+viene **prima svuotata** perché `cp -R` accumulerebbe gli asset storici a ogni
+build (l'artefatto è passato da 19 a 85 file in quattro deploy).
 
 ⚠️ **Il passo `--env-file=../../.env.local` non è opzionale**: al deploy
 Freebuff fornisce quel file con i valori `VITE_SUPABASE_*` di produzione
