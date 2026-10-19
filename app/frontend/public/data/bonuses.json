@@ -1,8 +1,42 @@
 {
-  "generated_at": "2026-10-15T20:39:44Z",
+  "generated_at": "2026-10-19T15:16:52Z",
   "source": "BonusRadar scraper v1",
-  "count": 20,
+  "count": 18,
   "bonuses": [
+    {
+      "id": "scr-2474aed5d348",
+      "title": "Crisi industriali: nuove tutele e incentivi per le assunzioni",
+      "authority": "INPS",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Crisi industriali: nuove tutele e incentivi per le assunzioni",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.10.crisi-industriali-nuove-tutele-e-incentivi-per-le-assunzioni.html",
+      "source_name": "INPS",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-19T15:16:52Z"
+    },
+    {
+      "id": "scr-a1361e6428a1",
+      "title": "Nuovo Bonus mamme 2026: aggiornamenti",
+      "authority": "INPS",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su INPS: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.10.nuovo-bonus-mamme-2026-aggiornamenti.html",
+      "source_name": "INPS",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-19T15:16:52Z"
+    },
     {
       "id": "scr-180d5fd48a86",
       "title": "Bonus giovani under 36, comunicazioni alle imprese: chiarimenti",
@@ -18,24 +52,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-15T20:39:44Z"
-    },
-    {
-      "id": "scr-808509492916",
-      "title": "Lavoratori domestici: contributi terzo trimestre e nuova video guida",
-      "authority": "INPS",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Lavoratori domestici: contributi terzo trimestre e nuova video guida",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.10.lavoratori-domestici-contributi-terzo-trimestre-e-nuova-video-guida.html",
-      "source_name": "INPS",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-10-15T20:39:44Z"
+      "discovered_at": "2026-10-19T15:16:52Z"
     },
     {
       "id": "scr-545f1602d987",
@@ -52,7 +69,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-15T20:39:44Z"
+      "discovered_at": "2026-10-19T15:16:52Z"
     },
     {
       "id": "scr-201e2aef4705",
@@ -69,7 +86,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-15T20:39:44Z"
+      "discovered_at": "2026-10-19T15:16:52Z"
     },
     {
       "id": "scr-2287458edf86",
@@ -86,7 +103,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-15T20:39:44Z"
+      "discovered_at": "2026-10-19T15:16:52Z"
     },
     {
       "id": "scr-1b0da47a683b",
@@ -103,7 +120,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-15T20:39:44Z"
+      "discovered_at": "2026-10-19T15:16:52Z"
     },
     {
       "id": "scr-cf2efc5ae5f5",
@@ -120,7 +137,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-15T20:39:44Z"
+      "discovered_at": "2026-10-19T15:16:52Z"
     },
     {
       "id": "scr-72c6b5c86c37",
@@ -137,7 +154,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-15T20:39:44Z"
+      "discovered_at": "2026-10-19T15:16:52Z"
     },
     {
       "id": "scr-11a99c32c2a0",
@@ -154,7 +171,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-15T20:39:44Z"
+      "discovered_at": "2026-10-19T15:16:52Z"
     },
     {
       "id": "scr-df6acb22620a",
@@ -171,7 +188,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-15T20:39:44Z"
+      "discovered_at": "2026-10-19T15:16:52Z"
     },
     {
       "id": "scr-48e6a11399df",
@@ -188,24 +205,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-15T20:39:44Z"
-    },
-    {
-      "id": "scr-2b3d7957fe8f",
-      "title": "Lavoratori ex Fondo telefonici: accesso all’Assegno straordinario",
-      "authority": "INPS",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Lavoratori ex Fondo telefonici: accesso all’Assegno straordinario",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.09.lavoratori-ex-fondo-telefonici-accesso-all-assegno-straordinario.html",
-      "source_name": "INPS",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-10-15T20:39:44Z"
+      "discovered_at": "2026-10-19T15:16:52Z"
     },
     {
       "id": "scr-75da7de0248b",
@@ -224,7 +224,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-15T20:39:44Z"
+      "discovered_at": "2026-10-19T15:16:52Z"
     },
     {
       "id": "scr-8da88c31bd3a",
@@ -233,7 +233,7 @@
       "category": "studio",
       "amount": "",
       "deadline": "",
-      "summary": "Concessione di derivazione idrica a uso igienico - Comune di Imperia - pratica IMD003864 (PRIN304) 15 Ottobre 2026 15 Ottobre 2026 13 Novembre 2026 AVVISI Manifestazione di interesse - partecipazione al procedimento di coprogettazione per la definizione interventi di Servizio Civile Regionale con successiva formalizzazione mediante patto di sussidiarietà ai sensi dell'articolo 11, legge 241/199…",
+      "summary": "domanda di concessione di derivazione idrica ad uso igienico e assimilati - località Bastia comune di Albenga - pratica SVD2600001 pubblicazione istanza e visita dei luoghi 16 Ottobre 2026 16 Ottobre 2026 05 Novembre 2026 AVVISI Istanza di concessione di area demaniale per uso nautico turistico-ricettivo - Comune di Ameglia - pratica SPC7822 16 Ottobre 2026 16 Ottobre 2026 04 Novembre 2026 AVVI…",
       "requirements": [
         "età",
         "Residenza in Liguria"
@@ -244,7 +244,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-15T20:39:44Z"
+      "discovered_at": "2026-10-19T15:16:52Z"
     },
     {
       "id": "scr-288865bbce1d",
@@ -253,7 +253,7 @@
       "category": "altro",
       "amount": "",
       "deadline": "",
-      "summary": "Concessione di derivazione idrica a uso igienico - Comune di Imperia - pratica IMD003864 (PRIN304) 15 Ottobre 2026 15 Ottobre 2026 13 Novembre 2026 AVVISI Manifestazione di interesse - partecipazione al procedimento di coprogettazione per la definizione interventi di Servizio Civile Regionale con successiva formalizzazione mediante patto di sussidiarietà ai sensi dell'articolo 11, legge 241/199…",
+      "summary": "domanda di concessione di derivazione idrica ad uso igienico e assimilati - località Bastia comune di Albenga - pratica SVD2600001 pubblicazione istanza e visita dei luoghi 16 Ottobre 2026 16 Ottobre 2026 05 Novembre 2026 AVVISI Istanza di concessione di area demaniale per uso nautico turistico-ricettivo - Comune di Ameglia - pratica SPC7822 16 Ottobre 2026 16 Ottobre 2026 04 Novembre 2026 AVVI…",
       "requirements": [
         "età",
         "Residenza in Liguria"
@@ -264,7 +264,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-15T20:39:44Z"
+      "discovered_at": "2026-10-19T15:16:52Z"
     },
     {
       "id": "scr-4db44d262eba",
@@ -273,7 +273,7 @@
       "category": "altro",
       "amount": "",
       "deadline": "",
-      "summary": "Concessione di derivazione idrica a uso igienico - Comune di Imperia - pratica IMD003864 (PRIN304) 15 Ottobre 2026 15 Ottobre 2026 13 Novembre 2026 AVVISI Manifestazione di interesse - partecipazione al procedimento di coprogettazione per la definizione interventi di Servizio Civile Regionale con successiva formalizzazione mediante patto di sussidiarietà ai sensi dell'articolo 11, legge 241/199…",
+      "summary": "domanda di concessione di derivazione idrica ad uso igienico e assimilati - località Bastia comune di Albenga - pratica SVD2600001 pubblicazione istanza e visita dei luoghi 16 Ottobre 2026 16 Ottobre 2026 05 Novembre 2026 AVVISI Istanza di concessione di area demaniale per uso nautico turistico-ricettivo - Comune di Ameglia - pratica SPC7822 16 Ottobre 2026 16 Ottobre 2026 04 Novembre 2026 AVVI…",
       "requirements": [
         "età",
         "Residenza in Liguria"
@@ -284,7 +284,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-15T20:39:44Z"
+      "discovered_at": "2026-10-19T15:16:52Z"
     },
     {
       "id": "scr-85d694a4c3bf",
@@ -293,7 +293,7 @@
       "category": "altro",
       "amount": "",
       "deadline": "",
-      "summary": "Concessione di derivazione idrica a uso igienico - Comune di Imperia - pratica IMD003864 (PRIN304) 15 Ottobre 2026 15 Ottobre 2026 13 Novembre 2026 AVVISI Manifestazione di interesse - partecipazione al procedimento di coprogettazione per la definizione interventi di Servizio Civile Regionale con successiva formalizzazione mediante patto di sussidiarietà ai sensi dell'articolo 11, legge 241/199…",
+      "summary": "domanda di concessione di derivazione idrica ad uso igienico e assimilati - località Bastia comune di Albenga - pratica SVD2600001 pubblicazione istanza e visita dei luoghi 16 Ottobre 2026 16 Ottobre 2026 05 Novembre 2026 AVVISI Istanza di concessione di area demaniale per uso nautico turistico-ricettivo - Comune di Ameglia - pratica SPC7822 16 Ottobre 2026 16 Ottobre 2026 04 Novembre 2026 AVVI…",
       "requirements": [
         "residenza",
         "età",
@@ -305,7 +305,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-15T20:39:44Z"
+      "discovered_at": "2026-10-19T15:16:52Z"
     },
     {
       "id": "scr-911f485d538f",
@@ -314,7 +314,7 @@
       "category": "altro",
       "amount": "",
       "deadline": "",
-      "summary": "Concessione di derivazione idrica a uso igienico - Comune di Imperia - pratica IMD003864 (PRIN304) 15 Ottobre 2026 15 Ottobre 2026 13 Novembre 2026 AVVISI Manifestazione di interesse - partecipazione al procedimento di coprogettazione per la definizione interventi di Servizio Civile Regionale con successiva formalizzazione mediante patto di sussidiarietà ai sensi dell'articolo 11, legge 241/199…",
+      "summary": "domanda di concessione di derivazione idrica ad uso igienico e assimilati - località Bastia comune di Albenga - pratica SVD2600001 pubblicazione istanza e visita dei luoghi 16 Ottobre 2026 16 Ottobre 2026 05 Novembre 2026 AVVISI Istanza di concessione di area demaniale per uso nautico turistico-ricettivo - Comune di Ameglia - pratica SPC7822 16 Ottobre 2026 16 Ottobre 2026 04 Novembre 2026 AVVI…",
       "requirements": [
         "residenza",
         "età",
@@ -326,49 +326,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-15T20:39:44Z"
-    },
-    {
-      "id": "scr-bc16fece4aa9",
-      "title": "Concessione di contributi a enti e associazioni per l'accoglienza di nuclei familiari in disagio socio-economico con bambini in cura presso gli ospedali pediatr",
-      "authority": "Regione Liguria",
-      "category": "altro",
-      "amount": "",
-      "deadline": "30 ottobre 2026",
-      "summary": "Concessione di derivazione idrica a uso igienico - Comune di Imperia - pratica IMD003864 (PRIN304) 15 Ottobre 2026 15 Ottobre 2026 13 Novembre 2026 AVVISI Manifestazione di interesse - partecipazione al procedimento di coprogettazione per la definizione interventi di Servizio Civile Regionale con successiva formalizzazione mediante patto di sussidiarietà ai sensi dell'articolo 11, legge 241/199…",
-      "requirements": [
-        "residenza",
-        "età",
-        "Residenza in Liguria"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetition/4754:concessione-contributi-accoglienza-bambini-ospedali-2026.html",
-      "source_name": "Regione Liguria",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-10-15T20:39:44Z"
-    },
-    {
-      "id": "scr-2bb2dbe50a1d",
-      "title": "Avviso di stabilizzazione per titoli e colloquio, per la stabilizzazione a tempo indeterminato di 6 unità di personale, Area dei Funzionari e dell'elevata quali",
-      "authority": "Regione Liguria",
-      "category": "altro",
-      "amount": "",
-      "deadline": "30 ottobre 2026",
-      "summary": "Concessione di derivazione idrica a uso igienico - Comune di Imperia - pratica IMD003864 (PRIN304) 15 Ottobre 2026 15 Ottobre 2026 13 Novembre 2026 AVVISI Manifestazione di interesse - partecipazione al procedimento di coprogettazione per la definizione interventi di Servizio Civile Regionale con successiva formalizzazione mediante patto di sussidiarietà ai sensi dell'articolo 11, legge 241/199…",
-      "requirements": [
-        "residenza",
-        "età",
-        "Residenza in Liguria"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetition/4756:stabilizzazione-6-eq-funzionari-tecnico-amm.html",
-      "source_name": "Regione Liguria",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-10-15T20:39:44Z"
+      "discovered_at": "2026-10-19T15:16:52Z"
     }
   ]
 }
