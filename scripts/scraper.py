@@ -91,7 +91,9 @@ SOURCES: list[dict] = [
     {
         "name": "Agenzia delle Entrate",
         "authority": "Agenzia delle Entrate",
-        "list_url": "https://www.agenziaentrate.gov.it/portale/web/guest/area-stampa/novita",
+        # La vecchia pagina "/area-stampa/novita" risponde 404 da tempo:
+        # la home è raggiungibile e produce candidati reali.
+        "list_url": "https://www.agenziaentrate.gov.it/",
         "base_url": "https://www.agenziaentrate.gov.it/",
     },
     # ---------------- Fonti locali prioritarie ----------------
@@ -133,6 +135,41 @@ SOURCES: list[dict] = [
             "inoccup", "corsi", "borse", "student", "iscrizion",
         ),
     },
+
+    # ---------------- Fonti nazionali aggiuntive (ampliamento ricerca) ----------------
+    {
+        "name": "Ministero del Lavoro",
+        "authority": "Ministero del Lavoro e delle Politiche Sociali",
+        "list_url": "https://www.lavoro.gov.it/",
+        "base_url": "https://www.lavoro.gov.it/",
+    },
+    {
+        "name": "Cliclavoro",
+        "authority": "Ministero del Lavoro e delle Politiche Sociali",
+        "list_url": "https://www.cliclavoro.gov.it/",
+        "base_url": "https://www.cliclavoro.gov.it/",
+    },
+    {
+        "name": "INAIL",
+        "authority": "INAIL",
+        "list_url": "https://www.inail.it/cs/news",
+        "base_url": "https://www.inail.it/",
+    },
+    # ---------------- Fonti regionali aggiuntive ----------------
+    {
+        "name": "Regione Toscana",
+        "authority": "Regione Toscana",
+        "list_url": "https://www.regione.toscana.it/",
+        "base_url": "https://www.regione.toscana.it/",
+        "residency": "Residenza in Toscana",
+    },
+    {
+        "name": "Regione Veneto",
+        "authority": "Regione Veneto",
+        "list_url": "https://www.regione.veneto.it/",
+        "base_url": "https://www.regione.veneto.it/",
+        "residency": "Residenza nel Veneto",
+    },
 ]
 
 # Parole-chiave: un link è candidato "bonus" se il testo le contiene.
@@ -164,6 +201,17 @@ DOCUMENT_PATTERNS = (
 )
 
 RE_AMOUNT = re.compile(r"(?:fino a |da |detrazione )?\d[\d.,]*\s*(?:€|euro)", re.IGNORECASE)
+
+# Titoli generici di menu/navigazione: non sono bandi. Usati in build_bonus
+# per scartare i link di servizio che il filtro keyword lascia passare.
+GENERIC_TITLES = {
+    "bandi e concorsi", "bandi di concorso", "bandi e avvisi", "avvisi e bandi",
+    "in primo piano", "in evidenza", "in diretta", "news e eventi", "news & eventi",
+    "notizie", "novita", "novità", "comunicati", "comunicati e news",
+    "eventi", "approfondimenti", "leggi tutto", "continua a leggere",
+    "scopri di più", "scopri di piu", "vai al sito", "tutte le notizie",
+    "home page", "cerca", "contatti", "menu", "approfondisci",
+}
 RE_DEADLINE_CARD = re.compile(
     # "Scadenza: ore 12.00 del giorno 12 ottobre 2026", "Chiusura: 30/09/2026",
     # "Termine presentazione domande: 15 ottobre 2026", "entro il 30/09/2026"
@@ -394,6 +442,11 @@ def build_bonus(source: dict, url: str, raw_title: str, extra_text: str = "") ->
     requisiti e documenti senza sostituire il titolo."""
     title = clean_title(raw_title)
     if len(title) < 12:
+        return None
+    # Voci di menu/navigazione che superano il filtro keyword ma non sono bandi
+    # (es. "Bandi e concorsi", "In primo piano"): scartate qui per non sporcare
+    # il catalogo con link di servizio.
+    if title.lower().strip(" .:|—–-").rstrip(".") in GENERIC_TITLES:
         return None
 
     full_text = f"{title} {extra_text}"

@@ -1,8 +1,25 @@
 {
-  "generated_at": "2026-10-19T15:16:52Z",
+  "generated_at": "2026-10-21T20:27:34Z",
   "source": "BonusRadar scraper v1",
-  "count": 18,
+  "count": 40,
   "bonuses": [
+    {
+      "id": "scr-d7fdd15b01dd",
+      "title": "Nuovo Bonus mamme 2026: presentazione della domanda",
+      "authority": "INPS",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Nuovo Bonus mamme 2026: presentazione della domanda",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.10.nuovo-bonus-mamme-2026-aggiornamenti.html",
+      "source_name": "INPS",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-21T20:27:34Z"
+    },
     {
       "id": "scr-2474aed5d348",
       "title": "Crisi industriali: nuove tutele e incentivi per le assunzioni",
@@ -18,24 +35,24 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-19T15:16:52Z"
+      "discovered_at": "2026-10-21T20:27:34Z"
     },
     {
-      "id": "scr-a1361e6428a1",
-      "title": "Nuovo Bonus mamme 2026: aggiornamenti",
+      "id": "scr-94f124b76f13",
+      "title": "Decreto Coesione: chiarimenti sul contributo per l’autoimpiego",
       "authority": "INPS",
-      "category": "altro",
+      "category": "mobilita",
       "amount": "",
       "deadline": "",
-      "summary": "Avviso pubblicato su INPS: apri la fonte per i dettagli.",
+      "summary": "Decreto Coesione: chiarimenti sul contributo per l’autoimpiego",
       "requirements": [],
       "required_documents": [],
-      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.10.nuovo-bonus-mamme-2026-aggiornamenti.html",
+      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.10.decreto-coesione-chiarimenti-sul-contributo-per-l-autoimpiego.html",
       "source_name": "INPS",
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-19T15:16:52Z"
+      "discovered_at": "2026-10-21T20:27:34Z"
     },
     {
       "id": "scr-180d5fd48a86",
@@ -52,7 +69,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-19T15:16:52Z"
+      "discovered_at": "2026-10-21T20:27:34Z"
     },
     {
       "id": "scr-545f1602d987",
@@ -69,7 +86,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-19T15:16:52Z"
+      "discovered_at": "2026-10-21T20:27:34Z"
     },
     {
       "id": "scr-201e2aef4705",
@@ -86,7 +103,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-19T15:16:52Z"
+      "discovered_at": "2026-10-21T20:27:34Z"
     },
     {
       "id": "scr-2287458edf86",
@@ -103,7 +120,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-19T15:16:52Z"
+      "discovered_at": "2026-10-21T20:27:34Z"
     },
     {
       "id": "scr-1b0da47a683b",
@@ -120,7 +137,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-19T15:16:52Z"
+      "discovered_at": "2026-10-21T20:27:34Z"
     },
     {
       "id": "scr-cf2efc5ae5f5",
@@ -137,7 +154,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-19T15:16:52Z"
+      "discovered_at": "2026-10-21T20:27:34Z"
     },
     {
       "id": "scr-72c6b5c86c37",
@@ -154,7 +171,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-19T15:16:52Z"
+      "discovered_at": "2026-10-21T20:27:34Z"
     },
     {
       "id": "scr-11a99c32c2a0",
@@ -171,7 +188,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-19T15:16:52Z"
+      "discovered_at": "2026-10-21T20:27:34Z"
     },
     {
       "id": "scr-df6acb22620a",
@@ -188,24 +205,26 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-19T15:16:52Z"
+      "discovered_at": "2026-10-21T20:27:34Z"
     },
     {
-      "id": "scr-48e6a11399df",
-      "title": "Assegno unico e universale: l’Osservatorio con i dati di agosto 2026",
-      "authority": "INPS",
-      "category": "famiglia",
+      "id": "scr-3415ff85b915",
+      "title": "Casa, tutto quello che c'è da sapere",
+      "authority": "Agenzia delle Entrate",
+      "category": "casa",
       "amount": "",
       "deadline": "",
-      "summary": "Assegno unico e universale: l’Osservatorio con i dati di agosto 2026",
-      "requirements": [],
+      "summary": "Avviso pubblicato su Agenzia delle Entrate: apri la fonte per i dettagli.",
+      "requirements": [
+        "contratto"
+      ],
       "required_documents": [],
-      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.10.assegno-unico-e-universale-l-osservatorio-con-i-dati-di-agosto-2026.html",
-      "source_name": "INPS",
+      "source_url": "https://www.agenziaentrate.gov.it/portale/aree-tematiche/casa",
+      "source_name": "Agenzia delle Entrate",
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-19T15:16:52Z"
+      "discovered_at": "2026-10-21T20:27:34Z"
     },
     {
       "id": "scr-75da7de0248b",
@@ -224,7 +243,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-19T15:16:52Z"
+      "discovered_at": "2026-10-21T20:27:34Z"
     },
     {
       "id": "scr-8da88c31bd3a",
@@ -232,8 +251,8 @@
       "authority": "Regione Liguria",
       "category": "studio",
       "amount": "",
-      "deadline": "",
-      "summary": "domanda di concessione di derivazione idrica ad uso igienico e assimilati - località Bastia comune di Albenga - pratica SVD2600001 pubblicazione istanza e visita dei luoghi 16 Ottobre 2026 16 Ottobre 2026 05 Novembre 2026 AVVISI Istanza di concessione di area demaniale per uso nautico turistico-ricettivo - Comune di Ameglia - pratica SPC7822 16 Ottobre 2026 16 Ottobre 2026 04 Novembre 2026 AVVI…",
+      "deadline": "20 novembre 2026",
+      "summary": "concorso pubblico per titoli ed esami per la copertura a tempo indeterminato di una unità di personale, area degli istruttori, profilo professionale Istruttore servizi amministrativi presso la Giunta della Regione Liguria, per le esigenze del Runts 21 Ottobre 2026 21 Ottobre 2026 20 Novembre 2026 privati Note: presentazione candidature entro il 20 novembre 2026, tramite inPA AVVISI domanda di c…",
       "requirements": [
         "età",
         "Residenza in Liguria"
@@ -244,7 +263,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-19T15:16:52Z"
+      "discovered_at": "2026-10-21T20:27:34Z"
     },
     {
       "id": "scr-288865bbce1d",
@@ -252,8 +271,8 @@
       "authority": "Regione Liguria",
       "category": "altro",
       "amount": "",
-      "deadline": "",
-      "summary": "domanda di concessione di derivazione idrica ad uso igienico e assimilati - località Bastia comune di Albenga - pratica SVD2600001 pubblicazione istanza e visita dei luoghi 16 Ottobre 2026 16 Ottobre 2026 05 Novembre 2026 AVVISI Istanza di concessione di area demaniale per uso nautico turistico-ricettivo - Comune di Ameglia - pratica SPC7822 16 Ottobre 2026 16 Ottobre 2026 04 Novembre 2026 AVVI…",
+      "deadline": "20 novembre 2026",
+      "summary": "concorso pubblico per titoli ed esami per la copertura a tempo indeterminato di una unità di personale, area degli istruttori, profilo professionale Istruttore servizi amministrativi presso la Giunta della Regione Liguria, per le esigenze del Runts 21 Ottobre 2026 21 Ottobre 2026 20 Novembre 2026 privati Note: presentazione candidature entro il 20 novembre 2026, tramite inPA AVVISI domanda di c…",
       "requirements": [
         "età",
         "Residenza in Liguria"
@@ -264,7 +283,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-19T15:16:52Z"
+      "discovered_at": "2026-10-21T20:27:34Z"
     },
     {
       "id": "scr-4db44d262eba",
@@ -272,8 +291,8 @@
       "authority": "Regione Liguria",
       "category": "altro",
       "amount": "",
-      "deadline": "",
-      "summary": "domanda di concessione di derivazione idrica ad uso igienico e assimilati - località Bastia comune di Albenga - pratica SVD2600001 pubblicazione istanza e visita dei luoghi 16 Ottobre 2026 16 Ottobre 2026 05 Novembre 2026 AVVISI Istanza di concessione di area demaniale per uso nautico turistico-ricettivo - Comune di Ameglia - pratica SPC7822 16 Ottobre 2026 16 Ottobre 2026 04 Novembre 2026 AVVI…",
+      "deadline": "20 novembre 2026",
+      "summary": "concorso pubblico per titoli ed esami per la copertura a tempo indeterminato di una unità di personale, area degli istruttori, profilo professionale Istruttore servizi amministrativi presso la Giunta della Regione Liguria, per le esigenze del Runts 21 Ottobre 2026 21 Ottobre 2026 20 Novembre 2026 privati Note: presentazione candidature entro il 20 novembre 2026, tramite inPA AVVISI domanda di c…",
       "requirements": [
         "età",
         "Residenza in Liguria"
@@ -284,7 +303,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-19T15:16:52Z"
+      "discovered_at": "2026-10-21T20:27:34Z"
     },
     {
       "id": "scr-85d694a4c3bf",
@@ -292,8 +311,8 @@
       "authority": "Regione Liguria",
       "category": "altro",
       "amount": "",
-      "deadline": "",
-      "summary": "domanda di concessione di derivazione idrica ad uso igienico e assimilati - località Bastia comune di Albenga - pratica SVD2600001 pubblicazione istanza e visita dei luoghi 16 Ottobre 2026 16 Ottobre 2026 05 Novembre 2026 AVVISI Istanza di concessione di area demaniale per uso nautico turistico-ricettivo - Comune di Ameglia - pratica SPC7822 16 Ottobre 2026 16 Ottobre 2026 04 Novembre 2026 AVVI…",
+      "deadline": "20 novembre 2026",
+      "summary": "concorso pubblico per titoli ed esami per la copertura a tempo indeterminato di una unità di personale, area degli istruttori, profilo professionale Istruttore servizi amministrativi presso la Giunta della Regione Liguria, per le esigenze del Runts 21 Ottobre 2026 21 Ottobre 2026 20 Novembre 2026 privati Note: presentazione candidature entro il 20 novembre 2026, tramite inPA AVVISI domanda di c…",
       "requirements": [
         "residenza",
         "età",
@@ -305,28 +324,413 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-19T15:16:52Z"
+      "discovered_at": "2026-10-21T20:27:34Z"
     },
     {
-      "id": "scr-911f485d538f",
-      "title": "Manifestazione di interesse finalizzata alla selezione di iniziative orientate alla destagionalizzazione e alla riscoperta di tradizioni, prodotti e luoghi iden",
-      "authority": "Regione Liguria",
-      "category": "altro",
+      "id": "scr-291d165275af",
+      "title": "Aggiornamento coefficienti di trasformazione del montante contributivo dal primo gennaio 2027",
+      "authority": "Ministero del Lavoro e delle Politiche Sociali",
+      "category": "lavoro",
       "amount": "",
       "deadline": "",
-      "summary": "domanda di concessione di derivazione idrica ad uso igienico e assimilati - località Bastia comune di Albenga - pratica SVD2600001 pubblicazione istanza e visita dei luoghi 16 Ottobre 2026 16 Ottobre 2026 05 Novembre 2026 AVVISI Istanza di concessione di area demaniale per uso nautico turistico-ricettivo - Comune di Ameglia - pratica SPC7822 16 Ottobre 2026 16 Ottobre 2026 04 Novembre 2026 AVVI…",
+      "summary": "20 ottobre 2026 Aggiornamento coefficienti di trasformazione del montante contributivo dal primo gennaio 2027",
       "requirements": [
-        "residenza",
-        "età",
-        "Residenza in Liguria"
+        "CIE"
       ],
       "required_documents": [],
-      "source_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetition/4755:natale-in-liguria-2026.html",
-      "source_name": "Regione Liguria",
+      "source_url": "https://www.lavoro.gov.it/notizie/pagine/aggiornamento-coefficienti-di-trasformazione-del-montante-contributivo-2027",
+      "source_name": "Ministero del Lavoro",
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-19T15:16:52Z"
+      "discovered_at": "2026-10-21T20:27:34Z"
+    },
+    {
+      "id": "scr-aef1e805e24e",
+      "title": "Assegno di inclusione: parte il nuovo ciclo di webinar formativi per gli operatori",
+      "authority": "Ministero del Lavoro e delle Politiche Sociali",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "8 ottobre 2026 Assegno di inclusione: parte il nuovo ciclo di webinar formativi per gli operatori",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.lavoro.gov.it/notizie/pagine/assegno-di-inclusione-parte-il-nuovo-ciclo-di-webinar-formativi-per-gli-operatori",
+      "source_name": "Ministero del Lavoro",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-21T20:27:34Z"
+    },
+    {
+      "id": "scr-5da8ec56f40a",
+      "title": "Vai al sito dedicato agli Operatori dell’Assegno di inclusione",
+      "authority": "Ministero del Lavoro e delle Politiche Sociali",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Vai Portale sulla Previdenza Complementare Vai al sito dedicato agli Operatori dell’Assegno di inclusione",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.lavoro.gov.it/adi/",
+      "source_name": "Ministero del Lavoro",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-21T20:27:34Z"
+    },
+    {
+      "id": "scr-45e0bdec558f",
+      "title": "Roma - Acquario Romano",
+      "authority": "Ministero del Lavoro e delle Politiche Sociali",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Ministero del Lavoro: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.lavoro.gov.it/eventi/pagine/joborienta-2023-verona-da-22-a-25-novembre",
+      "source_name": "Ministero del Lavoro",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-21T20:27:34Z"
+    },
+    {
+      "id": "scr-1e1d47a2d3d6",
+      "title": "la Regione Lombardia mette a disposizione 7 milioni di euro a sostegno delle pmi nell’economia circolare",
+      "authority": "Ministero del Lavoro e delle Politiche Sociali",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "la Regione Lombardia mette a disposizione 7 milioni di euro a sostegno delle pmi nell’economia circolare Contributi a fondo perduto per interventi finalizzati a rendere più efficienti e sostenibili i processi produttivi delle imprese APPROFONDISCI",
+      "requirements": [
+        "CIE"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.cliclavoro.gov.it/news/news-eventi/lombardia-7-milioni-di-euro-per-sostenere-le-pmi-nelleconomia-circolare?language_content_entity=it",
+      "source_name": "Cliclavoro",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-21T20:27:34Z"
+    },
+    {
+      "id": "scr-75ba8c5a9121",
+      "title": "Regione Puglia: finanziamento a fondo perduto per società sportive dilettantistiche",
+      "authority": "Ministero del Lavoro e delle Politiche Sociali",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Recruiting Day Young a Pordenone Previsti quattro incontri conoscitivi per i partecipanti Pordenone News 20/10/2026 Regione Puglia: finanziamento a fondo perduto per società sportive dilettantistiche Si rivolge alle eccellenze sportive che hanno conseguito titoli in campionati mondiali, europei e nazionali Bari, Barletta-Andria-Trani, Brindisi, Foggia, Lecce, Taranto",
+      "requirements": [
+        "età",
+        "CIE"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.cliclavoro.gov.it/news/news-eventi/regione-puglia-finanziamento-a-fondo-perduto-per-societa-sportive-dilettantistiche?language_content_entity=it",
+      "source_name": "Cliclavoro",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-21T20:27:34Z"
+    },
+    {
+      "id": "scr-47f6665e7fda",
+      "title": "Avviso pubblico formazione e informazione 2024",
+      "authority": "INAIL",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblico formazione e informazione 2024",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.inail.it/portale/prevenzione-e-sicurezza/it/prevenzione-e-sicurezza/finanziamenti-per-la-sicurezza/finanziamenti-ad-enti-ed-organismi/avviso-pubblico-formazione-e-informazione-2024.html",
+      "source_name": "INAIL",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-21T20:27:34Z"
+    },
+    {
+      "id": "scr-0c64cf2ad33d",
+      "title": "Ricerca e Innovazione tecnologica",
+      "authority": "INAIL",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su INAIL: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.inail.it/portale/ricerca-e-tecnologia/it/come-fare-per/bandi-di-ricerca-in-collaborazione--bric-.html",
+      "source_name": "INAIL",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-21T20:27:34Z"
+    },
+    {
+      "id": "scr-7a114e8d3724",
+      "title": "Avviso di mobilità volontaria esterna n. 231 posti, area funzionari amministrativi: pubblicazione calendario colloqui",
+      "authority": "INAIL",
+      "category": "mobilita",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso di mobilità volontaria esterna n. 231 posti, area funzionari amministrativi: pubblicazione calendario colloqui",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.inail.it/portale/it/inail-comunica/avvisi/avviso.2026.06.avviso-231-funz-calendario-colloqui.html",
+      "source_name": "INAIL",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-21T20:27:34Z"
+    },
+    {
+      "id": "scr-604ac29200f3",
+      "title": "Fondo per i lavoratori di società partecipate pubbliche che hanno contratto patologie asbesto-correlate presso i cantieri navali: istruzioni",
+      "authority": "INAIL",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Fondo per i lavoratori di società partecipate pubbliche che hanno contratto patologie asbesto-correlate presso i cantieri navali: istruzioni",
+      "requirements": [
+        "età",
+        "CIE",
+        "contratto"
+      ],
+      "required_documents": [
+        "contratto"
+      ],
+      "source_url": "https://www.inail.it/portale/it/inail-comunica/avvisi/avviso.2026.08.avviso-circolare-36-del-7-agosto-2026.html",
+      "source_name": "INAIL",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-21T20:27:34Z"
+    },
+    {
+      "id": "scr-c91d65738b3e",
+      "title": "Contributi associativi: apertura servizi telematici",
+      "authority": "INAIL",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Contributi associativi: apertura servizi telematici",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.inail.it/portale/it/inail-comunica/avvisi/avviso.2026.07.avviso-contributi-associativi-2027.html",
+      "source_name": "INAIL",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-21T20:27:34Z"
+    },
+    {
+      "id": "scr-fd4b0072cac0",
+      "title": "Avviso di mobilità volontaria esterna n. 231 posti, area funzionari amministrativi: graduatorie definitive di merito",
+      "authority": "INAIL",
+      "category": "mobilita",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso di mobilità volontaria esterna n. 231 posti, area funzionari amministrativi: graduatorie definitive di merito",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.inail.it/portale/it/inail-comunica/avvisi/avviso.2026.08.aviso-graduatorie-friuli-liguria-sardegna-231-posti.html",
+      "source_name": "INAIL",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-21T20:27:34Z"
+    },
+    {
+      "id": "scr-f774d1f7e058",
+      "title": "Conclusa la tappa di SI.IN.PRE.SA. a Genova: dall’Inail un sostegno di prossimità per lavoratori e imprese",
+      "authority": "INAIL",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Conclusa la tappa di SI.IN.PRE.SA. a Genova: dall’Inail un sostegno di prossimità per lavoratori e imprese",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.inail.it/portale/it/inail-comunica/news/notizia.2026.10.conclusa-la-tappa-di-si-in-pre-sa--a-genova.html",
+      "source_name": "INAIL",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-21T20:27:34Z"
+    },
+    {
+      "id": "scr-1151f00b6a48",
+      "title": "Mercati rionali: contributi ai Comuni",
+      "authority": "Regione Toscana",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Regione Toscana: apri la fonte per i dettagli.",
+      "requirements": [
+        "età",
+        "Residenza in Toscana"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.toscana.it/-/mercati-rionali-contributi-ai-comuni-per-ammodernamento-ampliamento-e-riqualificazione",
+      "source_name": "Regione Toscana",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-21T20:27:34Z"
+    },
+    {
+      "id": "scr-7b99e1a18e0f",
+      "title": "Avviso pubblico 2026 per incarico di consigliere consigliera di fiducia",
+      "authority": "Regione Toscana",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblico 2026 per incarico di consigliere consigliera di fiducia",
+      "requirements": [
+        "Residenza in Toscana"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.toscana.it/-/avviso-pubblico-2026-per-incarico-di-consigliere-consigliera-di-fiducia",
+      "source_name": "Regione Toscana",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-21T20:27:34Z"
+    },
+    {
+      "id": "scr-38fb0e317343",
+      "title": "Finanziamento di percorsi formativi per Operatrice e Operatore Forestale",
+      "authority": "Regione Toscana",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblico 2026 per incarico di consigliere consigliera di fiducia Pubblicato su BURT il 21.10.2026 Scadenza presentazione domande 05.11.2026 12:00 Stato: Aperto Finanziamento di percorsi formativi per Operatrice e Operatore Forestale",
+      "requirements": [
+        "Residenza in Toscana"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.toscana.it/-/finanziamento-di-percorsi-formativi-per-operatrice-e-operatore-forestale",
+      "source_name": "Regione Toscana",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-21T20:27:34Z"
+    },
+    {
+      "id": "scr-d4cd29cd5923",
+      "title": "Contributi agli enti locali per lo sviluppo di progettualità sui dati: il bando 2026",
+      "authority": "Regione Toscana",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblico 2026 per incarico di consigliere consigliera di fiducia Pubblicato su BURT il 21.10.2026 Scadenza presentazione domande 05.11.2026 12:00 Stato: Aperto Finanziamento di percorsi formativi per Operatrice e Operatore Forestale Pubblicato su BURT il 21.10.2026 Scadenza presentazione domande 15.01.2027 12:00 Stato: Aperto Contributi agli enti locali per lo sviluppo di progettualità s…",
+      "requirements": [
+        "Residenza in Toscana"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.toscana.it/-/contributi-agli-enti-locali-per-lo-sviluppo-di-progettualit%C3%A0-sui-dati-il-bando-2026",
+      "source_name": "Regione Toscana",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-21T20:27:34Z"
+    },
+    {
+      "id": "scr-c46a7393605e",
+      "title": "Sostegno a progetti di particolare rilevanza per la valorizzazione delle identità locali",
+      "authority": "Regione Toscana",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblico 2026 per incarico di consigliere consigliera di fiducia Pubblicato su BURT il 21.10.2026 Scadenza presentazione domande 05.11.2026 12:00 Stato: Aperto Finanziamento di percorsi formativi per Operatrice e Operatore Forestale Pubblicato su BURT il 21.10.2026 Scadenza presentazione domande 15.01.2027 12:00 Stato: Aperto Contributi agli enti locali per lo sviluppo di progettualità s…",
+      "requirements": [
+        "Residenza in Toscana"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.toscana.it/-/sostegno-a-progetti-di-particolare-rilevanza-per-la-valorizzazione-delle-identit%C3%A0-locali-promossi-dalle-associazioni-pro-loco-della-toscana",
+      "source_name": "Regione Toscana",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-21T20:27:34Z"
+    },
+    {
+      "id": "scr-267622d655d3",
+      "title": "Promozione della conciliazione vita-lavoro: bando 2026-2027 per attività di animazione territoriale",
+      "authority": "Regione Toscana",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblico 2026 per incarico di consigliere consigliera di fiducia Pubblicato su BURT il 21.10.2026 Scadenza presentazione domande 05.11.2026 12:00 Stato: Aperto Finanziamento di percorsi formativi per Operatrice e Operatore Forestale Pubblicato su BURT il 21.10.2026 Scadenza presentazione domande 15.01.2027 12:00 Stato: Aperto Contributi agli enti locali per lo sviluppo di progettualità s…",
+      "requirements": [
+        "Residenza in Toscana"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.toscana.it/-/promozione-della-conciliazione-vita-lavoro-bando-2026-2027-per-attivit%C3%A0-di-animazione-territoriale",
+      "source_name": "Regione Toscana",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-21T20:27:34Z"
+    },
+    {
+      "id": "scr-e00f9527cd94",
+      "title": "Progetti di servizio civile regionale, bando 2 mila 396 giovani: avviso per i posti vacanti",
+      "authority": "Regione Toscana",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblico 2026 per incarico di consigliere consigliera di fiducia Pubblicato su BURT il 21.10.2026 Scadenza presentazione domande 05.11.2026 12:00 Stato: Aperto Finanziamento di percorsi formativi per Operatrice e Operatore Forestale Pubblicato su BURT il 21.10.2026 Scadenza presentazione domande 15.01.2027 12:00 Stato: Aperto Contributi agli enti locali per lo sviluppo di progettualità s…",
+      "requirements": [
+        "Residenza in Toscana"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.toscana.it/-/progetti-di-servizio-civile-regionale-bando-2-mila-396-giovani-avviso-per-i-posti-vacanti",
+      "source_name": "Regione Toscana",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-21T20:27:34Z"
+    },
+    {
+      "id": "scr-b5055cd1f50a",
+      "title": "Bilancio Semplificato per il cittadino 2026-2028",
+      "authority": "Regione Veneto",
+      "category": "altro",
+      "amount": "",
+      "deadline": "26 ottobre 2026",
+      "summary": "Avviso pubblico per la cessione a titolo gratuito di archivi compattabili mobili del Consiglio regionale del Veneto - Termine prorogato Le manifestazioni di interesse dovranno essere trasmesse all'indirizzo PEC indicato nell'Avviso entro le ore 12:00 del 26 ottobre 2026 (termine prorogato) Bilancio Semplificato per il cittadino 2026-2028 È on line il portale \"Bilancio semplificato per il cittad…",
+      "requirements": [
+        "Residenza nel Veneto"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.veneto.it/web/guest/article-detail?articleId=14422656",
+      "source_name": "Regione Veneto",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-21T20:27:34Z"
+    },
+    {
+      "id": "scr-1757e1a7d17f",
+      "title": "Bando Metalmeccanica 2026",
+      "authority": "Regione Veneto",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Regione Veneto: apri la fonte per i dettagli.",
+      "requirements": [
+        "Residenza nel Veneto"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.veneto.it/web/guest/article-detail?articleId=14416684",
+      "source_name": "Regione Veneto",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-10-21T20:27:34Z"
     }
   ]
 }

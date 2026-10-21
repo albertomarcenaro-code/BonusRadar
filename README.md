@@ -92,6 +92,10 @@ verifica con `BASE_URL=https://bonusradar.freebuff.app npm run test:e2e`.
   `bonuses` e committa `app/frontend/public/data/bonuses.json` se cambiato.
   Usa i secret `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` e (per la scrittura)
   `SUPABASE_SERVICE_ROLE_KEY`.
+  Fonti monitorate (10): incentivi.gov.it, INPS, Agenzia delle Entrate,
+  Comune di Genova, Regione Liguria, Ministero del Lavoro, Cliclavoro, INAIL,
+  Regione Toscana, Regione Veneto. Una fonte non raggiungibile viene saltata
+  senza fermare le altre; i titoli di menu/navigazione vengono scartati.
 - **Supabase keep-alive** — tre ping al giorno su `/rest/v1/bonuses` per non far
   mettere in pausa il progetto Free. Usa `VITE_SUPABASE_URL` e
   `VITE_SUPABASE_ANON_KEY`: se i secret non coincidono con il progetto reale il

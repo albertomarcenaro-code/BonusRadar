@@ -130,6 +130,10 @@ try {
     .first()
     .waitFor({ state: "visible", timeout: 15000 });
   check("catalogo bonus caricato dal chunk lazy", true);
+  // La tabella Supabase è mockata vuota: i bandi devono arrivare dal catalogo
+  // JSON pubblico (verifica del fallback listBonuses → /data/bonuses.json).
+  const cards = await page.getByTestId("bonus-card").count();
+  check("bandi renderizzati nel catalogo", cards > 0, `cards=${cards}`);
 
   await page.getByTestId("nav-profile").click();
   await page.waitForURL((u) => u.pathname === "/profile", { timeout: 15000 });
