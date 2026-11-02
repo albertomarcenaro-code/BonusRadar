@@ -1,8 +1,42 @@
 {
-  "generated_at": "2026-10-26T14:51:15Z",
+  "generated_at": "2026-11-02T17:48:33Z",
   "source": "BonusRadar scraper v1",
-  "count": 41,
+  "count": 39,
   "bonuses": [
+    {
+      "id": "scr-d214e2153d65",
+      "title": "Fondo Pensioni Lavoratori Dipendenti: prepensionamento dei giornalisti",
+      "authority": "INPS",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Fondo Pensioni Lavoratori Dipendenti: prepensionamento dei giornalisti",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.10.fondo-pensioni-lavoratori-dipendenti-prepensionamento-dei-giornalisti.html",
+      "source_name": "INPS",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-02T17:48:33Z"
+    },
+    {
+      "id": "scr-2b3d7957fe8f",
+      "title": "Lavoratori ex Fondo telefonici: accesso all’Assegno straordinario",
+      "authority": "INPS",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Lavoratori ex Fondo telefonici: accesso all’Assegno straordinario",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.09.lavoratori-ex-fondo-telefonici-accesso-all-assegno-straordinario.html",
+      "source_name": "INPS",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-02T17:48:33Z"
+    },
     {
       "id": "scr-d7fdd15b01dd",
       "title": "Nuovo Bonus mamme 2026: presentazione della domanda",
@@ -18,24 +52,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
-    },
-    {
-      "id": "scr-2474aed5d348",
-      "title": "Crisi industriali: nuove tutele e incentivi per le assunzioni",
-      "authority": "INPS",
-      "category": "lavoro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Crisi industriali: nuove tutele e incentivi per le assunzioni",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.10.crisi-industriali-nuove-tutele-e-incentivi-per-le-assunzioni.html",
-      "source_name": "INPS",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-94f124b76f13",
@@ -52,7 +69,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-545f1602d987",
@@ -69,7 +86,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-201e2aef4705",
@@ -86,24 +103,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
-    },
-    {
-      "id": "scr-2287458edf86",
-      "title": "Esoneri contributivi agricoltura: esito dei controlli ex post",
-      "authority": "INPS",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Esoneri contributivi agricoltura: esito dei controlli ex post",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.05.esoneri-contributivi-agricoltura-esito-dei-controlli-ex-post.html",
-      "source_name": "INPS",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-1b0da47a683b",
@@ -120,7 +120,24 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
+    },
+    {
+      "id": "scr-2287458edf86",
+      "title": "Esoneri contributivi agricoltura: esito dei controlli ex post",
+      "authority": "INPS",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Esoneri contributivi agricoltura: esito dei controlli ex post",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.05.esoneri-contributivi-agricoltura-esito-dei-controlli-ex-post.html",
+      "source_name": "INPS",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-cf2efc5ae5f5",
@@ -137,7 +154,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-72c6b5c86c37",
@@ -154,7 +171,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-11a99c32c2a0",
@@ -171,41 +188,24 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
-      "id": "scr-df6acb22620a",
-      "title": "Bonus asilo nido 2026: attivo il servizio per la domanda",
+      "id": "scr-2474aed5d348",
+      "title": "Crisi industriali: nuove tutele e incentivi per le assunzioni",
       "authority": "INPS",
-      "category": "famiglia",
+      "category": "lavoro",
       "amount": "",
       "deadline": "",
-      "summary": "Bonus asilo nido 2026: attivo il servizio per la domanda",
+      "summary": "Crisi industriali: nuove tutele e incentivi per le assunzioni",
       "requirements": [],
       "required_documents": [],
-      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.03.bonus-asilo-nido-2026-attivo-il-servizio-per-la-domanda.html",
+      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.10.crisi-industriali-nuove-tutele-e-incentivi-per-le-assunzioni.html",
       "source_name": "INPS",
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
-    },
-    {
-      "id": "scr-180d5fd48a86",
-      "title": "Bonus giovani under 36, comunicazioni alle imprese: chiarimenti",
-      "authority": "INPS",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Bonus giovani under 36, comunicazioni alle imprese: chiarimenti",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.10.bonus-giovani-under-36-comunicazioni-alle-imprese-chiarimenti.html",
-      "source_name": "INPS",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-3415ff85b915",
@@ -224,26 +224,26 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
-      "id": "scr-5bbba619eea2",
-      "title": "Fiera di San Carlo 2026 - Avviso agli operatori commerciali e graduatoria spuntisti",
+      "id": "scr-0ac574653c07",
+      "title": "Avviso di nomina di competenza della Sindaca di n. 1 componente del Consiglio di Amministrazione della Fondazione Asilo Infantile Pontedecimo, in sostituzione d",
       "authority": "Comune di Genova",
-      "category": "lavoro",
+      "category": "famiglia",
       "amount": "",
       "deadline": "",
-      "summary": "Fiera di San Carlo 2026 - Avviso agli operatori commerciali e graduatoria spuntisti 26 Ottobre 2026 Graduatoria utile ai fini dell'assegnazione del posteggio in spunta Vai alla notizia",
+      "summary": "Avviso di nomina di competenza della Sindaca di n. 1 componente del Consiglio di Amministrazione della Fondazione Asilo Infantile Pontedecimo, in sostituzione di dimissionario 27 Ottobre 2026 Nomina/designazione di competenza della Sindaca Vai alla notizia",
       "requirements": [
         "Residenza nel Comune di Genova"
       ],
       "required_documents": [],
-      "source_url": "https://www.comune.genova.it/novita/avvisi/fiera-di-san-carlo-2026-avviso-agli-operatori-commerciali-e-graduatoria-spuntisti",
+      "source_url": "https://www.comune.genova.it/novita/avvisi/avviso-di-nomina-di-competenza-della-sindaca-di-n-1-componente-del-consiglio-di-1",
       "source_name": "Comune di Genova",
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-81ee7a333bf7",
@@ -252,8 +252,10 @@
       "category": "altro",
       "amount": "",
       "deadline": "16 novembre 2026",
-      "summary": "Avviso per l'individuazione di enti del Terzo settore, costituiti come soggetto unitario in partenariato, disponibili alla coprogettazione con Regione Liguria del Piano triennale Progetto giovani 2024-2025-2026 26 Ottobre 2026 26 Ottobre 2026 16 Novembre 2026 enti del terzo settore Note: termine presentazione istanze 16 novembre 2026 ESITI Consiglio regionale - Affidamento, ai sensi degli artt.…",
+      "summary": "Domanda di concessione di derivazione idrica - Comune di Genova - pratica GDE6791 02 Novembre 2026 02 Novembre 2026 02 Dicembre 2026 ESITI Consiglio regionale - Servizi di pulizia e igiene ambientale: adesione alla Convenzione Quadro S.U.A. (ID 4699) \"Servizi di pulizia e igiene ambientale da eseguirsi su immobili di pubbliche amministrazioni, enti, aziende pubbliche e società a partecipazione…",
       "requirements": [
+        "età",
+        "CIE",
         "affidamento",
         "Residenza in Liguria"
       ],
@@ -263,7 +265,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-c5689d95a2b9",
@@ -272,8 +274,10 @@
       "category": "altro",
       "amount": "",
       "deadline": "16 novembre 2026",
-      "summary": "Avviso per l'individuazione di enti del Terzo settore, costituiti come soggetto unitario in partenariato, disponibili alla coprogettazione con Regione Liguria del Piano triennale Progetto giovani 2024-2025-2026 26 Ottobre 2026 26 Ottobre 2026 16 Novembre 2026 enti del terzo settore Note: termine presentazione istanze 16 novembre 2026 ESITI Consiglio regionale - Affidamento, ai sensi degli artt.…",
+      "summary": "Domanda di concessione di derivazione idrica - Comune di Genova - pratica GDE6791 02 Novembre 2026 02 Novembre 2026 02 Dicembre 2026 ESITI Consiglio regionale - Servizi di pulizia e igiene ambientale: adesione alla Convenzione Quadro S.U.A. (ID 4699) \"Servizi di pulizia e igiene ambientale da eseguirsi su immobili di pubbliche amministrazioni, enti, aziende pubbliche e società a partecipazione…",
       "requirements": [
+        "età",
+        "CIE",
         "affidamento",
         "Residenza in Liguria"
       ],
@@ -283,109 +287,43 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
-      "id": "scr-8c24d6277fd9",
-      "title": "Istanza di concessione di area demaniale per uso nautico turistico-ricettivo - Comune di Ameglia - pratica SPC7822",
-      "authority": "Regione Liguria",
-      "category": "altro",
-      "amount": "",
-      "deadline": "16 novembre 2026",
-      "summary": "Avviso per l'individuazione di enti del Terzo settore, costituiti come soggetto unitario in partenariato, disponibili alla coprogettazione con Regione Liguria del Piano triennale Progetto giovani 2024-2025-2026 26 Ottobre 2026 26 Ottobre 2026 16 Novembre 2026 enti del terzo settore Note: termine presentazione istanze 16 novembre 2026 ESITI Consiglio regionale - Affidamento, ai sensi degli artt.…",
-      "requirements": [
-        "affidamento",
-        "Residenza in Liguria"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetition/4761:concessione-demanio-spc7822.html",
-      "source_name": "Regione Liguria",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
-    },
-    {
-      "id": "scr-c110b1d67327",
-      "title": "Concessione di derivazione idrica a uso igienico - Comune di Imperia - pratica IMD003864 (PRIN304)",
-      "authority": "Regione Liguria",
-      "category": "altro",
-      "amount": "",
-      "deadline": "16 novembre 2026",
-      "summary": "Avviso per l'individuazione di enti del Terzo settore, costituiti come soggetto unitario in partenariato, disponibili alla coprogettazione con Regione Liguria del Piano triennale Progetto giovani 2024-2025-2026 26 Ottobre 2026 26 Ottobre 2026 16 Novembre 2026 enti del terzo settore Note: termine presentazione istanze 16 novembre 2026 ESITI Consiglio regionale - Affidamento, ai sensi degli artt.…",
-      "requirements": [
-        "affidamento",
-        "Residenza in Liguria"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetition/4763:concessione-idrica-imd003864.html",
-      "source_name": "Regione Liguria",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
-    },
-    {
-      "id": "scr-004132282d91",
-      "title": "Manifestazione di interesse - partecipazione al procedimento di coprogettazione per la definizione interventi di Servizio Civile Regionale",
-      "authority": "Regione Liguria",
-      "category": "altro",
-      "amount": "",
-      "deadline": "16 novembre 2026",
-      "summary": "Avviso per l'individuazione di enti del Terzo settore, costituiti come soggetto unitario in partenariato, disponibili alla coprogettazione con Regione Liguria del Piano triennale Progetto giovani 2024-2025-2026 26 Ottobre 2026 26 Ottobre 2026 16 Novembre 2026 enti del terzo settore Note: termine presentazione istanze 16 novembre 2026 ESITI Consiglio regionale - Affidamento, ai sensi degli artt.…",
-      "requirements": [
-        "affidamento",
-        "Residenza in Liguria"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetition/4764:partecipazione-coprogettazione-interventi-servizio-civile-regionale.html",
-      "source_name": "Regione Liguria",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
-    },
-    {
-      "id": "scr-aae251fc81c6",
-      "title": "Invito a presentare operazioni relative a percorsi di formazione in alternanza Match Point Plus a valere sul Programma Regionale FSE+ Liguria 2021-2027",
-      "authority": "Regione Liguria",
+      "id": "scr-8801b0c8370d",
+      "title": "Pubblicato l’Avviso \"PRIMI PASSI\"",
+      "authority": "Ministero del Lavoro e delle Politiche Sociali",
       "category": "lavoro",
       "amount": "",
-      "deadline": "16 novembre 2026",
-      "summary": "Avviso per l'individuazione di enti del Terzo settore, costituiti come soggetto unitario in partenariato, disponibili alla coprogettazione con Regione Liguria del Piano triennale Progetto giovani 2024-2025-2026 26 Ottobre 2026 26 Ottobre 2026 16 Novembre 2026 enti del terzo settore Note: termine presentazione istanze 16 novembre 2026 ESITI Consiglio regionale - Affidamento, ai sensi degli artt.…",
-      "requirements": [
-        "età",
-        "affidamento",
-        "Residenza in Liguria"
-      ],
+      "deadline": "",
+      "summary": "Avviso pubblicato su Ministero del Lavoro: apri la fonte per i dettagli.",
+      "requirements": [],
       "required_documents": [],
-      "source_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetition/4762:match-point-plus.html",
-      "source_name": "Regione Liguria",
+      "source_url": "https://www.lavoro.gov.it/notizie/pagine/pubblicato-avviso-primi-passi",
+      "source_name": "Ministero del Lavoro",
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
-      "id": "scr-8da88c31bd3a",
-      "title": "Avviso pubblico per l'erogazione di voucher a rimborso dei costi di iscrizione a master di I e di II livello Specializzarsi per competere 2026",
-      "authority": "Regione Liguria",
-      "category": "studio",
+      "id": "scr-d8ffc9e8a08b",
+      "title": "Sgravio contributivo per contratti di solidarietà industriali - Anno 2026",
+      "authority": "Ministero del Lavoro e delle Politiche Sociali",
+      "category": "lavoro",
       "amount": "",
-      "deadline": "16 novembre 2026",
-      "summary": "Avviso per l'individuazione di enti del Terzo settore, costituiti come soggetto unitario in partenariato, disponibili alla coprogettazione con Regione Liguria del Piano triennale Progetto giovani 2024-2025-2026 26 Ottobre 2026 26 Ottobre 2026 16 Novembre 2026 enti del terzo settore Note: termine presentazione istanze 16 novembre 2026 ESITI Consiglio regionale - Affidamento, ai sensi degli artt.…",
+      "deadline": "",
+      "summary": "27 ottobre 2026 Sgravio contributivo per contratti di solidarietà industriali - Anno 2026",
       "requirements": [
-        "età",
-        "affidamento",
-        "Residenza in Liguria"
+        "età"
       ],
       "required_documents": [],
-      "source_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetition/4760:rimborso-iscrizione-specializzarsi-per-competere-2026.html",
-      "source_name": "Regione Liguria",
+      "source_url": "https://www.lavoro.gov.it/notizie/pagine/sgravio-contributivo-per-contratti-di-solidarieta-industriali-anno-2026",
+      "source_name": "Ministero del Lavoro",
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-291d165275af",
@@ -404,7 +342,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-5da8ec56f40a",
@@ -421,7 +359,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-45e0bdec558f",
@@ -438,45 +376,77 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
-      "id": "scr-1e1d47a2d3d6",
-      "title": "la Regione Lombardia mette a disposizione 7 milioni di euro a sostegno delle pmi nell’economia circolare",
+      "id": "scr-3fbb07414f85",
+      "title": "Brevetti+, Disegni+ e Marchi+: le misure a sostegno di proprietà intellettuale e creatività",
       "authority": "Ministero del Lavoro e delle Politiche Sociali",
       "category": "lavoro",
       "amount": "",
       "deadline": "",
-      "summary": "la Regione Lombardia mette a disposizione 7 milioni di euro a sostegno delle pmi nell’economia circolare Contributi a fondo perduto per interventi finalizzati a rendere più efficienti e sostenibili i processi produttivi delle imprese APPROFONDISCI",
+      "summary": "Brevetti+, Disegni+ e Marchi+: le misure a sostegno di proprietà intellettuale e creatività Rappresentano una concreta opportunità di crescita e di sviluppo industriale APPROFONDISCI",
       "requirements": [
-        "CIE"
+        "età"
       ],
       "required_documents": [],
-      "source_url": "https://www.cliclavoro.gov.it/news/news-eventi/lombardia-7-milioni-di-euro-per-sostenere-le-pmi-nelleconomia-circolare?language_content_entity=it",
+      "source_url": "https://www.cliclavoro.gov.it/news/trend-interviste/innovazione-e-solidita-tecnologica-i-nuovi-bandi-targati-brevetti-disegni-e?language_content_entity=it",
       "source_name": "Cliclavoro",
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
-      "id": "scr-f50e3b5819b0",
-      "title": "SACE cerca laureati per stage a Roma",
+      "id": "scr-5630193c3a9c",
+      "title": "Tela: la startup che vuole rendere digitale la gestione dei musei italiani",
       "authority": "Ministero del Lavoro e delle Politiche Sociali",
       "category": "lavoro",
       "amount": "",
       "deadline": "",
-      "summary": "Avviso pubblicato su Cliclavoro: apri la fonte per i dettagli.",
-      "requirements": [
-        "CIE"
-      ],
+      "summary": "Innovazione e solidità tecnologica: i nuovi bandi targati Brevetti+, Disegni+ e Marchi+ Le misure consentono di sviluppare idee innovative e di tutelarle in un mercato sempre più competitivo 28/10/2026 Tela: la startup che vuole rendere digitale la gestione dei musei italiani Usare AI, IoT e infrastrutture cloud per creare una unica infrastruttura digitale per tutte le operazioni, dal ticketing…",
+      "requirements": [],
       "required_documents": [],
-      "source_url": "https://www.cliclavoro.gov.it/news/news-eventi/sace-cerca-laureati-per-stage-a-roma?language_content_entity=it",
+      "source_url": "https://www.cliclavoro.gov.it/news/trend-interviste/tela-la-startup-che-vuole-rendere-digitale-la-gestione-dei-musei-italiani?language_content_entity=it",
       "source_name": "Cliclavoro",
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
+    },
+    {
+      "id": "scr-b95e7fe3a53e",
+      "title": "Banca Sella cerca laureati per la sede di Biella",
+      "authority": "Ministero del Lavoro e delle Politiche Sociali",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Un corso gratuito per diventare Hotel Manager L'iniziativa è gratuita e prevede contributi per le spese oltre che borse di studio Siena News 30/10/2026 Banca Sella cerca laureati per la sede di Biella Si cercano figure per dare assistenza nei servizi di Trading Online Biella",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.cliclavoro.gov.it/news/news-eventi/banca-sella-cerca-laureati-per-la-sede-di-biella?language_content_entity=it",
+      "source_name": "Cliclavoro",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-02T17:48:33Z"
+    },
+    {
+      "id": "scr-95f1263dd9c2",
+      "title": "Opportunità di tirocinio all’Istituto Universitario Europeo di Firenze",
+      "authority": "Ministero del Lavoro e delle Politiche Sociali",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Marche per i giovani: finanziamento a fondo perduto per l’imprenditorialità giovanile Il Fondo sostiene l’avvio di attività da parte di disoccupati under 36. Ancona, Ascoli Piceno, Fermo, Macerata, Pesaro e Urbino News 29/10/2026 Opportunità di tirocinio all’Istituto Universitario Europeo di Firenze Sono disponibili stage in diverse sezioni Firenze",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.cliclavoro.gov.it/news/news-eventi/opportunita-di-tirocinio-allistituto-universitario-europeo-di-firenze?language_content_entity=it",
+      "source_name": "Cliclavoro",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-47f6665e7fda",
@@ -493,7 +463,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-0c64cf2ad33d",
@@ -510,7 +480,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-7a114e8d3724",
@@ -527,7 +497,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-604ac29200f3",
@@ -550,7 +520,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-c91d65738b3e",
@@ -567,7 +537,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-fd4b0072cac0",
@@ -584,7 +554,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-f774d1f7e058",
@@ -601,7 +571,83 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
+    },
+    {
+      "id": "scr-ff7997829491",
+      "title": "Conciliazione vita-lavoro, contributi per piani di welfare aziendale: il bando 2026-2027",
+      "authority": "Regione Toscana",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Conciliazione vita-lavoro, contributi per piani di welfare aziendale: il bando 2026-2027",
+      "requirements": [
+        "Residenza in Toscana"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.toscana.it/-/conciliazione-vita-lavoro-contributi-per-piani-di-welfare-aziendale-il-bando-2026-2027",
+      "source_name": "Regione Toscana",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-02T17:48:33Z"
+    },
+    {
+      "id": "scr-907805fa579a",
+      "title": "Procedura comparativa per progressioni da Istruttore per 16 posti di Funzionario",
+      "authority": "Regione Toscana",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Conciliazione vita-lavoro, contributi per piani di welfare aziendale: il bando 2026-2027 Pubblicato su BURT il 04.11.2026 Scadenza presentazione domande 30.10.2027 12:00 Stato: Aperto Procedura comparativa per progressioni da Istruttore per 16 posti di Funzionario",
+      "requirements": [
+        "Residenza in Toscana"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.toscana.it/-/procedura-comparativa-per-progressioni-da-istruttore-per-16-posti-di-funzionario-peq",
+      "source_name": "Regione Toscana",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-02T17:48:33Z"
+    },
+    {
+      "id": "scr-320e1378eb83",
+      "title": "Procedura comparativa per progressioni da Operatore esperto per 10 posti di Istruttore",
+      "authority": "Regione Toscana",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Conciliazione vita-lavoro, contributi per piani di welfare aziendale: il bando 2026-2027 Pubblicato su BURT il 04.11.2026 Scadenza presentazione domande 30.10.2027 12:00 Stato: Aperto Procedura comparativa per progressioni da Istruttore per 16 posti di Funzionario Pubblicato su BURT il 28.10.2026 Scadenza presentazione domande 26.11.2026 12:00 Stato: Aperto Procedura comparativa per progression…",
+      "requirements": [
+        "Residenza in Toscana"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.toscana.it/-/procedura-comparativa-per-progressioni-da-operatore-esperto-per-10-posti-di-istruttore",
+      "source_name": "Regione Toscana",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-02T17:48:33Z"
+    },
+    {
+      "id": "scr-daf1b38188fc",
+      "title": "Incarichi vacanti di Emergenza sanitaria territoriale: Secondo semestre 2026",
+      "authority": "Regione Toscana",
+      "category": "salute",
+      "amount": "",
+      "deadline": "",
+      "summary": "Conciliazione vita-lavoro, contributi per piani di welfare aziendale: il bando 2026-2027 Pubblicato su BURT il 04.11.2026 Scadenza presentazione domande 30.10.2027 12:00 Stato: Aperto Procedura comparativa per progressioni da Istruttore per 16 posti di Funzionario Pubblicato su BURT il 28.10.2026 Scadenza presentazione domande 26.11.2026 12:00 Stato: Aperto Procedura comparativa per progression…",
+      "requirements": [
+        "Residenza in Toscana"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.toscana.it/-/incarichi-vacanti-di-emergenza-sanitaria-territoriale-secondo-semestre-2026",
+      "source_name": "Regione Toscana",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-d4cd29cd5923",
@@ -610,7 +656,7 @@
       "category": "altro",
       "amount": "",
       "deadline": "",
-      "summary": "Contributi agli enti locali per lo sviluppo di progettualità sui dati: il bando 2026",
+      "summary": "Conciliazione vita-lavoro, contributi per piani di welfare aziendale: il bando 2026-2027 Pubblicato su BURT il 04.11.2026 Scadenza presentazione domande 30.10.2027 12:00 Stato: Aperto Procedura comparativa per progressioni da Istruttore per 16 posti di Funzionario Pubblicato su BURT il 28.10.2026 Scadenza presentazione domande 26.11.2026 12:00 Stato: Aperto Procedura comparativa per progression…",
       "requirements": [
         "Residenza in Toscana"
       ],
@@ -620,7 +666,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-7b99e1a18e0f",
@@ -629,7 +675,7 @@
       "category": "altro",
       "amount": "",
       "deadline": "",
-      "summary": "Contributi agli enti locali per lo sviluppo di progettualità sui dati: il bando 2026 Pubblicato su BURT il 21.10.2026 Stato: Aperto Avviso pubblico 2026 per incarico di consigliere consigliera di fiducia",
+      "summary": "Conciliazione vita-lavoro, contributi per piani di welfare aziendale: il bando 2026-2027 Pubblicato su BURT il 04.11.2026 Scadenza presentazione domande 30.10.2027 12:00 Stato: Aperto Procedura comparativa per progressioni da Istruttore per 16 posti di Funzionario Pubblicato su BURT il 28.10.2026 Scadenza presentazione domande 26.11.2026 12:00 Stato: Aperto Procedura comparativa per progression…",
       "requirements": [
         "Residenza in Toscana"
       ],
@@ -639,83 +685,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
-    },
-    {
-      "id": "scr-38fb0e317343",
-      "title": "Finanziamento di percorsi formativi per Operatrice e Operatore Forestale",
-      "authority": "Regione Toscana",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Contributi agli enti locali per lo sviluppo di progettualità sui dati: il bando 2026 Pubblicato su BURT il 21.10.2026 Stato: Aperto Avviso pubblico 2026 per incarico di consigliere consigliera di fiducia Pubblicato su BURT il 21.10.2026 Scadenza presentazione domande 05.11.2026 12:00 Stato: Aperto Finanziamento di percorsi formativi per Operatrice e Operatore Forestale",
-      "requirements": [
-        "Residenza in Toscana"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.toscana.it/-/finanziamento-di-percorsi-formativi-per-operatrice-e-operatore-forestale",
-      "source_name": "Regione Toscana",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
-    },
-    {
-      "id": "scr-c46a7393605e",
-      "title": "Sostegno a progetti di particolare rilevanza per la valorizzazione delle identità locali",
-      "authority": "Regione Toscana",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Contributi agli enti locali per lo sviluppo di progettualità sui dati: il bando 2026 Pubblicato su BURT il 21.10.2026 Stato: Aperto Avviso pubblico 2026 per incarico di consigliere consigliera di fiducia Pubblicato su BURT il 21.10.2026 Scadenza presentazione domande 05.11.2026 12:00 Stato: Aperto Finanziamento di percorsi formativi per Operatrice e Operatore Forestale Pubblicato su BURT il 21.…",
-      "requirements": [
-        "Residenza in Toscana"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.toscana.it/-/sostegno-a-progetti-di-particolare-rilevanza-per-la-valorizzazione-delle-identit%C3%A0-locali-promossi-dalle-associazioni-pro-loco-della-toscana",
-      "source_name": "Regione Toscana",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
-    },
-    {
-      "id": "scr-e00f9527cd94",
-      "title": "Progetti di servizio civile regionale, bando 2 mila 396 giovani: avviso per i posti vacanti",
-      "authority": "Regione Toscana",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Contributi agli enti locali per lo sviluppo di progettualità sui dati: il bando 2026 Pubblicato su BURT il 21.10.2026 Stato: Aperto Avviso pubblico 2026 per incarico di consigliere consigliera di fiducia Pubblicato su BURT il 21.10.2026 Scadenza presentazione domande 05.11.2026 12:00 Stato: Aperto Finanziamento di percorsi formativi per Operatrice e Operatore Forestale Pubblicato su BURT il 21.…",
-      "requirements": [
-        "Residenza in Toscana"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.toscana.it/-/progetti-di-servizio-civile-regionale-bando-2-mila-396-giovani-avviso-per-i-posti-vacanti",
-      "source_name": "Regione Toscana",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
-    },
-    {
-      "id": "scr-267622d655d3",
-      "title": "Promozione della conciliazione vita-lavoro: bando 2026-2027 per attività di animazione territoriale",
-      "authority": "Regione Toscana",
-      "category": "lavoro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Contributi agli enti locali per lo sviluppo di progettualità sui dati: il bando 2026 Pubblicato su BURT il 21.10.2026 Stato: Aperto Avviso pubblico 2026 per incarico di consigliere consigliera di fiducia Pubblicato su BURT il 21.10.2026 Scadenza presentazione domande 05.11.2026 12:00 Stato: Aperto Finanziamento di percorsi formativi per Operatrice e Operatore Forestale Pubblicato su BURT il 21.…",
-      "requirements": [
-        "Residenza in Toscana"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.toscana.it/-/promozione-della-conciliazione-vita-lavoro-bando-2026-2027-per-attivit%C3%A0-di-animazione-territoriale",
-      "source_name": "Regione Toscana",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     },
     {
       "id": "scr-b5055cd1f50a",
@@ -723,8 +693,8 @@
       "authority": "Regione Veneto",
       "category": "altro",
       "amount": "",
-      "deadline": "26 ottobre 2026",
-      "summary": "Avviso pubblico per la cessione a titolo gratuito di archivi compattabili mobili del Consiglio regionale del Veneto - Termine prorogato Le manifestazioni di interesse dovranno essere trasmesse all'indirizzo PEC indicato nell'Avviso entro le ore 12:00 del 26 ottobre 2026 (termine prorogato) Bilancio Semplificato per il cittadino 2026-2028 È on line il portale \"Bilancio semplificato per il cittad…",
+      "deadline": "",
+      "summary": "Prorogata al 22 novembre la scadenza del Bando Metalmeccanica 2026 Nuovo termine per la presentazione delle domande per il bando da 4 milioni di euro per l’erogazione di contributi a fondo perduto alle imprese venete del settore metalmeccanico Bilancio Semplificato per il cittadino 2026-2028 È on line il portale \"Bilancio semplificato per il cittadino 2026-2028\" della Regione del Veneto",
       "requirements": [
         "Residenza nel Veneto"
       ],
@@ -734,26 +704,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
-    },
-    {
-      "id": "scr-dbd83f941d7b",
-      "title": "Prorogata al 22 novembre la scadenza del Bando Metalmeccanica 2026",
-      "authority": "Regione Veneto",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Campagne di immunizzazione stagionale Informazioni su come prevenire influenza, Covid-19 e virus respiratorio sinciziale Prorogata al 22 novembre la scadenza del Bando Metalmeccanica 2026 Nuovo termine per la presentazione delle domande per il bando da 4 milioni di euro per l’erogazione di contributi a fondo perduto alle imprese venete del settore metalmeccanico",
-      "requirements": [
-        "Residenza nel Veneto"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.veneto.it/web/guest/article-detail?articleId=14429806",
-      "source_name": "Regione Veneto",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-10-26T14:51:15Z"
+      "discovered_at": "2026-11-02T17:48:33Z"
     }
   ]
 }
