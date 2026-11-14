@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useLocation } from "react-router-dom";
-import { CloudOff, LayoutDashboard, Radar, Sparkles, UserCheck } from "lucide-react";
+import { CloudOff, LayoutDashboard, Sparkles, UserCheck } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
 import UserMenu from "@/components/UserMenu";
 import { isSupabaseConfigured, useScanStatus } from "@/lib/queries";
@@ -26,12 +26,12 @@ export default function AppShell() {
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-white/8 bg-canvas-2/70 backdrop-blur-xl lg:flex">
         <div className="flex items-center justify-between px-5 py-6">
           <NavLink to="/dashboard" className="flex items-center gap-3">
-            <div className="relative grid size-10 place-items-center rounded-lg bg-[linear-gradient(180deg,#22d3ee,#2f6bff)]">
-              <Radar className="size-5 text-[#03121b]" />
-            </div>
-            <div>
-              <p className="font-display text-lg font-bold leading-none" data-testid="app-name">BonusRadar</p>
-              <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-dim">Italia</p>
+            <div className="flex items-center gap-2.5 rounded-xl bg-[linear-gradient(180deg,#8bf3ff_0%,#22d3ee_45%,#0ea5e9_100%)] px-3 py-2 text-[#03121b] shadow-[0_10px_30px_-12px_rgba(34,211,238,0.75)]">
+              <img src="/logo/logo-mark-inline.png" alt="" width={28} height={28} className="size-7 shrink-0" />
+              <div>
+                <p className="font-display text-lg font-bold leading-none" data-testid="app-name">BonusRadar</p>
+                <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.18em] opacity-70">Italia</p>
+              </div>
             </div>
           </NavLink>
           <UserMenu />
@@ -69,10 +69,10 @@ export default function AppShell() {
 
       <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-white/10 bg-[#04060d]/85 px-4 py-3 backdrop-blur-xl lg:hidden">
         <NavLink to="/dashboard" className="flex items-center gap-2">
-          <div className="grid size-8 place-items-center rounded-md bg-[linear-gradient(180deg,#22d3ee,#2f6bff)]">
-            <Radar className="size-4 text-[#03121b]" />
+          <div className="flex items-center gap-2 rounded-lg bg-[linear-gradient(180deg,#8bf3ff_0%,#22d3ee_45%,#0ea5e9_100%)] px-2.5 py-1.5 text-[#03121b] shadow-[0_10px_30px_-12px_rgba(34,211,238,0.75)]">
+            <img src="/logo/logo-mark-inline.png" alt="" width={20} height={20} className="size-5 shrink-0" />
+            <p className="font-display text-sm font-bold leading-none">BonusRadar</p>
           </div>
-          <p className="font-display font-bold text-ink">BonusRadar</p>
         </NavLink>
         {scan?.running && <span className="ml-auto size-2 animate-pulse-dot rounded-full bg-signal" />}
         <div className={scan?.running ? "" : "ml-auto"}>

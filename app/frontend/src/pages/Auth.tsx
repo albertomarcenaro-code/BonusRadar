@@ -31,10 +31,10 @@ export default function Auth() {
       {/* Colonna form */}
       <div className="flex flex-col px-5 py-6 sm:px-10 lg:px-16">
         <Link to="/" className="flex items-center gap-2.5 self-start" data-testid="auth-home-link">
-          <span className="grid size-9 place-items-center rounded-lg bg-gradient-to-b from-[#8bf3ff] via-accent to-[#0ea5e9] text-[#03121b] shadow-[0_8px_24px_-10px_rgba(34,211,238,0.8)]">
-            <Radar className="size-4.5" />
+          <span className="flex items-center gap-2 rounded-xl bg-[linear-gradient(180deg,#8bf3ff_0%,#22d3ee_45%,#0ea5e9_100%)] px-3 py-2 text-[#03121b] shadow-[0_8px_24px_-10px_rgba(34,211,238,0.8)]">
+            <img src="/logo/logo-mark-inline.png" alt="" width={28} height={28} className="size-7 shrink-0" />
+            <span className="font-heading text-lg font-bold">BonusRadar</span>
           </span>
-          <span className="font-heading text-lg font-bold text-ink">BonusRadar</span>
         </Link>
 
         <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center py-10">

@@ -1,3 +1,5 @@
+-- v2 · 14/11/2026 — VERSIONE CORRETTA (seed con $q$, script ri-eseguibile)
+-- Se la prima riga del testo incollato non è questa, stai eseguendo la versione vecchia.
 -- ============================================================
 -- BonusRadar Italia — Schema Supabase (PostgreSQL)
 -- ============================================================
@@ -14,9 +16,19 @@
 create extension if not exists "pgcrypto";
 
 -- ---------- Tipi enumerati ----------
-create type eligibility_status as enum ('eligible', 'maybe', 'not_eligible', 'unknown');
-create type document_status as enum ('da_firmare', 'firmato', 'inviato', 'approvato');
-create type questionnaire_status as enum ('in_progress', 'completed');
+do $$
+begin
+  if not exists (select 1 from pg_type where typname = 'eligibility_status') then
+    create type eligibility_status as enum ('eligible', 'maybe', 'not_eligible', 'unknown');
+  end if;
+  if not exists (select 1 from pg_type where typname = 'document_status') then
+    create type document_status as enum ('da_firmare', 'firmato', 'inviato', 'approvato');
+  end if;
+  if not exists (select 1 from pg_type where typname = 'questionnaire_status') then
+    create type questionnaire_status as enum ('in_progress', 'completed');
+  end if;
+end
+$$;
 
 -- ============================================================
 -- profiles — dati anagrafici/fiscali dell'utente (1:1 con auth.users)
@@ -141,30 +153,38 @@ alter table public.user_bonuses      enable row level security;
 alter table public.document_folders  enable row level security;
 
 -- profiles: l'utente vede e modifica solo il proprio profilo
+drop policy if exists "profiles_select_own" on public.profiles;
 create policy "profiles_select_own" on public.profiles
   for select using (auth.uid () = id);
+drop policy if exists "profiles_upsert_own" on public.profiles;
 create policy "profiles_upsert_own" on public.profiles
   for insert with check (auth.uid () = id);
+drop policy if exists "profiles_update_own" on public.profiles;
 create policy "profiles_update_own" on public.profiles
   for update using (auth.uid () = id) with check (auth.uid () = id);
 
 -- sources: per utente
+drop policy if exists "sources_all_own" on public.sources;
 create policy "sources_all_own" on public.sources
   for all using (auth.uid () = user_id) with check (auth.uid () = user_id);
 
 -- bonuses: catalogo in lettura per qualsiasi utente autenticato
+drop policy if exists "bonuses_select_authenticated" on public.bonuses;
 create policy "bonuses_select_authenticated" on public.bonuses
   for select using (auth.role () = 'authenticated');
 
 -- questionnaires: per utente
+drop policy if exists "questionnaires_all_own" on public.questionnaires;
 create policy "questionnaires_all_own" on public.questionnaires
   for all using (auth.uid () = user_id) with check (auth.uid () = user_id);
 
 -- user_bonuses: per utente
+drop policy if exists "user_bonuses_all_own" on public.user_bonuses;
 create policy "user_bonuses_all_own" on public.user_bonuses
   for all using (auth.uid () = user_id) with check (auth.uid () = user_id);
 
 -- document_folders: per utente
+drop policy if exists "documents_all_own" on public.document_folders;
 create policy "documents_all_own" on public.document_folders
   for all using (auth.uid () = user_id) with check (auth.uid () = user_id);
 
@@ -176,16 +196,19 @@ insert into storage.buckets (id, name, public)
 values ('documents', 'documents', false)
 on conflict (id) do nothing;
 
+drop policy if exists "documents_bucket_read_own" on storage.objects;
 create policy "documents_bucket_read_own" on storage.objects
   for select using (
     bucket_id = 'documents'
     and auth.uid ()::text = (storage.foldername (name))[1]
   );
+drop policy if exists "documents_bucket_insert_own" on storage.objects;
 create policy "documents_bucket_insert_own" on storage.objects
   for insert with check (
     bucket_id = 'documents'
     and auth.uid ()::text = (storage.foldername (name))[1]
   );
+drop policy if exists "documents_bucket_delete_own" on storage.objects;
 create policy "documents_bucket_delete_own" on storage.objects
   for delete using (
     bucket_id = 'documents'
@@ -198,23 +221,23 @@ create policy "documents_bucket_delete_own" on storage.objects
 insert into public.bonuses (title, authority, category, amount, deadline, summary, requirements, required_documents, source_url, source_name, is_new)
 values
   ('Assegno Unico e Universale per i figli', 'INPS', 'famiglia', 'da 57 € a 201 € al mese per figlio', 'domanda sempre aperta',
-   'Sostegno economico mensile per ogni figlio a carico fino a 21 anni. L''importo varia in base all''ISEE del nucleo.',
-   array['Figli a carico minori di 21 anni','Residenza in Italia'], array['Documento d''identità','Codici fiscali dei figli','IBAN'],
+   $q$Sostegno economico mensile per ogni figlio a carico fino a 21 anni. L'importo varia in base all'ISEE del nucleo.$q$,
+   array['Figli a carico minori di 21 anni','Residenza in Italia'], array[$q$Documento d'identità$q$,'Codici fiscali dei figli','IBAN'],
    'https://www.inps.it', 'INPS', false),
   ('Bonus Asilo Nido', 'INPS', 'famiglia', 'fino a 3.600 € annui', '31/12/2026',
    'Rimborso delle rette di asili nido pubblici e privati o supporto domiciliare per bambini sotto i 3 anni.',
    array['Figli di età inferiore a 3 anni','Iscrizione ad asilo nido'], array['Ricevute di pagamento rette','ISEE minorenni','IBAN'],
    'https://www.inps.it', 'INPS', false),
   ('Bonus Psicologo', 'INPS', 'salute', 'fino a 1.500 €', 'finestra annuale INPS',
-   'Contributo per sessioni di psicoterapia presso professionisti iscritti all''albo.',
+   $q$Contributo per sessioni di psicoterapia presso professionisti iscritti all'albo.$q$,
    array['ISEE non superiore a 50.000 €','Residenza in Italia'], array['ISEE','SPID/CIE'],
    'https://www.inps.it', 'INPS', false),
   ('Bonus Ristrutturazioni (detrazione 50%/36%)', 'Agenzia delle Entrate', 'casa', 'detrazione fino al 50% su max 96.000 €', '31/12/2026',
-   'Detrazione IRPEF per interventi di recupero edilizio sull''abitazione principale, ripartita in 10 anni.',
+   $q$Detrazione IRPEF per interventi di recupero edilizio sull'abitazione principale, ripartita in 10 anni.$q$,
    array['Proprietario o titolare di diritto reale','Pagamento con bonifico parlante'], array['Fatture','Bonifici parlanti'],
    'https://www.agenziaentrate.gov.it', 'Agenzia delle Entrate', false),
   ('Contributo Affitto Giovani (detrazione under 31)', 'Agenzia delle Entrate', 'casa', 'da 991,60 € a 2.000 € annui', 'in dichiarazione dei redditi',
-   'Detrazione per giovani tra 20 e 31 anni che affittano l''abitazione principale.',
+   $q$Detrazione per giovani tra 20 e 31 anni che affittano l'abitazione principale.$q$,
    array['Età tra 20 e 31 anni','Reddito fino a 15.493,71 €','Contratto registrato'], array['Contratto di locazione registrato'],
    'https://www.agenziaentrate.gov.it', 'Agenzia delle Entrate', false)
 on conflict (norm_title) do nothing;

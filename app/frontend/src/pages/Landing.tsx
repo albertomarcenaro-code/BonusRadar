@@ -114,10 +114,10 @@ export default function Landing() {
       >
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-8">
           <a href="#hero" className="flex items-center gap-2.5" data-testid="landing-brand">
-            <span className="grid size-9 place-items-center rounded-lg bg-[linear-gradient(180deg,#22d3ee,#2f6bff)]">
-              <Radar className="size-4.5 text-[#03121b]" />
+            <span className="flex items-center gap-2 rounded-xl bg-[linear-gradient(180deg,#8bf3ff_0%,#22d3ee_45%,#0ea5e9_100%)] px-3 py-2 text-[#03121b] shadow-[0_10px_30px_-12px_rgba(34,211,238,0.75)]">
+              <img src="/logo/logo-mark-inline.png" alt="" width={28} height={28} className="size-7 shrink-0" />
+              <span className="font-display text-lg font-bold tracking-tight">BonusRadar</span>
             </span>
-            <span className="font-display text-lg font-bold tracking-tight text-ink">BonusRadar</span>
           </a>
           <nav className="hidden items-center gap-8 text-sm text-muted md:flex" data-testid="landing-nav">
             <a href="#scansione" className="transition-colors hover:text-accent">Scansione</a>
