@@ -23,6 +23,11 @@ Output (entrambi, quando possibile):
      con --json o BONUSES_JSON_PATH): letto dal frontend anche dagli utenti
      NON autenticati (la RLS non permette loro di leggere la tabella).
 
+L'elenco delle fonti è letto dalla tabella Supabase `catalog_sources`
+(solo le righe con `enabled = true`, in ordine di `priority`); se la tabella
+non è leggibile si usa la lista `SOURCES` definita in questo file. Il seed
+della tabella è in `supabase_catalog_sources.sql`.
+
 Uso:
     python3 scripts/scraper.py                     # supabase + json
     python3 scripts/scraper.py --json percorso.json
@@ -68,8 +73,11 @@ DEFAULT_JSON_PATH = os.environ.get(
     "BONUSES_JSON_PATH", "app/frontend/public/data/bonuses.json"
 )
 
-# Fonti ufficiali monitorate. `list_url` è la pagina indice da cui si
-# estraggono i link; `base_url` serve a rendere assoluti i link relativi.
+# Fonti di FALLBACK: usate solo se la tabella `catalog_sources` su Supabase
+# non è leggibile (assente, RLS o rete). L'elenco ufficiale vive nel database
+# (vedi supabase_catalog_sources.sql) e si aggiorna senza toccare il codice.
+# `list_url` è la pagina indice da cui si estraggono i link; `base_url` serve
+# a rendere assoluti i link relativi.
 # `topics` (opzionale): filtro tematico — solo i link il cui testo contiene
 # una di queste parole sono candidati (deduzione locale mirata).
 # `residency` (opzionale): requisito di residenza da aggiungere alle schede
@@ -201,6 +209,13 @@ DOCUMENT_PATTERNS = (
 )
 
 RE_AMOUNT = re.compile(r"(?:fino a |da |detrazione )?\d[\d.,]*\s*(?:€|euro)", re.IGNORECASE)
+
+# Frammenti di testo che rivelano un elemento di interfaccia (widget,
+# selettori, menu) e non un avviso: scartati in build_bonus.
+NOISE_SUBSTRINGS = (
+    "selected items", "mostra di più", "mostra di piu", "filtra per",
+    "seleziona", "loading", "caricamento",
+)
 
 # Titoli generici di menu/navigazione: non sono bandi. Usati in build_bonus
 # per scartare i link di servizio che il filtro keyword lascia passare.
@@ -448,6 +463,8 @@ def build_bonus(source: dict, url: str, raw_title: str, extra_text: str = "") ->
     # il catalogo con link di servizio.
     if title.lower().strip(" .:|—–-").rstrip(".") in GENERIC_TITLES:
         return None
+    if any(noise in title.lower() for noise in NOISE_SUBSTRINGS):
+        return None
 
     full_text = f"{title} {extra_text}"
     summary = (extra_text.strip() or title) if len(title) > 40 else f"Avviso pubblicato su {source['name']}: apri la fonte per i dettagli."
@@ -576,6 +593,51 @@ def supabase_host(url: str) -> str:
     return url.split("://", 1)[-1].split("/", 1)[0].strip() or url
 
 
+def supabase_sources(url: str, key: str) -> list[dict] | None:
+    """Elenco fonti dalla tabella `catalog_sources` (solo quelle abilitate).
+
+    None se la tabella non è leggibile: in quel caso si usa l'elenco nel codice.
+    Le righe sono già nel formato atteso da scrape_source().
+    """
+    endpoint = (
+        url.rstrip("/")
+        + "/rest/v1/catalog_sources?enabled=is.true"
+        "&select=slug,name,authority,list_url,base_url,residency,topics,priority"
+        "&order=priority.asc"
+    )
+    req = urllib.request.Request(
+        endpoint,
+        headers={"apikey": key, "Authorization": f"Bearer {key}", "Accept": "application/json"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as resp:
+            data = json.loads(resp.read().decode("utf-8") or "[]")
+    except urllib.error.HTTPError as exc:
+        body = exc.read().decode("utf-8", errors="replace")[:160]
+        print(f"⚠︎ Fonti da catalog_sources non leggibili: HTTP {exc.code} {body}")
+        return None
+    except Exception as exc:
+        print(f"⚠︎ Fonti da catalog_sources non leggibili: {exc}")
+        return None
+
+    sources: list[dict] = []
+    for row in data:
+        if not isinstance(row, dict) or not row.get("list_url"):
+            continue
+        name = row.get("name") or row.get("slug") or ""
+        sources.append(
+            {
+                "name": name,
+                "authority": row.get("authority") or name,
+                "list_url": row["list_url"],
+                "base_url": row.get("base_url") or row["list_url"],
+                "residency": row.get("residency") or None,
+                "topics": tuple(row["topics"]) if row.get("topics") else None,
+            }
+        )
+    return sources or None
+
+
 def supabase_snapshot(url: str, key: str) -> set[str] | None:
     """Titoli normalizzati presenti in `bonuses`, per verificare l'upsert.
 
@@ -621,10 +683,33 @@ def main() -> int:
 
     print("BonusRadar scraper — avvio\n")
 
+    url = os.environ.get("SUPABASE_URL") or os.environ.get("VITE_SUPABASE_URL") or ""
+    service_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or ""
+    key = (
+        service_key
+        or os.environ.get("SUPABASE_ANON_KEY")
+        or os.environ.get("VITE_SUPABASE_ANON_KEY")
+        or ""
+    )
+    host = supabase_host(url) if url else ""
+
+    # 0) elenco fonti: tabella catalog_sources, con fallback al codice
+    sources: list[dict] = SOURCES
+    if url and key:
+        from_table = supabase_sources(url, key)
+        if from_table:
+            sources = from_table
+            print(f"→ Fonti da catalog_sources: {len(sources)} abilitate su {host}")
+        else:
+            print(
+                f"ℹ︎ Uso l'elenco fonti nel codice ({len(SOURCES)} fonti): "
+                "catalog_sources assente o non leggibile"
+            )
+
     # 1) raccolta
     rows: list[dict] = []
     seen: set[str] = set()
-    for source in SOURCES:
+    for source in sources:
         for bonus in scrape_source(source):
             key = normalize_title(bonus["title"])
             if key in seen:
@@ -635,16 +720,7 @@ def main() -> int:
     print(f"\nTotale bonus estratti: {len(rows)}")
 
     # 2) Supabase (se configurato)
-    url = os.environ.get("SUPABASE_URL") or os.environ.get("VITE_SUPABASE_URL") or ""
-    service_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or ""
-    key = (
-        service_key
-        or os.environ.get("SUPABASE_ANON_KEY")
-        or os.environ.get("VITE_SUPABASE_ANON_KEY")
-        or ""
-    )
     if rows and url and key:
-        host = supabase_host(url)
         print(f"→ Supabase: progetto {host}")
         if not service_key:
             print(

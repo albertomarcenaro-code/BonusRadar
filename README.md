@@ -27,6 +27,7 @@ app/frontend/          # unica app (Vite + React + TS)
 app/backend/           # backend Python legacy (non usato dal frontend attivo)
 scripts/scraper.py     # scraper bandi (eseguito anche da GitHub Actions)
 supabase_schema.sql    # schema completo + policy RLS + bucket storage
+supabase_catalog_sources.sql  # tabella catalog_sources: fonti monitorate dallo scraper
 .github/workflows/     # ci.yml, scraper.yml, supabase-keepalive.yml
 ```
 
