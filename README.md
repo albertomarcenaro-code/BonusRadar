@@ -4,8 +4,8 @@ Monitoraggio intelligente dei bandi e compilazione automatica dei documenti.
 Frontend React + Vite con backend **Supabase** (auth, database, storage): nessun
 altro server applicativo.
 
-- **Anteprima (dev):** gestita da Freebuff (`freebuff-preview`)
-- **Produzione:** `https://bonusradar.freebuff.app` (hosting Freebuff, output statico in `dist/`)
+- **Anteprima (dev):** dev server Vite su `:3000` (`npm run dev`)
+- **Produzione:** `https://bonusradar.freebuff.page` (Freebuff Sites, output statico in `dist/`)
 
 ## Stack
 
@@ -65,7 +65,9 @@ si gestiscono da Settings → Environment).
 
 ## Deploy
 
-Comandi configurati su Freebuff (`freebuff-preview set-install` / `set-build`):
+Il build è lo script `npm run build` della radice (è ciò che esegue anche il
+pulsante Publish di Freebuff): installa le dipendenze di `app/frontend`,
+compila e copia in `dist/`.
 
 ```bash
 cd app/frontend && npm install
@@ -82,8 +84,12 @@ Freebuff fornisce quel file con i valori `VITE_SUPABASE_*` di produzione
 semplice `vite build` senza quel file produce un bundle **senza** URL Supabase:
 la app va in errore all'avvio (`Invalid supabaseUrl`) ed esce in modalità demo.
 
-Dopo ogni modifica: `freebuff-deploy check` → `freebuff-deploy start` →
-verifica con `BASE_URL=https://bonusradar.freebuff.app npm run test:e2e`.
+Dopo ogni modifica: commit e push su `main`, poi pubblicazione dell'ambiente
+Production del progetto Sites (progetto `11d60866…`) e verifica con
+`BASE_URL=https://bonusradar.freebuff.page npm run test:e2e`.
+
+Il vecchio indirizzo `bonusradar.freebuff.app` appartiene al prodotto Freebuff
+Web, ormai sostituito da Sites: non riceve più questi deploy e non va usato.
 
 ## Automazioni GitHub Actions
 
