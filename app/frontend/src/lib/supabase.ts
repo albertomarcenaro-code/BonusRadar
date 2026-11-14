@@ -11,10 +11,32 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
  * "modalità demo": il data layer (src/lib/api.ts) serve i dati da un archivio
  * locale simulato e i download generano i file al volo nel browser.
  */
-const url = import.meta.env.VITE_SUPABASE_URL as string | undefined;
 const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
 
-export const isSupabaseConfigured = Boolean(url && anonKey) && /^https?:\/\//.test(url as string);
+/**
+ * Origine del progetto Supabase, senza percorso.
+ *
+ * supabase-js concatena i propri percorsi all'URL configurato: se nel file
+ * d'ambiente finisce un endpoint completo (es. `https://<ref>.supabase.co/rest/v1`,
+ * il "REST URL" mostrato dal dashboard) le chiamate diventano
+ * `<...>/rest/v1/auth/v1/token` e Supabase risponde 404, lasciando il pulsante
+ * di accesso in attesa senza alcun errore visibile. Qui si tiene la sola
+ * origine, così una URL incollata male non rompe più il login.
+ */
+function projectOrigin(value?: string): string | undefined {
+  if (!value) return undefined;
+  try {
+    const parsed = new URL(value.trim());
+    if (parsed.protocol !== "https:" && parsed.protocol !== "http:") return undefined;
+    return parsed.origin;
+  } catch {
+    return undefined;
+  }
+}
+
+const url = projectOrigin(import.meta.env.VITE_SUPABASE_URL as string | undefined);
+
+export const isSupabaseConfigured = Boolean(url && anonKey);
 
 // Nota: la validazione della forma dell'URL serve perché una build senza le
 // variabili d'ambiente (vedi il build command di deploy) non deve mai arrivare
