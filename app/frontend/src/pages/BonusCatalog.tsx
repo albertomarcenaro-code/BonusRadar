@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { CalendarClock, ExternalLink, FileText, Heart, Loader2, Radar, RefreshCw, RotateCcw, Search, Sparkles, X } from "lucide-react";
+import { CalendarClock, ExternalLink, FileText, Heart, Loader2, RefreshCw, RotateCcw, Search, Sparkles, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -87,12 +87,12 @@ export default function BonusCatalog() {
   const discardedBonuses = (bonuses ?? []).filter((b) => discSet.has(b.id));
 
   // ------------------------------------------------------------------
-  // Scansione web on-demand
+  // Ricerca nell'ultimo catalogo dello scraper settimanale
   // ------------------------------------------------------------------
-  const { start: startWeb, reset: resetWeb, isScanning, phase, result, webBonuses, lastQuery } = useWebSearch();
+  const { start: startWeb, reset: resetWeb, isScanning, result, webBonuses, lastQuery } = useWebSearch();
 
-  // Se la ricerca locale non trova nulla per una query "complessa", la scansione
-  // web parte in background senza che l'utente debba premere nulla.
+  // Se la ricerca locale non trova nulla per una query "complessa", legge in
+  // background l'ultimo catalogo senza che l'utente debba premere nulla.
   useEffect(() => {
     const trimmed = q.trim();
     if (trimmed.length < 8 || isScanning) return;
@@ -208,7 +208,7 @@ export default function BonusCatalog() {
               }}
               placeholder="Cerca un bando, un argomento o un ente… es. «pannelli solari», «ristrutturazione»"
               className="h-12 rounded-xl bg-white/[0.04] pl-12 pr-4"
-              aria-label="Cerca bonus nel catalogo e sul web"
+              aria-label="Cerca bonus nel catalogo e nell'ultimo aggiornamento dello scraper"
               data-testid="bonus-search-input"
             />
           </div>
@@ -218,8 +218,8 @@ export default function BonusCatalog() {
             onClick={() => void startWeb(q)}
             data-testid="btn-web-scan"
           >
-            {isScanning ? <Loader2 className="size-4 animate-spin" /> : <Radar className="size-4" />}
-            {isScanning ? "Scansione in corso…" : "Scansione web"}
+            {isScanning ? <Loader2 className="size-4 animate-spin" /> : <Search className="size-4" />}
+            {isScanning ? "Ricerca in corso…" : "Cerca nel catalogo"}
           </Button>
         </div>
         <div className="mt-3 flex flex-wrap items-center gap-2" data-testid="bonus-quick-filters">
@@ -242,24 +242,11 @@ export default function BonusCatalog() {
         </div>
       </div>
 
-      {/* Stato di scansione web: radar in azione + fasi + progress bar */}
+      {/* La lettura del catalogo è locale: nessuna barra di avanzamento finta */}
       {isScanning && (
-        <div className="panel mb-6 overflow-hidden rounded-2xl p-5" data-testid="bonus-web-scan-status">
-          <div className="flex items-center gap-4">
-            <div className="relative grid size-12 shrink-0 place-items-center">
-              <span className="absolute inset-0 rounded-full border border-accent/25" />
-              <span className="radar-sweep absolute inset-1 rounded-full" />
-              <span className="radar-ping absolute size-3 rounded-full bg-accent/70" />
-              <Radar className="relative size-5 text-accent" />
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-semibold text-ink">Scansione fonti ufficiali e bandi in corso…</p>
-              <p className="mt-0.5 truncate font-mono text-xs text-accent" data-testid="bonus-web-scan-phase">{phase}</p>
-              <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/[0.06]">
-                <div className="scan-progress-bar h-full w-1/3 rounded-full bg-gradient-to-r from-accent/50 via-accent to-accent/50" />
-              </div>
-            </div>
-          </div>
+        <div className="panel mb-6 flex items-center gap-3 rounded-2xl px-5 py-4" data-testid="bonus-web-scan-status">
+          <Loader2 className="size-4 animate-spin text-accent" />
+          <p className="text-sm text-muted">Lettura del catalogo aggiornato…</p>
         </div>
       )}
 
@@ -267,18 +254,23 @@ export default function BonusCatalog() {
       {!isScanning && result && (
         <section className="mb-8" data-testid="bonus-web-results">
           <div className="mb-3 flex items-center justify-between gap-2">
-            <h2 className="flex items-center gap-2 font-display text-xl font-bold text-ink" data-testid="bonus-web-results-title">
-              <Sparkles className="size-5 text-accent" />
-              Risultati della scansione web
-              <span className="font-mono text-sm font-normal text-dim">({webBonuses.length + result.leads.length})</span>
-            </h2>
+            <div className="min-w-0">
+              <h2 className="flex items-center gap-2 font-display text-xl font-bold text-ink" data-testid="bonus-web-results-title">
+                <Sparkles className="size-5 text-accent" />
+                Risultati dal catalogo aggiornato
+                <span className="font-mono text-sm font-normal text-dim">({webBonuses.length})</span>
+              </h2>
+              <p className="mt-1 font-mono text-xs text-dim" data-testid="bonus-web-catalog-date">
+                Catalogo dello scraper aggiornato al {fmtDateTime(result.catalogGeneratedAt)}
+              </p>
+            </div>
             <button onClick={resetWeb} className="text-sm text-dim hover:text-ink" data-testid="btn-close-web-results">
               Chiudi risultati
             </button>
           </div>
-          {webBonuses.length === 0 && result.leads.length === 0 ? (
+          {webBonuses.length === 0 ? (
             <div className="rounded-xl border border-dashed border-line bg-white/[0.03] p-6 text-sm text-muted" data-testid="bonus-web-results-empty">
-              La scansione non ha trovato bandi nuovi per «{lastQuery}». Prova a riformulare la ricerca o esplora il catalogo locale.
+              Nessun bando nuovo nel catalogo aggiornato per «{lastQuery}». Prova a riformulare la ricerca o esplora il catalogo locale.
             </div>
           ) : (
             <>
@@ -307,10 +299,10 @@ export default function BonusCatalog() {
                           <CalendarClock className="size-3" /> {b.deadline}
                         </span>
                       )}
-                      <span className="rounded-md bg-positive/10 px-2 py-1 font-semibold text-positive">Trovato ora</span>
+                      <span className="rounded-md bg-positive/10 px-2 py-1 font-semibold text-positive">Dal catalogo aggiornato</span>
                     </div>
                     <div className="mt-auto flex items-center justify-between gap-2 pt-4">
-                      <span className="text-xs text-dim">Scansione web on-demand</span>
+                      <span className="text-xs text-dim">Aggiornamento settimanale</span>
                       <Button
                         variant="outline"
                         size="sm"
@@ -326,29 +318,6 @@ export default function BonusCatalog() {
                   </article>
                 ))}
               </div>
-              {result.leads.length > 0 && (
-                <div className="mt-4 rounded-xl border border-line bg-white/[0.03] p-4" data-testid="bonus-web-leads">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-dim">Approfondimenti dal web</p>
-                  <ul className="mt-2 space-y-2">
-                    {result.leads.map((l) => (
-                      <li key={l.url} className="min-w-0">
-                        <a
-                          href={l.url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="group flex items-start gap-2 text-sm text-ink hover:text-accent"
-                        >
-                          <ExternalLink className="mt-0.5 size-3.5 shrink-0 text-dim group-hover:text-accent" />
-                          <span className="min-w-0">
-                            <span className="font-medium">{l.title}</span>
-                            {l.snippet && <span className="block truncate text-muted">{l.snippet}</span>}
-                          </span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
             </>
           )}
         </section>
@@ -422,7 +391,7 @@ export default function BonusCatalog() {
             {filter === "eligible" && eligibleCount === 0
               ? "Nessun bonus risulta idoneo con i dati attuali del profilo: completa o aggiorna il tuo profilo, oppure esplora tutto il catalogo."
               : q.trim()
-                ? `Nessun risultato locale per «${q.trim()}». Premi «Scansione web» per cercare anche nelle fonti ufficiali.`
+                ? `Nessun risultato locale per «${q.trim()}». Premi «Cerca nel catalogo» per cercare anche nell'ultimo aggiornamento dello scraper.`
                 : "Nessun bonus corrisponde ai filtri selezionati."}
           </div>
         )}
@@ -675,7 +644,7 @@ function BonusDetailPanel({
             <CalendarClock className="size-3.5" /> {b.deadline}
           </span>
         )}
-        {!isLocal && <span className="rounded-md bg-positive/10 px-2 py-1 text-xs font-semibold text-positive">Trovato dalla scansione web</span>}
+        {!isLocal && <span className="rounded-md bg-positive/10 px-2 py-1 text-xs font-semibold text-positive">Dal catalogo aggiornato</span>}
       </div>
 
       <p className="mt-4 text-sm leading-relaxed text-muted">{b.summary}</p>

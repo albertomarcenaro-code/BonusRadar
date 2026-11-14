@@ -126,7 +126,7 @@ export default function Dashboard() {
             </p>
           ) : (
             <p className="truncate font-mono text-xs text-dim" data-testid="dashboard-scan-idle">
-              Monitoraggio automatico attivo · prossima scansione delle fonti ufficiali a breve
+              Scansione automatica settimanale dello scraper · nessuna esecuzione manuale
             </p>
           )}
         </div>
@@ -137,7 +137,7 @@ export default function Dashboard() {
           )}
           data-testid="dashboard-scan-status"
         >
-          {running ? "Scansione attiva" : "Attivo · settimanale"}
+          {running ? "Aggiornamento in corso" : "Aggiornamento settimanale"}
         </span>
       </section>
 

@@ -29,7 +29,7 @@ import {
 import type { Bonus, DocStatus, ProfileIn } from "@/lib/types";
 import type { UserAttachment } from "@/lib/api";
 import type { WebScanResult } from "@/lib/webSearch";
-import { scanWeb } from "@/lib/webSearch";
+import { scanCatalog } from "@/lib/webSearch";
 
 export { isSupabaseConfigured } from "@/lib/supabase";
 
@@ -99,43 +99,39 @@ export function useToggleDiscarded() {
 }
 
 /**
- * Scansione web on-demand dalla ricerca del catalogo: fasi visibili nella UI
- * (radar in scansione), risultati con badge di idoneità dinamici.
+ * Ricerca nell'ultimo catalogo prodotto dallo scraper settimanale.
+ * Non interroga il web: legge `/data/bonuses.json`, scarta i bandi già noti
+ * e ordina il resto per rilevanza rispetto alla query.
  */
 export function useWebSearch() {
   const { data: bonuses } = useBonuses(false);
   const { data: profile } = useProfile();
-  const [phase, setPhase] = useState<string | null>(null);
+  const [scanning, setScanning] = useState(false);
   const [result, setResult] = useState<WebScanResult | null>(null);
   const [lastQuery, setLastQuery] = useState("");
   const seq = useRef(0);
-
-  const isScanning = phase !== null;
 
   const start = useCallback(
     async (query: string) => {
       const q = query.trim();
       if (!q) return;
       const mySeq = ++seq.current;
-      setPhase("Avvio scansione…");
+      setScanning(true);
       setResult(null);
       setLastQuery(q);
       try {
         const knownIds = new Set((bonuses ?? []).map((b) => b.id));
-        const res = await scanWeb(q, {
+        const res = await scanCatalog(q, {
           profile: (profile ?? null) as import("@/lib/types").Profile | null,
           knownIds,
-          onPhase: (p) => {
-            if (seq.current === mySeq) setPhase(p);
-          },
         });
         if (seq.current === mySeq) {
           setResult(res);
-          setPhase(null);
+          setScanning(false);
         }
       } catch (e) {
         if (seq.current === mySeq) {
-          setPhase(null);
+          setScanning(false);
           toast.error(errMsg(e));
         }
       }
@@ -145,15 +141,15 @@ export function useWebSearch() {
 
   const reset = useCallback(() => {
     seq.current++;
-    setPhase(null);
+    setScanning(false);
     setResult(null);
     setLastQuery("");
   }, []);
 
-  /** Bonus scoperti dalla scansione, con badge già calcolato. */
+  /** Bonus dal catalogo aggiornato, con badge già calcolato. */
   const webBonuses = useMemo(() => result?.newBonuses ?? [], [result]);
 
-  return { start, reset, isScanning, phase, result, webBonuses, lastQuery };
+  return { start, reset, isScanning: scanning, result, webBonuses, lastQuery };
 }
 
 export const useDocuments = () =>

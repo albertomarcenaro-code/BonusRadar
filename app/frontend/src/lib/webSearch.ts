@@ -1,18 +1,15 @@
 /**
- * Ricerca approfondita & Scansione web on-demand.
+ * Ricerca nel catalogo e negli approfondimenti locali.
  *
- * Due livelli:
+ * Due livelli, entrambi sui dati già disponibili nel progetto:
  *  1. Ricerca locale "intelligente": scoring keyword con sinonimi e stopwords
  *     su titolo/summary/requisiti/categoria/ente del catalogo già in DB.
- *  2. Scansione web on-demand: quando la locale non basta (o l'utente la
- *     richiede esplicitamente) si interrogano in background:
- *       - il catalogo dello scraper (`/data/bonuses.json`, prodotto delle
- *         scansioni settimanali delle fonti ufficiali) alla ricerca di bandi
- *         ancora non presenti nel catalogo utente;
- *       - una ricerca web pubblica (DuckDuckGo Instant Answer, CORS ok) per
- *         proporre fonti/approfondimenti aggiuntivi. Se la rete non
- *         risponde, il flusso degrada elegantemente sul solo catalogo.
- * Ogni risultato viene poi valutato col matching engine (badge dinamico).
+ *  2. Ricerca nel catalogo aggiornato: legge `/data/bonuses.json`, prodotto
+ *     dalle scansioni settimanali dello scraper Python sulle fonti ufficiali,
+ *     e propone i bandi non ancora presenti nel catalogo dell'utente.
+ * Nessuna delle due interroga il web al momento della richiesta: il browser
+ * non può leggere i portali istituzionali (CORS) e non esiste un endpoint
+ * server che lo faccia.
  */
 import { calculateBonusMatch, type MatchResult } from "@/lib/matching";
 import type { Bonus, Profile } from "@/lib/types";
@@ -108,27 +105,26 @@ export function searchLocalBonuses(bonuses: Bonus[], query: string): { bonus: Bo
 }
 
 // ------------------------------------------------------------------
-// Scansione web on-demand
+// Ricerca nel catalogo aggiornato
+//
+// Non è una scansione del web: il browser non può interrogare i portali
+// istituzionali (CORS) e il sito non ha un endpoint server che lo faccia.
+// Si legge l'ultimo catalogo prodotto dallo scraper settimanale, si
+// scartano i bandi già noti e si ordina il resto per rilevanza. La data
+// reale del catalogo torna alla UI, che la mostra all'utente.
 // ------------------------------------------------------------------
-/** Fonte web esterna proposta all'utente (link + estratto). */
-export interface WebLead {
-  title: string;
-  url: string;
-  snippet: string;
-}
+
+/** Catalogo statico prodotto da `scripts/scraper.py` (GitHub Actions). */
+const CATALOG_URL = "/data/bonuses.json";
 
 export interface WebScanResult {
-  /** Bandi trovati nel catalogo dello scraper ma non ancora nel DB utente. */
+  /** Bandi nel catalogo aggiornato non ancora presenti nel DB dell'utente. */
   newBonuses: { bonus: Bonus; match: MatchResult }[];
-  /** Approfondimenti/fonti trovati sul web. */
-  leads: WebLead[];
-  /** Fonti ufficiali interrogate dalla scansione. */
-  sourcesScanned: number;
+  /** Data di generazione del catalogo letto (ISO), null se non disponibile. */
+  catalogGeneratedAt: string | null;
 }
 
-const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
-/** Id deterministico per i bonus scoperti via web. */
+/** Id deterministico per i bonus letti dal catalogo dello scraper. */
 function webId(title: string): string {
   let h = 0;
   for (let i = 0; i < title.length; i++) h = (h * 31 + title.charCodeAt(i)) | 0;
@@ -136,80 +132,39 @@ function webId(title: string): string {
 }
 
 /**
- * Scansione web on-demand in background.
- * `onPhase` notifica le fasi per lo stato di caricamento della UI.
+ * Cerca la query nell'ultimo catalogo dello scraper, escludendo i bandi già
+ * presenti nel catalogo dell'utente e ordinando per rilevanza.
  */
-export async function scanWeb(
+export async function scanCatalog(
   query: string,
-  opts: {
-    profile: Profile | null;
-    /** Bonus già noti alla UI (DB locale): non riproposti. */
-    knownIds: Set<string>;
-    onPhase?: (phase: string) => void;
-  },
+  opts: { profile: Profile | null; knownIds: Set<string> },
 ): Promise<WebScanResult> {
-  const { profile, knownIds, onPhase } = opts;
+  const { profile, knownIds } = opts;
   const terms = tokenizeQuery(query);
 
-  onPhase?.("Analisi della richiesta…");
-  await sleep(500);
-
-  onPhase?.("Scansione fonti ufficiali e bandi in corso…");
-  // 1) Catalogo dello scraper (bandi estratti dalle fonti ufficiali).
   let scraped: Bonus[] = [];
+  let catalogGeneratedAt: string | null = null;
   try {
-    const res = await fetch(`/data/bonuses.json?cb=${Date.now()}`, { cache: "no-cache" });
+    const res = await fetch(`${CATALOG_URL}?cb=${Date.now()}`, { cache: "no-cache" });
     if (res.ok) {
-      const file = (await res.json()) as { bonuses?: Bonus[] };
+      const file = (await res.json()) as { bonuses?: Bonus[]; generated_at?: string };
       scraped = Array.isArray(file.bonuses) ? file.bonuses : [];
+      catalogGeneratedAt = typeof file.generated_at === "string" ? file.generated_at : null;
     }
   } catch {
-    scraped = []; // catalogo non raggiungibile: la scansione continua col web
+    scraped = []; // catalogo non raggiungibile: nessun risultato, nessun errore
   }
 
-  const newOnes = scraped
+  const newBonuses = scraped
     .filter((b) => !knownIds.has(b.id))
     .map((b) => ({ bonus: b, relevance: scoreBonus(b, terms, query) }))
     .filter((r) => r.relevance > 0.05)
     .sort((a, b) => b.relevance - a.relevance)
     .slice(0, 6)
-    .map((r) => ({
-      bonus: { ...r.bonus, id: webId(r.bonus.title), is_new: true },
-      match: calculateBonusMatch(profile, { ...r.bonus, id: webId(r.bonus.title) }),
-    }));
+    .map((r) => {
+      const bonus = { ...r.bonus, id: webId(r.bonus.title), is_new: true };
+      return { bonus, match: calculateBonusMatch(profile, bonus) };
+    });
 
-  onPhase?.("Verifica idoneità sul tuo profilo…");
-  await sleep(500);
-
-  // 2) Ricerca web pubblica per approfondimenti (best-effort, CORS ok).
-  let leads: WebLead[] = [];
-  try {
-    const url = `https://api.duckduckgo.com/?q=${encodeURIComponent(
-      `${query} bando ufficiale`,
-    )}&format=json&no_redirect=1&no_html=1&skip_disambig=1`;
-    const res = await fetch(url, { signal: AbortSignal.timeout(4000) });
-    if (res.ok) {
-      const data = (await res.json()) as {
-        AbstractText?: string;
-        AbstractURL?: string;
-        Heading?: string;
-        RelatedTopics?: { Text?: string; FirstURL?: string }[];
-      };
-      if (data.AbstractText && data.AbstractURL && data.Heading) {
-        leads.push({ title: data.Heading, url: data.AbstractURL, snippet: data.AbstractText.slice(0, 220) });
-      }
-      for (const t of data.RelatedTopics ?? []) {
-        if (leads.length >= 4) break;
-        if (t.Text && t.FirstURL && t.FirstURL.startsWith("http")) {
-          const [titlePart, ...rest] = t.Text.split(" - ");
-          leads.push({ title: titlePart.slice(0, 90), url: t.FirstURL, snippet: rest.join(" - ").slice(0, 200) || titlePart.slice(0, 200) });
-        }
-      }
-    }
-  } catch {
-    leads = []; // rete non disponibile: nessun errore UI, solo risultati locali
-  }
-
-  onPhase?.("Completato");
-  return { newBonuses: newOnes, leads, sourcesScanned: Math.max(1, scraped.length > 0 ? 1 : 0) };
+  return { newBonuses, catalogGeneratedAt };
 }

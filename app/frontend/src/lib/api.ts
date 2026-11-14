@@ -473,7 +473,9 @@ export async function listSources(): Promise<Source[]> {
 
 export const scan = {
   async status(): Promise<ScanStatus> {
-    return { running: false, phase: isSupabaseConfigured ? "Scansione disponibile a breve" : "Modalità demo: scansione AI non attiva", last_run_at: null, next_run_at: null, log: [] };
+    // Lo scraper gira una volta a settimana su GitHub Actions: da qui non c'è
+    // alcuna scansione in corso né schedulabile a mano.
+    return { running: false, phase: isSupabaseConfigured ? "Scansione automatica settimanale dello scraper" : "Modalità demo: scansione non attiva", last_run_at: null, next_run_at: null, log: [] };
   },
 };
 
