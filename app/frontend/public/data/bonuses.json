@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-14T16:18:23Z",
+  "generated_at": "2026-11-14T16:50:35Z",
   "source": "BonusRadar scraper v1",
-  "count": 41,
+  "count": 56,
   "bonuses": [
     {
       "id": "scr-47ce8944846b",
@@ -18,7 +18,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-94f124b76f13",
@@ -35,7 +35,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-545f1602d987",
@@ -52,7 +52,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-201e2aef4705",
@@ -69,7 +69,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-1b0da47a683b",
@@ -86,7 +86,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-2287458edf86",
@@ -103,7 +103,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-cf2efc5ae5f5",
@@ -120,7 +120,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-72c6b5c86c37",
@@ -137,7 +137,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-b851c1323291",
@@ -154,7 +154,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-4b158d8bf9ca",
@@ -171,7 +171,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-c27b08c7531f",
@@ -188,7 +188,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-5fe5c876e045",
@@ -205,7 +205,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-3415ff85b915",
@@ -224,7 +224,160 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
+    },
+    {
+      "id": "scr-c0661d6d68b0",
+      "title": "Brevetti+ 2026",
+      "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Invitalia: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/voucher-cloud-e-cybersecurity",
+      "source_name": "Invitalia",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-14T16:50:35Z"
+    },
+    {
+      "id": "scr-6cd57382c738",
+      "title": "Voucher cloud e cybersecurity",
+      "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
+      "category": "altro",
+      "amount": "",
+      "deadline": "20 gennaio 2027",
+      "summary": "Avviso pubblicato su Invitalia: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/fondo-di-contrasto-alla-deindustrializzazione-2026",
+      "source_name": "Invitalia",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-14T16:50:35Z"
+    },
+    {
+      "id": "scr-0e3dae2d1f29",
+      "title": "Fondo di contrasto alla deindustrializzazione 2026",
+      "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
+      "category": "altro",
+      "amount": "",
+      "deadline": "28 novembre 2026",
+      "summary": "Fondo di contrasto alla deindustrializzazione 2026 L’incentivo che sostiene gli investimenti nei consorzi industriali di Lazio e Marche Attivo Data apertura: 28 settembre 2026 Data chiusura: 28 novembre 2026 Leggi tutto su Fondo di partecipazione MUR",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/fondo-di-partecipazione-mur",
+      "source_name": "Invitalia",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-14T16:50:35Z"
+    },
+    {
+      "id": "scr-cf6c645857e8",
+      "title": "Fondo di partecipazione MUR",
+      "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
+      "category": "altro",
+      "amount": "",
+      "deadline": "31 dicembre 2030",
+      "summary": "Avviso pubblicato su Invitalia: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/credito-dimposta-incubatori-e-acceleratori-certificati",
+      "source_name": "Invitalia",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-14T16:50:35Z"
+    },
+    {
+      "id": "scr-88008f106fd8",
+      "title": "Credito d’imposta per incubatori e acceleratori certificati",
+      "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Credito d’imposta per incubatori e acceleratori certificati L’incentivo per gli investimenti nel capitale delle startup innovative Attivo Data apertura: 30 marzo 2026 Leggi tutto su Sviluppo competenze specialistiche delle Pmi",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/sviluppo-competenze-specialistiche-delle-pmi",
+      "source_name": "Invitalia",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-14T16:50:35Z"
+    },
+    {
+      "id": "scr-731c69443704",
+      "title": "Sviluppo competenze specialistiche delle Pmi",
+      "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
+      "category": "altro",
+      "amount": "",
+      "deadline": "21 dicembre 2026",
+      "summary": "Sviluppo competenze specialistiche delle Pmi L’incentivo per la formazione del personale dipendente delle imprese del Mezzogiorno Attivo Data apertura: 10 settembre 2026 Data chiusura: 21 dicembre 2026 Leggi tutto su Cultura Cresce",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/cultura-cresce",
+      "source_name": "Invitalia",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-14T16:50:35Z"
+    },
+    {
+      "id": "scr-d244520dff41",
+      "title": "Cultura Cresce",
+      "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Invitalia: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/ON-nuove-imprese-tasso-zero",
+      "source_name": "Invitalia",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-14T16:50:35Z"
+    },
+    {
+      "id": "scr-3df33a7c0d4d",
+      "title": "ON - Oltre Nuove imprese a tasso zero",
+      "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Invitalia: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/imprenditoria-femminile",
+      "source_name": "Invitalia",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-14T16:50:35Z"
+    },
+    {
+      "id": "scr-d20a5b49c256",
+      "title": "Smart&Start Italia",
+      "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Invitalia: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/beni-strumentali-nuova-sabatini",
+      "source_name": "Invitalia",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-2c4f5d33b903",
@@ -244,7 +397,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-5fce4b87cd0a",
@@ -263,7 +416,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-2c4f060b0823",
@@ -282,7 +435,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-0c2bc129578d",
@@ -301,7 +454,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-1b90a62971e1",
@@ -320,7 +473,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-a0a28b979990",
@@ -341,7 +494,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-116081809b90",
@@ -362,7 +515,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-d5c8b37ee15c",
@@ -383,7 +536,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-b697f51102d9",
@@ -404,7 +557,202 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
+    },
+    {
+      "id": "scr-d6c55d360de0",
+      "title": "Detrazioni fiscali",
+      "authority": "Ministero dell'Ambiente e della Sicurezza Energetica",
+      "category": "energia",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su MASE: apri la fonte per i dettagli.",
+      "requirements": [
+        "CIE"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.mise.gov.it/index.php/it/incentivi/energia/detrazioni-fiscali",
+      "source_name": "MASE",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-14T16:50:35Z"
+    },
+    {
+      "id": "scr-5f9d25105df4",
+      "title": "Fondo nazionale efficienza energetica",
+      "authority": "Ministero dell'Ambiente e della Sicurezza Energetica",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su MASE: apri la fonte per i dettagli.",
+      "requirements": [
+        "CIE"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.mase.gov.it/portale/web/guest/fondo-nazionale-efficienza-energetica",
+      "source_name": "MASE",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-14T16:50:35Z"
+    },
+    {
+      "id": "scr-a2f8fa00dfe0",
+      "title": "Ecobonus e Superbonus 110%",
+      "authority": "Ministero dell'Ambiente e della Sicurezza Energetica",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su MASE: apri la fonte per i dettagli.",
+      "requirements": [
+        "CIE"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.efficienzaenergetica.enea.it/detrazioni-fiscali/contatti/quesiti-di-natura-tecnico-procedurale.html",
+      "source_name": "MASE",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-14T16:50:35Z"
+    },
+    {
+      "id": "scr-20532ff2606f",
+      "title": "Energia: Ecobonus, ENEA aggiorna vademecum su interventi di efficientamento",
+      "authority": "ENEA",
+      "category": "energia",
+      "amount": "",
+      "deadline": "",
+      "summary": "Energia: Ecobonus, ENEA aggiorna vademecum su interventi di efficientamento",
+      "requirements": [
+        "CIE"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.efficienzaenergetica.enea.it/vi-segnaliamo/energia-ecobonus-enea-aggiorna-vademecum-su-interventi-di-efficientamento.html",
+      "source_name": "ENEA — Efficienza Energetica",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-14T16:50:35Z"
+    },
+    {
+      "id": "scr-6a94d0ce304a",
+      "title": "SIMEST e Intesa Sanpaolo rafforzano il sostegno all’internazionalizzazione delle imprese italiane",
+      "authority": "SIMEST",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "SIMEST e Intesa Sanpaolo rafforzano il sostegno all’internazionalizzazione delle imprese italiane SIMEST e Intesa Sanpaolo rafforzano il sostegno all'internazionalizzazione delle imprese italiane 06 novembre 2026 Leggi di più",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.simest.it/media/mondo-simest/simest-e-intesa-sanpaolo-rafforzano-il-sostegno-allinternazionalizzazione-delle-imprese-italiane/",
+      "source_name": "SIMEST (Gruppo CDP)",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-14T16:50:35Z"
+    },
+    {
+      "id": "scr-377863cac8c8",
+      "title": "MEZZOGIORNO, 151 MILIONI PER IMPRESE CULTURALI",
+      "authority": "Ministero della Cultura",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "MEZZOGIORNO, 151 MILIONI PER IMPRESE CULTURALI 1,9 MLN A SOSTEGNO DEI “PICCOLI MUSEI” ITALIANI",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://cultura.gov.it/comunicato/28242/",
+      "source_name": "Ministero della Cultura (MiC)",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-14T16:50:35Z"
+    },
+    {
+      "id": "scr-47f6665e7fda",
+      "title": "Avviso pubblico formazione e informazione 2024",
+      "authority": "INAIL",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblico formazione e informazione 2024",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.inail.it/portale/prevenzione-e-sicurezza/it/prevenzione-e-sicurezza/finanziamenti-per-la-sicurezza/finanziamenti-ad-enti-ed-organismi/avviso-pubblico-formazione-e-informazione-2024.html",
+      "source_name": "INAIL",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-14T16:50:35Z"
+    },
+    {
+      "id": "scr-0c64cf2ad33d",
+      "title": "Ricerca e Innovazione tecnologica",
+      "authority": "INAIL",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su INAIL: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.inail.it/portale/ricerca-e-tecnologia/it/come-fare-per/bandi-di-ricerca-in-collaborazione--bric-.html",
+      "source_name": "INAIL",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-14T16:50:35Z"
+    },
+    {
+      "id": "scr-e7b8561d8fb6",
+      "title": "Bandi di concorso – copertura di n. 19 unità presso la Cte - I livello di professionalità: graduatorie",
+      "authority": "INAIL",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Bandi di concorso – copertura di n. 19 unità presso la Cte - I livello di professionalità: graduatorie",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.inail.it/portale/it/inail-comunica/avvisi/avviso.2026.11.avviso-concorso-19-posti-cte-graduatorie.html",
+      "source_name": "INAIL",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-14T16:50:35Z"
+    },
+    {
+      "id": "scr-7a114e8d3724",
+      "title": "Avviso di mobilità volontaria esterna n. 231 posti, area funzionari amministrativi: pubblicazione calendario colloqui",
+      "authority": "INAIL",
+      "category": "mobilita",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso di mobilità volontaria esterna n. 231 posti, area funzionari amministrativi: pubblicazione calendario colloqui",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.inail.it/portale/it/inail-comunica/avvisi/avviso.2026.06.avviso-231-funz-calendario-colloqui.html",
+      "source_name": "INAIL",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-14T16:50:35Z"
+    },
+    {
+      "id": "scr-fd4b0072cac0",
+      "title": "Avviso di mobilità volontaria esterna n. 231 posti, area funzionari amministrativi: graduatorie definitive di merito",
+      "authority": "INAIL",
+      "category": "mobilita",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso di mobilità volontaria esterna n. 231 posti, area funzionari amministrativi: graduatorie definitive di merito",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.inail.it/portale/it/inail-comunica/avvisi/avviso.2026.08.aviso-graduatorie-friuli-liguria-sardegna-231-posti.html",
+      "source_name": "INAIL",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-8801b0c8370d",
@@ -421,7 +769,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-d8ffc9e8a08b",
@@ -440,7 +788,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-5da8ec56f40a",
@@ -457,7 +805,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-45e0bdec558f",
@@ -474,7 +822,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-3fbb07414f85",
@@ -493,7 +841,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-e846f6dd6d89",
@@ -510,7 +858,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-220eb0740858",
@@ -527,92 +875,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
-    },
-    {
-      "id": "scr-47f6665e7fda",
-      "title": "Avviso pubblico formazione e informazione 2024",
-      "authority": "INAIL",
-      "category": "lavoro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblico formazione e informazione 2024",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inail.it/portale/prevenzione-e-sicurezza/it/prevenzione-e-sicurezza/finanziamenti-per-la-sicurezza/finanziamenti-ad-enti-ed-organismi/avviso-pubblico-formazione-e-informazione-2024.html",
-      "source_name": "INAIL",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
-    },
-    {
-      "id": "scr-0c64cf2ad33d",
-      "title": "Ricerca e Innovazione tecnologica",
-      "authority": "INAIL",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su INAIL: apri la fonte per i dettagli.",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inail.it/portale/ricerca-e-tecnologia/it/come-fare-per/bandi-di-ricerca-in-collaborazione--bric-.html",
-      "source_name": "INAIL",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
-    },
-    {
-      "id": "scr-e7b8561d8fb6",
-      "title": "Bandi di concorso – copertura di n. 19 unità presso la Cte - I livello di professionalità: graduatorie",
-      "authority": "INAIL",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Bandi di concorso – copertura di n. 19 unità presso la Cte - I livello di professionalità: graduatorie",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inail.it/portale/it/inail-comunica/avvisi/avviso.2026.11.avviso-concorso-19-posti-cte-graduatorie.html",
-      "source_name": "INAIL",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
-    },
-    {
-      "id": "scr-7a114e8d3724",
-      "title": "Avviso di mobilità volontaria esterna n. 231 posti, area funzionari amministrativi: pubblicazione calendario colloqui",
-      "authority": "INAIL",
-      "category": "mobilita",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso di mobilità volontaria esterna n. 231 posti, area funzionari amministrativi: pubblicazione calendario colloqui",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inail.it/portale/it/inail-comunica/avvisi/avviso.2026.06.avviso-231-funz-calendario-colloqui.html",
-      "source_name": "INAIL",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
-    },
-    {
-      "id": "scr-fd4b0072cac0",
-      "title": "Avviso di mobilità volontaria esterna n. 231 posti, area funzionari amministrativi: graduatorie definitive di merito",
-      "authority": "INAIL",
-      "category": "mobilita",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso di mobilità volontaria esterna n. 231 posti, area funzionari amministrativi: graduatorie definitive di merito",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inail.it/portale/it/inail-comunica/avvisi/avviso.2026.08.aviso-graduatorie-friuli-liguria-sardegna-231-posti.html",
-      "source_name": "INAIL",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-c1ca38f77731",
@@ -631,7 +894,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-7b99e1a18e0f",
@@ -650,7 +913,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-0abd0c8fefc3",
@@ -669,7 +932,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-6fa868366ddd",
@@ -688,7 +951,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-f092cf2e7839",
@@ -707,7 +970,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-ff7997829491",
@@ -726,7 +989,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     },
     {
       "id": "scr-7cb43d8532fe",
@@ -745,7 +1008,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:18:23Z"
+      "discovered_at": "2026-11-14T16:50:35Z"
     }
   ]
 }
