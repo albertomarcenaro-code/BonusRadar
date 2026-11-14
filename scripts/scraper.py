@@ -571,6 +571,35 @@ def supabase_upsert(url: str, key: str, rows: list[dict]) -> tuple[bool, str]:
         return False, str(exc)
 
 
+def supabase_host(url: str) -> str:
+    """Host del progetto Supabase (solo il dominio: nessuna chiave nel log)."""
+    return url.split("://", 1)[-1].split("/", 1)[0].strip() or url
+
+
+def supabase_snapshot(url: str, key: str) -> set[str] | None:
+    """Titoli normalizzati presenti in `bonuses`, per verificare l'upsert.
+
+    None se la lettura non è permessa (RLS con la sola chiave anon): in quel
+    caso non si può affermare niente sulla scrittura.
+    """
+    endpoint = url.rstrip("/") + "/rest/v1/bonuses?select=norm_title&limit=5000"
+    req = urllib.request.Request(
+        endpoint,
+        headers={"apikey": key, "Authorization": f"Bearer {key}", "Accept": "application/json"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as resp:
+            data = json.loads(resp.read().decode("utf-8") or "[]")
+    except urllib.error.HTTPError as exc:
+        body = exc.read().decode("utf-8", errors="replace")[:160]
+        print(f"⚠︎ Verifica Supabase non possibile: HTTP {exc.code} {body}")
+        return None
+    except Exception as exc:  # rete assente o risposta non JSON
+        print(f"⚠︎ Verifica Supabase non possibile: {exc}")
+        return None
+    return {row.get("norm_title", "") for row in data if isinstance(row, dict)}
+
+
 def write_json(path: Path, rows: list[dict]) -> None:
     """Scrive il file JSON letto dal frontend (catalogo per utenti anonimi)."""
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -607,18 +636,40 @@ def main() -> int:
 
     # 2) Supabase (se configurato)
     url = os.environ.get("SUPABASE_URL") or os.environ.get("VITE_SUPABASE_URL") or ""
+    service_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or ""
     key = (
-        os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
+        service_key
         or os.environ.get("SUPABASE_ANON_KEY")
         or os.environ.get("VITE_SUPABASE_ANON_KEY")
         or ""
     )
     if rows and url and key:
+        host = supabase_host(url)
+        print(f"→ Supabase: progetto {host}")
+        if not service_key:
+            print(
+                "::warning::SUPABASE_SERVICE_ROLE_KEY assente: con la sola chiave anon la RLS "
+                "blocca la scrittura su bonuses. Finché il secret non c'è, resta aggiornato solo il JSON."
+            )
         ok, detail = supabase_upsert(url, key, rows)
-        if ok:
-            print(f"✓ Supabase aggiornato ({detail})")
+        print(f"{'✓' if ok else '⚠︎'} Supabase {'aggiornato' if ok else 'non aggiornato'} ({detail})")
+        if not ok:
+            print("  proseguo con il solo file JSON")
+
+        # L'HTTP 2xx da solo non prova che le righe siano in tabella: si rilegge.
+        expected = {normalize_title(r["title"]) for r in rows}
+        present = supabase_snapshot(url, key) if service_key else None
+        if present is None:
+            print("ℹ︎ Verifica righe saltata: serve SUPABASE_SERVICE_ROLE_KEY per leggere la tabella.")
         else:
-            print(f"⚠︎ Supabase non aggiornato ({detail}) → proseguo con il solo JSON")
+            matched = len(expected & present)
+            print(f"  righe in bonuses: {len(present)} · titoli di questo scraping presenti: {matched}/{len(expected)}")
+            if matched < len(expected):
+                print(
+                    f"::warning::Supabase {host}: {len(expected) - matched} titoli non risultano in bonuses. "
+                    "I secret SUPABASE_URL/VITE_SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY devono puntare "
+                    "allo stesso progetto che usa il sito."
+                )
     elif rows:
         print("ℹ︎ Credenziali Supabase non presenti → solo file JSON")
 
