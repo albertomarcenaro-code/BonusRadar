@@ -28,6 +28,7 @@ app/backend/           # backend Python legacy (non usato dal frontend attivo)
 scripts/scraper.py     # scraper bandi (eseguito anche da GitHub Actions)
 supabase_schema.sql    # schema completo + policy RLS + bucket storage
 supabase_catalog_sources.sql  # tabella catalog_sources: fonti monitorate dallo scraper
+supabase_catalog_stats.sql    # stato dei bandi (is_active) + RPC catalog_stats()
 .github/workflows/     # ci.yml, scraper.yml, supabase-keepalive.yml
 ```
 
@@ -99,6 +100,11 @@ Web, ormai sostituito da Sites: non riceve più questi deploy e non va usato.
   `bonuses` e committa `app/frontend/public/data/bonuses.json` se cambiato.
   Usa i secret `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` e (per la scrittura)
   `SUPABASE_SERVICE_ROLE_KEY`.
+  I bandi che una run non trova più non vengono cancellati: restano in tabella
+  come storico (`is_active = false`, `archived_at`), escono dal catalogo e dal
+  matching con il profilo ma entrano nel contatore pubblico (`--no-archive`
+  disattiva). Se la run trova meno della metà dei bandi attivi l'archiviazione
+  salta, così una fonte che risponde male non svuota il catalogo.
   Fonti monitorate (10): incentivi.gov.it, INPS, Agenzia delle Entrate,
   Comune di Genova, Regione Liguria, Ministero del Lavoro, Cliclavoro, INAIL,
   Regione Toscana, Regione Veneto. Una fonte non raggiungibile viene saltata

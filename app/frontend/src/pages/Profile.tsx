@@ -98,6 +98,7 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
   const setMember = (i: number, patch: Partial<FamilyMember>) =>
     set("family_members", form.family_members.map((m, j) => (j === i ? { ...m, ...patch } : m)));
   const num = (v: string) => (v === "" ? null : Number(v));
+  const allInterests = INTERESTS.every((k) => form.interests.includes(k));
 
   const field = (k: keyof ProfileIn, label: string, props: React.ComponentProps<typeof Input> = {}) => (
     <div className="flex flex-col gap-1.5">
@@ -322,7 +323,18 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
       {/* Sezione 4: Interessi */}
       {section === 3 && (
         <section className="panel flex flex-col gap-5 rounded-2xl p-5 sm:p-8" data-testid="profile-section-interessi">
-          <h2 className="text-xl font-bold">4 · Categorie e Aree d'Interesse</h2>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 className="text-xl font-bold">4 · Categorie e Aree d'Interesse</h2>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => set("interests", allInterests ? [] : [...INTERESTS])}
+              data-testid="btn-select-all-interests"
+            >
+              {allInterests ? "Deseleziona tutto" : "Seleziona tutto"}
+            </Button>
+          </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {INTERESTS.map((k) => {
               const on = form.interests.includes(k);
@@ -379,8 +391,17 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
           Sezione {section + 1} di {SECTIONS.length}
         </p>
         {section < SECTIONS.length - 1 ? (
-          <Button onClick={() => setSection((s) => Math.min(SECTIONS.length - 1, s + 1))} className="h-11 px-6" data-testid="btn-next-section">
-            Avanti <ArrowRight className="size-4" />
+          <Button
+            onClick={() => {
+              // "Avanti" salva la sezione corrente prima di passare alla successiva.
+              if (form.full_name.trim()) save.mutate(form);
+              setSection((s) => Math.min(SECTIONS.length - 1, s + 1));
+            }}
+            className="h-11 px-6"
+            data-testid="btn-next-section"
+          >
+            {!form.full_name.trim() ? "Avanti" : save.isPending ? "Salvataggio…" : "Salva e avanti"}{" "}
+            <ArrowRight className="size-4" />
           </Button>
         ) : (
           <Link to="/dashboard" className={buttonVariants({ variant: "outline" })} data-testid="btn-goto-dashboard">

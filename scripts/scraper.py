@@ -15,10 +15,12 @@ attivi ed estrae per ciascuno:
 Output (entrambi, quando possibile):
 
   1. Supabase — tabella `bonuses`, upsert sul vincolo unico `norm_title`.
-     Serve un key con permesso di scrittura: si usa SUPABASE_SERVICE_ROLE_KEY
-     se presente (consigliata: la policy RLS consente agli utenti solo la
-     lettura); in mancanza si prova la chiave anon, che RLS bloccherà e
-     lo script proseguirà con il solo file JSON.
+     I bandi che questa run non trova più NON vengono cancellati: restano in
+     tabella come storico con `is_active = false` (+ `archived_at`), così il
+     contatore pubblico cresce e il catalogo/matching vede solo i bandi in
+     vigore. L'archiviazione richiede SUPABASE_SERVICE_ROLE_KEY e viene
+     saltata per prudenza se la run trova meno della metà degli attivi; si
+     disattiva con --no-archive. Le colonne sono in supabase_catalog_stats.sql.
   2. Fallback JSON — `app/frontend/public/data/bonuses.json` (configurabile
      con --json o BONUSES_JSON_PATH): letto dal frontend anche dagli utenti
      NON autenticati (la RLS non permette loro di leggere la tabella).
@@ -68,6 +70,15 @@ BROWSER_UA = (
 REQUEST_TIMEOUT = 20          # secondi
 DELAY_BETWEEN_REQUESTS = 1.0  # richiesta educata tra una fonte e l'altra
 MAX_ITEMS_PER_SOURCE = 12
+
+# Archiviazione di `bonuses`: niente viene cancellato. Un bando che la run non
+# rintraccia più resta in tabella come storico (`is_active = false`), esce dal
+# catalogo e dal matching con il profilo, mentre il contatore pubblico cresce.
+# L'archiviazione si applica solo quando la run è credibile: se una fonte
+# risponde male e i bandi trovati crollano, non si tocca niente.
+ARCHIVE_MIN_KEEP = 10    # bandi estratti minimi perché l'archiviazione avvenga
+ARCHIVE_MIN_SHARE = 0.5  # i bandi trovati devono essere ≥ 50% degli attivi
+ARCHIVE_BATCH = 100      # id per richiesta PATCH (limite di lunghezza dell'URL)
 
 DEFAULT_JSON_PATH = os.environ.get(
     "BONUSES_JSON_PATH", "app/frontend/public/data/bonuses.json"
@@ -546,8 +557,15 @@ def scrape_source(source: dict) -> list[dict]:
 # Output: Supabase + JSON
 # ---------------------------------------------------------------
 
-def supabase_upsert(url: str, key: str, rows: list[dict]) -> tuple[bool, str]:
-    """Upsert su PostgREST: POST /rest/v1/bonuses?on_conflict=norm_title."""
+def supabase_upsert(
+    url: str, key: str, rows: list[dict], *, mark_active: bool = True
+) -> tuple[bool, str]:
+    """Upsert su PostgREST: POST /rest/v1/bonuses?on_conflict=norm_title.
+
+    `mark_active` rimette `is_active = true`: un bando archiviato che ricompare
+    torna in vigore senza intervento manuale. Si disattiva solo quando la
+    colonna non esiste ancora (supabase_catalog_stats.sql non eseguito).
+    """
     endpoint = url.rstrip("/") + "/rest/v1/bonuses?on_conflict=norm_title"
     payload = json.dumps(
         [
@@ -563,6 +581,7 @@ def supabase_upsert(url: str, key: str, rows: list[dict]) -> tuple[bool, str]:
                 "source_url": r["source_url"],
                 "source_name": r["source_name"],
                 "is_new": r["is_new"],
+                **({"is_active": True} if mark_active else {}),
             }
             for r in rows
         ]
@@ -662,23 +681,151 @@ def supabase_snapshot(url: str, key: str) -> set[str] | None:
     return {row.get("norm_title", "") for row in data if isinstance(row, dict)}
 
 
-def write_json(path: Path, rows: list[dict]) -> None:
-    """Scrive il file JSON letto dal frontend (catalogo per utenti anonimi)."""
+def supabase_rows(url: str, key: str, *, only_active: bool = False) -> list[dict] | None:
+    """Righe di `bonuses` (id, titolo normalizzato, fonte) per l'archiviazione.
+
+    `only_active` limita alle righe ancora in vigore: sono le uniche che questa
+    run può rendere obsolete. None se la lettura non è permessa o fallisce: in
+    quel caso non si archivia niente (serve sapere cosa c'è in tabella).
+    """
+    endpoint = (
+        url.rstrip("/")
+        + "/rest/v1/bonuses?select=id,norm_title,title,source_name&limit=5000"
+        + ("&is_active=is.true" if only_active else "")
+    )
+    req = urllib.request.Request(
+        endpoint,
+        headers={"apikey": key, "Authorization": f"Bearer {key}", "Accept": "application/json"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as resp:
+            data = json.loads(resp.read().decode("utf-8") or "[]")
+    except urllib.error.HTTPError as exc:
+        body = exc.read().decode("utf-8", errors="replace")[:160]
+        print(f"⚠︎ Archiviazione non possibile: lettura bonuses HTTP {exc.code} {body}")
+        return None
+    except Exception as exc:  # rete assente o risposta non JSON
+        print(f"⚠︎ Archiviazione non possibile: {exc}")
+        return None
+    return [row for row in data if isinstance(row, dict) and row.get("id")]
+
+
+def supabase_patch(url: str, key: str, ids: list[str], payload: dict) -> tuple[bool, str]:
+    """PATCH delle righe indicate, a blocchi: `?id=in.("…","…")`.
+
+    Gli id sono UUID generati dal database, quindi entrano nell'URL tra
+    virgolette senza bisogno di altro escaping.
+    """
+    body = json.dumps(payload).encode("utf-8")
+    for start in range(0, len(ids), ARCHIVE_BATCH):
+        batch = ids[start : start + ARCHIVE_BATCH]
+        values = ",".join(f'"{i}"' for i in batch)
+        endpoint = url.rstrip("/") + f"/rest/v1/bonuses?id=in.({values})"
+        req = urllib.request.Request(
+            endpoint,
+            data=body,
+            method="PATCH",
+            headers={
+                "apikey": key,
+                "Authorization": f"Bearer {key}",
+                "Content-Type": "application/json",
+                "Prefer": "return=minimal",
+            },
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as resp:
+                if resp.status >= 300:
+                    return False, f"HTTP {resp.status}"
+        except urllib.error.HTTPError as exc:
+            detail = exc.read().decode("utf-8", errors="replace")[:200]
+            return False, f"HTTP {exc.code}: {detail}"
+        except Exception as exc:
+            return False, str(exc)
+    return True, f"{len(ids)} righe"
+
+
+def supabase_archive(url: str, key: str, keep: set[str]) -> int:
+    """Marca `is_active = false` sui bandi che questa run non ha più trovato.
+
+    Niente viene cancellato: i bandi escono dal catalogo e dal matching con il
+    profilo, ma restano in tabella come storico (`archived_at`), così il
+    contatore pubblico cresce. `keep` sono i titoli normalizzati appena scritti.
+    Restituisce quante righe sono state archiviate; 0 anche quando
+    l'operazione viene saltata, e in quel caso il motivo finisce nel log
+    (nessuna archiviazione silenziosa).
+    """
+    rows = supabase_rows(url, key, only_active=True)
+    if rows is None:
+        return 0
+    total = len(rows)
+    if total == 0:
+        print("ℹ︎ Archiviazione: nessun bando attivo da valutare")
+        return 0
+    stale = [r for r in rows if r.get("norm_title") not in keep]
+    if not stale:
+        print("ℹ︎ Archiviazione: tutti i bandi attivi sono stati ritrovati")
+        return 0
+    if len(keep) < ARCHIVE_MIN_KEEP or len(keep) < total * ARCHIVE_MIN_SHARE:
+        print(
+            f"::warning::Archiviazione saltata per prudenza: questa run ha trovato {len(keep)} "
+            f"bandi contro {total} attivi in tabella. I {len(stale)} non trovati restano attivi, "
+            "così una fonte irraggiungibile non svuota il catalogo."
+        )
+        return 0
+    now = datetime.now(timezone.utc).isoformat()
+    ok, detail = supabase_patch(
+        url, key, [r["id"] for r in stale], {"is_active": False, "archived_at": now}
+    )
+    if not ok:
+        print(f"::warning::Archiviazione non riuscita ({detail}): i bandi restano attivi")
+        return 0
+    print(
+        f"✓ Archiviazione: {len(stale)} bandi non più trovati marcati come scaduti "
+        f"({total} attivi → {total - len(stale)}; restano in tabella come storico)"
+    )
+    return len(stale)
+
+
+def write_json(path: Path, rows: list[dict], sources_count: int, db_rows: int | None) -> None:
+    """Scrive il file JSON letto dal frontend (catalogo per utenti anonimi).
+
+    `stats` sono i contatori del registro mostrati dalla landing: `bonuses` =
+    righe in tabella comprese le archiviate (quando la lettura è permessa,
+    altrimenti i bandi di questa run), `active` = bandi in vigore trovati da
+    questa run e `sources` = fonti abilitate lette da `catalog_sources` (o
+    l'elenco nel codice, se la tabella manca).
+    Il sito legge i contatori live via RPC `catalog_stats()`; questo snapshot
+    serve solo come fallback quando la RPC non è ancora installata.
+    """
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     file = {
         "generated_at": now,
         "source": "BonusRadar scraper v1",
         "count": len(rows),
+        "stats": {
+            "bonuses": db_rows if db_rows is not None else len(rows),
+            "active": len(rows),
+            "sources": sources_count,
+        },
         "bonuses": [{**r, "discovered_at": now} for r in rows],
     }
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(file, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"✓ JSON aggiornato: {path} ({len(rows)} bonus)")
+    print(
+        f"  contatori registro: {file['stats']['bonuses']} bonus · "
+        f"{file['stats']['sources']} fonti abilitate"
+    )
 
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="Scraper fonti ufficiali BonusRadar")
     ap.add_argument("--json", default=DEFAULT_JSON_PATH, help=f"percorso del file JSON (default: {DEFAULT_JSON_PATH})")
+    ap.add_argument(
+        "--no-archive",
+        action="store_true",
+        help="non marcare come scaduti i bandi che questa run non ha trovato",
+    )
     args = ap.parse_args()
 
     print("BonusRadar scraper — avvio\n")
@@ -692,6 +839,7 @@ def main() -> int:
         or ""
     )
     host = supabase_host(url) if url else ""
+    archive = not args.no_archive
 
     # 0) elenco fonti: tabella catalog_sources, con fallback al codice
     sources: list[dict] = SOURCES
@@ -705,6 +853,8 @@ def main() -> int:
                 f"ℹ︎ Uso l'elenco fonti nel codice ({len(SOURCES)} fonti): "
                 "catalog_sources assente o non leggibile"
             )
+
+    sources_count = len(sources)
 
     # 1) raccolta
     rows: list[dict] = []
@@ -720,6 +870,7 @@ def main() -> int:
     print(f"\nTotale bonus estratti: {len(rows)}")
 
     # 2) Supabase (se configurato)
+    db_rows: int | None = None
     if rows and url and key:
         print(f"→ Supabase: progetto {host}")
         if not service_key:
@@ -728,17 +879,36 @@ def main() -> int:
                 "blocca la scrittura su bonuses. Finché il secret non c'è, resta aggiornato solo il JSON."
             )
         ok, detail = supabase_upsert(url, key, rows)
+        if not ok and "is_active" in detail.lower():
+            # Colonna non ancora creata: meglio riscrivere senza stato dei bandi
+            # che perdere l'aggiornamento della tabella.
+            print(
+                "::warning::colonna is_active assente su bonuses: esegui "
+                "supabase_catalog_stats.sql. Riscrivo senza marcare i bandi attivi."
+            )
+            ok, detail = supabase_upsert(url, key, rows, mark_active=False)
         print(f"{'✓' if ok else '⚠︎'} Supabase {'aggiornato' if ok else 'non aggiornato'} ({detail})")
         if not ok:
             print("  proseguo con il solo file JSON")
 
-        # L'HTTP 2xx da solo non prova che le righe siano in tabella: si rilegge.
         expected = {normalize_title(r["title"]) for r in rows}
+
+        # 2b) archiviazione: i bandi non più trovati restano in tabella come
+        # storico, quindi il contatore pubblico cresce, ma escono dal catalogo
+        # e dal matching con il profilo.
+        if ok and service_key and archive:
+            supabase_archive(url, service_key, expected)
+        elif ok and not service_key:
+            print("ℹ︎ Archiviazione dei bandi obsoleti saltata: serve SUPABASE_SERVICE_ROLE_KEY.")
+
+        # L'HTTP 2xx da solo non prova che le righe siano in tabella: si rilegge
+        # (dopo la pulizia, così il conteggio è quello finale).
         present = supabase_snapshot(url, key) if service_key else None
         if present is None:
             print("ℹ︎ Verifica righe saltata: serve SUPABASE_SERVICE_ROLE_KEY per leggere la tabella.")
         else:
             matched = len(expected & present)
+            db_rows = len(present)
             print(f"  righe in bonuses: {len(present)} · titoli di questo scraping presenti: {matched}/{len(expected)}")
             if matched < len(expected):
                 print(
@@ -754,7 +924,7 @@ def main() -> int:
     if rows == 0 and json_path.exists():
         print(f"ℹ︎ Nessun nuovo bonus: mantengo il file esistente {json_path}")
         return 0
-    write_json(json_path, rows)
+    write_json(json_path, rows, sources_count, db_rows)
     return 0
 
 

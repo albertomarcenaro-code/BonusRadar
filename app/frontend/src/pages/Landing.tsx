@@ -7,7 +7,6 @@ import {
   CheckCircle2,
   Landmark,
   LogIn,
-  Radar,
   Search,
   Sparkles,
   UserPlus,
@@ -17,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Reveal } from "@/components/Reveal";
 import LiveScan, { demoMatches } from "@/pages/LiveScan";
 import { MatchBadge, MatchChecks } from "@/components/match";
-import { useScraperCatalog } from "@/lib/queries";
+import { useCatalogStats, useScraperCatalog } from "@/lib/queries";
 import { fmtDateTime, fmtDate } from "@/lib/format";
 import { usePrefersReducedMotion, useScrollProgress } from "@/hooks/motion";
 import { cn } from "@/lib/utils";
@@ -59,6 +58,9 @@ export default function Landing() {
   const reduced = usePrefersReducedMotion();
   const progress = useScrollProgress();
   const { data: catalog } = useScraperCatalog();
+  // Contatori del registro letti dal database (RPC catalog_stats): cambiano a
+  // ogni run dello scraper, anche restando su questa pagina.
+  const { data: stats } = useCatalogStats();
   // Memoizzato: un `?? []` inline creerebbe un array nuovo a ogni render e
   // invaliderebbe i useMemo dipendenti da `bonuses`.
   const bonuses = useMemo(() => catalog?.bonuses ?? [], [catalog]);
@@ -540,11 +542,18 @@ export default function Landing() {
           <div className="mt-8 grid gap-6 lg:grid-cols-[1.4fr_1fr]">
             <div className="flex flex-col gap-6">
               {/* Statistiche del registro */}
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 gap-3">
                 {[
-                  { v: String(catalog?.count ?? bonuses.length), l: "Bonus nel catalogo", test: "landing-stat-count" },
-                  { v: String(MONITORED_SOURCES.length), l: "Portali monitorati", test: "landing-stat-portals" },
-                  { v: "7 gg", l: "Frequenza scansione", test: "landing-stat-frequency" },
+                  {
+                    v: String(stats?.bonuses ?? catalog?.stats?.bonuses ?? catalog?.count ?? bonuses.length),
+                    l: "Bandi catalogati",
+                    test: "landing-stat-count",
+                  },
+                  {
+                    v: String(stats?.sources ?? catalog?.stats?.sources ?? MONITORED_SOURCES.length),
+                    l: "Fonti monitorate",
+                    test: "landing-stat-portals",
+                  },
                 ].map((s, i) => (
                   <Reveal key={s.l} delay={i * 90}>
                     <div className="panel-sub px-4 py-4">
@@ -665,12 +674,24 @@ function Footer() {
   return (
     <footer className="border-t border-line bg-canvas-2/70" data-testid="landing-footer">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-8 text-sm sm:flex-row sm:px-8">
-        <div className="flex items-center gap-2" data-testid="landing-footer-brand">
-          <span className="grid size-7 place-items-center rounded-md bg-[linear-gradient(180deg,#22d3ee,#2f6bff)]">
-            <Radar className="size-3.5 text-[#03121b]" />
+        {/* Marchio + nome + payoff: il gradiente è lo stesso del titolo
+            "passarti accanto", il testo resta testo (fuori dal logo). */}
+        <Link
+          to="/"
+          className="flex shrink-0 items-center gap-3"
+          data-testid="landing-footer-brand"
+          aria-label="BonusRadar — home"
+        >
+          <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-[linear-gradient(100deg,#eaf3ff_0%,#7fe6f5_45%,#4f8bff_100%)] shadow-[0_10px_28px_-14px_rgba(127,230,245,0.7)]">
+            <img src="/logo/logo-mark-inline.png" alt="" width={30} height={30} className="size-[30px]" />
           </span>
-          <span className="font-display font-bold text-ink">BonusRadar</span>
-        </div>
+          <span className="flex flex-col leading-none">
+            <span className="font-display text-base font-bold tracking-tight text-ink">BonusRadar</span>
+            <span className="mt-1.5 text-[0.5625rem] font-semibold uppercase tracking-[0.22em] text-dim">
+              Trova. Confronta. Ottieni.
+            </span>
+          </span>
+        </Link>
         <div className="flex flex-col items-center gap-1.5 text-center">
           <p className="text-muted">
             Indipendente dalle istituzioni: verifica sempre i bandi sui portali ufficiali.

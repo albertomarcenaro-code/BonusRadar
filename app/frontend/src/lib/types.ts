@@ -78,11 +78,27 @@ export interface Bonus {
   is_new: boolean;
 }
 
+/**
+ * Contatori del registro mostrati dalla landing.
+ * Arrivano dalla RPC `catalog_stats()` (supabase_catalog_stats.sql), quindi
+ * riflettono il database e non un file statico.
+ */
+export interface CatalogStats {
+  /** Righe nella tabella `bonuses` (storico compreso: il contatore cresce). */
+  bonuses: number;
+  /** Di quelle, quante sono ancora in vigore (`is_active`). */
+  active?: number;
+  /** Fonti con `enabled = true` in `catalog_sources`. */
+  sources: number;
+}
+
 /** File JSON generato dallo scraper (public/data/bonuses.json). */
 export interface BonusCatalogFile {
   generated_at: string;
   source: string;
   count: number;
+  /** Snapshot dei contatori al momento della scansione (fallback pubblico). */
+  stats?: CatalogStats;
   bonuses: Bonus[];
 }
 

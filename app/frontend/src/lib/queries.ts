@@ -6,6 +6,7 @@ import {
   DataError,
   deleteAttachment,
   deleteDocument,
+  fetchCatalogStats,
   fetchScraperCatalog,
   generateDocuments,
   getAttachmentUrl,
@@ -55,6 +56,20 @@ export const useScraperCatalog = () =>
     queryFn: fetchScraperCatalog,
     retry: false,
     staleTime: 5 * 60_000,
+  });
+
+/**
+ * Contatori live del registro dal database. Si rileggono mentre la landing
+ * resta aperta, così dopo una run dello scraper i numeri si aggiornano senza
+ * ricaricare la pagina.
+ */
+export const useCatalogStats = () =>
+  useQuery({
+    queryKey: ["catalog-stats"],
+    queryFn: fetchCatalogStats,
+    retry: false,
+    staleTime: 5 * 60_000,
+    refetchInterval: 10 * 60_000,
   });
 
 export const useBonuses = (poll = false) =>
@@ -204,7 +219,7 @@ export function useOpenAttachment() {
 export function useInvalidateAll() {
   const qc = useQueryClient();
   return () => {
-    for (const k of ["dashboard", "scan", "bonus", "sources", "documents", "profile", "favorites", "discarded", "attachments", "scraper-catalog", "auth-user"]) {
+    for (const k of ["dashboard", "scan", "bonus", "sources", "documents", "profile", "favorites", "discarded", "attachments", "scraper-catalog", "catalog-stats", "auth-user"]) {
       qc.invalidateQueries({ queryKey: [k] });
     }
   };

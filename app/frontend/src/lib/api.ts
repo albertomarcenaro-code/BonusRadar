@@ -14,7 +14,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { DOCUMENTS_BUCKET, attachmentObjectPath, documentObjectPath, isSupabaseConfigured, supabase } from "@/lib/supabase";
 import { demoStore } from "@/lib/demoStore";
 import { buildHtml, makeFileNames, openPrintWindow } from "@/lib/docgen";
-import type { Bonus, BonusCatalogFile, Dashboard, DocStatus, DocumentFolder, Profile, ProfileIn, ScanStatus, Source } from "@/lib/types";
+import type { Bonus, BonusCatalogFile, CatalogStats, Dashboard, DocStatus, DocumentFolder, Profile, ProfileIn, ScanStatus, Source } from "@/lib/types";
 import type { DemoAttachment } from "@/lib/demoStore";
 
 export class DataError extends Error {}
@@ -45,7 +45,7 @@ async function currentUser(): Promise<{ id: string; email: string } | null> {
 }
 
 /** Riga tabella bonuses → tipo usato dalla UI. */
-type BonusRow = Omit<Bonus, "discovered_at"> & { created_at: string };
+type BonusRow = Omit<Bonus, "discovered_at"> & { created_at: string; is_active?: boolean };
 function mapBonus(b: BonusRow): Bonus {
   return { ...b, discovered_at: b.created_at };
 }
@@ -150,7 +150,11 @@ export async function listBonuses(): Promise<Bonus[]> {
     .order("created_at", { ascending: true });
   dbx(error);
   const rows = (data ?? []) as BonusRow[];
-  if (rows.length > 0) return rows.map(mapBonus);
+  // La tabella conserva anche i bandi non più rintracciati, marcati
+  // `is_active = false`: restano come storico per il contatore pubblico ma non
+  // devono comparire nel catalogo né entrare nel matching con il profilo.
+  const active = rows.filter((r) => r.is_active !== false);
+  if (active.length > 0) return active.map(mapBonus);
   // La tabella può risultare vuota: lo scraper non riesce a scrivere senza una
   // service-role key (RLS) e la sua action a volte punta una URL sbagliata.
   // In quel caso il catalogo pubblico JSON è la stessa fonte → usato come
@@ -172,6 +176,30 @@ export async function fetchScraperCatalog(): Promise<BonusCatalogFile | null> {
     return Array.isArray(file.bonuses) ? file : null;
   } catch {
     return null; // file assente (es. deploy senza catalogo): nessun errore UI
+  }
+}
+
+/**
+ * Contatori del registro (bonus nel catalogo + fonti abilitate).
+ *
+ * Passa dalla RPC `catalog_stats()` perché la RLS non lascia leggere `bonuses`
+ * e `catalog_sources` agli utenti anonimi, che sono la maggior parte dei
+ * visitatori della landing. Risponde `null` se la funzione non è ancora stata
+ * creata (supabase_catalog_stats.sql): la UI usa allora lo snapshot del JSON.
+ */
+export async function fetchCatalogStats(): Promise<CatalogStats | null> {
+  if (!isSupabaseConfigured) return null;
+  try {
+    const { data, error } = await requireSupabase().rpc("catalog_stats");
+    if (error || !data) return null;
+    const raw = data as { bonuses?: unknown; active?: unknown; sources?: unknown };
+    const bonuses = Number(raw.bonuses);
+    const sources = Number(raw.sources);
+    if (!Number.isInteger(bonuses) || !Number.isInteger(sources)) return null;
+    const active = Number(raw.active);
+    return Number.isInteger(active) ? { bonuses, active, sources } : { bonuses, sources };
+  } catch {
+    return null; // rete o RPC assente: nessun errore in UI
   }
 }
 
