@@ -2,8 +2,7 @@ import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { CloudOff, LayoutDashboard, Sparkles, UserCheck } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
 import UserMenu from "@/components/UserMenu";
-import { isSupabaseConfigured, useScanStatus, useScraperCatalog } from "@/lib/queries";
-import { fmtDate } from "@/lib/format";
+import { isSupabaseConfigured, useScanStatus } from "@/lib/queries";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
@@ -18,7 +17,6 @@ const LINKS = [
  */
 export default function AppShell() {
   const { data: scan } = useScanStatus();
-  const { data: catalog } = useScraperCatalog();
   const demoMode = !isSupabaseConfigured;
   const location = useLocation();
 
@@ -58,14 +56,7 @@ export default function AppShell() {
             </NavLink>
           ))}
         </nav>
-        <div className="m-4 mt-auto rounded-xl border border-line bg-white/[0.03] p-4" data-testid="sidebar-scan-status">
-          <p className="text-[11px] font-semibold uppercase tracking-wider text-dim">Catalogo bonus</p>
-          <div className="mt-2 flex items-center gap-2 text-sm text-ink">
-            <span className={cn("size-2 rounded-full", scan?.running ? "animate-pulse-dot bg-signal" : "bg-positive animate-pulse-dot")} />
-            {scan?.running ? "Aggiornamento in corso" : "Aggiornamento settimanale"}
-          </div>
-          <p className="mt-1 font-mono text-xs text-dim">Ultimo: {fmtDate(catalog?.generated_at)}</p>
-        </div>
+
       </aside>
 
       <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-white/10 bg-[#04060d]/85 px-4 py-3 backdrop-blur-xl lg:hidden">

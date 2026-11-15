@@ -107,41 +107,40 @@ export default function Dashboard() {
                   type="button"
                   onClick={runMatch}
                   disabled={matching}
-                  aria-label="Confronta il catalogo con il tuo profilo"
+                  aria-label="Scansiona il catalogo e confrontalo con il tuo profilo"
                   data-testid="cta-radar-match"
                   className={cn(
-                    "group relative grid size-20 shrink-0 place-items-center rounded-full border border-accent/40 bg-accent/10 text-accent transition duration-200",
-                    "hover:border-accent/70 hover:bg-accent/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50",
+                    "group relative grid size-16 shrink-0 place-items-center overflow-hidden rounded-full text-[#03121b] transition duration-200",
+                    "bg-[linear-gradient(180deg,#8bf3ff_0%,#22d3ee_45%,#0ea5e9_100%)] shadow-[0_10px_30px_-12px_rgba(34,211,238,0.85)]",
+                    "hover:brightness-105 hover:shadow-[0_14px_34px_-10px_rgba(34,211,238,0.9)] active:brightness-95",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas",
                     matching ? "cursor-progress" : "cursor-pointer",
                   )}
                 >
-                  <span className="pointer-events-none absolute inset-1 rounded-full border border-accent/20" />
-                  <span className="pointer-events-none absolute inset-4 rounded-full border border-accent/15" />
                   {(matching || running) && (
                     <span
                       className="pointer-events-none absolute inset-0 animate-radar rounded-full"
-                      style={{ background: "conic-gradient(from 0deg, rgba(34,211,238,0.5), transparent 28%)" }}
+                      style={{ background: "conic-gradient(from 0deg, rgba(255,255,255,0.6), transparent 30%)" }}
                     />
                   )}
-                  <Radar
-                    className={cn(
-                      "relative size-7",
-                      matching ? "animate-pulse" : "transition-transform duration-200 group-hover:scale-110",
-                    )}
-                  />
+                  <Radar className={cn("relative size-6", matching && "animate-pulse")} />
                 </button>
-                <p className="max-w-[16rem] text-sm text-muted" aria-live="polite" data-testid="dashboard-match-caption">
-                  {matching ? (
-                    <span className="font-mono text-xs text-accent">Confronto catalogo e profilo…</span>
-                  ) : matched ? (
-                    <>
-                      <span className="font-semibold text-ink">{eligibleCount}</span> bandi idonei ·{" "}
-                      <span className="font-semibold text-ink">{top.length}</span> in evidenza qui sotto
-                    </>
-                  ) : (
-                    "Tocca il radar per confrontare il catalogo con il tuo profilo."
-                  )}
-                </p>
+                <div className="min-w-0" aria-live="polite" data-testid="dashboard-match-caption">
+                  <p className="font-display text-base font-bold text-ink">
+                    {matching
+                      ? "Scansione in corso…"
+                      : matched
+                        ? `${eligibleCount} bandi idonei per te`
+                        : "Scansiona e trova i tuoi bonus"}
+                  </p>
+                  <p className="mt-0.5 text-sm text-muted">
+                    {matching
+                      ? "Confronto tra catalogo e profilo…"
+                      : matched
+                        ? "Risultati qui sotto, in evidenza."
+                        : "Confrontiamo ogni bando con i tuoi dati."}
+                  </p>
+                </div>
               </>
             )}
           </div>
@@ -191,10 +190,10 @@ export default function Dashboard() {
       </section>
 
       <section className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <Stat testId="stat-eligible" label="Idonei per te" value={eligibleCount || d?.bonus_eligible} accent="text-positive" icon={CheckCircle2} />
-        <Stat testId="stat-favorites" label="Preferiti salvati" value={d?.favorites_total} accent="text-signal" icon={Heart} />
-        <Stat testId="stat-docs-to-sign" label="Documenti da firmare" value={d?.documents_to_sign} accent="text-accent" icon={FileSignature} />
-        <Stat testId="stat-bonus-total" label="Bonus nel catalogo" value={d?.bonus_total} accent="text-ink" icon={Sparkles} />
+        <Stat testId="stat-eligible" label="Idonei per te" value={eligibleCount || d?.bonus_eligible} accent="text-positive" icon={CheckCircle2} scrollTo="in-evidenza" />
+        <Stat testId="stat-favorites" label="Preferiti salvati" value={d?.favorites_total} accent="text-signal" icon={Heart} scrollTo="preferiti" />
+        <Stat testId="stat-docs-to-sign" label="Documenti da firmare" value={d?.documents_to_sign} accent="text-accent" icon={FileSignature} to="/profile" />
+        <Stat testId="stat-bonus-total" label="Bonus nel catalogo" value={d?.bonus_total} accent="text-ink" icon={Sparkles} to="/bonus" />
       </section>
 
       {!profile && (
@@ -236,7 +235,7 @@ export default function Dashboard() {
 
       {/* Preferiti con matching */}
       <section className="mt-8">
-        <div className="mb-3 flex items-center justify-between">
+        <div id="preferiti" className="mb-3 flex scroll-mt-24 items-center justify-between">
           <h2 className="font-display text-xl font-bold text-ink">I tuoi preferiti</h2>
           <Link to="/bonus" className="flex items-center gap-1 text-sm text-accent hover:underline" data-testid="link-favorites-bonus">
             Gestisci nel catalogo <ArrowRight className="size-4" />
@@ -260,7 +259,7 @@ export default function Dashboard() {
       </section>
 
       {/* Scadenze imminenti */}
-      <section className="mt-8">
+      <section id="scadenze" className="mt-8 scroll-mt-24">
         <h2 className="font-display text-xl font-bold text-ink">Scadenze imminenti</h2>
         <div className="mt-3 flex flex-col gap-2" data-testid="dashboard-deadlines">
           {(d?.upcoming_deadlines ?? []).length === 0 ? (
@@ -318,21 +317,29 @@ function BonusMatchRow({ bonus: b, match }: { bonus: Bonus; match: ReturnType<ty
   );
 }
 
+/**
+ * Riquadro numerico cliccabile: `to` porta a un'altra pagina, `scrollTo`
+ * scorre alla sezione della stessa dashboard (preferiti, in evidenza…).
+ */
 function Stat({
   label,
   value,
   accent,
   icon: Icon,
   testId,
+  to,
+  scrollTo,
 }: {
   label: string;
   value: number | undefined;
   accent: string;
   icon: typeof Radar;
   testId: string;
+  to?: string;
+  scrollTo?: string;
 }) {
-  return (
-    <div className="panel rounded-xl p-4">
+  const body = (
+    <>
       <div className="flex items-center justify-between">
         <p className="text-xs font-semibold uppercase tracking-wider text-muted">{label}</p>
         <Icon className="size-4 text-dim" />
@@ -340,6 +347,26 @@ function Stat({
       <p className={cn("mt-3 font-display text-3xl font-bold", accent)} data-testid={testId}>
         {value ?? "—"}
       </p>
-    </div>
+    </>
+  );
+  const cls = "panel interactive block w-full rounded-xl p-4 text-left transition-colors duration-150";
+
+  if (to) {
+    return (
+      <Link to={to} className={cls} data-testid={`${testId}-card`} aria-label={`${label}: apri`}>
+        {body}
+      </Link>
+    );
+  }
+  return (
+    <button
+      type="button"
+      onClick={() => document.getElementById(scrollTo ?? "")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+      className={cls}
+      data-testid={`${testId}-card`}
+      aria-label={`${label}: vai alla sezione`}
+    >
+      {body}
+    </button>
   );
 }
