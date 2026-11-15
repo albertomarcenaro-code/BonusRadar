@@ -148,38 +148,33 @@ export default function Dashboard() {
 
         {/* Registro scansione, inglobato nell'hero: una riga compatta */}
         <div
-          className="relative mt-8 flex flex-col gap-3 border-t border-line pt-4 sm:flex-row sm:items-center sm:gap-6"
+          className="relative mt-10 flex flex-col gap-3 border-t border-line pt-4 sm:flex-row sm:items-center sm:gap-6"
           data-testid="dashboard-scan-log"
         >
-        <div className="flex shrink-0 items-center gap-2.5">
-          <span className="relative grid size-8 place-items-center rounded-full border border-accent/30">
-            <Radar className={cn("size-4 text-accent", running && "animate-pulse")} />
-          </span>
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-dim">Registro scansione</p>
-            <p className="text-sm text-muted" data-testid="dashboard-last-scan">
-              Ultima: {fmtDateTime(d?.last_scan_at ?? scan?.last_run_at)}
-            </p>
-          </div>
+        <div className="shrink-0">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-dim">Registro scansione</p>
+          <p className="text-[13px] text-muted" data-testid="dashboard-last-scan">
+            Ultima: {fmtDateTime(d?.last_scan_at ?? scan?.last_run_at)}
+          </p>
         </div>
         <div className="min-w-0 flex-1 border-line sm:border-l sm:pl-6">
           {running ? (
-            <p className="truncate font-mono text-xs text-accent" data-testid="dashboard-scan-phase-log">
+            <p className="truncate font-mono text-[11px] text-accent" data-testid="dashboard-scan-phase-log">
               {scan?.phase || "Scansione in corso…"}
             </p>
           ) : (scan?.log ?? []).length > 0 ? (
-            <p className="truncate font-mono text-xs text-muted" data-testid="dashboard-scan-last-line">
+            <p className="truncate font-mono text-[11px] text-muted" data-testid="dashboard-scan-last-line">
               {(scan?.log ?? [])[(scan?.log ?? []).length - 1]}
             </p>
           ) : (
-            <p className="truncate font-mono text-xs text-dim" data-testid="dashboard-scan-idle">
+            <p className="truncate font-mono text-[11px] text-dim" data-testid="dashboard-scan-idle">
               Scansione automatica settimanale dello scraper · nessuna esecuzione manuale
             </p>
           )}
         </div>
         <span
           className={cn(
-            "shrink-0 self-start rounded-full border px-2.5 py-0.5 text-xs font-semibold sm:self-center",
+            "shrink-0 self-start rounded-full border px-2.5 py-0.5 text-[11px] font-semibold sm:self-center",
             running ? "border-accent/40 bg-accent/10 text-accent" : "border-positive/30 bg-positive/10 text-positive",
           )}
           data-testid="dashboard-scan-status"
