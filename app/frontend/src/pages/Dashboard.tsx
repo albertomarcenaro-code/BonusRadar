@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -11,7 +11,6 @@ import {
   UserCheck,
 } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
-import { Button } from "@/components/ui/button";
 import { MatchBadge } from "@/components/match";
 import { calculateBonusMatch } from "@/lib/matching";
 import { useBonuses, useDashboard, useProfile, useScanStatus } from "@/lib/queries";
@@ -50,6 +49,30 @@ export default function Dashboard() {
 
   const running = scan?.running ?? false;
 
+  // Match on demand: il radar mostra il confronto in corso e poi porta ai
+  // risultati. I dati sono gli stessi che la pagina calcola già; l'attesa
+  // copre il passaggio e rende evidente cosa è appena successo.
+  const [matching, setMatching] = useState(false);
+  const [matched, setMatched] = useState(false);
+  const matchTimer = useRef<number | null>(null);
+  useEffect(
+    () => () => {
+      if (matchTimer.current) window.clearTimeout(matchTimer.current);
+    },
+    [],
+  );
+
+  const runMatch = () => {
+    if (matching) return;
+    setMatching(true);
+    setMatched(false);
+    matchTimer.current = window.setTimeout(() => {
+      setMatching(false);
+      setMatched(true);
+      document.getElementById("in-evidenza")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 1200);
+  };
+
   return (
     <div>
       <section className="panel relative overflow-hidden p-6 sm:p-10 animate-rise">
@@ -67,43 +90,68 @@ export default function Dashboard() {
             {d?.profile_name ? `Buongiorno, ${d.profile_name.split(" ")[0]}` : "Benvenuto in BonusRadar"}
           </p>
           <h1 className="mt-3 font-display text-4xl font-bold leading-[1.05] text-ink sm:text-5xl" data-testid="dashboard-title">
-            La tua panoramica:
-            <br />
-            <span className="text-gradient">pratiche, preferiti, scadenze.</span>
+            <span className="text-gradient">Pratiche, preferiti, scadenze.</span>
           </h1>
           <p className="mt-4 text-muted">
             Confrontiamo ogni settimana i requisiti dei bandi con il tuo profilo: qui trovi i bonus più compatibili, i
             preferiti e le scadenze imminenti.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-7 flex flex-wrap items-center gap-4">
             {d && !d.has_profile ? (
               <Link to="/profile" className={buttonVariants({ size: "lg" })} data-testid="cta-start-questionnaire">
                 <UserCheck className="size-4" /> Completa il tuo profilo
               </Link>
             ) : (
-              <Link to="/bonus" className={buttonVariants({ size: "lg" })} data-testid="cta-view-bonus">
-                <Sparkles className="size-4" /> Vedi i miei bonus
-              </Link>
+              <>
+                <button
+                  type="button"
+                  onClick={runMatch}
+                  disabled={matching}
+                  aria-label="Confronta il catalogo con il tuo profilo"
+                  data-testid="cta-radar-match"
+                  className={cn(
+                    "group relative grid size-20 shrink-0 place-items-center rounded-full border border-accent/40 bg-accent/10 text-accent transition duration-200",
+                    "hover:border-accent/70 hover:bg-accent/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50",
+                    matching ? "cursor-progress" : "cursor-pointer",
+                  )}
+                >
+                  <span className="pointer-events-none absolute inset-1 rounded-full border border-accent/20" />
+                  <span className="pointer-events-none absolute inset-4 rounded-full border border-accent/15" />
+                  {(matching || running) && (
+                    <span
+                      className="pointer-events-none absolute inset-0 animate-radar rounded-full"
+                      style={{ background: "conic-gradient(from 0deg, rgba(34,211,238,0.5), transparent 28%)" }}
+                    />
+                  )}
+                  <Radar
+                    className={cn(
+                      "relative size-7",
+                      matching ? "animate-pulse" : "transition-transform duration-200 group-hover:scale-110",
+                    )}
+                  />
+                </button>
+                <p className="max-w-[16rem] text-sm text-muted" aria-live="polite" data-testid="dashboard-match-caption">
+                  {matching ? (
+                    <span className="font-mono text-xs text-accent">Confronto catalogo e profilo…</span>
+                  ) : matched ? (
+                    <>
+                      <span className="font-semibold text-ink">{eligibleCount}</span> bandi idonei ·{" "}
+                      <span className="font-semibold text-ink">{top.length}</span> in evidenza qui sotto
+                    </>
+                  ) : (
+                    "Tocca il radar per confrontare il catalogo con il tuo profilo."
+                  )}
+                </p>
+              </>
             )}
-            <Link to="/profile" data-testid="cta-goto-profile">
-              <Button variant="outline" size="lg">
-                <FileSignature className="size-4" /> Profilo &amp; Documenti
-              </Button>
-            </Link>
           </div>
-          {running && (
-            <p className="mt-3 font-mono text-xs text-dim" data-testid="dashboard-scan-phase">
-              {scan?.phase}
-            </p>
-          )}
         </div>
-      </section>
 
-      {/* Registro scansione: full-width subito sotto l'hero, su una riga compatta */}
-      <section
-        className="terminal mt-6 flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:gap-6"
-        data-testid="dashboard-scan-log"
-      >
+        {/* Registro scansione, inglobato nell'hero: una riga compatta */}
+        <div
+          className="relative mt-8 flex flex-col gap-3 border-t border-line pt-4 sm:flex-row sm:items-center sm:gap-6"
+          data-testid="dashboard-scan-log"
+        >
         <div className="flex shrink-0 items-center gap-2.5">
           <span className="relative grid size-8 place-items-center rounded-full border border-accent/30">
             <Radar className={cn("size-4 text-accent", running && "animate-pulse")} />
@@ -139,6 +187,7 @@ export default function Dashboard() {
         >
           {running ? "Aggiornamento in corso" : "Aggiornamento settimanale"}
         </span>
+        </div>
       </section>
 
       <section className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
@@ -162,7 +211,7 @@ export default function Dashboard() {
         </section>
       )}
 
-      <section className="mt-8">
+      <section id="in-evidenza" className="mt-8 scroll-mt-24">
         <div className="mb-3 flex items-center justify-between">
           <h2 className="font-display text-xl font-bold text-ink">In evidenza per te</h2>
           <Link to="/bonus" className="flex items-center gap-1 text-sm text-accent hover:underline" data-testid="link-all-bonus">
