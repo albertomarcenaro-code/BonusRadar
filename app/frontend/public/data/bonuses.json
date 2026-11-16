@@ -1,7 +1,12 @@
 {
-  "generated_at": "2026-11-14T16:50:35Z",
+  "generated_at": "2026-11-16T15:06:48Z",
   "source": "BonusRadar scraper v1",
-  "count": 56,
+  "count": 67,
+  "stats": {
+    "bonuses": 67,
+    "active": 67,
+    "sources": 15
+  },
   "bonuses": [
     {
       "id": "scr-47ce8944846b",
@@ -224,7 +229,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-16T15:06:48Z"
     },
     {
       "id": "scr-c0661d6d68b0",
@@ -348,36 +353,36 @@
     {
       "id": "scr-3df33a7c0d4d",
       "title": "ON - Oltre Nuove imprese a tasso zero",
-      "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
-      "category": "altro",
+      "authority": "Invitalia",
+      "category": "lavoro",
       "amount": "",
       "deadline": "",
-      "summary": "Avviso pubblicato su Invitalia: apri la fonte per i dettagli.",
+      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
       "requirements": [],
       "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/imprenditoria-femminile",
-      "source_name": "Invitalia",
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/ON-nuove-imprese-tasso-zero?from=/per-chi-vuole-fare-impresa/incentivi",
+      "source_name": "Invitalia — Autoimpiego e nuove imprese",
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-16T15:06:48Z"
     },
     {
       "id": "scr-d20a5b49c256",
       "title": "Smart&Start Italia",
-      "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
-      "category": "altro",
+      "authority": "Invitalia",
+      "category": "lavoro",
       "amount": "",
       "deadline": "",
-      "summary": "Avviso pubblicato su Invitalia: apri la fonte per i dettagli.",
+      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
       "requirements": [],
       "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/beni-strumentali-nuova-sabatini",
-      "source_name": "Invitalia",
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/smartstart-italia?from=/per-chi-vuole-fare-impresa/incentivi",
+      "source_name": "Invitalia — Autoimpiego e nuove imprese",
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-16T15:06:48Z"
     },
     {
       "id": "scr-2c4f5d33b903",
@@ -797,7 +802,7 @@
       "category": "lavoro",
       "amount": "",
       "deadline": "",
-      "summary": "Vai Portale sulla Previdenza Complementare Vai al sito dedicato agli Operatori dell’Assegno di inclusione",
+      "summary": "Vai al sito dedicato agli Operatori dell’Assegno di inclusione",
       "requirements": [],
       "required_documents": [],
       "source_url": "https://www.lavoro.gov.it/adi/",
@@ -805,7 +810,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-16T15:06:48Z"
     },
     {
       "id": "scr-45e0bdec558f",
@@ -822,7 +827,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-16T15:06:48Z"
     },
     {
       "id": "scr-3fbb07414f85",
@@ -832,16 +837,14 @@
       "amount": "",
       "deadline": "",
       "summary": "Brevetti+, Disegni+ e Marchi+: le misure a sostegno di proprietà intellettuale e creatività Rappresentano una concreta opportunità di crescita e di sviluppo industriale APPROFONDISCI",
-      "requirements": [
-        "età"
-      ],
+      "requirements": [],
       "required_documents": [],
       "source_url": "https://www.cliclavoro.gov.it/news/trend-interviste/innovazione-e-solidita-tecnologica-i-nuovi-bandi-targati-brevetti-disegni-e?language_content_entity=it",
       "source_name": "Cliclavoro",
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-16T15:06:48Z"
     },
     {
       "id": "scr-e846f6dd6d89",
@@ -850,7 +853,7 @@
       "category": "lavoro",
       "amount": "",
       "deadline": "",
-      "summary": "Sport e inclusione sociale, le iniziative per lo sviluppo degli spazi civici Incentivi e progetti per promuovere luoghi aperti, accessibili e inclusivi con modalità di formazione e orientamento 10/11/2026 Startup innovative: sostegni a un settore in crescita Innovazione, ricerca e imprenditorialità giovanile al centro delle politiche di sostegno",
+      "summary": "Startup innovative: sostegni a un settore in crescita Innovazione, ricerca e imprenditorialità giovanile al centro delle politiche di sostegno",
       "requirements": [],
       "required_documents": [],
       "source_url": "https://www.cliclavoro.gov.it/news/trend-interviste/startup-innovative-sostegni-a-un-settore-in-crescita?language_content_entity=it",
@@ -858,7 +861,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-16T15:06:48Z"
     },
     {
       "id": "scr-220eb0740858",
@@ -867,7 +870,7 @@
       "category": "lavoro",
       "amount": "",
       "deadline": "",
-      "summary": "Il 17 novembre torna la IULM for Job a Milano La Career Fair dedicata all'incontro tra studenti, laureati e mondo del lavoro Milano News 12/11/2026 Bando Neoimpresa Valle D’Aosta: finanziamento a Fondo perduto per l’avvio di nuove attività imprenditoriali e di lavoro autonomo L’incentivo si rivolge alle persone disoccupate Aosta",
+      "summary": "Bando Neoimpresa Valle D’Aosta: finanziamento a Fondo perduto per l’avvio di nuove attività imprenditoriali e di lavoro autonomo L’incentivo si rivolge alle persone disoccupate Aosta",
       "requirements": [],
       "required_documents": [],
       "source_url": "https://www.cliclavoro.gov.it/news/news-eventi/bando-neoimpresa-valle-daosta-finanziamento-a-fondo-perduto-per-lavvio-di-nuove?language_content_entity=it",
@@ -875,7 +878,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-16T15:06:48Z"
     },
     {
       "id": "scr-c1ca38f77731",
@@ -1009,6 +1012,205 @@
       "eligibility_reason": "",
       "is_new": true,
       "discovered_at": "2026-11-14T16:50:35Z"
+    },
+    {
+      "id": "scr-0b3bb316cd1a",
+      "title": "Avviso pubblico per la presentazione di domande di incentivi a fondo perduto destinati ai datori di lavoro privati per l'assunzione di lavoratori con disabilità",
+      "authority": "Regione Liguria",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblico per la presentazione di domande di incentivi a fondo perduto destinati ai datori di lavoro privati per l'assunzione di lavoratori con disabilità",
+      "requirements": [
+        "Residenza in Liguria"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetition/4782:avviso-pubblico-per-la-presentazione-di-domande-di-incentivi-a-fondo-perduto-destinati-ai-datori-di-lavoro-privati-per-l-assunzione-di-lavoratori-con-disabilita.html",
+      "source_name": "Regione Liguria",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-16T15:06:48Z"
+    },
+    {
+      "id": "scr-83644461d463",
+      "title": "Voucher Internazionalizzazione Pmi 2027",
+      "authority": "Regione Lazio (Lazio Innova)",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Lazio Innova: apri la fonte per i dettagli.",
+      "requirements": [
+        "Sede operativa o residenza nel Lazio"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.lazioinnova.it/bandi/voucher-internazionalizzazione-pmi-2027/",
+      "source_name": "Lazio Innova",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-16T15:06:48Z"
+    },
+    {
+      "id": "scr-171213fa3702",
+      "title": "Finanziamenti con provvista BEI e contributo in conto interessi",
+      "authority": "Regione Lazio (Lazio Innova)",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Finanziamenti con provvista BEI e contributo in conto interessi",
+      "requirements": [
+        "Sede operativa o residenza nel Lazio"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.lazioinnova.it/bandi/finanziamenti-con-provvista-bei-e-contributo-in-conto-interessi/",
+      "source_name": "Lazio Innova",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-16T15:06:48Z"
+    },
+    {
+      "id": "scr-dc72123c2d6c",
+      "title": "Basket Bond Lazio – Contributo sui costi di emissione sostenuti dalle Pmi ammissibili",
+      "authority": "Regione Lazio (Lazio Innova)",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Basket Bond Lazio – Contributo sui costi di emissione sostenuti dalle Pmi ammissibili",
+      "requirements": [
+        "Sede operativa o residenza nel Lazio"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.lazioinnova.it/bandi/basket-bond-lazio-contributo-sui-costi-di-emissione-sostenuti-dalle-pmi-ammissibili/",
+      "source_name": "Lazio Innova",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-16T15:06:48Z"
+    },
+    {
+      "id": "scr-f10d49c51993",
+      "title": "Fondo Microcredito ‘Adozioni’",
+      "authority": "Regione Lazio (Lazio Innova)",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Lazio Innova: apri la fonte per i dettagli.",
+      "requirements": [
+        "Sede operativa o residenza nel Lazio"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.lazioinnova.it/bandi/fondo-microcredito-adozioni/",
+      "source_name": "Lazio Innova",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-16T15:06:48Z"
+    },
+    {
+      "id": "scr-ff1578b7f081",
+      "title": "Autoimpiego Centro-Nord",
+      "authority": "Invitalia",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/autoimpiego-centro-nord?from=/per-chi-vuole-fare-impresa/incentivi",
+      "source_name": "Invitalia — Autoimpiego e nuove imprese",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-16T15:06:48Z"
+    },
+    {
+      "id": "scr-0026efe14789",
+      "title": "Resto al Sud 2.0",
+      "authority": "Invitalia",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/resto-al-sud-20?from=/per-chi-vuole-fare-impresa/incentivi",
+      "source_name": "Invitalia — Autoimpiego e nuove imprese",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-16T15:06:48Z"
+    },
+    {
+      "id": "scr-4bc5369a150a",
+      "title": "Imprenditoria femminile",
+      "authority": "Invitalia",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/imprenditoria-femminile",
+      "source_name": "Invitalia — Autoimpiego e nuove imprese",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-16T15:06:48Z"
+    },
+    {
+      "id": "scr-b05c66f7b9f1",
+      "title": "Economia circolare",
+      "authority": "Invitalia",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/economia-circolare",
+      "source_name": "Invitalia — Autoimpiego e nuove imprese",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-16T15:06:48Z"
+    },
+    {
+      "id": "scr-736efc897cf7",
+      "title": "Italia Economia Sociale",
+      "authority": "Invitalia",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/italia-economia-sociale",
+      "source_name": "Invitalia — Autoimpiego e nuove imprese",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-16T15:06:48Z"
+    },
+    {
+      "id": "scr-c4bce98ceef4",
+      "title": "Termini presentazione domande di contributo al CATA Artigianato FVG",
+      "authority": "Regione Autonoma Friuli Venezia Giulia",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Termini presentazione domande di contributo al CATA Artigianato FVG",
+      "requirements": [
+        "Sede operativa o residenza in Friuli Venezia Giulia"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/hp-new/in-evidenza/ultime/2945_f.html",
+      "source_name": "Regione Friuli Venezia Giulia",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "discovered_at": "2026-11-16T15:06:48Z"
     }
   ]
 }

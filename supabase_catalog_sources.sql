@@ -27,6 +27,10 @@ create table if not exists public.catalog_sources (
   base_url    text not null default '',
   residency   text,
   topics      text[] not null default '{}',
+  -- A chi si rivolge la fonte: persona, impresa, artigiani, professionisti.
+  -- Usato per etichettare le schede estratte e per il matching per tipo di
+  -- soggetto. Default volutamente ampio: nessuna scheda sparisce.
+  target      text[] not null default '{persona,impresa}',
   enabled     boolean not null default false,
   priority    integer not null default 100,
   note        text not null default '',
@@ -38,6 +42,10 @@ create index if not exists idx_catalog_sources_enabled
   on public.catalog_sources (enabled, priority);
 
 alter table public.catalog_sources enable row level security;
+
+-- Migrazione per i database già creati con la v1 (senza `target`).
+alter table public.catalog_sources
+  add column if not exists target text[] not null default '{persona,impresa}';
 
 -- Lettura per gli utenti autenticati; la scrittura resta al service_role
 -- (che bypassa la RLS e viene usato dallo scraper in GitHub Actions).
@@ -211,6 +219,43 @@ values
     'https://ec.europa.eu/info/funding-tenders/opportunities/portal/', 'https://ec.europa.eu/info/funding-tenders/opportunities/portal/', 'https://ec.europa.eu/',
     null, '{}', false, 27,
     'Portale interamente JavaScript: 0 elementi estraibili dall''HTML (14/11/2026). Richiederebbe la loro API di ricerca.'
+  ),
+  -- ---------------- Imprese, artigiani e professionisti (16/11/2026) ----------------
+  -- Pagine verificate con il parser attuale prima di essere messe in mappa.
+  (
+    'lazio-innova', 'Lazio Innova', 'Regione Lazio (Lazio Innova)',
+    $d$Società della Regione Lazio che gestisce bandi e contributi per imprese, startup e professionisti del Lazio (voucher digitalizzazione e internazionalizzazione, contributi in conto interesse, avvisi per giovani attività professionali).$d$,
+    'https://www.lazioinnova.it/bandi/', 'https://www.lazioinnova.it/bandi/', 'https://www.lazioinnova.it/',
+    'Sede operativa o residenza nel Lazio', '{}', true, 16,
+    'Verificata il 16/11/2026: 12 card estratte dalla pagina bandi.'
+  ),
+  (
+    'invitalia-autoimpiego', 'Invitalia — Autoimpiego e nuove imprese', 'Invitalia',
+    $d$Incentivi nazionali per chi avvia o sviluppa un'attività in proprio: autoimpiego, nuove imprese a tasso zero, imprenditoria femminile, microimprese e artigiani.$d$,
+    'https://www.invitalia.it/per-chi-vuole-fare-impresa/incentivi-e-strumenti', 'https://www.invitalia.it/per-chi-vuole-fare-impresa/incentivi-e-strumenti', 'https://www.invitalia.it/',
+    null, '{}', true, 17,
+    'Verificata il 16/11/2026: 13 card estratte (ON tasso zero, Autoimpiego Centro-Nord, Imprenditoria femminile).'
+  ),
+  (
+    'sardegna-impresa', 'Sardegna Impresa (Confartigianato)', 'Confartigianato Sud Sardegna',
+    $d$Portale di Confartigianato dedicato ai bandi per artigiani e piccole imprese della Sardegna: finanziamenti regionali, contributi camerali, avvisi per l'artigianato.$d$,
+    'https://www.sardegnaimpresa.it/bandi', 'https://www.sardegnaimpresa.it/bandi', 'https://www.sardegnaimpresa.it/',
+    'Sede operativa in Sardegna', '{}', true, 18,
+    'Verificata il 16/11/2026: 10 card estratte.'
+  ),
+  (
+    'fondoprofessioni', 'Fondoprofessioni', 'Fondoprofessioni',
+    $d$Fondo interprofessionale per la formazione continua dei professionisti: avvisi e voucher formativi per studi professionali e lavoratori autonomi.$d$,
+    'https://www.fondoprofessioni.it/avvisi', 'https://www.fondoprofessioni.it/avvisi', 'https://www.fondoprofessioni.it/',
+    null, '{}', true, 19,
+    'Verificata il 16/11/2026: 11 card estratte.'
+  ),
+  (
+    'regione-fvg', 'Regione Friuli Venezia Giulia', 'Regione Autonoma Friuli Venezia Giulia',
+    $d$Bandi e contributi regionali per imprese, artigiani e liberi professionisti del Friuli Venezia Giulia (innovazione, internazionalizzazione, artigianato, energia).$d$,
+    'https://www.regione.fvg.it/', 'https://www.regione.fvg.it/', 'https://www.regione.fvg.it/',
+    'Sede operativa o residenza in Friuli Venezia Giulia', '{}', true, 20,
+    'Verificata il 16/11/2026: 23 link con parole chiave bando/contributo nella home. Filtro topics attivo perché la home è molto ampia.'
   )
 on conflict (slug) do update set
   name        = excluded.name,
@@ -225,3 +270,11 @@ on conflict (slug) do update set
   priority    = excluded.priority,
   note        = excluded.note,
   updated_at  = now();
+
+-- Target editoriale delle fonti per imprese/artigiani/professionisti: il
+-- default '{persona,impresa}' resta su tutte le altre.
+update public.catalog_sources set target = '{impresa,professionisti}' where slug = 'lazio-innova';
+update public.catalog_sources set target = '{impresa,artigiani}'      where slug = 'invitalia-autoimpiego';
+update public.catalog_sources set target = '{artigiani,impresa}'      where slug = 'sardegna-impresa';
+update public.catalog_sources set target = '{professionisti}'         where slug = 'fondoprofessioni';
+update public.catalog_sources set target = '{impresa,artigiani}'      where slug = 'regione-fvg';

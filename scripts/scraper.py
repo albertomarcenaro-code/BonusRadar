@@ -189,6 +189,68 @@ SOURCES: list[dict] = [
         "base_url": "https://www.regione.veneto.it/",
         "residency": "Residenza nel Veneto",
     },
+    # ---------------- Imprese, artigiani e professionisti ----------------
+    # Aggiunte il 16/11/2026 dopo la verifica delle pagine di elenco: tutte
+    # rispondono e producono card con il parser attuale.
+    {
+        "name": "Lazio Innova",
+        "authority": "Regione Lazio (Lazio Innova)",
+        "list_url": "https://www.lazioinnova.it/bandi/",
+        "base_url": "https://www.lazioinnova.it/",
+        "residency": "Sede operativa o residenza nel Lazio",
+        "target": ("impresa", "professionisti"),
+    },
+    {
+        "name": "Invitalia — Autoimpiego e nuove imprese",
+        "authority": "Invitalia",
+        "list_url": "https://www.invitalia.it/per-chi-vuole-fare-impresa/incentivi-e-strumenti",
+        "base_url": "https://www.invitalia.it/",
+        # Pagina curata: le card sono i nomi degli incentivi, senza testo.
+        "all_items": True,
+        # Progetti educativi per le scuole, non incentivi per chi fa impresa.
+        "exclude": (
+            "saper(e)consumare", "sapereconsumare", "progetto rete",
+            # Link promozionali in colonna: non sono autoimpiego.
+            "ecobonus", "colonnine", "mobilità sostenibile",
+        ),
+        "target": ("impresa", "artigiani"),
+    },
+    {
+        "name": "Sardegna Impresa (Confartigianato)",
+        "authority": "Confartigianato Sud Sardegna",
+        "list_url": "https://www.sardegnaimpresa.it/bandi",
+        "base_url": "https://www.sardegnaimpresa.it/",
+        "residency": "Sede operativa in Sardegna",
+        # La pagina mescola bandi e articoli divulgativi.
+        "topics": ("bando", "avviso", "incentiv", "finanziament", "credito d'imposta", "contribut"),
+        "target": ("artigiani", "impresa"),
+    },
+    {
+        "name": "Fondoprofessioni",
+        "authority": "Fondoprofessioni",
+        "list_url": "https://www.fondoprofessioni.it/avvisi",
+        "base_url": "https://www.fondoprofessioni.it/",
+        # La pagina di elenco è molto "di servizio": solo gli avvisi veri.
+        "topics": ("avviso", "bando", "voucher", "formazione", "contribut"),
+        # La pagina è un menu: si scartano eventi, premi e materiali.
+        "exclude": ("forum", "concorso", "premio", "video appuntamento", "convegno"),
+        "target": ("professionisti",),
+    },
+    {
+        "name": "Regione Friuli Venezia Giulia",
+        "authority": "Regione Autonoma Friuli Venezia Giulia",
+        "list_url": "https://www.regione.fvg.it/",
+        "base_url": "https://www.regione.fvg.it/",
+        "residency": "Sede operativa o residenza in Friuli Venezia Giulia",
+        # Home molto ampia: senza filtro tematico entrano solo notizie.
+        # La home contiene anche bandi per Comuni, scuole ed ETS: il filtro
+        # tiene solo ciò che parla di imprese, artigiani e professionisti.
+        "topics": (
+            "impres", "artigian", "professionist", "pmi", "startup",
+            "innovazione", "internazional", "voucher",
+        ),
+        "target": ("impresa", "artigiani"),
+    },
 ]
 
 # Parole-chiave: un link è candidato "bonus" se il testo le contiene.
@@ -226,6 +288,8 @@ RE_AMOUNT = re.compile(r"(?:fino a |da |detrazione )?\d[\d.,]*\s*(?:€|euro)", 
 NOISE_SUBSTRINGS = (
     "selected items", "mostra di più", "mostra di piu", "filtra per",
     "seleziona", "loading", "caricamento",
+    # Paginazione e inviti generici delle pagine di elenco: non sono bandi.
+    "navigazione articoli", "prenota il tuo video appuntamento",
 )
 
 # Atti amministrativi che non sono bonus per i cittadini: gare, affidamenti,
@@ -239,6 +303,8 @@ NEWS_NOISE_SUBSTRINGS = (
     "rafforzano", "smau", "convegno", "seminario", "webinar", "comunicato",
     "rassegna", "intervista", "criterio del", "multicomparto", "controlli ex post",
     "campagna proattiva", "in diretta",
+    # Annunci di incontri/convegni sul tema: informazione, non opportunità.
+    "incontro su", "incontro dedicato",
 )
 
 ADMIN_NOISE_SUBSTRINGS = (
@@ -569,10 +635,17 @@ def scrape_source(source: dict) -> list[dict]:
         if len(items) >= MAX_ITEMS_PER_SOURCE:
             break
         hay = f"{element['title']} {element['text']}".lower()
-        if not any(k in hay for k in BONUS_KEYWORDS):
-            continue
-        # Filtro tematico delle fonti locali: solo gli avvisi in tema.
-        if topics and not any(t in hay for t in topics):
+        # Pagine di elenco curate (es. Invitalia "incentivi e strumenti"): le
+        # card hanno solo il nome dell'incentivo, senza keyword nel testo, quindi
+        # il filtro per parole chiave le scarterebbe tutte.
+        if not source.get("all_items"):
+            if not any(k in hay for k in BONUS_KEYWORDS):
+                continue
+            # Filtro tematico delle fonti locali: solo gli avvisi in tema.
+            if topics and not any(t in hay for t in topics):
+                continue
+        # Esclusioni puntuali per fonte (voci della pagina che non sono bandi).
+        if any(x in hay for x in source.get("exclude", ())):
             continue
         bonus = build_bonus(source, element["url"], element["title"], element["text"])
         if bonus:
@@ -650,20 +723,31 @@ def supabase_sources(url: str, key: str) -> list[dict] | None:
     endpoint = (
         url.rstrip("/")
         + "/rest/v1/catalog_sources?enabled=is.true"
-        "&select=slug,name,authority,list_url,base_url,residency,topics,priority"
+        "&select=slug,name,authority,list_url,base_url,residency,topics,target,priority"
         "&order=priority.asc"
     )
-    req = urllib.request.Request(
-        endpoint,
-        headers={"apikey": key, "Authorization": f"Bearer {key}", "Accept": "application/json"},
-    )
+    headers = {"apikey": key, "Authorization": f"Bearer {key}", "Accept": "application/json"}
     try:
+        req = urllib.request.Request(endpoint, headers=headers)
         with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as resp:
             data = json.loads(resp.read().decode("utf-8") or "[]")
     except urllib.error.HTTPError as exc:
-        body = exc.read().decode("utf-8", errors="replace")[:160]
-        print(f"⚠︎ Fonti da catalog_sources non leggibili: HTTP {exc.code} {body}")
-        return None
+        # Colonna `target` non ancora creata (migrazione non eseguita): si
+        # rilegge senza, invece di rinunciare alla tabella e alle sue fonti.
+        if exc.code == 400:
+            retry = endpoint.replace(",target,", ",")
+            try:
+                req = urllib.request.Request(retry, headers=headers)
+                with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as resp:
+                    data = json.loads(resp.read().decode("utf-8") or "[]")
+                print("ℹ︎ catalog_sources senza colonna `target`: esegui la migrazione")
+            except Exception as exc2:
+                print(f"⚠︎ Fonti da catalog_sources non leggibili: {exc2}")
+                return None
+        else:
+            body = exc.read().decode("utf-8", errors="replace")[:160]
+            print(f"⚠︎ Fonti da catalog_sources non leggibili: HTTP {exc.code} {body}")
+            return None
     except Exception as exc:
         print(f"⚠︎ Fonti da catalog_sources non leggibili: {exc}")
         return None
@@ -681,6 +765,7 @@ def supabase_sources(url: str, key: str) -> list[dict] | None:
                 "base_url": row.get("base_url") or row["list_url"],
                 "residency": row.get("residency") or None,
                 "topics": tuple(row["topics"]) if row.get("topics") else None,
+                "target": tuple(row["target"]) if row.get("target") else None,
             }
         )
     return sources or None
@@ -815,6 +900,40 @@ def supabase_archive(url: str, key: str, keep: set[str]) -> int:
     return len(stale)
 
 
+def merge_with_existing(
+    rows: list[dict], path: Path
+) -> tuple[list[dict], int, int, int]:
+    """Unisce la run al catalogo già presente nel JSON.
+
+    Una singola run non è una fotografia completa delle fonti: una pagina che
+    risponde male, un elenco che ruota o un timeout fanno sparire schede ancora
+    valide. Le schede già in catalogo restano quindi in elenco, aggiornate quando
+    la run le ritrova (stesso titolo normalizzato) e mantenute com'erano quando
+    non le ritrova. Restituisce (righe, nuove, aggiornate, conservate).
+    """
+    try:
+        previous = json.loads(path.read_text(encoding="utf-8")).get("bonuses", [])
+    except (OSError, ValueError):
+        previous = []
+    if not isinstance(previous, list) or not previous:
+        return rows, len(rows), 0, 0
+
+    merged: list[dict] = [r for r in previous if isinstance(r, dict)]
+    index = {normalize_title(r.get("title", "")): i for i, r in enumerate(merged)}
+    new = updated = 0
+    for row in rows:
+        key = normalize_title(row["title"])
+        if key in index:
+            merged[index[key]] = row
+            updated += 1
+        else:
+            index[key] = len(merged)
+            merged.append(row)
+            new += 1
+    kept = len(merged) - new - updated
+    return merged, new, updated, kept
+
+
 def write_json(path: Path, rows: list[dict], sources_count: int, db_rows: int | None) -> None:
     """Scrive il file JSON letto dal frontend (catalogo per utenti anonimi).
 
@@ -836,7 +955,9 @@ def write_json(path: Path, rows: list[dict], sources_count: int, db_rows: int | 
             "active": len(rows),
             "sources": sources_count,
         },
-        "bonuses": [{**r, "discovered_at": now} for r in rows],
+        # `discovered_at` di una scheda conservata resta quello originale: solo
+        # le schede appena viste prendono la data di questa run.
+        "bonuses": [{**r, "discovered_at": r.get("discovered_at") or now} for r in rows],
     }
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(file, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -854,6 +975,14 @@ def main() -> int:
         "--no-archive",
         action="store_true",
         help="non marcare come scaduti i bandi che questa run non ha trovato",
+    )
+    ap.add_argument(
+        "--replace",
+        action="store_true",
+        help=(
+            "sostituisci il catalogo JSON con la sola run (default: unisci al "
+            "catalogo esistente, così le schede non ritrovate non si perdono)"
+        ),
     )
     args = ap.parse_args()
 
@@ -897,6 +1026,20 @@ def main() -> int:
             rows.append(bonus)
         time.sleep(DELAY_BETWEEN_REQUESTS)
     print(f"\nTotale bonus estratti: {len(rows)}")
+
+    json_path = Path(args.json)
+
+    # 1b) unione con il catalogo esistente, prima di Supabase: così anche
+    # l'archiviazione e i contatori vedono le schede conservate come attive.
+    if rows:
+        if args.replace:
+            print("ℹ︎ --replace: il catalogo sarà sostituito dalla sola run")
+        else:
+            rows, new, updated, kept = merge_with_existing(rows, json_path)
+            print(
+                f"✓ Catalogo unito: {new} nuove · {updated} aggiornate · "
+                f"{kept} conservate dal catalogo esistente"
+            )
 
     # 2) Supabase (se configurato)
     db_rows: int | None = None
@@ -949,7 +1092,6 @@ def main() -> int:
         print("ℹ︎ Credenziali Supabase non presenti → solo file JSON")
 
     # 3) JSON di fallback (sempre: serve agli utenti non autenticati)
-    json_path = Path(args.json)
     if rows == 0 and json_path.exists():
         print(f"ℹ︎ Nessun nuovo bonus: mantengo il file esistente {json_path}")
         return 0
