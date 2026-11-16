@@ -228,6 +228,16 @@ NOISE_SUBSTRINGS = (
     "seleziona", "loading", "caricamento",
 )
 
+# Atti amministrativi che non sono bonus per i cittadini: gare, affidamenti,
+# concessioni e procedure interne. Filtro sul titolo, così il catalogo non
+# propone come "idoneo" un avviso di procedura negoziata.
+ADMIN_NOISE_SUBSTRINGS = (
+    "procedura negoziata", "avviso di indizione", "affidamento",
+    "concessione di derivazione", "derivazione idrica", "ricerca acque sotterranee",
+    "mobilità volontaria", "graduatorie", "calendario colloqui",
+    "nomina del revisore", "istanza concessione", "manifestazione di interesse",
+)
+
 # Titoli generici di menu/navigazione: non sono bandi. Usati in build_bonus
 # per scartare i link di servizio che il filtro keyword lascia passare.
 GENERIC_TITLES = {
@@ -442,14 +452,20 @@ def guess_category(text: str) -> str:
     return "altro"
 
 
+def _mentioned(pattern: str, low: str) -> bool:
+    """True se `pattern` compare come parola: "età" non deve combaciare con
+    "società" o "entità", che non sono requisiti di età."""
+    return re.search(rf"\b{re.escape(pattern.lower())}", low) is not None
+
+
 def extract_requirements(text: str) -> list[str]:
     low = text.lower()
-    return [p for p in REQUIREMENT_PATTERNS if p.lower() in low]
+    return [p for p in REQUIREMENT_PATTERNS if _mentioned(p, low)]
 
 
 def extract_documents(text: str) -> list[str]:
     low = text.lower()
-    return [p for p in DOCUMENT_PATTERNS if p.lower() in low]
+    return [p for p in DOCUMENT_PATTERNS if _mentioned(p, low)]
 
 
 def normalize_title(title: str) -> str:
@@ -475,6 +491,8 @@ def build_bonus(source: dict, url: str, raw_title: str, extra_text: str = "") ->
     if title.lower().strip(" .:|—–-").rstrip(".") in GENERIC_TITLES:
         return None
     if any(noise in title.lower() for noise in NOISE_SUBSTRINGS):
+        return None
+    if any(noise in title.lower() for noise in ADMIN_NOISE_SUBSTRINGS):
         return None
 
     full_text = f"{title} {extra_text}"

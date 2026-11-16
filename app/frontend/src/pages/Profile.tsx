@@ -71,6 +71,25 @@ const NEW_MEMBER: FamilyMember = {
   dependent: true,
 };
 
+/** Età in mesi compiuti: il matching la usa per i limiti di età (es. nido 0–3 anni). */
+function ageMonths(birth: string): number | null {
+  if (!birth) return null;
+  const b = new Date(`${birth}T00:00:00Z`);
+  if (Number.isNaN(b.getTime())) return null;
+  const now = new Date();
+  let months = (now.getUTCFullYear() - b.getUTCFullYear()) * 12 + (now.getUTCMonth() - b.getUTCMonth());
+  if (now.getUTCDate() < b.getUTCDate()) months -= 1;
+  return months >= 0 ? months : null;
+}
+
+function ageText(months: number | null): string {
+  if (months === null) return "—";
+  const years = Math.floor(months / 12);
+  const rest = months % 12;
+  if (years === 0) return `${months} ${months === 1 ? "mese" : "mesi"}`;
+  return rest === 0 ? `${years} ${years === 1 ? "anno" : "anni"}` : `${years} anni e ${rest} mesi`;
+}
+
 const RELATIONS: Record<string, string> = { coniuge: "Coniuge / partner", figlio: "Figlio/a", genitore: "Genitore", altro: "Altro" };
 const HOUSING: Record<string, string> = { proprietario: "Proprietario", affitto: "In affitto", comodato: "Comodato / ospite", altro: "Altro" };
 const INTERESTS = ["casa", "famiglia", "lavoro", "mobilita", "studio", "salute", "energia"];
@@ -228,6 +247,21 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
                   data-testid={`input-member-cf-${i}`}
                 />
               </div>
+              {m.birth_date && (
+                <p className="mt-2 text-xs text-muted" data-testid={`member-age-${i}`}>
+                  Età: <span className="font-semibold text-ink">{ageText(ageMonths(m.birth_date))}</span>
+                  {m.relation === "figlio" && (ageMonths(m.birth_date) ?? 99) < 36 && (
+                    <span className="ml-2 rounded-full border border-accent/30 bg-accent/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
+                      fascia asilo nido
+                    </span>
+                  )}
+                  {m.relation === "figlio" && (ageMonths(m.birth_date) ?? 0) >= 216 && (
+                    <span className="ml-2 rounded-full border border-line bg-white/5 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-dim">
+                      maggiorenne
+                    </span>
+                  )}
+                </p>
+              )}
               <div className="mt-3 flex flex-wrap items-center gap-5 text-sm">
                 {(["dependent", "disabled", "student"] as const).map((k) => (
                   <label key={k} className="flex items-center gap-2">
@@ -264,6 +298,13 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
           </Button>
           <p className="font-mono text-xs text-muted" data-testid="family-count">
             Nucleo: {form.family_members.length + 1} componenti · {form.family_members.filter((m) => m.relation === "figlio").length} figli
+          </p>
+          <p
+            className="rounded-lg border border-line bg-white/[0.03] p-3 text-sm text-muted"
+            data-testid="family-age-hint"
+          >
+            🎂 La data di nascita conta: il matching esclude i bandi con limiti di età non rispettati. Per l’asilo nido
+            serve un figlio sotto i 3 anni; molti bonus chiedono figli minorenni o un’età minima del richiedente.
           </p>
         </section>
       )}
