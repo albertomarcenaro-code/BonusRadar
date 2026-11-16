@@ -231,6 +231,16 @@ NOISE_SUBSTRINGS = (
 # Atti amministrativi che non sono bonus per i cittadini: gare, affidamenti,
 # concessioni e procedure interne. Filtro sul titolo, così il catalogo non
 # propone come "idoneo" un avviso di procedura negoziata.
+# Notizie e contenuti informativi che non sono bandi: comunicati, osservatori,
+# premi, vademecum, eventi. Il catalogo deve contenere opportunità, non articoli.
+NEWS_NOISE_SUBSTRINGS = (
+    "osservatorio", "chiarimenti", "premio", "esito dei controlli", "video guida",
+    "job&orienta", "job & orienta", "comunicazioni sui contributi", "vademecum",
+    "rafforzano", "smau", "convegno", "seminario", "webinar", "comunicato",
+    "rassegna", "intervista", "criterio del", "multicomparto", "controlli ex post",
+    "campagna proattiva", "in diretta",
+)
+
 ADMIN_NOISE_SUBSTRINGS = (
     "procedura negoziata", "avviso di indizione", "affidamento",
     "concessione di derivazione", "derivazione idrica", "ricerca acque sotterranee",
@@ -493,6 +503,8 @@ def build_bonus(source: dict, url: str, raw_title: str, extra_text: str = "") ->
     if any(noise in title.lower() for noise in NOISE_SUBSTRINGS):
         return None
     if any(noise in title.lower() for noise in ADMIN_NOISE_SUBSTRINGS):
+        return None
+    if any(noise in title.lower() for noise in NEWS_NOISE_SUBSTRINGS):
         return None
 
     full_text = f"{title} {extra_text}"
