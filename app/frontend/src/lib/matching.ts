@@ -522,11 +522,14 @@ function checkScadenza(bonus: Bonus): MatchCheck | null {
   if (!date) return null;
   const today = new Date();
   const days = Math.floor((Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()) - Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate())) / MS_DAY);
+  // La data è costruita a mezzanotte UTC: formattarla nel fuso locale
+  // mostrerebbe il giorno precedente, quindi si formatta in UTC.
+  const label = date.toLocaleDateString("it-IT", { timeZone: "UTC" });
   if (days < 0) {
-    return { label: `Termine indicato ${date.toLocaleDateString("it-IT")}: verifica se è ancora aperto`, state: "warn" };
+    return { label: `Termine indicato ${label}: verifica se è ancora aperto`, state: "warn" };
   }
   if (days <= 30) {
-    return { label: `Scadenza vicina: ${date.toLocaleDateString("it-IT")} (${days} ${days === 1 ? "giorno" : "giorni"})`, state: "ok" };
+    return { label: `Scadenza vicina: ${label} (${days} ${days === 1 ? "giorno" : "giorni"})`, state: "ok" };
   }
   return null;
 }

@@ -1,50 +1,29 @@
 {
-  "generated_at": "2026-11-16T20:53:34Z",
+  "generated_at": "2026-11-16T21:27:35Z",
   "source": "BonusRadar scraper v1",
-  "count": 68,
+  "count": 6,
   "stats": {
-    "bonuses": 68,
-    "active": 68,
+    "bonuses": 6,
+    "active": 6,
     "sources": 20
   },
   "bonuses": [
-    {
-      "id": "scr-3415ff85b915",
-      "title": "Casa, tutto quello che c'è da sapere",
-      "authority": "Agenzia delle Entrate",
-      "category": "casa",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Agenzia delle Entrate: apri la fonte per i dettagli.",
-      "requirements": [
-        "contratto"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.agenziaentrate.gov.it/portale/aree-tematiche/casa",
-      "source_name": "Agenzia delle Entrate",
-      "target": [
-        "persona",
-        "impresa"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
-    },
     {
       "id": "scr-0b3bb316cd1a",
       "title": "Avviso pubblico per la presentazione di domande di incentivi a fondo perduto destinati ai datori di lavoro privati per l'assunzione di lavoratori con disabilità",
       "authority": "Regione Liguria",
       "category": "lavoro",
       "amount": "",
-      "deadline": "",
+      "deadline": "31 Dicembre 2027",
       "summary": "Avviso pubblico per la presentazione di domande di incentivi a fondo perduto destinati ai datori di lavoro privati per l'assunzione di lavoratori con disabilità",
       "requirements": [
         "Residenza in Liguria"
       ],
-      "required_documents": [],
+      "required_documents": [
+        "I datori di lavoro interessati e in possesso dei requisiti descritti all'interno del Paragrafo 6 dell'Avviso pubblico possono far domanda esclusivamente online , accedendo al sistema \" Bandi online \" di Filse, mediante S",
+        "allegato 1 - Avviso pubblico per la presentazione di domande di incentivi a fondo perduto destinati ai datori di lavoro privati per l'assunzione di lavoratori con disabilità",
+        "allegato 2 - Convenzione Regione Liguria - Filse Spa"
+      ],
       "source_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetition/4782:avviso-pubblico-per-la-presentazione-di-domande-di-incentivi-a-fondo-perduto-destinati-ai-datori-di-lavoro-privati-per-l-assunzione-di-lavoratori-con-disabilita.html",
       "source_name": "Regione Liguria",
       "target": [
@@ -54,39 +33,58 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
+      "detail_fetched_at": "2026-11-16T21:25:20Z",
+      "source_excerpts": {
+        "deadline": "Data chiusura: 31 Dicembre 2027",
+        "documents": "I datori di lavoro interessati e in possesso dei requisiti descritti all'interno del Paragrafo 6 dell'Avviso pubblico possono far domanda esclusivamente online , accedendo al sistema \" Bandi online \" di Filse, mediante S"
+      },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
+      "last_seen_at": "2026-11-16T21:27:35Z",
+      "status": "open",
+      "gate_reason": "evidenze: scadenza, documenti",
+      "discovered_at": "2026-11-16T21:27:35Z"
     },
     {
       "id": "scr-6cd57382c738",
       "title": "Voucher cloud e cybersecurity",
       "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
       "category": "altro",
-      "amount": "",
-      "deadline": "",
+      "amount": "20.000 euro",
+      "deadline": "20/1/2027",
       "summary": "Avviso pubblicato su Invitalia: apri la fonte per i dettagli.",
       "requirements": [],
-      "required_documents": [],
+      "required_documents": [
+        "essere in possesso di un’identità digitale (SPID, CNS, CIE)",
+        "Allegato 1 – Oneri informativi"
+      ],
       "source_url": "https://www.invitalia.it/incentivi-e-strumenti/voucher-cloud-e-cybersecurity",
       "source_name": "Invitalia",
       "target": [
-        "impresa"
+        "impresa",
+        "professionisti"
       ],
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
+      "detail_fetched_at": "2026-11-16T21:25:23Z",
+      "source_excerpts": {
+        "deadline": "chiusura 20/1/2027 Compila la domanda Sezione dedicata sul sito del Mimit Incentivi e strumenti per le impre",
+        "amount": "Le agevolazioni sono concesse nella forma del contributo a fondo perduto , fino al 50% delle spese ammissibili. Il contributo non può superare, in ogni caso, l’importo di 20.000 euro",
+        "documents": "essere in possesso di un’identità digitale (SPID, CNS, CIE)"
+      },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
+      "last_seen_at": "2026-11-16T21:27:35Z",
+      "status": "open",
+      "gate_reason": "evidenze: scadenza, importo, documenti",
+      "discovered_at": "2026-11-16T21:27:35Z"
     },
     {
       "id": "scr-0e3dae2d1f29",
       "title": "Fondo di contrasto alla deindustrializzazione 2026",
       "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
       "category": "altro",
-      "amount": "",
-      "deadline": "",
+      "amount": "300.000 euro",
+      "deadline": "28/11/2026",
       "summary": "Fondo di contrasto alla deindustrializzazione 2026",
       "requirements": [],
       "required_documents": [],
@@ -98,32 +96,125 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
+      "detail_fetched_at": "2026-11-16T21:25:23Z",
+      "source_excerpts": {
+        "deadline": "chiusura 28/11/2026 Presenta la domanda Incentivi e strumenti per le imprese Stato incentivo o strumento Att",
+        "amount": "Contributo in conto capitale fino a 300.000 euro e non superiore al 100% delle spese ammesse, sostenute tra l’8 maggio 2024 e il 31 dicembre 2028, per l'acquisto di macchinari, impianti, arredi, attrezzature nuovi di fab"
+      },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
+      "last_seen_at": "2026-11-16T21:27:35Z",
+      "status": "open",
+      "gate_reason": "evidenze: scadenza, importo",
+      "discovered_at": "2026-11-16T21:27:35Z"
     },
     {
-      "id": "scr-cf6c645857e8",
-      "title": "Fondo di partecipazione MUR",
-      "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
+      "id": "scr-83644461d463",
+      "title": "Voucher Internazionalizzazione Pmi 2027",
+      "authority": "Regione Lazio (Lazio Innova)",
       "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Invitalia: apri la fonte per i dettagli.",
-      "requirements": [],
+      "amount": "15.240,00 euro",
+      "deadline": "10 dicembre 2026",
+      "summary": "Avviso pubblicato su Lazio Innova: apri la fonte per i dettagli.",
+      "requirements": [
+        "Sede operativa o residenza nel Lazio",
+        "Destinatari medie imprese piccole imprese"
+      ],
       "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/fondo-di-partecipazione-mur",
-      "source_name": "Invitalia",
+      "source_url": "https://www.lazioinnova.it/bandi/voucher-internazionalizzazione-pmi-2027/",
+      "source_name": "Lazio Innova",
       "target": [
         "impresa"
       ],
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
+      "detail_fetched_at": "2026-11-16T21:27:13Z",
+      "source_excerpts": {
+        "deadline": "Le domande devono essere inviate dalle ore 12.00 del 10 dicembre 2026 ed entro le ore 17.00 del 21 gennaio 2027",
+        "amount": "Il contributo è a fondo perduto (sovvenzione diretta in denaro) ed è concesso a titolo di De Minimis. Il contributo concedibile è pari ad euro 15.240,00 euro per ciascuna singola Fiera Internazionale Business to Business",
+        "requirements": "Destinatari medie imprese piccole imprese"
+      },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
+      "last_seen_at": "2026-11-16T21:27:35Z",
+      "status": "open",
+      "gate_reason": "evidenze: scadenza, importo, requisiti",
+      "discovered_at": "2026-11-16T21:27:35Z"
     },
+    {
+      "id": "scr-171213fa3702",
+      "title": "Finanziamenti con provvista BEI e contributo in conto interessi",
+      "authority": "Regione Lazio (Lazio Innova)",
+      "category": "altro",
+      "amount": "100.000 euro",
+      "deadline": "23 novembre 2026",
+      "summary": "Finanziamenti con provvista BEI e contributo in conto interessi",
+      "requirements": [
+        "Sede operativa o residenza nel Lazio",
+        "Destinatari medie imprese piccole imprese"
+      ],
+      "required_documents": [
+        "Prestiti a sostegno di progetti imprenditoriali realizzati da PMI dell’indotto del settore automotive. L’appartenenza all’indotto del settore automotive deve risultare da un attestato rilasciato dal Consorzio Industriale"
+      ],
+      "source_url": "https://www.lazioinnova.it/bandi/finanziamenti-con-provvista-bei-e-contributo-in-conto-interessi/",
+      "source_name": "Lazio Innova",
+      "target": [
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-16T21:27:12Z",
+      "source_excerpts": {
+        "deadline": "Accesso ai contributi in conto interessi : presentando domanda tramite la piattaforma GeCoWEB Plus a partire dalle ore 12:00 del 23 novembre 2026 e fino alle ore 17:00 del 3 ottobre 2028, salvo chiusura anticipata per es",
+        "amount": "Importo: da 100.000 euro a 10 milioni di euro",
+        "requirements": "Destinatari medie imprese piccole imprese",
+        "documents": "Prestiti a sostegno di progetti imprenditoriali realizzati da PMI dell’indotto del settore automotive. L’appartenenza all’indotto del settore automotive deve risultare da un attestato rilasciato dal Consorzio Industriale"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T21:27:35Z",
+      "status": "open",
+      "gate_reason": "evidenze: scadenza, importo, requisiti, documenti",
+      "discovered_at": "2026-11-16T21:27:35Z"
+    },
+    {
+      "id": "scr-dc72123c2d6c",
+      "title": "Basket Bond Lazio – Contributo sui costi di emissione sostenuti dalle Pmi ammissibili",
+      "authority": "Regione Lazio (Lazio Innova)",
+      "category": "altro",
+      "amount": "7.500,00 euro",
+      "deadline": "",
+      "summary": "Basket Bond Lazio – Contributo sui costi di emissione sostenuti dalle Pmi ammissibili",
+      "requirements": [
+        "Sede operativa o residenza nel Lazio",
+        "Destinatari medie imprese piccole imprese"
+      ],
+      "required_documents": [
+        "hanno già sostenuto i costi ammissibili oggetto del contributo, con l’eccezione disciplinata nell’Avviso per i costi di prima certificazione del bilancio",
+        "c) il costo per la prima certificazione del bilancio della PMI beneficiaria; è ammissibile solo il costo iniziale (una tantum) e il contributo massimo concedibile con riferimento a questa voce di costo è pari a 7.500,00 "
+      ],
+      "source_url": "https://www.lazioinnova.it/bandi/basket-bond-lazio-contributo-sui-costi-di-emissione-sostenuti-dalle-pmi-ammissibili/",
+      "source_name": "Lazio Innova",
+      "target": [
+        "impresa",
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-16T21:27:12Z",
+      "source_excerpts": {
+        "amount": "c) il costo per la prima certificazione del bilancio della PMI beneficiaria; è ammissibile solo il costo iniziale (una tantum) e il contributo massimo concedibile con riferimento a questa voce di costo è pari a 7.500,00 ",
+        "requirements": "Destinatari medie imprese piccole imprese",
+        "documents": "hanno già sostenuto i costi ammissibili oggetto del contributo, con l’eccezione disciplinata nell’Avviso per i costi di prima certificazione del bilancio"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T21:27:35Z",
+      "status": "unknown",
+      "gate_reason": "evidenze: importo, requisiti, documenti",
+      "discovered_at": "2026-11-16T21:27:35Z"
+    }
+  ],
+  "quarantine": [
     {
       "id": "scr-d6c55d360de0",
       "title": "Detrazioni fiscali",
@@ -143,8 +234,8 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
+      "last_seen_at": "2026-11-16T21:27:35Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
       "id": "scr-5f9d25105df4",
@@ -155,7 +246,12 @@
       "deadline": "",
       "summary": "Avviso pubblicato su MASE: apri la fonte per i dettagli.",
       "requirements": [],
-      "required_documents": [],
+      "required_documents": [
+        "Fondo Nazionale Efficienza Energetica - Ministero dell'Ambiente e della Sicurezza energetica",
+        "Fondo Nazionale Efficienza Energetica",
+        "Il Fondo sostiene gli interventi di efficienza energetica realizzati dalle imprese, ivi comprese le ESCO, e dalla Pubblica Amministrazione, su immobili, impianti e processi produttivi",
+        "l’efficientamento di servizi ed infrastrutture pubbliche, inclusa l’illuminazione pubblica"
+      ],
       "source_url": "https://www.mase.gov.it/portale/web/guest/fondo-nazionale-efficienza-energetica",
       "source_name": "MASE",
       "target": [
@@ -164,9 +260,13 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
+      "detail_fetched_at": "2026-11-16T21:25:26Z",
+      "source_excerpts": {
+        "documents": "Fondo Nazionale Efficienza Energetica - Ministero dell'Ambiente e della Sicurezza energetica"
+      },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
+      "last_seen_at": "2026-11-16T21:27:35Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
     },
     {
       "id": "scr-a2f8fa00dfe0",
@@ -177,18 +277,27 @@
       "deadline": "",
       "summary": "Avviso pubblicato su MASE: apri la fonte per i dettagli.",
       "requirements": [],
-      "required_documents": [],
+      "required_documents": [
+        "Dipartimento Unità per l'Efficienza Energetica",
+        "Suggeriamo di prendere visione anche della sezione dedicata \"Come richiedere copia delle schede descrittive Ecobonus/Bonus Casa?\" al link https://www.efficienzaenergetica.enea.it/detrazioni-fiscali.html",
+        "efficienzaenergetica@enea.it"
+      ],
       "source_url": "https://www.efficienzaenergetica.enea.it/detrazioni-fiscali/contatti/quesiti-di-natura-tecnico-procedurale.html",
       "source_name": "MASE",
       "target": [
-        "impresa"
+        "impresa",
+        "persona"
       ],
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
+      "detail_fetched_at": "2026-11-16T21:25:29Z",
+      "source_excerpts": {
+        "documents": "Dipartimento Unità per l'Efficienza Energetica"
+      },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
+      "last_seen_at": "2026-11-16T21:27:35Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
     },
     {
       "id": "scr-5da8ec56f40a",
@@ -196,22 +305,26 @@
       "authority": "Ministero del Lavoro e delle Politiche Sociali",
       "category": "lavoro",
       "amount": "",
-      "deadline": "",
+      "deadline": "11 novembre 2026",
       "summary": "Vai al sito dedicato agli Operatori dell’Assegno di inclusione",
       "requirements": [],
       "required_documents": [],
       "source_url": "https://www.lavoro.gov.it/adi/",
       "source_name": "Ministero del Lavoro",
       "target": [
-        "persona",
-        "impresa"
+        "impresa",
+        "persona"
       ],
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
+      "detail_fetched_at": "2026-11-16T21:26:56Z",
+      "source_excerpts": {
+        "deadline": "scadenza l’11 novembre 2026 per gli Ambiti Territoriali Sociali e i Comuni interessati all’assunzione di ass"
+      },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
+      "last_seen_at": "2026-11-16T21:27:35Z",
+      "gate_reason": "nessun segnale di bando"
     },
     {
       "id": "scr-45e0bdec558f",
@@ -226,15 +339,17 @@
       "source_url": "https://www.lavoro.gov.it/eventi/pagine/joborienta-2023-verona-da-22-a-25-novembre",
       "source_name": "Ministero del Lavoro",
       "target": [
-        "persona",
-        "impresa"
+        "impresa",
+        "persona"
       ],
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
+      "detail_fetched_at": "2026-11-16T21:26:57Z",
+      "source_excerpts": {},
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
+      "last_seen_at": "2026-11-16T21:27:35Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
       "id": "scr-3fbb07414f85",
@@ -249,142 +364,23 @@
       "source_url": "https://www.cliclavoro.gov.it/news/trend-interviste/innovazione-e-solidita-tecnologica-i-nuovi-bandi-targati-brevetti-disegni-e?language_content_entity=it",
       "source_name": "Cliclavoro",
       "target": [
-        "persona",
         "impresa"
       ],
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
+      "detail_fetched_at": "2026-11-16T21:27:00Z",
+      "source_excerpts": {},
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
-    },
-    {
-      "id": "scr-e846f6dd6d89",
-      "title": "Startup innovative: sostegni a un settore in crescita",
-      "authority": "Ministero del Lavoro e delle Politiche Sociali",
-      "category": "lavoro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Startup innovative: sostegni a un settore in crescita Innovazione, ricerca e imprenditorialità giovanile al centro delle politiche di sostegno",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.cliclavoro.gov.it/news/trend-interviste/startup-innovative-sostegni-a-un-settore-in-crescita?language_content_entity=it",
-      "source_name": "Cliclavoro",
-      "target": [
-        "impresa"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
-    },
-    {
-      "id": "scr-83644461d463",
-      "title": "Voucher Internazionalizzazione Pmi 2027",
-      "authority": "Regione Lazio (Lazio Innova)",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Lazio Innova: apri la fonte per i dettagli.",
-      "requirements": [
-        "Sede operativa o residenza nel Lazio"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.lazioinnova.it/bandi/voucher-internazionalizzazione-pmi-2027/",
-      "source_name": "Lazio Innova",
-      "target": [
-        "impresa"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
-    },
-    {
-      "id": "scr-171213fa3702",
-      "title": "Finanziamenti con provvista BEI e contributo in conto interessi",
-      "authority": "Regione Lazio (Lazio Innova)",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Finanziamenti con provvista BEI e contributo in conto interessi",
-      "requirements": [
-        "Sede operativa o residenza nel Lazio"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.lazioinnova.it/bandi/finanziamenti-con-provvista-bei-e-contributo-in-conto-interessi/",
-      "source_name": "Lazio Innova",
-      "target": [
-        "impresa",
-        "professionisti"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
-    },
-    {
-      "id": "scr-dc72123c2d6c",
-      "title": "Basket Bond Lazio – Contributo sui costi di emissione sostenuti dalle Pmi ammissibili",
-      "authority": "Regione Lazio (Lazio Innova)",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Basket Bond Lazio – Contributo sui costi di emissione sostenuti dalle Pmi ammissibili",
-      "requirements": [
-        "Sede operativa o residenza nel Lazio"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.lazioinnova.it/bandi/basket-bond-lazio-contributo-sui-costi-di-emissione-sostenuti-dalle-pmi-ammissibili/",
-      "source_name": "Lazio Innova",
-      "target": [
-        "impresa"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
-    },
-    {
-      "id": "scr-f10d49c51993",
-      "title": "Fondo Microcredito ‘Adozioni’",
-      "authority": "Regione Lazio (Lazio Innova)",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Lazio Innova: apri la fonte per i dettagli.",
-      "requirements": [
-        "Sede operativa o residenza nel Lazio"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.lazioinnova.it/bandi/fondo-microcredito-adozioni/",
-      "source_name": "Lazio Innova",
-      "target": [
-        "impresa",
-        "professionisti"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
+      "last_seen_at": "2026-11-16T21:27:35Z",
+      "gate_reason": "nessun segnale di bando"
     },
     {
       "id": "scr-ff1578b7f081",
       "title": "Autoimpiego Centro-Nord",
       "authority": "Invitalia",
       "category": "lavoro",
-      "amount": "",
+      "amount": "200.000 euro",
       "deadline": "",
       "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
       "requirements": [],
@@ -392,22 +388,25 @@
       "source_url": "https://www.invitalia.it/incentivi-e-strumenti/autoimpiego-centro-nord?from=/per-chi-vuole-fare-impresa/incentivi",
       "source_name": "Invitalia — Autoimpiego e nuove imprese",
       "target": [
-        "impresa",
-        "artigiani"
+        "impresa"
       ],
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
+      "detail_fetched_at": "2026-11-16T21:27:14Z",
+      "source_excerpts": {
+        "amount": "contributo del 60% a fondo perduto per programmi di investimento che hanno un importo compreso tra 120.000 euro e 200.000 euro"
+      },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
+      "last_seen_at": "2026-11-16T21:27:35Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: importo"
     },
     {
       "id": "scr-0026efe14789",
       "title": "Resto al Sud 2.0",
       "authority": "Invitalia",
       "category": "lavoro",
-      "amount": "",
+      "amount": "200.000 euro",
       "deadline": "",
       "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
       "requirements": [],
@@ -415,15 +414,18 @@
       "source_url": "https://www.invitalia.it/incentivi-e-strumenti/resto-al-sud-20?from=/per-chi-vuole-fare-impresa/incentivi",
       "source_name": "Invitalia — Autoimpiego e nuove imprese",
       "target": [
-        "impresa",
-        "artigiani"
+        "impresa"
       ],
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
+      "detail_fetched_at": "2026-11-16T21:27:14Z",
+      "source_excerpts": {
+        "amount": "contributo del 70% a fondo perduto per programmi di investimento che hanno un importo compreso tra 120.000 euro e 200.000 euro"
+      },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
+      "last_seen_at": "2026-11-16T21:27:35Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: importo"
     },
     {
       "id": "scr-3df33a7c0d4d",
@@ -433,7 +435,9 @@
       "amount": "",
       "deadline": "",
       "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
-      "requirements": [],
+      "requirements": [
+        "Imprese costituite da non più di 60 mesi o persone fisiche che vogliono costituire una nuova impresa. La compagine deve essere composta, per oltre la metà numerica dei soci e di quote di partecipazione, da persone di età"
+      ],
       "required_documents": [],
       "source_url": "https://www.invitalia.it/incentivi-e-strumenti/ON-nuove-imprese-tasso-zero?from=/per-chi-vuole-fare-impresa/incentivi",
       "source_name": "Invitalia — Autoimpiego e nuove imprese",
@@ -443,9 +447,13 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
+      "detail_fetched_at": "2026-11-16T21:27:14Z",
+      "source_excerpts": {
+        "requirements": "Imprese costituite da non più di 60 mesi o persone fisiche che vogliono costituire una nuova impresa. La compagine deve essere composta, per oltre la metà numerica dei soci e di quote di partecipazione, da persone di età"
+      },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
+      "last_seen_at": "2026-11-16T21:27:35Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
       "id": "scr-4bc5369a150a",
@@ -460,15 +468,16 @@
       "source_url": "https://www.invitalia.it/incentivi-e-strumenti/imprenditoria-femminile",
       "source_name": "Invitalia — Autoimpiego e nuove imprese",
       "target": [
-        "impresa",
-        "artigiani"
+        "impresa"
       ],
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
+      "detail_fetched_at": "2026-11-16T21:27:14Z",
+      "source_excerpts": {},
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
+      "last_seen_at": "2026-11-16T21:27:35Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
       "id": "scr-d20a5b49c256",
@@ -479,19 +488,25 @@
       "deadline": "",
       "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
       "requirements": [],
-      "required_documents": [],
+      "required_documents": [
+        "La società pugliese è stata finanziata da Invitalia con Smart&Start"
+      ],
       "source_url": "https://www.invitalia.it/incentivi-e-strumenti/smartstart-italia?from=/per-chi-vuole-fare-impresa/incentivi",
       "source_name": "Invitalia — Autoimpiego e nuove imprese",
       "target": [
         "impresa",
-        "artigiani"
+        "persona"
       ],
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
+      "detail_fetched_at": "2026-11-16T21:27:14Z",
+      "source_excerpts": {
+        "documents": "La società pugliese è stata finanziata da Invitalia con Smart&Start"
+      },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
+      "last_seen_at": "2026-11-16T21:27:35Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
     },
     {
       "id": "scr-b05c66f7b9f1",
@@ -502,7 +517,9 @@
       "deadline": "",
       "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
       "requirements": [],
-      "required_documents": [],
+      "required_documents": [
+        "“Economia circolare” è l’incentivo che sostiene la transizione delle attività economiche verso un modello di economia circolare e favorisce la riconversione produttiva per un uso più efficiente e sostenibile delle risors"
+      ],
       "source_url": "https://www.invitalia.it/incentivi-e-strumenti/economia-circolare",
       "source_name": "Invitalia — Autoimpiego e nuove imprese",
       "target": [
@@ -512,9 +529,13 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
+      "detail_fetched_at": "2026-11-16T21:27:14Z",
+      "source_excerpts": {
+        "documents": "“Economia circolare” è l’incentivo che sostiene la transizione delle attività economiche verso un modello di economia circolare e favorisce la riconversione produttiva per un uso più efficiente e sostenibile delle risors"
+      },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
+      "last_seen_at": "2026-11-16T21:27:35Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
     },
     {
       "id": "scr-736efc897cf7",
@@ -536,8 +557,39 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
+      "last_seen_at": "2026-11-16T21:27:35Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
+    },
+    {
+      "id": "scr-c4bce98ceef4",
+      "title": "Termini presentazione domande di contributo al CATA Artigianato FVG",
+      "authority": "Regione Autonoma Friuli Venezia Giulia",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Termini presentazione domande di contributo al CATA Artigianato FVG",
+      "requirements": [
+        "Sede operativa o residenza in Friuli Venezia Giulia"
+      ],
+      "required_documents": [
+        "citati, e dal sito del CATA. I fac-simile della documentazione che dovrà essere allegata alla"
+      ],
+      "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/hp-new/in-evidenza/ultime/2945_f.html",
+      "source_name": "Regione Friuli Venezia Giulia",
+      "target": [
+        "impresa",
+        "artigiani"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-16T21:27:34Z",
+      "source_excerpts": {
+        "documents": "citati, e dal sito del CATA. I fac-simile della documentazione che dovrà essere allegata alla"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T21:27:35Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
     },
     {
       "id": "scr-2fcc05aadd72",
@@ -561,112 +613,8 @@
       "is_new": true,
       "miss_streak": 0,
       "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
-    },
-    {
-      "id": "scr-c4bce98ceef4",
-      "title": "Termini presentazione domande di contributo al CATA Artigianato FVG",
-      "authority": "Regione Autonoma Friuli Venezia Giulia",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Termini presentazione domande di contributo al CATA Artigianato FVG",
-      "requirements": [
-        "Sede operativa o residenza in Friuli Venezia Giulia"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/hp-new/in-evidenza/ultime/2945_f.html",
-      "source_name": "Regione Friuli Venezia Giulia",
-      "target": [
-        "impresa",
-        "artigiani"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z"
-    },
-    {
-      "id": "scr-47ce8944846b",
-      "title": "Contributi lavoratori domestici: chiarimenti pagamento",
-      "authority": "INPS",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Contributi lavoratori domestici: chiarimenti pagamento",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.11.contributi-lavoratori-domestici-chiarimenti-pagamento.html",
-      "source_name": "INPS",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "persona"
-      ]
-    },
-    {
-      "id": "scr-94f124b76f13",
-      "title": "Decreto Coesione: chiarimenti sul contributo per l’autoimpiego",
-      "authority": "INPS",
-      "category": "mobilita",
-      "amount": "",
-      "deadline": "",
-      "summary": "Decreto Coesione: chiarimenti sul contributo per l’autoimpiego",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.10.decreto-coesione-chiarimenti-sul-contributo-per-l-autoimpiego.html",
-      "source_name": "INPS",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "persona"
-      ]
-    },
-    {
-      "id": "scr-545f1602d987",
-      "title": "Assegno unico e universale: l’Osservatorio con i dati di luglio 2026",
-      "authority": "INPS",
-      "category": "famiglia",
-      "amount": "",
-      "deadline": "",
-      "summary": "Assegno unico e universale: l’Osservatorio con i dati di luglio 2026",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.09.assegno-unico-e-universale-l-osservatorio-con-i-dati-di-luglio-2026.html",
-      "source_name": "INPS",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "persona"
-      ]
-    },
-    {
-      "id": "scr-201e2aef4705",
-      "title": "Fondo Perseo-Sirio: applicato il criterio del multicomparto",
-      "authority": "INPS",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Fondo Perseo-Sirio: applicato il criterio del multicomparto",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.07.fondo-perseo-sirio-applicato-il-criterio-del-multicomparto.html",
-      "source_name": "INPS",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "persona"
-      ]
+      "discovered_at": "2026-11-16T20:53:34Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
       "id": "scr-1b0da47a683b",
@@ -686,127 +634,8 @@
       "discovered_at": "2026-11-14T16:50:35Z",
       "target": [
         "persona"
-      ]
-    },
-    {
-      "id": "scr-2287458edf86",
-      "title": "Esoneri contributivi agricoltura: esito dei controlli ex post",
-      "authority": "INPS",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Esoneri contributivi agricoltura: esito dei controlli ex post",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.05.esoneri-contributivi-agricoltura-esito-dei-controlli-ex-post.html",
-      "source_name": "INPS",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "persona"
-      ]
-    },
-    {
-      "id": "scr-cf2efc5ae5f5",
-      "title": "Assegno sociale: avvio campagna proattiva",
-      "authority": "INPS",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Assegno sociale: avvio campagna proattiva",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.06.assegno-sociale-avvio-campagna-proattiva.html",
-      "source_name": "INPS",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "persona"
-      ]
-    },
-    {
-      "id": "scr-72c6b5c86c37",
-      "title": "Assegno unico e universale: l’Osservatorio con i dati di marzo 2026",
-      "authority": "INPS",
-      "category": "famiglia",
-      "amount": "",
-      "deadline": "",
-      "summary": "Assegno unico e universale: l’Osservatorio con i dati di marzo 2026",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.05.assegno-unico-e-universale-l-osservatorio-con-i-dati-di-marzo-2026.html",
-      "source_name": "INPS",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "persona"
-      ]
-    },
-    {
-      "id": "scr-b851c1323291",
-      "title": "Assegno di Inclusione: arriva la video guida personalizzata",
-      "authority": "INPS",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Assegno di Inclusione: arriva la video guida personalizzata",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.11.assegno-di-inclusione-arriva-la-video-guida-personalizzata.html",
-      "source_name": "INPS",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "persona"
-      ]
-    },
-    {
-      "id": "scr-4b158d8bf9ca",
-      "title": "Assegno unico e universale: Osservatorio con i dati di settembre 2026",
-      "authority": "INPS",
-      "category": "famiglia",
-      "amount": "",
-      "deadline": "",
-      "summary": "Assegno unico e universale: Osservatorio con i dati di settembre 2026",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.11.assegno-unico-e-universale-osservatorio-con-i-dati-di-settembre-2026.html",
-      "source_name": "INPS",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "persona"
-      ]
-    },
-    {
-      "id": "scr-c27b08c7531f",
-      "title": "Bonus asilo nido: l’Istituto vince il Premio Innovazione a SMAU",
-      "authority": "INPS",
-      "category": "famiglia",
-      "amount": "",
-      "deadline": "",
-      "summary": "Bonus asilo nido: l’Istituto vince il Premio Innovazione a SMAU",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inps.it/it/it/inps-comunica/notizie/dettaglio-news-page.news.2026.11.bonus-asilo-nido-l-istituto-vince-il-premio-innovazione-a-smau.html",
-      "source_name": "INPS",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "persona"
-      ]
+      ],
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
       "id": "scr-5fe5c876e045",
@@ -826,361 +655,8 @@
       "discovered_at": "2026-11-14T16:50:35Z",
       "target": [
         "persona"
-      ]
-    },
-    {
-      "id": "scr-c0661d6d68b0",
-      "title": "Brevetti+ 2026",
-      "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Invitalia: apri la fonte per i dettagli.",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/voucher-cloud-e-cybersecurity",
-      "source_name": "Invitalia",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "persona",
-        "impresa"
       ],
-      "miss_streak": 1
-    },
-    {
-      "id": "scr-88008f106fd8",
-      "title": "Credito d’imposta per incubatori e acceleratori certificati",
-      "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Credito d’imposta per incubatori e acceleratori certificati L’incentivo per gli investimenti nel capitale delle startup innovative Attivo Data apertura: 30 marzo 2026",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/sviluppo-competenze-specialistiche-delle-pmi",
-      "source_name": "Invitalia",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "impresa"
-      ],
-      "miss_streak": 1
-    },
-    {
-      "id": "scr-731c69443704",
-      "title": "Sviluppo competenze specialistiche delle Pmi",
-      "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
-      "category": "altro",
-      "amount": "",
-      "deadline": "21 dicembre 2026",
-      "summary": "Sviluppo competenze specialistiche delle Pmi L’incentivo per la formazione del personale dipendente delle imprese del Mezzogiorno Attivo Data apertura: 10 settembre 2026 Data chiusura: 21 dicembre 2026",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/cultura-cresce",
-      "source_name": "Invitalia",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "impresa"
-      ],
-      "miss_streak": 1
-    },
-    {
-      "id": "scr-d244520dff41",
-      "title": "Cultura Cresce",
-      "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Invitalia: apri la fonte per i dettagli.",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/ON-nuove-imprese-tasso-zero",
-      "source_name": "Invitalia",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "persona",
-        "impresa"
-      ],
-      "miss_streak": 1
-    },
-    {
-      "id": "scr-2c4f5d33b903",
-      "title": "Avviso di indizione procedura negoziata",
-      "authority": "Comune di Genova",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Comune di Genova: apri la fonte per i dettagli.",
-      "requirements": [
-        "affidamento",
-        "Residenza nel Comune di Genova"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.comune.genova.it/novita/avvisi/avviso-di-indizione-procedura-negoziata-30",
-      "source_name": "Comune di Genova",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "persona",
-        "impresa"
-      ]
-    },
-    {
-      "id": "scr-5fce4b87cd0a",
-      "title": "presentazione delle candidature per la nomina del revisore dei conti dell'Agenzia regionale per il lavoro, la formazione e l'accreditamento (Alfa) e dell'agenzi",
-      "authority": "Regione Liguria",
-      "category": "lavoro",
-      "amount": "",
-      "deadline": "23 novembre 2026",
-      "summary": "domanda di concessione idrica e ricerca acque sotterranee a uso irriguo - località Bastia comune di Albenga - pratica SVD2600005 13 Novembre 2026 13 Novembre 2026 13 Dicembre 2026 AVVISI Seconda selezione Natale in Liguria 2026 - Manifestazione di interesse finalizzata alla selezione di iniziative orientate alla destagionalizzazione e alla riscoperta di tradizioni, prodotti e luoghi identitari…",
-      "requirements": [
-        "Residenza in Liguria"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetition/4777:nomina-revisore-conti-alfa-aliseo.html",
-      "source_name": "Regione Liguria",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "miss_streak": 2,
-      "target": [
-        "persona",
-        "impresa"
-      ]
-    },
-    {
-      "id": "scr-2c4f060b0823",
-      "title": "Istanza concessione di derivazione idrica - Comune di Castiglione Chiavarese - pratica GDE6798",
-      "authority": "Regione Liguria",
-      "category": "altro",
-      "amount": "",
-      "deadline": "23 novembre 2026",
-      "summary": "domanda di concessione idrica e ricerca acque sotterranee a uso irriguo - località Bastia comune di Albenga - pratica SVD2600005 13 Novembre 2026 13 Novembre 2026 13 Dicembre 2026 AVVISI Seconda selezione Natale in Liguria 2026 - Manifestazione di interesse finalizzata alla selezione di iniziative orientate alla destagionalizzazione e alla riscoperta di tradizioni, prodotti e luoghi identitari…",
-      "requirements": [
-        "Residenza in Liguria"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetition/4776:concessione-idrica-gde6798.html",
-      "source_name": "Regione Liguria",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "miss_streak": 2,
-      "target": [
-        "persona",
-        "impresa"
-      ]
-    },
-    {
-      "id": "scr-0c2bc129578d",
-      "title": "Domanda di concessione derivazione idrica a uso igienico - Comune di Badalucco - pratica IMD003866 (ARGE374)",
-      "authority": "Regione Liguria",
-      "category": "altro",
-      "amount": "",
-      "deadline": "23 novembre 2026",
-      "summary": "domanda di concessione idrica e ricerca acque sotterranee a uso irriguo - località Bastia comune di Albenga - pratica SVD2600005 13 Novembre 2026 13 Novembre 2026 13 Dicembre 2026 AVVISI Seconda selezione Natale in Liguria 2026 - Manifestazione di interesse finalizzata alla selezione di iniziative orientate alla destagionalizzazione e alla riscoperta di tradizioni, prodotti e luoghi identitari…",
-      "requirements": [
-        "Residenza in Liguria"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetition/4775:concessione-idrica-imd003866.html",
-      "source_name": "Regione Liguria",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "miss_streak": 2,
-      "target": [
-        "persona",
-        "impresa"
-      ]
-    },
-    {
-      "id": "scr-1b90a62971e1",
-      "title": "Domanda di concessione di derivazione idrica - Comune di Genova - pratica GDE6791",
-      "authority": "Regione Liguria",
-      "category": "altro",
-      "amount": "",
-      "deadline": "23 novembre 2026",
-      "summary": "domanda di concessione idrica e ricerca acque sotterranee a uso irriguo - località Bastia comune di Albenga - pratica SVD2600005 13 Novembre 2026 13 Novembre 2026 13 Dicembre 2026 AVVISI Seconda selezione Natale in Liguria 2026 - Manifestazione di interesse finalizzata alla selezione di iniziative orientate alla destagionalizzazione e alla riscoperta di tradizioni, prodotti e luoghi identitari…",
-      "requirements": [
-        "Residenza in Liguria"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetition/4774:concessione-idrica-gde6791.html",
-      "source_name": "Regione Liguria",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "miss_streak": 2,
-      "target": [
-        "persona",
-        "impresa"
-      ]
-    },
-    {
-      "id": "scr-a0a28b979990",
-      "title": "Consiglio regionale - Servizi di pulizia e igiene ambientale: adesione alla Convenzione Quadro S.U.A. (ID 4699) \"Servizi di pulizia e igiene ambientale da esegu",
-      "authority": "Regione Liguria",
-      "category": "altro",
-      "amount": "",
-      "deadline": "23 novembre 2026",
-      "summary": "domanda di concessione idrica e ricerca acque sotterranee a uso irriguo - località Bastia comune di Albenga - pratica SVD2600005 13 Novembre 2026 13 Novembre 2026 13 Dicembre 2026 AVVISI Seconda selezione Natale in Liguria 2026 - Manifestazione di interesse finalizzata alla selezione di iniziative orientate alla destagionalizzazione e alla riscoperta di tradizioni, prodotti e luoghi identitari…",
-      "requirements": [
-        "età",
-        "CIE",
-        "Residenza in Liguria"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.liguria.it/component/publiccompetitions/publiccompetition/4773:cr-servizi-pulizia-igiene-sua-2027-30.html",
-      "source_name": "Regione Liguria",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "miss_streak": 2,
-      "target": [
-        "persona",
-        "impresa"
-      ]
-    },
-    {
-      "id": "scr-116081809b90",
-      "title": "Domanda concessione idrica a uso potabile - Comune di Borgomaro - pratica IMD003853 (IMPE324)",
-      "authority": "Regione Liguria",
-      "category": "altro",
-      "amount": "",
-      "deadline": "23 novembre 2026",
-      "summary": "domanda di concessione idrica e ricerca acque sotterranee a uso irriguo - località Bastia comune di Albenga - pratica SVD2600005 13 Novembre 2026 13 Novembre 2026 13 Dicembre 2026 AVVISI Seconda selezione Natale in Liguria 2026 - Manifestazione di interesse finalizzata alla selezione di iniziative orientate alla destagionalizzazione e alla riscoperta di tradizioni, prodotti e luoghi identitari…",
-      "requirements": [
-        "età",
-        "CIE",
-        "Residenza in Liguria"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetition/4772:concessione-idrica-imd003853.html",
-      "source_name": "Regione Liguria",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "miss_streak": 2,
-      "target": [
-        "persona",
-        "impresa"
-      ]
-    },
-    {
-      "id": "scr-d5c8b37ee15c",
-      "title": "Domanda di autorizzazione ricerca acque sotterranee - Comune di Genova - pratica GDE6797",
-      "authority": "Regione Liguria",
-      "category": "mobilita",
-      "amount": "",
-      "deadline": "23 novembre 2026",
-      "summary": "domanda di concessione idrica e ricerca acque sotterranee a uso irriguo - località Bastia comune di Albenga - pratica SVD2600005 13 Novembre 2026 13 Novembre 2026 13 Dicembre 2026 AVVISI Seconda selezione Natale in Liguria 2026 - Manifestazione di interesse finalizzata alla selezione di iniziative orientate alla destagionalizzazione e alla riscoperta di tradizioni, prodotti e luoghi identitari…",
-      "requirements": [
-        "età",
-        "CIE",
-        "Residenza in Liguria"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetition/4770:ricerca-acque-sotterranee-gde6797.html",
-      "source_name": "Regione Liguria",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "miss_streak": 2,
-      "target": [
-        "persona",
-        "impresa"
-      ]
-    },
-    {
-      "id": "scr-b697f51102d9",
-      "title": "Fesr 2021-2027 - OS 2.1 - Azione 2.1.1 - Promozione dell'eco-efficienza e riduzione di consumi di energia primaria negli edifici e strutture pubbliche (V bando)",
-      "authority": "Regione Liguria",
-      "category": "energia",
-      "amount": "",
-      "deadline": "23 novembre 2026",
-      "summary": "domanda di concessione idrica e ricerca acque sotterranee a uso irriguo - località Bastia comune di Albenga - pratica SVD2600005 13 Novembre 2026 13 Novembre 2026 13 Dicembre 2026 AVVISI Seconda selezione Natale in Liguria 2026 - Manifestazione di interesse finalizzata alla selezione di iniziative orientate alla destagionalizzazione e alla riscoperta di tradizioni, prodotti e luoghi identitari…",
-      "requirements": [
-        "età",
-        "CIE",
-        "Residenza in Liguria"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetition/4771:azione-211-energiapa-5bando.html",
-      "source_name": "Regione Liguria",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "miss_streak": 2,
-      "target": [
-        "persona",
-        "impresa"
-      ]
-    },
-    {
-      "id": "scr-20532ff2606f",
-      "title": "Energia: Ecobonus, ENEA aggiorna vademecum su interventi di efficientamento",
-      "authority": "ENEA",
-      "category": "energia",
-      "amount": "",
-      "deadline": "",
-      "summary": "Energia: Ecobonus, ENEA aggiorna vademecum su interventi di efficientamento",
-      "requirements": [
-        "CIE"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.efficienzaenergetica.enea.it/vi-segnaliamo/energia-ecobonus-enea-aggiorna-vademecum-su-interventi-di-efficientamento.html",
-      "source_name": "ENEA — Efficienza Energetica",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "persona",
-        "impresa"
-      ],
-      "miss_streak": 1
-    },
-    {
-      "id": "scr-6a94d0ce304a",
-      "title": "SIMEST e Intesa Sanpaolo rafforzano il sostegno all’internazionalizzazione delle imprese italiane",
-      "authority": "SIMEST",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "SIMEST e Intesa Sanpaolo rafforzano il sostegno all’internazionalizzazione delle imprese italiane SIMEST e Intesa Sanpaolo rafforzano il sostegno all'internazionalizzazione delle imprese italiane 06 novembre 2026 Leggi di più",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.simest.it/media/mondo-simest/simest-e-intesa-sanpaolo-rafforzano-il-sostegno-allinternazionalizzazione-delle-imprese-italiane/",
-      "source_name": "SIMEST (Gruppo CDP)",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "impresa"
-      ]
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
       "id": "scr-377863cac8c8",
@@ -1200,7 +676,8 @@
       "discovered_at": "2026-11-14T16:50:35Z",
       "target": [
         "impresa"
-      ]
+      ],
+      "gate_reason": "nessun segnale di bando"
     },
     {
       "id": "scr-47f6665e7fda",
@@ -1221,7 +698,8 @@
       "target": [
         "impresa",
         "persona"
-      ]
+      ],
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
       "id": "scr-0c64cf2ad33d",
@@ -1242,138 +720,8 @@
       "target": [
         "impresa",
         "persona"
-      ]
-    },
-    {
-      "id": "scr-e7b8561d8fb6",
-      "title": "Bandi di concorso – copertura di n. 19 unità presso la Cte - I livello di professionalità: graduatorie",
-      "authority": "INAIL",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Bandi di concorso – copertura di n. 19 unità presso la Cte - I livello di professionalità: graduatorie",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inail.it/portale/it/inail-comunica/avvisi/avviso.2026.11.avviso-concorso-19-posti-cte-graduatorie.html",
-      "source_name": "INAIL",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "impresa",
-        "persona"
-      ]
-    },
-    {
-      "id": "scr-7a114e8d3724",
-      "title": "Avviso di mobilità volontaria esterna n. 231 posti, area funzionari amministrativi: pubblicazione calendario colloqui",
-      "authority": "INAIL",
-      "category": "mobilita",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso di mobilità volontaria esterna n. 231 posti, area funzionari amministrativi: pubblicazione calendario colloqui",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inail.it/portale/it/inail-comunica/avvisi/avviso.2026.06.avviso-231-funz-calendario-colloqui.html",
-      "source_name": "INAIL",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "impresa",
-        "persona"
-      ]
-    },
-    {
-      "id": "scr-fd4b0072cac0",
-      "title": "Avviso di mobilità volontaria esterna n. 231 posti, area funzionari amministrativi: graduatorie definitive di merito",
-      "authority": "INAIL",
-      "category": "mobilita",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso di mobilità volontaria esterna n. 231 posti, area funzionari amministrativi: graduatorie definitive di merito",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.inail.it/portale/it/inail-comunica/avvisi/avviso.2026.08.aviso-graduatorie-friuli-liguria-sardegna-231-posti.html",
-      "source_name": "INAIL",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "impresa",
-        "persona"
-      ]
-    },
-    {
-      "id": "scr-8801b0c8370d",
-      "title": "Pubblicato l’Avviso \"PRIMI PASSI\"",
-      "authority": "Ministero del Lavoro e delle Politiche Sociali",
-      "category": "lavoro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Ministero del Lavoro: apri la fonte per i dettagli.",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.lavoro.gov.it/notizie/pagine/pubblicato-avviso-primi-passi",
-      "source_name": "Ministero del Lavoro",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "miss_streak": 2,
-      "target": [
-        "persona",
-        "impresa"
-      ]
-    },
-    {
-      "id": "scr-d8ffc9e8a08b",
-      "title": "Sgravio contributivo per contratti di solidarietà industriali - Anno 2026",
-      "authority": "Ministero del Lavoro e delle Politiche Sociali",
-      "category": "lavoro",
-      "amount": "",
-      "deadline": "",
-      "summary": "27 ottobre 2026 Sgravio contributivo per contratti di solidarietà industriali - Anno 2026",
-      "requirements": [
-        "età"
       ],
-      "required_documents": [],
-      "source_url": "https://www.lavoro.gov.it/notizie/pagine/sgravio-contributivo-per-contratti-di-solidarieta-industriali-anno-2026",
-      "source_name": "Ministero del Lavoro",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "miss_streak": 2,
-      "target": [
-        "persona",
-        "impresa"
-      ]
-    },
-    {
-      "id": "scr-220eb0740858",
-      "title": "Bando Neoimpresa Valle D’Aosta: finanziamento a Fondo perduto per l’avvio di nuove attività imprenditoriali e di lavoro autonomo",
-      "authority": "Ministero del Lavoro e delle Politiche Sociali",
-      "category": "lavoro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Bando Neoimpresa Valle D’Aosta: finanziamento a Fondo perduto per l’avvio di nuove attività imprenditoriali e di lavoro autonomo L’incentivo si rivolge alle persone disoccupate Aosta",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.cliclavoro.gov.it/news/news-eventi/bando-neoimpresa-valle-daosta-finanziamento-a-fondo-perduto-per-lavvio-di-nuove?language_content_entity=it",
-      "source_name": "Cliclavoro",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z",
-      "miss_streak": 2,
-      "target": [
-        "persona",
-        "impresa"
-      ]
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
       "id": "scr-c1ca38f77731",
@@ -1396,30 +744,8 @@
       "target": [
         "persona",
         "impresa"
-      ]
-    },
-    {
-      "id": "scr-7b99e1a18e0f",
-      "title": "Avviso pubblico 2026 per incarico di consigliere consigliera di fiducia",
-      "authority": "Regione Toscana",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Riapertura dell'avviso dalle ore 9 dell'11 novembre alle ore 12 del 17 novembre 2026",
-      "requirements": [
-        "Residenza in Toscana"
       ],
-      "required_documents": [],
-      "source_url": "https://www.regione.toscana.it/-/avviso-pubblico-2026-per-incarico-di-consigliere-consigliera-di-fiducia",
-      "source_name": "Regione Toscana",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "persona",
-        "impresa"
-      ]
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
       "id": "scr-0abd0c8fefc3",
@@ -1441,7 +767,8 @@
       "discovered_at": "2026-11-14T16:50:35Z",
       "target": [
         "impresa"
-      ]
+      ],
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
       "id": "scr-6fa868366ddd",
@@ -1464,7 +791,8 @@
       "target": [
         "persona",
         "impresa"
-      ]
+      ],
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
       "id": "scr-f092cf2e7839",
@@ -1487,7 +815,8 @@
       "target": [
         "persona",
         "impresa"
-      ]
+      ],
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
       "id": "scr-ff7997829491",
@@ -1509,29 +838,41 @@
       "discovered_at": "2026-11-14T16:50:35Z",
       "target": [
         "impresa"
-      ]
+      ],
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
+    }
+  ],
+  "news": [
+    {
+      "title": "Casa, tutto quello che c'è da sapere",
+      "source_name": "Agenzia delle Entrate",
+      "source_url": "https://www.agenziaentrate.gov.it/portale/aree-tematiche/casa",
+      "reason": "comunicato («tutto quello che c'è da sapere»)"
     },
     {
-      "id": "scr-7cb43d8532fe",
-      "title": "La Regione del Veneto a JOB&Orienta 2026. Dal 25 al 28 novembre 2026 a Verona",
-      "authority": "Regione Veneto",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Prorogata al 22 novembre la scadenza del Bando Metalmeccanica 2026 Nuovo termine per la presentazione delle domande per il bando da 4 milioni di euro per l’erogazione di contributi a fondo perduto alle imprese venete del settore metalmeccanico La Regione del Veneto a JOB&Orienta 2026. Dal 25 al 28 novembre 2026 a Verona Dal 25 al 28 novembre a Verona il salone nazionale su orientamento, scuola,…",
-      "requirements": [
-        "Residenza nel Veneto"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.veneto.it/web/guest/article-detail?articleId=14439968",
-      "source_name": "Regione Veneto",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "impresa"
-      ]
+      "title": "Startup innovative: sostegni a un settore in crescita",
+      "source_name": "Cliclavoro",
+      "source_url": "https://www.cliclavoro.gov.it/news/trend-interviste/startup-innovative-sostegni-a-un-settore-in-crescita?language_content_entity=it",
+      "reason": "comunicato («in crescita»)"
     }
-  ]
+  ],
+  "quality": {
+    "verified": 6,
+    "open": 5,
+    "unknown_deadline": 1,
+    "expired": 2,
+    "quarantine": 25,
+    "news": 2,
+    "fill": {
+      "deadline_pct": 83.3,
+      "amount_pct": 83.3,
+      "requirements_pct": 66.7,
+      "documents_pct": 66.7
+    },
+    "by_source": {
+      "Regione Liguria": 1,
+      "Invitalia": 2,
+      "Lazio Innova": 3
+    }
+  }
 }

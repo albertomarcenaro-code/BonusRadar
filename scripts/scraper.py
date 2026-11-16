@@ -762,6 +762,11 @@ def scrape_source(source: dict) -> tuple[list[dict], bool]:
             items.append(bonus)
 
     print(f"  ✓ {len(items)} candidati estratti")
+    if items and source.get("detail", True):
+        items = enrich_items(items)
+        filled = sum(1 for it in items if (it.get("deadline") or "").strip())
+        priced = sum(1 for it in items if (it.get("amount") or "").strip())
+        print(f"  ↳ dettaglio letto: {filled}/{len(items)} con scadenza · {priced} con importo")
     return items, True
 
 
@@ -1011,6 +1016,455 @@ def supabase_archive(url: str, key: str, keep: set[str]) -> int:
     return len(stale)
 
 
+# ---------------------------------------------------------------
+# Gate qualità: bando vs notizia vs quarantena
+# ---------------------------------------------------------------
+# Il catalogo non è un feed: una voce entra solo se il testo mostra almeno due
+# evidenze di bando (scadenza, importo, requisiti, documenti). Comunicati,
+# osservatori, atti amministrativi e gare vanno in "notizie"; ciò che parla di
+# bandi ma non è verificabile va in quarantena, non in catalogo.
+GATE_NOTIZIA_RE = re.compile(
+    r"chiariment|osservatori|premio|vademecum|smau|convegno|seminario|webinar|"
+    r"comunicat|rassegna|intervista|esito dei controlli|multicomparto|"
+    r"campagna proattiva|in diretta|job&orienta|job & orienta|rafforzano|"
+    r"in crescita|tutto quello che c'è da sapere|video guida|incontro su|"
+    r"incontro dedicato|i dati di|avvio campagna|aggiorna|approfondiment|notizi",
+    re.I,
+)
+# Niente "assunzion" qui di proposito: gli incentivi all'assunzione sono bandi
+# per le imprese, non atti amministrativi.
+GATE_ATTO_RE = re.compile(
+    r"procedura negoziata|avviso di indizione|affidament|concessione di derivazione|"
+    r"derivazione idrica|concessione idrica|ricerca acque sotterranee|"
+    r"mobilità volontaria|graduatori|nomina del revisore|istanza concessione|"
+    r"bandi? di concorso|concorso pubblico|gara|appalto|servizi di pulizia|"
+    r"fornitura|incarico di|selezione di personale",
+    re.I,
+)
+GATE_BANDO_RE = re.compile(
+    r"\bband[oi]\b|avviso|contribut|incentiv|voucher|agevolaz|finanziament|"
+    r"\bfondo\b|detrazion|credito d'imposta|\bbonus\b|domanda|scadenz",
+    re.I,
+)
+OPEN_WORDS = re.compile(
+    r"sempre aperto|sportello|fino a esaurimento|a sportello|in dichiarazione|"
+    r"domanda sempre",
+    re.I,
+)
+RE_IT_DATE = re.compile(
+    r"\b(\d{1,2})[/-](\d{1,2})[/-](\d{4})\b"
+    r"|\b(\d{1,2})\s+(gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|"
+    r"settembre|ottobre|novembre|dicembre)\s+(\d{4})\b",
+    re.I,
+)
+MESI = {
+    "gennaio": 1, "febbraio": 2, "marzo": 3, "aprile": 4, "maggio": 5, "giugno": 6,
+    "luglio": 7, "agosto": 8, "settembre": 9, "ottobre": 10, "novembre": 11,
+    "dicembre": 12,
+}
+
+
+def deadline_status(deadline: str, today: datetime | None = None) -> str:
+    """Stato del bando dalla sua scadenza: open | closed | unknown."""
+    text = (deadline or "").strip()
+    if not text:
+        return "unknown"
+    if OPEN_WORDS.search(text):
+        return "open"
+    m = RE_IT_DATE.search(text)
+    if not m:
+        return "unknown"
+    if m.group(1):
+        day, month, year = int(m.group(1)), int(m.group(2)), int(m.group(3))
+    else:
+        day, month, year = int(m.group(4)), MESI[m.group(5).lower()], int(m.group(6))
+    ref = today or datetime.now(timezone.utc)
+    try:
+        date = datetime(year, month, day, tzinfo=timezone.utc)
+    except ValueError:
+        return "unknown"
+    return "closed" if date < ref else "open"
+
+
+def classify_bonus(bonus: dict) -> tuple[str, str]:
+    """Restituisce (verdetto, motivo): bando | notizia | quarantena."""
+    title = bonus.get("title") or ""
+    low = f"{title} {bonus.get('summary') or ''}".lower()
+    if GATE_NOTIZIA_RE.search(title):
+        return "notizia", f"comunicato («{GATE_NOTIZIA_RE.search(title).group(0)}»)"
+    if GATE_ATTO_RE.search(title):
+        return "notizia", f"atto amministrativo/gara («{GATE_ATTO_RE.search(title).group(0)}»)"
+    evidence: list[str] = []
+    if (bonus.get("deadline") or "").strip():
+        evidence.append("scadenza")
+    if (bonus.get("amount") or "").strip():
+        evidence.append("importo")
+    if len(bonus.get("requirements") or []) >= 2:
+        evidence.append("requisiti")
+    if bonus.get("required_documents"):
+        evidence.append("documenti")
+    if len(evidence) >= 2:
+        return "bando", "evidenze: " + ", ".join(evidence)
+    if GATE_BANDO_RE.search(low):
+        return "quarantena", (
+            "parla di bandi ma senza scadenza/importo/requisiti: "
+            + ("nessuna scadenza né importo" if not evidence else "evidenze insufficienti: " + ", ".join(evidence))
+        )
+    return "quarantena", "nessun segnale di bando"
+
+
+def split_catalog(
+    rows: list[dict], today: datetime | None = None
+) -> tuple[list[dict], list[dict], list[dict], list[dict]]:
+    """Partiziona le schede in (bandi pubblicabili, quarantena, notizie, scaduti).
+
+    Le schede pubblicabili ricevono `status` (open/closed/unknown) e
+    `gate_reason`; quelle con `status = closed` non entrano in catalogo.
+    """
+    verified: list[dict] = []
+    quarantine: list[dict] = []
+    news: list[dict] = []
+    expired: list[dict] = []
+    for row in rows:
+        verdict, reason = classify_bonus(row)
+        if verdict == "notizia":
+            news.append({
+                "title": row.get("title", ""),
+                "source_name": row.get("source_name", ""),
+                "source_url": row.get("source_url", ""),
+                "reason": reason,
+            })
+            continue
+        if verdict == "quarantena":
+            quarantine.append({**row, "gate_reason": reason})
+            continue
+        status = deadline_status(row.get("deadline", ""), today)
+        entry = {**row, "status": status, "gate_reason": reason}
+        if status == "closed":
+            expired.append(entry)
+        else:
+            verified.append(entry)
+    return verified, quarantine, news, expired
+
+
+def quality_metrics(
+    verified: list[dict],
+    quarantine: list[dict],
+    news: list[dict],
+    expired: list[dict],
+) -> dict:
+    """Metriche di qualità del catalogo: riempimento campi e composizione."""
+    total = len(verified) or 1
+
+    def share(pred) -> float:
+        return round(sum(1 for b in verified if pred(b)) / total * 100, 1)
+
+    by_source: dict[str, int] = {}
+    for bonus in verified:
+        name = bonus.get("source_name") or "?"
+        by_source[name] = by_source.get(name, 0) + 1
+    return {
+        "verified": len(verified),
+        "open": sum(1 for b in verified if b.get("status") == "open"),
+        "unknown_deadline": sum(1 for b in verified if b.get("status") == "unknown"),
+        "expired": len(expired),
+        "quarantine": len(quarantine),
+        "news": len(news),
+        "fill": {
+            "deadline_pct": share(lambda b: bool((b.get("deadline") or "").strip())),
+            "amount_pct": share(lambda b: bool((b.get("amount") or "").strip())),
+            "requirements_pct": share(lambda b: bool(b.get("requirements"))),
+            "documents_pct": share(lambda b: bool(b.get("required_documents"))),
+        },
+        "by_source": by_source,
+    }
+
+
+# ---------------------------------------------------------------
+# Fase B: lettura della pagina di dettaglio
+# ---------------------------------------------------------------
+# La card di un elenco non contiene scadenza, importo, requisiti o documenti:
+# quelli stanno nella pagina del bando. Leggerla è ciò che distingue un catalogo
+# da un feed. Ogni campo estratto porta con sé la citazione da cui viene.
+MAX_DETAILS_PER_SOURCE = 6
+DETAIL_WORKERS = 4
+EXCERPT_CHARS = 220
+
+RE_DETAIL_DEADLINE = re.compile(
+    r"(?:scadenza|termine|chiusura|entro\s+(?:il|le)|presentazione\s+(?:delle\s+)?domande)"
+    r"[^.\n]{0,100}",
+    re.I,
+)
+RE_DETAIL_AMOUNT = re.compile(
+    r"(?:(?:fino\s+a|contributo\s+(?:di|fino\s+a)|voucher\s+(?:di|fino\s+a)|dotazione|importo)\s+)"
+    r"((?:\d{1,3}(?:\.\d{3})+|\d+)(?:,\d{1,2})?\s*(?:€|euro))"
+    r"|((?:\d{1,3}(?:\.\d{3})+|\d+)(?:,\d{1,2})?\s*(?:€|euro))",
+    re.I,
+)
+RE_DETAIL_REQ = re.compile(
+    r"[^.\n]{0,160}(?:ISEE|residenza|resident[ei]|reddito|età|anni|figli|nucleo familiare|"
+    r"partita\s+iva|ATECO|dipendenti|fatturato|imprese|professionist|studenti|disoccupat|"
+    r"proprietario|contratto di locazione)[^.\n]{0,240}",
+    re.I,
+)
+RE_DETAIL_DOCS = re.compile(
+    r"[^.\n]{0,120}(?:documento|certificazion|autocertificazion|allegare|ISEE|SPID|CIE|"
+    r"fattur|bonifico|ricevut|modulo)[^.\n]{0,200}",
+    re.I,
+)
+
+
+JUNK_RE = re.compile(
+    r"cookie|privacy|newsletter|accedi|area personale|menu|skip to|homepage|\bhome\b|"
+    r"contatti|social|facebook|twitter|linkedin|youtube|instagram|telegram|copyright|"
+    r"©|p\.iva|pec\b|telefono|fax|posta certificata|mappa del sito|amministrazione trasparente|"
+    r"consiglio bandi e gare|ufficio relazioni con il pubblico|motore di ricerca|"
+    r"seguici|iscriviti|scarica l'app|torna su|leggi di più|share",
+    re.I,
+)
+REQUISITO_SIGNAL = re.compile(
+    r"ISEE|reddito|residen\w+|resident[ei]|cittadin\w+|età|anni compiuti|under \d+|nucleo familiare|"
+    r"figli|minori|disabilit|partita\s+iva|partita iva|ATECO|dipendenti|fatturato|imprese|impresa|"
+    r"professionist|artigian|studenti|disoccupat|inattiv|proprietari|locazione|affitto|"
+    r"micro|piccole|medie dimensioni|startup|enti del terzo settore|ETS",
+    re.I,
+)
+
+
+def main_content(markup: str) -> str:
+    """Estrae il corpo della pagina, scartando menu, header, footer e aside."""
+    for tag in ("main", "article"):
+        match = re.search(rf"(?is)<{tag}\b[^>]*>(.*?)</{tag}>", markup)
+        if match and len(html_to_text(match.group(1))) > 800:
+            markup = match.group(1)
+            break
+    else:
+        markup = re.sub(r"(?is)<(nav|header|footer|aside)\b[^>]*>.*?</\1>", " ", markup)
+    # conserva i confini di blocco: le frasi servono separate, non appiattite
+    import html as html_module
+
+    markup = re.sub(r"(?is)<(script|style|noscript)[^>]*>.*?</\1>", " ", markup)
+    markup = re.sub(r"(?is)<br\s*/?>", "\n", markup)
+    markup = re.sub(r"(?is)</(p|div|li|h[1-6]|section|tr|td|dd|dt|blockquote)>", "\n", markup)
+    text = html_module.unescape(re.sub(r"<[^>]+>", " ", markup))
+    text = re.sub(r"[ \t\r\f\v\u00a0]+", " ", text)
+    text = re.sub(r" *\n *", "\n", text)
+    return re.sub(r"\n{2,}", "\n", text).strip()
+
+
+def text_lines(markup: str) -> list[str]:
+    """Righe di testo del corpo pagina, ripulite e senza duplicati consecutivi."""
+    body = main_content(markup)
+    body = re.sub(r"\s*\n\s*", "\n", body)
+    lines: list[str] = []
+    for raw in body.split("\n"):
+        line = re.sub(r"\s+", " ", raw).strip(" .,;:-–—|•\t")
+        if len(line) < 4:
+            continue
+        if lines and lines[-1] == line:
+            continue
+        lines.append(line)
+    return lines
+
+
+def html_to_text(markup: str) -> str:
+    """Testo leggibile da una pagina HTML, senza script/stili e spazi doppi."""
+    import html as html_module
+
+    body = re.sub(r"(?is)<(script|style|noscript)[^>]*>.*?</\1>", " ", markup)
+    text = re.sub(r"<[^>]+>", " ", body)
+    text = html_module.unescape(text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def _clean_sentence(raw: str) -> str:
+    sentence = re.sub(r"\s+", " ", raw).strip(" .,;:-–—|•")
+    return sentence[:EXCERPT_CHARS]
+
+
+AMOUNT_TOKEN = re.compile(r"(?:\d{1,3}(?:\.\d{3})+|\d+)(?:,\d{1,2})?\s*(?:€|euro)\b", re.I)
+AMOUNT_CONTEXT = re.compile(
+    r"fino a|contribut|voucher|dotazione|importo|finanziament|incentiv|agevolaz|"
+    r"spesa ammissibile|budget|massimale|\bpari a\b|\bdi\s+\d",
+    re.I,
+)
+# Solo ciò che è davvero un documento da produrre: "fatturato" o "ricevute"
+# citate in altre frasi finivano per sembrare documenti del bando.
+DOC_SIGNAL = re.compile(
+    r"documento|certificazion|autocertificazion|dichiarazione sostitutiva|allegare|\ballegat|"
+    r"SPID|CIE|CNS|firma digital|modulo di domanda|domanda online",
+    re.I,
+)
+HEADING_HINT = re.compile(
+    r"^(requisiti|destinatari|beneficiari|a chi si rivolge|chi può|soggetti|sono ammessi|possono)", re.I
+)
+
+
+def _amount_number(token: str) -> float | None:
+    raw = re.match(r"[\d.,]+", token)
+    if not raw:
+        return None
+    value = raw.group(0)
+    if "," in value:
+        value = value.replace(".", "").replace(",", ".")
+    elif "." in value:
+        value = value.replace(".", "")
+    try:
+        return float(value)
+    except ValueError:
+        return None
+
+
+def _plausible_amount(token: str) -> bool:
+    """Scarta gli anni (es. «2026 Euro») e i numeri senza senso economico."""
+    number = _amount_number(token)
+    if number is None:
+        return False
+    if 1900 <= number <= 2100 and "," not in token and "." not in token.split(" ")[0]:
+        return False
+    return number >= 100
+
+
+def extract_detail_fields(markup: str) -> dict:
+    """Campi del bando letti nella pagina di dettaglio, con citazione."""
+    lines = text_lines(markup)
+    fields: dict = {"deadline": "", "amount": "", "requirements": [], "documents": []}
+    excerpts: dict = {}
+
+    for line in lines:
+        if JUNK_RE.search(line) or not RE_DETAIL_DEADLINE.search(line):
+            continue
+        date = RE_IT_DATE.search(line)
+        if not date:
+            continue
+        fields["deadline"] = date.group(0)
+        excerpts["deadline"] = _clean_sentence(line)
+        break
+    if not fields["deadline"]:
+        flat = " ".join(lines)
+        match = RE_DETAIL_DEADLINE.search(flat)
+        if match and RE_IT_DATE.search(match.group(0)):
+            fields["deadline"] = RE_IT_DATE.search(match.group(0)).group(0)
+            excerpts["deadline"] = _clean_sentence(match.group(0))
+
+    best: tuple[float, str, str] | None = None
+    for line in lines:
+        if JUNK_RE.search(line):
+            continue
+        # una cifra in una frase che parla di contributo vale più di un numero
+        # qualsiasi trovato in pagina: a parità di contesto vince la più alta
+        weight = 1.0 if AMOUNT_CONTEXT.search(line) else 0.4
+        for token in AMOUNT_TOKEN.findall(line):
+            if not _plausible_amount(token):
+                continue
+            score = (_amount_number(token) or 0.0) * weight
+            if best is None or score > best[0]:
+                best = (score, token, _clean_sentence(line))
+    if best:
+        fields["amount"] = _clean_sentence(best[1])
+        excerpts["amount"] = best[2]
+
+    seen: set[str] = set()
+    for line in lines:
+        if JUNK_RE.search(line) or not REQUISITO_SIGNAL.search(line):
+            continue
+        if not (25 <= len(line) <= 320):
+            continue
+        if not (HEADING_HINT.search(line) or re.search(r"\b(essere|avere|possono|deve|devono|rivolt|riservat)\b", line, re.I)):
+            continue
+        key = line.lower()[:60]
+        if key in seen:
+            continue
+        seen.add(key)
+        fields["requirements"].append(_clean_sentence(line))
+        if len(fields["requirements"]) >= 6:
+            break
+    if fields["requirements"]:
+        excerpts["requirements"] = fields["requirements"][0]
+
+    seen_docs: set[str] = set()
+    for line in lines:
+        if JUNK_RE.search(line) or not DOC_SIGNAL.search(line):
+            continue
+        if not (12 <= len(line) <= 260):
+            continue
+        key = line.lower()[:50]
+        if key in seen_docs:
+            continue
+        seen_docs.add(key)
+        fields["documents"].append(_clean_sentence(line))
+        if len(fields["documents"]) >= 5:
+            break
+    if fields["documents"]:
+        excerpts["documents"] = fields["documents"][0]
+
+    fields["excerpts"] = excerpts
+    return fields
+
+
+def enrich_from_detail(bonus: dict) -> dict:
+    """Completa la scheda leggendo la pagina del bando.
+
+    Non sovrascrive ciò che la card dichiara già; aggiunge solo i campi mancanti
+    e conserva la citazione (`source_excerpts`) e la data di lettura, così ogni
+    dato in catalogo è tracciabile alla fonte.
+    """
+    url = bonus.get("source_url") or ""
+    if not url:
+        return bonus
+    html: str | None = None
+    for agent in (BROWSER_UA, USER_AGENT):
+        try:
+            html = fetch(url, user_agent=agent)
+            break
+        except FetchError:
+            continue
+    if not html:
+        return bonus
+
+    text = main_content(html)
+    fields = extract_detail_fields(html)
+    detail: dict = {}
+    if not (bonus.get("deadline") or "").strip() and fields["deadline"]:
+        detail["deadline"] = fields["deadline"]
+    if not (bonus.get("amount") or "").strip() and fields["amount"]:
+        detail["amount"] = fields["amount"]
+    existing = [r.lower() for r in (bonus.get("requirements") or [])]
+    extra_req = [
+        r for r in fields["requirements"] if not any(r.lower()[:40] in e for e in existing)
+    ]
+    if extra_req:
+        detail["requirements"] = list(bonus.get("requirements") or []) + extra_req[:4]
+    if fields["documents"]:
+        detail["required_documents"] = list(bonus.get("required_documents") or []) + fields["documents"][:4]
+    # Il testo del dettaglio è il segnale migliore per il destinatario.
+    fallback = tuple(bonus.get("target") or ()) or ("persona", "impresa")
+    detail["target"] = deduce_target(f"{bonus.get('title','')} {text[:4000]}", fallback)
+    detail["detail_fetched_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    detail["source_excerpts"] = fields["excerpts"]
+    return {**bonus, **detail}
+
+
+def enrich_items(items: list[dict]) -> list[dict]:
+    """Arricchisce in parallelo le schede leggendo le rispettive pagine di dettaglio."""
+    if not items:
+        return items
+    from concurrent.futures import ThreadPoolExecutor
+
+    worth: list[dict] = []
+    skipped: list[dict] = []
+    for item in items:
+        title = item.get("title") or ""
+        if GATE_NOTIZIA_RE.search(title) or GATE_ATTO_RE.search(title):
+            skipped.append(item)  # comunicato o atto: non vale una richiesta
+        else:
+            worth.append(item)
+    head, rest = worth[:MAX_DETAILS_PER_SOURCE], worth[MAX_DETAILS_PER_SOURCE:]
+    with ThreadPoolExecutor(max_workers=DETAIL_WORKERS) as pool:
+        enriched = list(pool.map(enrich_from_detail, head))
+    return enriched + rest + skipped
+
+
 def retag_catalog(path: Path, sources: list[dict]) -> int:
     """Ricalcola il target di ogni scheda del JSON dal suo testo.
 
@@ -1081,9 +1535,12 @@ def merge_with_existing(
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     rows = [{**r, "miss_streak": 0, "last_seen_at": now} for r in rows]
     try:
-        previous = json.loads(path.read_text(encoding="utf-8")).get("bonuses", [])
+        data = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
-        previous = []
+        data = {}
+    # Le schede in quarantena restano nel giro: se la run le ritrova vengono
+    # rivalutate, se non le ritrova non spariscono dal file.
+    previous = list(data.get("bonuses", [])) + list(data.get("quarantine", []))
     if not isinstance(previous, list) or not previous:
         return rows, len(rows), 0, 0, 0
 
@@ -1123,7 +1580,15 @@ def merge_with_existing(
     return merged, new, updated, kept, archived
 
 
-def write_json(path: Path, rows: list[dict], sources_count: int, db_rows: int | None) -> None:
+def write_json(
+    path: Path,
+    rows: list[dict],
+    sources_count: int,
+    db_rows: int | None,
+    quarantine: list[dict] | None = None,
+    news: list[dict] | None = None,
+    quality: dict | None = None,
+) -> None:
     """Scrive il file JSON letto dal frontend (catalogo per utenti anonimi).
 
     `stats` sono i contatori del registro mostrati dalla landing: `bonuses` =
@@ -1147,6 +1612,11 @@ def write_json(path: Path, rows: list[dict], sources_count: int, db_rows: int | 
         # `discovered_at` di una scheda conservata resta quello originale: solo
         # le schede appena viste prendono la data di questa run.
         "bonuses": [{**r, "discovered_at": r.get("discovered_at") or now} for r in rows],
+        # Fuori catalogo ma conservati per revisione e audit: non sono bandi
+        # pubblicabili, quindi non entrano in conteggi, matching o alert.
+        "quarantine": quarantine or [],
+        "news": news or [],
+        "quality": quality or {},
     }
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(file, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -1287,6 +1757,30 @@ def main() -> int:
                     "penalizzate): " + ", ".join(idle)
                 )
 
+    # 1c) gate qualità: in catalogo solo i bandi con evidenze verificabili
+    verified: list[dict] = []
+    quarantine: list[dict] = []
+    news_items: list[dict] = []
+    expired: list[dict] = []
+    quality: dict = {}
+    if rows:
+        verified, quarantine, news_items, expired = split_catalog(rows)
+        quality = quality_metrics(verified, quarantine, news_items, expired)
+        print(
+            f"✓ Gate qualità: {len(verified)} bandi in catalogo "
+            f"({quality['open']} aperti, {quality['unknown_deadline']} senza scadenza) · "
+            f"{len(quarantine)} in quarantena · {len(news_items)} notizie · "
+            f"{len(expired)} scaduti"
+        )
+        print(
+            "  riempimento campi: "
+            f"scadenza {quality['fill']['deadline_pct']}% · "
+            f"importo {quality['fill']['amount_pct']}% · "
+            f"requisiti {quality['fill']['requirements_pct']}% · "
+            f"documenti {quality['fill']['documents_pct']}%"
+        )
+        rows = verified
+
     # 2) Supabase (se configurato)
     db_rows: int | None = None
     if rows and url and key:
@@ -1349,7 +1843,15 @@ def main() -> int:
     if rows == 0 and json_path.exists():
         print(f"ℹ︎ Nessun nuovo bonus: mantengo il file esistente {json_path}")
         return 0
-    write_json(json_path, rows, sources_count, db_rows)
+    write_json(
+        json_path,
+        rows,
+        sources_count,
+        db_rows,
+        quarantine=quarantine,
+        news=news_items,
+        quality=quality,
+    )
     return 0
 
 

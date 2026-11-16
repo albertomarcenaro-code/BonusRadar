@@ -203,6 +203,27 @@ export default function BonusCatalog() {
         </p>
       )}
 
+      {catalog?.quality && (
+        <p
+          className="mb-4 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-xs text-dim"
+          data-testid="bonus-quality"
+        >
+          <span>
+            <span className="font-medium text-ink">{catalog.quality.verified}</span> bandi verificati
+          </span>
+          {catalog.quality.unknown_deadline > 0 && (
+            <span>· {catalog.quality.unknown_deadline} senza scadenza indicata</span>
+          )}
+          {catalog.quality.quarantine > 0 && (
+            <span>· {catalog.quality.quarantine} segnalazioni in verifica</span>
+          )}
+          {catalog.quality.news > 0 && <span>· {catalog.quality.news} notizie scartate</span>}
+          <span className="text-dim/70">
+            · ogni voce entra solo con scadenza, importo o requisiti verificabili
+          </span>
+        </p>
+      )}
+
       {dash && !dash.has_profile && (
         <div className="mb-6 flex flex-col gap-3 rounded-xl border border-signal/30 bg-signal/10 p-4 sm:flex-row sm:items-center sm:justify-between" data-testid="bonus-no-profile-banner">
           <p className="text-sm text-signal">Completa il tuo profilo per verificare se hai diritto ai bonus del catalogo.</p>
@@ -431,6 +452,42 @@ export default function BonusCatalog() {
           </div>
         )}
       </div>
+
+      {catalog?.quarantine && catalog.quarantine.length > 0 && (
+        <details className="mt-6 rounded-xl border border-line bg-white/[0.03] p-4" data-testid="bonus-quarantine">
+          <summary className="cursor-pointer text-sm font-semibold text-ink">
+            Segnalazioni in verifica ({catalog.quarantine.length})
+            <span className="ml-2 text-xs font-normal text-muted">
+              avvisi trovati dalle fonti di cui non sono ancora disponibili scadenza, importo o requisiti
+            </span>
+          </summary>
+          <p className="mt-3 text-xs text-muted">
+            Restano fuori dal catalogo e dal matching finché la fonte non viene letta nel dettaglio: meglio
+            nessun dato che un dato sbagliato. Puoi aprire la fonte e verificare tu.
+          </p>
+          <ul className="mt-3 divide-y divide-line/60">
+            {catalog.quarantine.map((b) => (
+              <li key={b.id} className="flex flex-col gap-1 py-2 sm:flex-row sm:items-center sm:justify-between">
+                <span className="text-sm text-ink">
+                  {b.title}
+                  <span className="ml-2 text-xs text-dim">{b.source_name}</span>
+                </span>
+                <span className="flex items-center gap-3 text-xs">
+                  <span className="text-signal/80">{b.gate_reason}</span>
+                  <a
+                    href={b.source_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 text-accent hover:underline"
+                  >
+                    Apri la fonte <ExternalLink className="size-3" />
+                  </a>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
 
       {/* Drawer di dettaglio: overlay con backdrop-blur che sfoca il catalogo */}
       {detail && (
@@ -715,6 +772,43 @@ function BonusDetailPanel({
           </ul>
         </div>
       </div>
+
+      {b.source_excerpts && Object.keys(b.source_excerpts).length > 0 && (
+        <div className="mt-5 rounded-xl border border-line bg-white/[0.02] p-4" data-testid="bonus-detail-provenance">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-dim">
+            Dati letti dalla fonte
+            {b.detail_fetched_at && <span className="ml-1 font-normal normal-case tracking-normal">· {fmtDateTime(b.detail_fetched_at)}</span>}
+          </p>
+          <ul className="space-y-1.5 text-xs text-muted">
+            {(
+              [
+                ["deadline", "Scadenza"],
+                ["amount", "Importo"],
+                ["requirements", "Requisiti"],
+                ["documents", "Documenti"],
+              ] as const
+            ).map(([key, label]) => {
+              const quote = b.source_excerpts?.[key];
+              if (!quote) return null;
+              return (
+                <li key={key}>
+                  <span className="font-semibold text-ink">{label}: </span>
+                  <span className="italic">«{quote}»</span>
+                </li>
+              );
+            })}
+          </ul>
+          <a
+            href={b.source_url}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-3 inline-flex items-center gap-1 text-xs text-accent hover:underline"
+            data-testid="link-source-excerpt"
+          >
+            Verifica sulla fonte <ExternalLink className="size-3" />
+          </a>
+        </div>
+      )}
 
       <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-line pt-5">
         {isLocal ? (

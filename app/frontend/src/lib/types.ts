@@ -77,6 +77,22 @@ export interface Bonus {
    * `artigiani`, `professionisti`. Assente = vale per entrambi i pubblici.
    */
   target?: string[];
+  /**
+   * Stato del bando dedotto dalla scadenza: `open`, `closed` (escluso dal
+   * catalogo) o `unknown` quando la fonte non indica un termine.
+   */
+  status?: "open" | "closed" | "unknown";
+  /** Perché il gate qualità lo ha ammesso (o perché è in quarantena). */
+  gate_reason?: string;
+  /** Quando la pagina del bando è stata letta per riempire i campi. */
+  detail_fetched_at?: string;
+  /** Citazioni da cui provengono scadenza, importo, requisiti e documenti. */
+  source_excerpts?: {
+    deadline?: string;
+    amount?: string;
+    requirements?: string;
+    documents?: string;
+  };
   eligibility: Eligibility;
   eligibility_reason: string;
   discovered_at: string;
@@ -98,6 +114,31 @@ export interface CatalogStats {
 }
 
 /** File JSON generato dallo scraper (public/data/bonuses.json). */
+/** Notizia o comunicato scartato dal gate qualità (non è un bando). */
+export interface CatalogNews {
+  title: string;
+  source_name: string;
+  source_url: string;
+  reason: string;
+}
+
+/** Metriche di qualità del catalogo calcolate dallo scraper. */
+export interface CatalogQuality {
+  verified: number;
+  open: number;
+  unknown_deadline: number;
+  expired: number;
+  quarantine: number;
+  news: number;
+  fill: {
+    deadline_pct: number;
+    amount_pct: number;
+    requirements_pct: number;
+    documents_pct: number;
+  };
+  by_source: Record<string, number>;
+}
+
 export interface BonusCatalogFile {
   generated_at: string;
   source: string;
@@ -105,6 +146,11 @@ export interface BonusCatalogFile {
   /** Snapshot dei contatori al momento della scansione (fallback pubblico). */
   stats?: CatalogStats;
   bonuses: Bonus[];
+  /** Schede che parlano di bandi ma senza dati verificabili: fuori catalogo. */
+  quarantine?: Bonus[];
+  /** Notizie/comunicati/atti scartati dal gate, conservati per audit. */
+  news?: CatalogNews[];
+  quality?: CatalogQuality;
 }
 
 export type DocStatus = "da_firmare" | "firmato" | "inviato" | "approvato";
