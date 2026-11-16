@@ -75,7 +75,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      <section className="panel relative overflow-hidden p-6 sm:p-10 animate-rise">
+      <section className="panel relative overflow-hidden p-6 pb-5 sm:p-10 sm:pb-6 animate-rise">
         <div className="bg-grid-paper absolute inset-0" />
         <div className="pointer-events-none absolute -right-24 -top-24 size-80 rounded-full border border-accent/15">
           <div className="absolute inset-8 rounded-full border border-accent/15" />
