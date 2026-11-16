@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-11-16T20:17:56Z",
+  "generated_at": "2026-11-16T20:53:34Z",
   "source": "BonusRadar scraper v1",
-  "count": 67,
+  "count": 68,
   "stats": {
-    "bonuses": 67,
-    "active": 67,
-    "sources": 15
+    "bonuses": 68,
+    "active": 68,
+    "sources": 20
   },
   "bonuses": [
     {
@@ -30,8 +30,8 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:17:56Z",
-      "discovered_at": "2026-11-16T20:17:56Z"
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
     },
     {
       "id": "scr-0b3bb316cd1a",
@@ -55,8 +55,140 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:17:56Z",
-      "discovered_at": "2026-11-16T20:17:56Z"
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
+    },
+    {
+      "id": "scr-6cd57382c738",
+      "title": "Voucher cloud e cybersecurity",
+      "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Invitalia: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/voucher-cloud-e-cybersecurity",
+      "source_name": "Invitalia",
+      "target": [
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
+    },
+    {
+      "id": "scr-0e3dae2d1f29",
+      "title": "Fondo di contrasto alla deindustrializzazione 2026",
+      "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Fondo di contrasto alla deindustrializzazione 2026",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/fondo-di-contrasto-alla-deindustrializzazione-2026",
+      "source_name": "Invitalia",
+      "target": [
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
+    },
+    {
+      "id": "scr-cf6c645857e8",
+      "title": "Fondo di partecipazione MUR",
+      "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Invitalia: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/fondo-di-partecipazione-mur",
+      "source_name": "Invitalia",
+      "target": [
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
+    },
+    {
+      "id": "scr-d6c55d360de0",
+      "title": "Detrazioni fiscali",
+      "authority": "Ministero dell'Ambiente e della Sicurezza Energetica",
+      "category": "energia",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su MASE: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.mise.gov.it/index.php/it/incentivi/energia/detrazioni-fiscali",
+      "source_name": "MASE",
+      "target": [
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
+    },
+    {
+      "id": "scr-5f9d25105df4",
+      "title": "Fondo nazionale efficienza energetica",
+      "authority": "Ministero dell'Ambiente e della Sicurezza Energetica",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su MASE: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.mase.gov.it/portale/web/guest/fondo-nazionale-efficienza-energetica",
+      "source_name": "MASE",
+      "target": [
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
+    },
+    {
+      "id": "scr-a2f8fa00dfe0",
+      "title": "Ecobonus e Superbonus 110%",
+      "authority": "Ministero dell'Ambiente e della Sicurezza Energetica",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su MASE: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.efficienzaenergetica.enea.it/detrazioni-fiscali/contatti/quesiti-di-natura-tecnico-procedurale.html",
+      "source_name": "MASE",
+      "target": [
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
     },
     {
       "id": "scr-5da8ec56f40a",
@@ -78,8 +210,8 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:17:56Z",
-      "discovered_at": "2026-11-16T20:17:56Z"
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
     },
     {
       "id": "scr-45e0bdec558f",
@@ -101,8 +233,8 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:17:56Z",
-      "discovered_at": "2026-11-16T20:17:56Z"
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
     },
     {
       "id": "scr-3fbb07414f85",
@@ -124,8 +256,8 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:17:56Z",
-      "discovered_at": "2026-11-16T20:17:56Z"
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
     },
     {
       "id": "scr-e846f6dd6d89",
@@ -146,8 +278,8 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:17:56Z",
-      "discovered_at": "2026-11-16T20:17:56Z"
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
     },
     {
       "id": "scr-83644461d463",
@@ -170,8 +302,8 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:17:56Z",
-      "discovered_at": "2026-11-16T20:17:56Z"
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
     },
     {
       "id": "scr-171213fa3702",
@@ -195,8 +327,8 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:17:56Z",
-      "discovered_at": "2026-11-16T20:17:56Z"
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
     },
     {
       "id": "scr-dc72123c2d6c",
@@ -219,8 +351,8 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:17:56Z",
-      "discovered_at": "2026-11-16T20:17:56Z"
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
     },
     {
       "id": "scr-f10d49c51993",
@@ -244,8 +376,8 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:17:56Z",
-      "discovered_at": "2026-11-16T20:17:56Z"
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
     },
     {
       "id": "scr-ff1578b7f081",
@@ -260,14 +392,15 @@
       "source_url": "https://www.invitalia.it/incentivi-e-strumenti/autoimpiego-centro-nord?from=/per-chi-vuole-fare-impresa/incentivi",
       "source_name": "Invitalia — Autoimpiego e nuove imprese",
       "target": [
-        "impresa"
+        "impresa",
+        "artigiani"
       ],
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:17:56Z",
-      "discovered_at": "2026-11-16T20:17:56Z"
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
     },
     {
       "id": "scr-0026efe14789",
@@ -282,14 +415,15 @@
       "source_url": "https://www.invitalia.it/incentivi-e-strumenti/resto-al-sud-20?from=/per-chi-vuole-fare-impresa/incentivi",
       "source_name": "Invitalia — Autoimpiego e nuove imprese",
       "target": [
-        "impresa"
+        "impresa",
+        "artigiani"
       ],
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:17:56Z",
-      "discovered_at": "2026-11-16T20:17:56Z"
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
     },
     {
       "id": "scr-3df33a7c0d4d",
@@ -310,8 +444,8 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:17:56Z",
-      "discovered_at": "2026-11-16T20:17:56Z"
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
     },
     {
       "id": "scr-4bc5369a150a",
@@ -326,14 +460,15 @@
       "source_url": "https://www.invitalia.it/incentivi-e-strumenti/imprenditoria-femminile",
       "source_name": "Invitalia — Autoimpiego e nuove imprese",
       "target": [
-        "impresa"
+        "impresa",
+        "artigiani"
       ],
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:17:56Z",
-      "discovered_at": "2026-11-16T20:17:56Z"
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
     },
     {
       "id": "scr-d20a5b49c256",
@@ -348,14 +483,15 @@
       "source_url": "https://www.invitalia.it/incentivi-e-strumenti/smartstart-italia?from=/per-chi-vuole-fare-impresa/incentivi",
       "source_name": "Invitalia — Autoimpiego e nuove imprese",
       "target": [
-        "impresa"
+        "impresa",
+        "artigiani"
       ],
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:17:56Z",
-      "discovered_at": "2026-11-16T20:17:56Z"
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
     },
     {
       "id": "scr-b05c66f7b9f1",
@@ -370,14 +506,15 @@
       "source_url": "https://www.invitalia.it/incentivi-e-strumenti/economia-circolare",
       "source_name": "Invitalia — Autoimpiego e nuove imprese",
       "target": [
-        "impresa"
+        "impresa",
+        "artigiani"
       ],
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:17:56Z",
-      "discovered_at": "2026-11-16T20:17:56Z"
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
     },
     {
       "id": "scr-736efc897cf7",
@@ -392,14 +529,39 @@
       "source_url": "https://www.invitalia.it/incentivi-e-strumenti/italia-economia-sociale",
       "source_name": "Invitalia — Autoimpiego e nuove imprese",
       "target": [
+        "impresa",
+        "artigiani"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
+    },
+    {
+      "id": "scr-2fcc05aadd72",
+      "title": "INCENTIVI – 56 milioni di euro a disposizione per nuove aziende e microcredito",
+      "authority": "Confartigianato Sud Sardegna",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "INCENTIVI – 56 milioni di euro a disposizione per nuove aziende e microcredito",
+      "requirements": [
+        "Sede operativa in Sardegna"
+      ],
+      "required_documents": [],
+      "source_url": "https://sardegnaimpresa.it/incentivi-56-milioni-di-euro-a-disposizione-per-nuove-aziende-e-microcredito/",
+      "source_name": "Sardegna Impresa (Confartigianato)",
+      "target": [
         "impresa"
       ],
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:17:56Z",
-      "discovered_at": "2026-11-16T20:17:56Z"
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
     },
     {
       "id": "scr-c4bce98ceef4",
@@ -423,8 +585,8 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:17:56Z",
-      "discovered_at": "2026-11-16T20:17:56Z"
+      "last_seen_at": "2026-11-16T20:53:34Z",
+      "discovered_at": "2026-11-16T20:53:34Z"
     },
     {
       "id": "scr-47ce8944846b",
@@ -685,69 +847,8 @@
       "target": [
         "persona",
         "impresa"
-      ]
-    },
-    {
-      "id": "scr-6cd57382c738",
-      "title": "Voucher cloud e cybersecurity",
-      "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Invitalia: apri la fonte per i dettagli.",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/voucher-cloud-e-cybersecurity",
-      "source_name": "Invitalia",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "persona",
-        "impresa"
-      ]
-    },
-    {
-      "id": "scr-0e3dae2d1f29",
-      "title": "Fondo di contrasto alla deindustrializzazione 2026",
-      "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Fondo di contrasto alla deindustrializzazione 2026",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/fondo-di-contrasto-alla-deindustrializzazione-2026",
-      "source_name": "Invitalia",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "impresa"
-      ]
-    },
-    {
-      "id": "scr-cf6c645857e8",
-      "title": "Fondo di partecipazione MUR",
-      "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Invitalia: apri la fonte per i dettagli.",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/fondo-di-partecipazione-mur",
-      "source_name": "Invitalia",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "persona",
-        "impresa"
-      ]
+      ],
+      "miss_streak": 1
     },
     {
       "id": "scr-88008f106fd8",
@@ -767,7 +868,8 @@
       "discovered_at": "2026-11-14T16:50:35Z",
       "target": [
         "impresa"
-      ]
+      ],
+      "miss_streak": 1
     },
     {
       "id": "scr-731c69443704",
@@ -787,7 +889,8 @@
       "discovered_at": "2026-11-14T16:50:35Z",
       "target": [
         "impresa"
-      ]
+      ],
+      "miss_streak": 1
     },
     {
       "id": "scr-d244520dff41",
@@ -808,7 +911,8 @@
       "target": [
         "persona",
         "impresa"
-      ]
+      ],
+      "miss_streak": 1
     },
     {
       "id": "scr-2c4f5d33b903",
@@ -852,7 +956,7 @@
       "eligibility_reason": "",
       "is_new": true,
       "discovered_at": "2026-11-14T16:50:35Z",
-      "miss_streak": 1,
+      "miss_streak": 2,
       "target": [
         "persona",
         "impresa"
@@ -876,7 +980,7 @@
       "eligibility_reason": "",
       "is_new": true,
       "discovered_at": "2026-11-14T16:50:35Z",
-      "miss_streak": 1,
+      "miss_streak": 2,
       "target": [
         "persona",
         "impresa"
@@ -900,7 +1004,7 @@
       "eligibility_reason": "",
       "is_new": true,
       "discovered_at": "2026-11-14T16:50:35Z",
-      "miss_streak": 1,
+      "miss_streak": 2,
       "target": [
         "persona",
         "impresa"
@@ -924,7 +1028,7 @@
       "eligibility_reason": "",
       "is_new": true,
       "discovered_at": "2026-11-14T16:50:35Z",
-      "miss_streak": 1,
+      "miss_streak": 2,
       "target": [
         "persona",
         "impresa"
@@ -950,7 +1054,7 @@
       "eligibility_reason": "",
       "is_new": true,
       "discovered_at": "2026-11-14T16:50:35Z",
-      "miss_streak": 1,
+      "miss_streak": 2,
       "target": [
         "persona",
         "impresa"
@@ -976,7 +1080,7 @@
       "eligibility_reason": "",
       "is_new": true,
       "discovered_at": "2026-11-14T16:50:35Z",
-      "miss_streak": 1,
+      "miss_streak": 2,
       "target": [
         "persona",
         "impresa"
@@ -1002,7 +1106,7 @@
       "eligibility_reason": "",
       "is_new": true,
       "discovered_at": "2026-11-14T16:50:35Z",
-      "miss_streak": 1,
+      "miss_streak": 2,
       "target": [
         "persona",
         "impresa"
@@ -1028,70 +1132,7 @@
       "eligibility_reason": "",
       "is_new": true,
       "discovered_at": "2026-11-14T16:50:35Z",
-      "miss_streak": 1,
-      "target": [
-        "persona",
-        "impresa"
-      ]
-    },
-    {
-      "id": "scr-d6c55d360de0",
-      "title": "Detrazioni fiscali",
-      "authority": "Ministero dell'Ambiente e della Sicurezza Energetica",
-      "category": "energia",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su MASE: apri la fonte per i dettagli.",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.mise.gov.it/index.php/it/incentivi/energia/detrazioni-fiscali",
-      "source_name": "MASE",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "persona",
-        "impresa"
-      ]
-    },
-    {
-      "id": "scr-5f9d25105df4",
-      "title": "Fondo nazionale efficienza energetica",
-      "authority": "Ministero dell'Ambiente e della Sicurezza Energetica",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su MASE: apri la fonte per i dettagli.",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.mase.gov.it/portale/web/guest/fondo-nazionale-efficienza-energetica",
-      "source_name": "MASE",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
-      "target": [
-        "persona",
-        "impresa"
-      ]
-    },
-    {
-      "id": "scr-a2f8fa00dfe0",
-      "title": "Ecobonus e Superbonus 110%",
-      "authority": "Ministero dell'Ambiente e della Sicurezza Energetica",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su MASE: apri la fonte per i dettagli.",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.efficienzaenergetica.enea.it/detrazioni-fiscali/contatti/quesiti-di-natura-tecnico-procedurale.html",
-      "source_name": "MASE",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z",
+      "miss_streak": 2,
       "target": [
         "persona",
         "impresa"
@@ -1118,7 +1159,8 @@
       "target": [
         "persona",
         "impresa"
-      ]
+      ],
+      "miss_streak": 1
     },
     {
       "id": "scr-6a94d0ce304a",
@@ -1281,7 +1323,7 @@
       "eligibility_reason": "",
       "is_new": true,
       "discovered_at": "2026-11-14T16:50:35Z",
-      "miss_streak": 1,
+      "miss_streak": 2,
       "target": [
         "persona",
         "impresa"
@@ -1305,7 +1347,7 @@
       "eligibility_reason": "",
       "is_new": true,
       "discovered_at": "2026-11-14T16:50:35Z",
-      "miss_streak": 1,
+      "miss_streak": 2,
       "target": [
         "persona",
         "impresa"
@@ -1327,7 +1369,7 @@
       "eligibility_reason": "",
       "is_new": true,
       "discovered_at": "2026-11-16T15:06:48Z",
-      "miss_streak": 1,
+      "miss_streak": 2,
       "target": [
         "persona",
         "impresa"

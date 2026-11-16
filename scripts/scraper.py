@@ -167,6 +167,44 @@ SOURCES: list[dict] = [
     },
 
     # ---------------- Fonti nazionali aggiuntive (ampliamento ricerca) ----------------
+    # Fonti presenti nella mappa `catalog_sources` (priorità 4 e 7-10) che qui
+    # mancavano: senza credenziali Supabase il fallback non le scansionava e le
+    # loro schede restavano ferme. Aggiunte il 16/11/2026.
+    {
+        "name": "Invitalia",
+        "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
+        "list_url": "https://www.invitalia.it/per-le-imprese/incentivi-e-strumenti",
+        "base_url": "https://www.invitalia.it/",
+        "target": ("impresa",),
+    },
+    {
+        "name": "MASE",
+        "authority": "Ministero dell'Ambiente e della Sicurezza Energetica",
+        "list_url": "https://www.mase.gov.it/portale/incentivi",
+        "base_url": "https://www.mase.gov.it/",
+        "target": ("impresa",),
+    },
+    {
+        "name": "ENEA — Efficienza Energetica",
+        "authority": "ENEA",
+        "list_url": "https://www.efficienzaenergetica.enea.it/",
+        "base_url": "https://www.efficienzaenergetica.enea.it/",
+        "target": ("persona", "impresa"),
+    },
+    {
+        "name": "SIMEST (Gruppo CDP)",
+        "authority": "SIMEST",
+        "list_url": "https://www.simest.it/",
+        "base_url": "https://www.simest.it/",
+        "target": ("impresa",),
+    },
+    {
+        "name": "Ministero della Cultura (MiC)",
+        "authority": "Ministero della Cultura",
+        "list_url": "https://cultura.gov.it/",
+        "base_url": "https://cultura.gov.it/",
+        "target": ("impresa",),
+    },
     {
         "name": "Ministero del Lavoro",
         "authority": "Ministero del Lavoro e delle Politiche Sociali",

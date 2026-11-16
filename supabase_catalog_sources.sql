@@ -283,6 +283,7 @@ update public.catalog_sources set target = '{impresa,artigiani}'      where slug
 -- bando. Restano "persona + impresa" (default) le fonti che coprono entrambi i
 -- pubblici (Agenzia delle Entrate, Comuni, Regioni, Cliclavoro, INAIL).
 update public.catalog_sources set target = '{persona}'                where slug = 'inps';
+update public.catalog_sources set target = '{impresa}'                where slug = 'invitalia';
 update public.catalog_sources set target = '{impresa}'                where slug = 'simest';
 update public.catalog_sources set target = '{impresa}'                where slug = 'mase';
 update public.catalog_sources set target = '{impresa}'                where slug = 'mic';
