@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T15:06:48Z",
+  "generated_at": "2026-11-16T17:56:28Z",
   "source": "BonusRadar scraper v1",
   "count": 67,
   "stats": {
@@ -229,7 +229,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
+      "discovered_at": "2026-11-16T17:56:28Z"
     },
     {
       "id": "scr-c0661d6d68b0",
@@ -254,16 +254,16 @@
       "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
       "category": "altro",
       "amount": "",
-      "deadline": "20 gennaio 2027",
+      "deadline": "",
       "summary": "Avviso pubblicato su Invitalia: apri la fonte per i dettagli.",
       "requirements": [],
       "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/fondo-di-contrasto-alla-deindustrializzazione-2026",
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/voucher-cloud-e-cybersecurity",
       "source_name": "Invitalia",
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-16T17:56:28Z"
     },
     {
       "id": "scr-0e3dae2d1f29",
@@ -271,16 +271,16 @@
       "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
       "category": "altro",
       "amount": "",
-      "deadline": "28 novembre 2026",
-      "summary": "Fondo di contrasto alla deindustrializzazione 2026 L’incentivo che sostiene gli investimenti nei consorzi industriali di Lazio e Marche Attivo Data apertura: 28 settembre 2026 Data chiusura: 28 novembre 2026",
+      "deadline": "",
+      "summary": "Fondo di contrasto alla deindustrializzazione 2026",
       "requirements": [],
       "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/fondo-di-partecipazione-mur",
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/fondo-di-contrasto-alla-deindustrializzazione-2026",
       "source_name": "Invitalia",
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-16T17:56:28Z"
     },
     {
       "id": "scr-cf6c645857e8",
@@ -288,16 +288,16 @@
       "authority": "Invitalia — Agenzia nazionale per lo sviluppo d'impresa",
       "category": "altro",
       "amount": "",
-      "deadline": "31 dicembre 2030",
+      "deadline": "",
       "summary": "Avviso pubblicato su Invitalia: apri la fonte per i dettagli.",
       "requirements": [],
       "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/credito-dimposta-incubatori-e-acceleratori-certificati",
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/fondo-di-partecipazione-mur",
       "source_name": "Invitalia",
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-16T17:56:28Z"
     },
     {
       "id": "scr-88008f106fd8",
@@ -572,16 +572,14 @@
       "amount": "",
       "deadline": "",
       "summary": "Avviso pubblicato su MASE: apri la fonte per i dettagli.",
-      "requirements": [
-        "CIE"
-      ],
+      "requirements": [],
       "required_documents": [],
       "source_url": "https://www.mise.gov.it/index.php/it/incentivi/energia/detrazioni-fiscali",
       "source_name": "MASE",
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-16T17:56:28Z"
     },
     {
       "id": "scr-5f9d25105df4",
@@ -591,16 +589,14 @@
       "amount": "",
       "deadline": "",
       "summary": "Avviso pubblicato su MASE: apri la fonte per i dettagli.",
-      "requirements": [
-        "CIE"
-      ],
+      "requirements": [],
       "required_documents": [],
       "source_url": "https://www.mase.gov.it/portale/web/guest/fondo-nazionale-efficienza-energetica",
       "source_name": "MASE",
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-16T17:56:28Z"
     },
     {
       "id": "scr-a2f8fa00dfe0",
@@ -610,16 +606,14 @@
       "amount": "",
       "deadline": "",
       "summary": "Avviso pubblicato su MASE: apri la fonte per i dettagli.",
-      "requirements": [
-        "CIE"
-      ],
+      "requirements": [],
       "required_documents": [],
       "source_url": "https://www.efficienzaenergetica.enea.it/detrazioni-fiscali/contatti/quesiti-di-natura-tecnico-procedurale.html",
       "source_name": "MASE",
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-16T17:56:28Z"
     },
     {
       "id": "scr-20532ff2606f",
@@ -810,7 +804,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
+      "discovered_at": "2026-11-16T17:56:28Z"
     },
     {
       "id": "scr-45e0bdec558f",
@@ -827,7 +821,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
+      "discovered_at": "2026-11-16T17:56:28Z"
     },
     {
       "id": "scr-3fbb07414f85",
@@ -844,7 +838,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
+      "discovered_at": "2026-11-16T17:56:28Z"
     },
     {
       "id": "scr-e846f6dd6d89",
@@ -861,7 +855,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
+      "discovered_at": "2026-11-16T17:56:28Z"
     },
     {
       "id": "scr-220eb0740858",
@@ -878,7 +872,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
+      "discovered_at": "2026-11-16T17:56:28Z"
     },
     {
       "id": "scr-c1ca38f77731",
@@ -1030,7 +1024,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
+      "discovered_at": "2026-11-16T17:56:28Z"
     },
     {
       "id": "scr-83644461d463",
