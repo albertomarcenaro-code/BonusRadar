@@ -87,7 +87,8 @@ function ageText(months: number | null): string {
   const years = Math.floor(months / 12);
   const rest = months % 12;
   if (years === 0) return `${months} ${months === 1 ? "mese" : "mesi"}`;
-  return rest === 0 ? `${years} ${years === 1 ? "anno" : "anni"}` : `${years} anni e ${rest} mesi`;
+  const y = `${years} ${years === 1 ? "anno" : "anni"}`;
+  return rest === 0 ? y : `${y} e ${rest} mesi`;
 }
 
 const RELATIONS: Record<string, string> = { coniuge: "Coniuge / partner", figlio: "Figlio/a", genitore: "Genitore", altro: "Altro" };
