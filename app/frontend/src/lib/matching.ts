@@ -261,17 +261,26 @@ export function findAgeRange(text: string): AgeRange | null {
     const b = Number(dash[2]);
     return { min: Math.min(a, b), max: Math.max(a, b) };
   }
+  // Non è un'età se il numero è un importo: "ISEE inferiore a 20.000 euro" non
+  // deve diventare "fino a 20 anni".
+  const NOT_MONEY = "(?![\\s\\d.,]*(?:euro|€)|[.,]\\d{3})";
   // "under 35", "sotto i 35 anni", "inferiore a 35 anni", "fino a 35 anni"
   const max =
     low.match(/\bunder\s*(\d{2})\b/) ??
-    low.match(/(?:sotto|inferiore\s+a|non\s+superiore\s+a|fino\s+a|massimo|non\s+oltre)\s+(?:i\s+)?(\d{2})\s*anni/) ??
-    low.match(/(?:sotto|inferiore\s+a|non\s+superiore\s+a|fino\s+a|massimo|non\s+oltre)\s+(?:i\s+)?(\d{2})\b/);
+    low.match(
+      new RegExp(
+        `(?:sotto|inferiore\\s+a|non\\s+superiore\\s+a|fino\\s+a|massimo|non\\s+oltre)\\s+(?:i\\s+)?(\\d{2})(?:\\s*anni)?${NOT_MONEY}`,
+      ),
+    );
   if (max) return { max: Number(max[1]) };
   // "over 65", "oltre i 65 anni", "maggiore di 18 anni", "almeno 18 anni"
   const min =
     low.match(/\bover\s*(\d{2})\b/) ??
-    low.match(/(?:superiore\s+a|maggiore\s+di|almeno|minimo|più\s+di|oltre)\s+(?:i\s+)?(\d{2})\s*anni/) ??
-    low.match(/(?:superiore\s+a|maggiore\s+di|almeno|minimo|più\s+di|oltre)\s+(?:i\s+)?(\d{2})\b/);
+    low.match(
+      new RegExp(
+        `(?:superiore\\s+a|maggiore\\s+di|almeno|minimo|più\\s+di|oltre)\\s+(?:i\\s+)?(\\d{2})(?:\\s*anni)?${NOT_MONEY}`,
+      ),
+    );
   if (min) return { min: Number(min[1]) };
   return null;
 }
@@ -543,6 +552,16 @@ export function calculateBonusMatch(profile: Profile | null, bonus: Bonus): Matc
     checkDestinatari(bonus),
     checkScadenza(bonus),
   ].filter((c): c is MatchCheck => c !== null);
+
+  // Se la scheda non pubblica requisiti, l'unico indizio è il titolo: non si
+  // può dire "IDONEO al 100%" solo perché una parola chiave combacia.
+  const requirementsDeclared = (bonus.requirements ?? []).length > 0;
+  if (checks.length > 0 && !requirementsDeclared) {
+    checks.push({
+      label: "Requisiti non pubblicati nella scheda: verifica sulla fonte prima di procedere",
+      state: "warn",
+    });
+  }
 
   const profileUsable = Boolean(
     profile &&

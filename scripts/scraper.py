@@ -325,11 +325,11 @@ class CardParser(HTMLParser):
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str]]) -> None:
         a = dict(attrs)
         if tag in ("h2", "h3", "h4"):
+            # Ogni heading apre una card nuova: senza questo azzeramento il testo
+            # della card precedente finiva nel sommario della successiva.
             self._heading = ""
             self._in_heading = True
-            cls = a.get("class", "")
-            if "card-title" in cls:
-                self._card_text = []
+            self._card_text = []
         elif tag == "a" and self._heading is not None:
             self._href = a.get("href")
             self._href_text = []
@@ -363,9 +363,8 @@ class CardParser(HTMLParser):
             self._href = None
             self._href_text = []
             self._time_attr = None
-            if not self._in_heading:
-                self._heading = None
-                self._card_text = []
+            self._heading = None
+            self._card_text = []
 
 
 class FetchError(Exception):
