@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T15:06:48Z",
+  "generated_at": "2026-11-16T20:17:56Z",
   "source": "BonusRadar scraper v1",
   "count": 67,
   "stats": {
@@ -8,6 +8,424 @@
     "sources": 15
   },
   "bonuses": [
+    {
+      "id": "scr-3415ff85b915",
+      "title": "Casa, tutto quello che c'è da sapere",
+      "authority": "Agenzia delle Entrate",
+      "category": "casa",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Agenzia delle Entrate: apri la fonte per i dettagli.",
+      "requirements": [
+        "contratto"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.agenziaentrate.gov.it/portale/aree-tematiche/casa",
+      "source_name": "Agenzia delle Entrate",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:17:56Z",
+      "discovered_at": "2026-11-16T20:17:56Z"
+    },
+    {
+      "id": "scr-0b3bb316cd1a",
+      "title": "Avviso pubblico per la presentazione di domande di incentivi a fondo perduto destinati ai datori di lavoro privati per l'assunzione di lavoratori con disabilità",
+      "authority": "Regione Liguria",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblico per la presentazione di domande di incentivi a fondo perduto destinati ai datori di lavoro privati per l'assunzione di lavoratori con disabilità",
+      "requirements": [
+        "Residenza in Liguria"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetition/4782:avviso-pubblico-per-la-presentazione-di-domande-di-incentivi-a-fondo-perduto-destinati-ai-datori-di-lavoro-privati-per-l-assunzione-di-lavoratori-con-disabilita.html",
+      "source_name": "Regione Liguria",
+      "target": [
+        "impresa",
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:17:56Z",
+      "discovered_at": "2026-11-16T20:17:56Z"
+    },
+    {
+      "id": "scr-5da8ec56f40a",
+      "title": "Vai al sito dedicato agli Operatori dell’Assegno di inclusione",
+      "authority": "Ministero del Lavoro e delle Politiche Sociali",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Vai al sito dedicato agli Operatori dell’Assegno di inclusione",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.lavoro.gov.it/adi/",
+      "source_name": "Ministero del Lavoro",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:17:56Z",
+      "discovered_at": "2026-11-16T20:17:56Z"
+    },
+    {
+      "id": "scr-45e0bdec558f",
+      "title": "Roma - Acquario Romano",
+      "authority": "Ministero del Lavoro e delle Politiche Sociali",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Ministero del Lavoro: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.lavoro.gov.it/eventi/pagine/joborienta-2023-verona-da-22-a-25-novembre",
+      "source_name": "Ministero del Lavoro",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:17:56Z",
+      "discovered_at": "2026-11-16T20:17:56Z"
+    },
+    {
+      "id": "scr-3fbb07414f85",
+      "title": "Brevetti+, Disegni+ e Marchi+: le misure a sostegno di proprietà intellettuale e creatività",
+      "authority": "Ministero del Lavoro e delle Politiche Sociali",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Brevetti+, Disegni+ e Marchi+: le misure a sostegno di proprietà intellettuale e creatività Rappresentano una concreta opportunità di crescita e di sviluppo industriale APPROFONDISCI",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.cliclavoro.gov.it/news/trend-interviste/innovazione-e-solidita-tecnologica-i-nuovi-bandi-targati-brevetti-disegni-e?language_content_entity=it",
+      "source_name": "Cliclavoro",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:17:56Z",
+      "discovered_at": "2026-11-16T20:17:56Z"
+    },
+    {
+      "id": "scr-e846f6dd6d89",
+      "title": "Startup innovative: sostegni a un settore in crescita",
+      "authority": "Ministero del Lavoro e delle Politiche Sociali",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Startup innovative: sostegni a un settore in crescita Innovazione, ricerca e imprenditorialità giovanile al centro delle politiche di sostegno",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.cliclavoro.gov.it/news/trend-interviste/startup-innovative-sostegni-a-un-settore-in-crescita?language_content_entity=it",
+      "source_name": "Cliclavoro",
+      "target": [
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:17:56Z",
+      "discovered_at": "2026-11-16T20:17:56Z"
+    },
+    {
+      "id": "scr-83644461d463",
+      "title": "Voucher Internazionalizzazione Pmi 2027",
+      "authority": "Regione Lazio (Lazio Innova)",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Lazio Innova: apri la fonte per i dettagli.",
+      "requirements": [
+        "Sede operativa o residenza nel Lazio"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.lazioinnova.it/bandi/voucher-internazionalizzazione-pmi-2027/",
+      "source_name": "Lazio Innova",
+      "target": [
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:17:56Z",
+      "discovered_at": "2026-11-16T20:17:56Z"
+    },
+    {
+      "id": "scr-171213fa3702",
+      "title": "Finanziamenti con provvista BEI e contributo in conto interessi",
+      "authority": "Regione Lazio (Lazio Innova)",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Finanziamenti con provvista BEI e contributo in conto interessi",
+      "requirements": [
+        "Sede operativa o residenza nel Lazio"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.lazioinnova.it/bandi/finanziamenti-con-provvista-bei-e-contributo-in-conto-interessi/",
+      "source_name": "Lazio Innova",
+      "target": [
+        "impresa",
+        "professionisti"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:17:56Z",
+      "discovered_at": "2026-11-16T20:17:56Z"
+    },
+    {
+      "id": "scr-dc72123c2d6c",
+      "title": "Basket Bond Lazio – Contributo sui costi di emissione sostenuti dalle Pmi ammissibili",
+      "authority": "Regione Lazio (Lazio Innova)",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Basket Bond Lazio – Contributo sui costi di emissione sostenuti dalle Pmi ammissibili",
+      "requirements": [
+        "Sede operativa o residenza nel Lazio"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.lazioinnova.it/bandi/basket-bond-lazio-contributo-sui-costi-di-emissione-sostenuti-dalle-pmi-ammissibili/",
+      "source_name": "Lazio Innova",
+      "target": [
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:17:56Z",
+      "discovered_at": "2026-11-16T20:17:56Z"
+    },
+    {
+      "id": "scr-f10d49c51993",
+      "title": "Fondo Microcredito ‘Adozioni’",
+      "authority": "Regione Lazio (Lazio Innova)",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Lazio Innova: apri la fonte per i dettagli.",
+      "requirements": [
+        "Sede operativa o residenza nel Lazio"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.lazioinnova.it/bandi/fondo-microcredito-adozioni/",
+      "source_name": "Lazio Innova",
+      "target": [
+        "impresa",
+        "professionisti"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:17:56Z",
+      "discovered_at": "2026-11-16T20:17:56Z"
+    },
+    {
+      "id": "scr-ff1578b7f081",
+      "title": "Autoimpiego Centro-Nord",
+      "authority": "Invitalia",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/autoimpiego-centro-nord?from=/per-chi-vuole-fare-impresa/incentivi",
+      "source_name": "Invitalia — Autoimpiego e nuove imprese",
+      "target": [
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:17:56Z",
+      "discovered_at": "2026-11-16T20:17:56Z"
+    },
+    {
+      "id": "scr-0026efe14789",
+      "title": "Resto al Sud 2.0",
+      "authority": "Invitalia",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/resto-al-sud-20?from=/per-chi-vuole-fare-impresa/incentivi",
+      "source_name": "Invitalia — Autoimpiego e nuove imprese",
+      "target": [
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:17:56Z",
+      "discovered_at": "2026-11-16T20:17:56Z"
+    },
+    {
+      "id": "scr-3df33a7c0d4d",
+      "title": "ON - Oltre Nuove imprese a tasso zero",
+      "authority": "Invitalia",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/ON-nuove-imprese-tasso-zero?from=/per-chi-vuole-fare-impresa/incentivi",
+      "source_name": "Invitalia — Autoimpiego e nuove imprese",
+      "target": [
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:17:56Z",
+      "discovered_at": "2026-11-16T20:17:56Z"
+    },
+    {
+      "id": "scr-4bc5369a150a",
+      "title": "Imprenditoria femminile",
+      "authority": "Invitalia",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/imprenditoria-femminile",
+      "source_name": "Invitalia — Autoimpiego e nuove imprese",
+      "target": [
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:17:56Z",
+      "discovered_at": "2026-11-16T20:17:56Z"
+    },
+    {
+      "id": "scr-d20a5b49c256",
+      "title": "Smart&Start Italia",
+      "authority": "Invitalia",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/smartstart-italia?from=/per-chi-vuole-fare-impresa/incentivi",
+      "source_name": "Invitalia — Autoimpiego e nuove imprese",
+      "target": [
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:17:56Z",
+      "discovered_at": "2026-11-16T20:17:56Z"
+    },
+    {
+      "id": "scr-b05c66f7b9f1",
+      "title": "Economia circolare",
+      "authority": "Invitalia",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/economia-circolare",
+      "source_name": "Invitalia — Autoimpiego e nuove imprese",
+      "target": [
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:17:56Z",
+      "discovered_at": "2026-11-16T20:17:56Z"
+    },
+    {
+      "id": "scr-736efc897cf7",
+      "title": "Italia Economia Sociale",
+      "authority": "Invitalia",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/italia-economia-sociale",
+      "source_name": "Invitalia — Autoimpiego e nuove imprese",
+      "target": [
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:17:56Z",
+      "discovered_at": "2026-11-16T20:17:56Z"
+    },
+    {
+      "id": "scr-c4bce98ceef4",
+      "title": "Termini presentazione domande di contributo al CATA Artigianato FVG",
+      "authority": "Regione Autonoma Friuli Venezia Giulia",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Termini presentazione domande di contributo al CATA Artigianato FVG",
+      "requirements": [
+        "Sede operativa o residenza in Friuli Venezia Giulia"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/hp-new/in-evidenza/ultime/2945_f.html",
+      "source_name": "Regione Friuli Venezia Giulia",
+      "target": [
+        "impresa",
+        "artigiani"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-16T20:17:56Z",
+      "discovered_at": "2026-11-16T20:17:56Z"
+    },
     {
       "id": "scr-47ce8944846b",
       "title": "Contributi lavoratori domestici: chiarimenti pagamento",
@@ -23,7 +441,10 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona"
+      ]
     },
     {
       "id": "scr-94f124b76f13",
@@ -40,7 +461,10 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona"
+      ]
     },
     {
       "id": "scr-545f1602d987",
@@ -57,7 +481,10 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona"
+      ]
     },
     {
       "id": "scr-201e2aef4705",
@@ -74,7 +501,10 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona"
+      ]
     },
     {
       "id": "scr-1b0da47a683b",
@@ -91,7 +521,10 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona"
+      ]
     },
     {
       "id": "scr-2287458edf86",
@@ -108,7 +541,10 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona"
+      ]
     },
     {
       "id": "scr-cf2efc5ae5f5",
@@ -125,7 +561,10 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona"
+      ]
     },
     {
       "id": "scr-72c6b5c86c37",
@@ -142,7 +581,10 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona"
+      ]
     },
     {
       "id": "scr-b851c1323291",
@@ -159,7 +601,10 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona"
+      ]
     },
     {
       "id": "scr-4b158d8bf9ca",
@@ -176,7 +621,10 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona"
+      ]
     },
     {
       "id": "scr-c27b08c7531f",
@@ -193,7 +641,10 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona"
+      ]
     },
     {
       "id": "scr-5fe5c876e045",
@@ -210,26 +661,10 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
-    },
-    {
-      "id": "scr-3415ff85b915",
-      "title": "Casa, tutto quello che c'è da sapere",
-      "authority": "Agenzia delle Entrate",
-      "category": "casa",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Agenzia delle Entrate: apri la fonte per i dettagli.",
-      "requirements": [
-        "contratto"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.agenziaentrate.gov.it/portale/aree-tematiche/casa",
-      "source_name": "Agenzia delle Entrate",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona"
+      ]
     },
     {
       "id": "scr-c0661d6d68b0",
@@ -246,7 +681,11 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-6cd57382c738",
@@ -263,7 +702,11 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-0e3dae2d1f29",
@@ -280,7 +723,10 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "impresa"
+      ]
     },
     {
       "id": "scr-cf6c645857e8",
@@ -297,7 +743,11 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-88008f106fd8",
@@ -314,7 +764,10 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "impresa"
+      ]
     },
     {
       "id": "scr-731c69443704",
@@ -331,7 +784,10 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "impresa"
+      ]
     },
     {
       "id": "scr-d244520dff41",
@@ -348,41 +804,11 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
-    },
-    {
-      "id": "scr-3df33a7c0d4d",
-      "title": "ON - Oltre Nuove imprese a tasso zero",
-      "authority": "Invitalia",
-      "category": "lavoro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/ON-nuove-imprese-tasso-zero?from=/per-chi-vuole-fare-impresa/incentivi",
-      "source_name": "Invitalia — Autoimpiego e nuove imprese",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
-    },
-    {
-      "id": "scr-d20a5b49c256",
-      "title": "Smart&Start Italia",
-      "authority": "Invitalia",
-      "category": "lavoro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/smartstart-italia?from=/per-chi-vuole-fare-impresa/incentivi",
-      "source_name": "Invitalia — Autoimpiego e nuove imprese",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-2c4f5d33b903",
@@ -402,7 +828,11 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-5fce4b87cd0a",
@@ -421,7 +851,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "miss_streak": 1,
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-2c4f060b0823",
@@ -440,7 +875,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "miss_streak": 1,
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-0c2bc129578d",
@@ -459,7 +899,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "miss_streak": 1,
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-1b90a62971e1",
@@ -478,7 +923,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "miss_streak": 1,
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-a0a28b979990",
@@ -499,7 +949,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "miss_streak": 1,
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-116081809b90",
@@ -520,7 +975,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "miss_streak": 1,
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-d5c8b37ee15c",
@@ -541,7 +1001,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "miss_streak": 1,
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-b697f51102d9",
@@ -562,7 +1027,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "miss_streak": 1,
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-d6c55d360de0",
@@ -581,7 +1051,11 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-5f9d25105df4",
@@ -600,7 +1074,11 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-a2f8fa00dfe0",
@@ -619,7 +1097,11 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-20532ff2606f",
@@ -638,7 +1120,11 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-6a94d0ce304a",
@@ -655,7 +1141,10 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "impresa"
+      ]
     },
     {
       "id": "scr-377863cac8c8",
@@ -672,7 +1161,10 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "impresa"
+      ]
     },
     {
       "id": "scr-47f6665e7fda",
@@ -689,7 +1181,11 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "impresa",
+        "persona"
+      ]
     },
     {
       "id": "scr-0c64cf2ad33d",
@@ -706,7 +1202,11 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "impresa",
+        "persona"
+      ]
     },
     {
       "id": "scr-e7b8561d8fb6",
@@ -723,7 +1223,11 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "impresa",
+        "persona"
+      ]
     },
     {
       "id": "scr-7a114e8d3724",
@@ -740,7 +1244,11 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "impresa",
+        "persona"
+      ]
     },
     {
       "id": "scr-fd4b0072cac0",
@@ -757,7 +1265,11 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "impresa",
+        "persona"
+      ]
     },
     {
       "id": "scr-8801b0c8370d",
@@ -774,7 +1286,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "miss_streak": 1,
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-d8ffc9e8a08b",
@@ -793,75 +1310,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
-    },
-    {
-      "id": "scr-5da8ec56f40a",
-      "title": "Vai al sito dedicato agli Operatori dell’Assegno di inclusione",
-      "authority": "Ministero del Lavoro e delle Politiche Sociali",
-      "category": "lavoro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Vai al sito dedicato agli Operatori dell’Assegno di inclusione",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.lavoro.gov.it/adi/",
-      "source_name": "Ministero del Lavoro",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
-    },
-    {
-      "id": "scr-45e0bdec558f",
-      "title": "Roma - Acquario Romano",
-      "authority": "Ministero del Lavoro e delle Politiche Sociali",
-      "category": "lavoro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Ministero del Lavoro: apri la fonte per i dettagli.",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.lavoro.gov.it/eventi/pagine/joborienta-2023-verona-da-22-a-25-novembre",
-      "source_name": "Ministero del Lavoro",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
-    },
-    {
-      "id": "scr-3fbb07414f85",
-      "title": "Brevetti+, Disegni+ e Marchi+: le misure a sostegno di proprietà intellettuale e creatività",
-      "authority": "Ministero del Lavoro e delle Politiche Sociali",
-      "category": "lavoro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Brevetti+, Disegni+ e Marchi+: le misure a sostegno di proprietà intellettuale e creatività Rappresentano una concreta opportunità di crescita e di sviluppo industriale APPROFONDISCI",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.cliclavoro.gov.it/news/trend-interviste/innovazione-e-solidita-tecnologica-i-nuovi-bandi-targati-brevetti-disegni-e?language_content_entity=it",
-      "source_name": "Cliclavoro",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
-    },
-    {
-      "id": "scr-e846f6dd6d89",
-      "title": "Startup innovative: sostegni a un settore in crescita",
-      "authority": "Ministero del Lavoro e delle Politiche Sociali",
-      "category": "lavoro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Startup innovative: sostegni a un settore in crescita Innovazione, ricerca e imprenditorialità giovanile al centro delle politiche di sostegno",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.cliclavoro.gov.it/news/trend-interviste/startup-innovative-sostegni-a-un-settore-in-crescita?language_content_entity=it",
-      "source_name": "Cliclavoro",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "miss_streak": 1,
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-220eb0740858",
@@ -878,7 +1332,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
+      "discovered_at": "2026-11-16T15:06:48Z",
+      "miss_streak": 1,
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-c1ca38f77731",
@@ -897,7 +1356,11 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-7b99e1a18e0f",
@@ -916,7 +1379,11 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-0abd0c8fefc3",
@@ -935,7 +1402,10 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "impresa"
+      ]
     },
     {
       "id": "scr-6fa868366ddd",
@@ -954,7 +1424,11 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-f092cf2e7839",
@@ -973,7 +1447,11 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "persona",
+        "impresa"
+      ]
     },
     {
       "id": "scr-ff7997829491",
@@ -992,7 +1470,10 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "impresa"
+      ]
     },
     {
       "id": "scr-7cb43d8532fe",
@@ -1011,206 +1492,10 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "discovered_at": "2026-11-14T16:50:35Z"
-    },
-    {
-      "id": "scr-0b3bb316cd1a",
-      "title": "Avviso pubblico per la presentazione di domande di incentivi a fondo perduto destinati ai datori di lavoro privati per l'assunzione di lavoratori con disabilità",
-      "authority": "Regione Liguria",
-      "category": "lavoro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblico per la presentazione di domande di incentivi a fondo perduto destinati ai datori di lavoro privati per l'assunzione di lavoratori con disabilità",
-      "requirements": [
-        "Residenza in Liguria"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetition/4782:avviso-pubblico-per-la-presentazione-di-domande-di-incentivi-a-fondo-perduto-destinati-ai-datori-di-lavoro-privati-per-l-assunzione-di-lavoratori-con-disabilita.html",
-      "source_name": "Regione Liguria",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
-    },
-    {
-      "id": "scr-83644461d463",
-      "title": "Voucher Internazionalizzazione Pmi 2027",
-      "authority": "Regione Lazio (Lazio Innova)",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Lazio Innova: apri la fonte per i dettagli.",
-      "requirements": [
-        "Sede operativa o residenza nel Lazio"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.lazioinnova.it/bandi/voucher-internazionalizzazione-pmi-2027/",
-      "source_name": "Lazio Innova",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
-    },
-    {
-      "id": "scr-171213fa3702",
-      "title": "Finanziamenti con provvista BEI e contributo in conto interessi",
-      "authority": "Regione Lazio (Lazio Innova)",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Finanziamenti con provvista BEI e contributo in conto interessi",
-      "requirements": [
-        "Sede operativa o residenza nel Lazio"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.lazioinnova.it/bandi/finanziamenti-con-provvista-bei-e-contributo-in-conto-interessi/",
-      "source_name": "Lazio Innova",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
-    },
-    {
-      "id": "scr-dc72123c2d6c",
-      "title": "Basket Bond Lazio – Contributo sui costi di emissione sostenuti dalle Pmi ammissibili",
-      "authority": "Regione Lazio (Lazio Innova)",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Basket Bond Lazio – Contributo sui costi di emissione sostenuti dalle Pmi ammissibili",
-      "requirements": [
-        "Sede operativa o residenza nel Lazio"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.lazioinnova.it/bandi/basket-bond-lazio-contributo-sui-costi-di-emissione-sostenuti-dalle-pmi-ammissibili/",
-      "source_name": "Lazio Innova",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
-    },
-    {
-      "id": "scr-f10d49c51993",
-      "title": "Fondo Microcredito ‘Adozioni’",
-      "authority": "Regione Lazio (Lazio Innova)",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Lazio Innova: apri la fonte per i dettagli.",
-      "requirements": [
-        "Sede operativa o residenza nel Lazio"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.lazioinnova.it/bandi/fondo-microcredito-adozioni/",
-      "source_name": "Lazio Innova",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
-    },
-    {
-      "id": "scr-ff1578b7f081",
-      "title": "Autoimpiego Centro-Nord",
-      "authority": "Invitalia",
-      "category": "lavoro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/autoimpiego-centro-nord?from=/per-chi-vuole-fare-impresa/incentivi",
-      "source_name": "Invitalia — Autoimpiego e nuove imprese",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
-    },
-    {
-      "id": "scr-0026efe14789",
-      "title": "Resto al Sud 2.0",
-      "authority": "Invitalia",
-      "category": "lavoro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/resto-al-sud-20?from=/per-chi-vuole-fare-impresa/incentivi",
-      "source_name": "Invitalia — Autoimpiego e nuove imprese",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
-    },
-    {
-      "id": "scr-4bc5369a150a",
-      "title": "Imprenditoria femminile",
-      "authority": "Invitalia",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/imprenditoria-femminile",
-      "source_name": "Invitalia — Autoimpiego e nuove imprese",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
-    },
-    {
-      "id": "scr-b05c66f7b9f1",
-      "title": "Economia circolare",
-      "authority": "Invitalia",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/economia-circolare",
-      "source_name": "Invitalia — Autoimpiego e nuove imprese",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
-    },
-    {
-      "id": "scr-736efc897cf7",
-      "title": "Italia Economia Sociale",
-      "authority": "Invitalia",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/italia-economia-sociale",
-      "source_name": "Invitalia — Autoimpiego e nuove imprese",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
-    },
-    {
-      "id": "scr-c4bce98ceef4",
-      "title": "Termini presentazione domande di contributo al CATA Artigianato FVG",
-      "authority": "Regione Autonoma Friuli Venezia Giulia",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Termini presentazione domande di contributo al CATA Artigianato FVG",
-      "requirements": [
-        "Sede operativa o residenza in Friuli Venezia Giulia"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/hp-new/in-evidenza/ultime/2945_f.html",
-      "source_name": "Regione Friuli Venezia Giulia",
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "discovered_at": "2026-11-16T15:06:48Z"
+      "discovered_at": "2026-11-14T16:50:35Z",
+      "target": [
+        "impresa"
+      ]
     }
   ]
 }

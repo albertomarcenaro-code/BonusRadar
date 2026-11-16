@@ -22,6 +22,27 @@ const FILTERS: { key: "all" | MatchStatus; label: string }[] = [
   { key: "not_eligible", label: "Non idonei" },
 ];
 
+/** Destinatario del bando: il target arriva dalla fonte che lo ha pubblicato. */
+type Audience = "tutti" | "persona" | "impresa" | "professionisti";
+
+const AUDIENCES: { key: Audience; label: string }[] = [
+  { key: "tutti", label: "Tutti i destinatari" },
+  { key: "persona", label: "Persone fisiche" },
+  { key: "impresa", label: "Imprese e artigiani" },
+  { key: "professionisti", label: "Professionisti" },
+];
+
+/**
+ * True se il bando è per il destinatario scelto. Un bando senza `target` vale
+ * per tutti, così le schede raccolte prima dell'etichetta non spariscono.
+ */
+function matchesAudience(bonus: Bonus, audience: Audience): boolean {
+  if (audience === "tutti") return true;
+  const target = bonus.target ?? ["persona", "impresa"];
+  if (audience === "impresa") return target.includes("impresa") || target.includes("artigiani");
+  return target.includes(audience);
+}
+
 /** Ricerche rapide: avviano subito anche la scansione web on-demand. */
 const QUICK_FILTERS = [
   { label: "Pannelli solari", q: "pannelli solari" },
@@ -46,6 +67,9 @@ export default function BonusCatalog() {
   const discSet = useMemo(() => new Set(discarded ?? []), [discarded]);
   const [filter, setFilter] = useState<"all" | MatchStatus>("all");
   const [category, setCategory] = useState("tutte");
+  // Destinatario: il target arriva dalla fonte del bando (persona/impresa/
+  // artigiani/professionisti). Assente = il bando vale per entrambi.
+  const [audience, setAudience] = useState<Audience>("tutti");
   const [params, setParams] = useSearchParams();
   // La ricerca rapida dalla landing arriva come ?q=...; ?bonus=<id> apre il drawer.
   const [q, setQ] = useState(params.get("q") ?? "");
@@ -73,12 +97,13 @@ export default function BonusCatalog() {
       (b) =>
         !discSet.has(b.id) &&
         (filter === "all" || matchMap.get(b.id)?.status === filter) &&
-        (category === "tutte" || b.category === category),
+        (category === "tutte" || b.category === category) &&
+        matchesAudience(b, audience),
     );
     if (!q.trim()) return base;
     const scored = new Map(localMatches.map((r) => [r.bonus.id, r.relevance]));
     return base.filter((b) => scored.has(b.id)).sort((a, b) => (scored.get(b.id) ?? 0) - (scored.get(a.id) ?? 0));
-  }, [bonuses, discSet, filter, category, q, localMatches, matchMap]);
+  }, [bonuses, discSet, filter, category, audience, q, localMatches, matchMap]);
 
   const count = (k: "all" | MatchStatus) =>
     k === "all" ? (bonuses ?? []).length : [...matchMap.values()].filter((m) => m.status === k).length;
@@ -347,6 +372,16 @@ export default function BonusCatalog() {
             <SelectItem value="tutte">Tutte le categorie</SelectItem>
             {Object.entries(CATEGORY_LABEL).map(([k, l]) => (
               <SelectItem key={k} value={k}>{l}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Select value={audience} onValueChange={(v: string) => setAudience(v as Audience)}>
+          <SelectTrigger className="h-11 w-full lg:w-52" data-testid="bonus-filter-audience-select">
+            <SelectValue placeholder="Tutti i destinatari" />
+          </SelectTrigger>
+          <SelectContent>
+            {AUDIENCES.map((a) => (
+              <SelectItem key={a.key} value={a.key}>{a.label}</SelectItem>
             ))}
           </SelectContent>
         </Select>

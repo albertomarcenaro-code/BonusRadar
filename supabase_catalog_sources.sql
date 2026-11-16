@@ -278,3 +278,15 @@ update public.catalog_sources set target = '{impresa,artigiani}'      where slug
 update public.catalog_sources set target = '{artigiani,impresa}'      where slug = 'sardegna-impresa';
 update public.catalog_sources set target = '{professionisti}'         where slug = 'fondoprofessioni';
 update public.catalog_sources set target = '{impresa,artigiani}'      where slug = 'regione-fvg';
+
+-- Fonti generiche: il target mirato lo deduce lo scraper dal testo del singolo
+-- bando. Restano "persona + impresa" (default) le fonti che coprono entrambi i
+-- pubblici (Agenzia delle Entrate, Comuni, Regioni, Cliclavoro, INAIL).
+update public.catalog_sources set target = '{persona}'                where slug = 'inps';
+update public.catalog_sources set target = '{impresa}'                where slug = 'simest';
+update public.catalog_sources set target = '{impresa}'                where slug = 'mase';
+update public.catalog_sources set target = '{impresa}'                where slug = 'mic';
+update public.catalog_sources set target = '{impresa}'                where slug = 'gse';
+update public.catalog_sources set target = '{impresa}'                where slug = 'sace';
+update public.catalog_sources set target = '{impresa}'                where slug = 'unioncamere';
+update public.catalog_sources set target = '{impresa}'                where slug = 'bandi-filse';

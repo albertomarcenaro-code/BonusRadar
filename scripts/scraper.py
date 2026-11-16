@@ -76,6 +76,12 @@ MAX_ITEMS_PER_SOURCE = 12
 # catalogo e dal matching con il profilo, mentre il contatore pubblico cresce.
 # L'archiviazione si applica solo quando la run è credibile: se una fonte
 # risponde male e i bandi trovati crollano, non si tocca niente.
+# Obsolescenza nel JSON pubblico e nel catalogo locale: una scheda che non
+# viene più ritrovata per MISS_LIMIT run consecutive viene archiviata (esce dal
+# catalogo). Le run in cui la sua fonte non ha risposto non contano: un timeout
+# non è una prova che il bando sia scaduto.
+MISS_LIMIT = 3
+
 ARCHIVE_MIN_KEEP = 10    # bandi estratti minimi perché l'archiviazione avvenga
 ARCHIVE_MIN_SHARE = 0.5  # i bandi trovati devono essere ≥ 50% degli attivi
 ARCHIVE_BATCH = 100      # id per richiesta PATCH (limite di lunghezza dell'URL)
@@ -100,12 +106,14 @@ SOURCES: list[dict] = [
         "authority": "Presidenza del Consiglio dei Ministri",
         "list_url": "https://incentivi.gov.it/",
         "base_url": "https://incentivi.gov.it/",
+        "target": ("persona", "impresa"),
     },
     {
         "name": "INPS",
         "authority": "INPS",
         "list_url": "https://www.inps.it/",
         "base_url": "https://www.inps.it/",
+        "target": ("persona",),
     },
     {
         "name": "Agenzia delle Entrate",
@@ -114,6 +122,7 @@ SOURCES: list[dict] = [
         # la home è raggiungibile e produce candidati reali.
         "list_url": "https://www.agenziaentrate.gov.it/",
         "base_url": "https://www.agenziaentrate.gov.it/",
+        "target": ("persona", "impresa"),
     },
     # ---------------- Fonti locali prioritarie ----------------
     {
@@ -134,6 +143,7 @@ SOURCES: list[dict] = [
             # commercio/imprese locali
             "commercio", "commerc", "esercizi", "imprese", "negoz", "tessuto economico",
         ),
+        "target": ("persona", "impresa"),
     },
     {
         "name": "Regione Liguria",
@@ -153,6 +163,7 @@ SOURCES: list[dict] = [
             "formazion", "lavoro", "occupabilit", "apprendistat", "impresa",
             "inoccup", "corsi", "borse", "student", "iscrizion",
         ),
+        "target": ("persona", "impresa"),
     },
 
     # ---------------- Fonti nazionali aggiuntive (ampliamento ricerca) ----------------
@@ -161,18 +172,21 @@ SOURCES: list[dict] = [
         "authority": "Ministero del Lavoro e delle Politiche Sociali",
         "list_url": "https://www.lavoro.gov.it/",
         "base_url": "https://www.lavoro.gov.it/",
+        "target": ("persona", "impresa"),
     },
     {
         "name": "Cliclavoro",
         "authority": "Ministero del Lavoro e delle Politiche Sociali",
         "list_url": "https://www.cliclavoro.gov.it/",
         "base_url": "https://www.cliclavoro.gov.it/",
+        "target": ("persona", "impresa"),
     },
     {
         "name": "INAIL",
         "authority": "INAIL",
         "list_url": "https://www.inail.it/cs/news",
         "base_url": "https://www.inail.it/",
+        "target": ("impresa", "persona"),
     },
     # ---------------- Fonti regionali aggiuntive ----------------
     {
@@ -181,6 +195,7 @@ SOURCES: list[dict] = [
         "list_url": "https://www.regione.toscana.it/",
         "base_url": "https://www.regione.toscana.it/",
         "residency": "Residenza in Toscana",
+        "target": ("persona", "impresa"),
     },
     {
         "name": "Regione Veneto",
@@ -188,6 +203,7 @@ SOURCES: list[dict] = [
         "list_url": "https://www.regione.veneto.it/",
         "base_url": "https://www.regione.veneto.it/",
         "residency": "Residenza nel Veneto",
+        "target": ("persona", "impresa"),
     },
     # ---------------- Imprese, artigiani e professionisti ----------------
     # Aggiunte il 16/11/2026 dopo la verifica delle pagine di elenco: tutte
@@ -316,6 +332,52 @@ ADMIN_NOISE_SUBSTRINGS = (
 
 # Titoli generici di menu/navigazione: non sono bandi. Usati in build_bonus
 # per scartare i link di servizio che il filtro keyword lascia passare.
+# Destinatario dedotto dal testo del bando. Serve a rendere utile il filtro
+# "destinatari": le fonti generiche valgono per entrambi i pubblici, ma il
+# singolo avviso spesso parla solo di imprese o solo di famiglie.
+TARGET_IMPRESE_RE = re.compile(
+    r"\b(imprese?|pmi|start[\s-]?up|aziende|società|ditte?|artigian\w*|"
+    r"professionist\w*|libere professioni|partita iva|ateco|consorzi\w*|"
+    r"cooperative?|enti locali|ets|associazioni di categoria|operatori economici|"
+    r"datori? di lavoro|assunzion\w*)\b",
+    re.I,
+)
+TARGET_PERSONE_RE = re.compile(
+    r"\b(famiglie|cittadin\w*|nucleo familiare|figli\w*|minori|studenti|"
+    r"pensionat\w*|isee|disabilit\w*|affitto|asilo nido|maggiorenni|"
+    r"consumatori)\b",
+    re.I,
+)
+
+
+def deduce_target(text: str, fallback: tuple[str, ...] | list[str]) -> list[str]:
+    """Target del singolo bando dal suo testo, con la fonte come fallback.
+
+    Se il testo parla solo di imprese → imprese; solo di famiglie/cittadini →
+    persone; di entrambi → entrambi; di nessuno dei due → target della fonte.
+    """
+    low = text.lower()
+    # "Aziende sanitarie", "aziende Usl", "aziende ospedaliere" non sono
+    # imprese: senza questa pulizia un avviso per medici risultava "impresa".
+    low = re.sub(
+        r"aziende?\s+(sanitari\w*|usl|ospedalier\w*|per i servizi sanitari)",
+        "enti sanitari",
+        low,
+    )
+    target: list[str] = []
+    if TARGET_IMPRESE_RE.search(low):
+        target.append("impresa")
+        if re.search(r"artigian", low):
+            target.append("artigiani")
+        if re.search(r"professionist|libere professioni", low):
+            target.append("professionisti")
+    if TARGET_PERSONE_RE.search(low):
+        target.append("persona")
+    if not target:
+        return list(fallback)
+    return list(dict.fromkeys(target))
+
+
 GENERIC_TITLES = {
     "bandi e concorsi", "bandi di concorso", "bandi e avvisi", "avvisi e bandi",
     "in primo piano", "in evidenza", "in diretta", "news e eventi", "news & eventi",
@@ -573,6 +635,11 @@ def build_bonus(source: dict, url: str, raw_title: str, extra_text: str = "") ->
         return None
 
     full_text = f"{title} {extra_text}"
+    # Target: prima il testo del bando, poi la fonte (persona / impresa /
+    # artigiani / professionisti). Senza indicazioni vale per entrambi i
+    # pubblici, così non sparisce dalla vista di nessuno.
+    source_target = tuple(t for t in (source.get("target") or ()) if t)
+    target = deduce_target(full_text, source_target or ("persona", "impresa"))
     summary = (extra_text.strip() or title) if len(title) > 40 else f"Avviso pubblicato su {source['name']}: apri la fonte per i dettagli."
     if len(summary) > 400:
         summary = summary[:397].rstrip() + "…"
@@ -609,14 +676,19 @@ def build_bonus(source: dict, url: str, raw_title: str, extra_text: str = "") ->
         "required_documents": extract_documents(title),
         "source_url": url,
         "source_name": source["name"],
+        "target": target,
         "eligibility": "unknown",
         "eligibility_reason": "",
         "is_new": True,
     }
 
 
-def scrape_source(source: dict) -> list[dict]:
-    """Scarica la pagina indice di una fonte e restituisce le schede bonus."""
+def scrape_source(source: dict) -> tuple[list[dict], bool]:
+    """Scarica la pagina indice di una fonte e restituisce (schede, raggiunta).
+
+    `raggiunta` è False quando la pagina non risponde: in quel caso le schede di
+    quella fonte non vanno contate come "non più trovate" (obsolescenza).
+    """
     print(f"→ Fonte: {source['name']} ({source['list_url']})")
     html: str | None = None
     for ua, label in ((USER_AGENT, "UA bot"), (BROWSER_UA, "UA browser")):
@@ -627,7 +699,7 @@ def scrape_source(source: dict) -> list[dict]:
             print(f"  ⚠︎ {label} fallito: {exc}")
     if html is None:
         print("  ⚠︎ fonte saltata (non raggiungibile): le altre proseguono")
-        return []
+        return [], False
 
     topics = source.get("topics")
     items: list[dict] = []
@@ -652,7 +724,7 @@ def scrape_source(source: dict) -> list[dict]:
             items.append(bonus)
 
     print(f"  ✓ {len(items)} candidati estratti")
-    return items
+    return items, True
 
 
 # ---------------------------------------------------------------
@@ -660,7 +732,7 @@ def scrape_source(source: dict) -> list[dict]:
 # ---------------------------------------------------------------
 
 def supabase_upsert(
-    url: str, key: str, rows: list[dict], *, mark_active: bool = True
+    url: str, key: str, rows: list[dict], *, mark_active: bool = True, with_target: bool = True
 ) -> tuple[bool, str]:
     """Upsert su PostgREST: POST /rest/v1/bonuses?on_conflict=norm_title.
 
@@ -682,6 +754,7 @@ def supabase_upsert(
                 "required_documents": r["required_documents"],
                 "source_url": r["source_url"],
                 "source_name": r["source_name"],
+                **({"target": r.get("target") or ["persona", "impresa"]} if with_target else {}),
                 "is_new": r["is_new"],
                 **({"is_active": True} if mark_active else {}),
             }
@@ -900,38 +973,116 @@ def supabase_archive(url: str, key: str, keep: set[str]) -> int:
     return len(stale)
 
 
+def retag_catalog(path: Path, sources: list[dict]) -> int:
+    """Ricalcola il target di ogni scheda del JSON dal suo testo.
+
+    Serve ai cataloghi raccolti prima che l'etichetta esistesse (o quando il
+    target della fonte cambia): senza questo, le schede vecchie resterebbero
+    "persona + impresa" e il filtro per destinatario mostrerebbe tutto.
+    """
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        print("⚠︎ nessun catalogo da rietichettare")
+        return 1
+    defaults = {
+        s["name"]: list(s.get("target") or ("persona", "impresa")) for s in sources
+    }
+    changed = 0
+    rows = data.get("bonuses", [])
+    for bonus in rows:
+        fallback = defaults.get(bonus.get("source_name", ""), ["persona", "impresa"])
+        text = " ".join(
+            [*bonus.get("requirements", []), bonus.get("title", ""), bonus.get("summary", "")]
+        )
+        new = deduce_target(text, fallback)
+        if new != bonus.get("target"):
+            bonus["target"] = new
+            changed += 1
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(f"✓ Target ricalcolato su {len(rows)} schede ({changed} cambiate): {path}")
+    return 0
+
+
 def merge_with_existing(
-    rows: list[dict], path: Path
-) -> tuple[list[dict], int, int, int]:
+    rows: list[dict],
+    path: Path,
+    scanned_sources: set[str] | None = None,
+    failed_sources: set[str] | None = None,
+    miss_limit: int = MISS_LIMIT,
+    source_targets: dict[str, list[str]] | None = None,
+) -> tuple[list[dict], int, int, int, int]:
     """Unisce la run al catalogo già presente nel JSON.
 
     Una singola run non è una fotografia completa delle fonti: una pagina che
     risponde male, un elenco che ruota o un timeout fanno sparire schede ancora
     valide. Le schede già in catalogo restano quindi in elenco, aggiornate quando
     la run le ritrova (stesso titolo normalizzato) e mantenute com'erano quando
-    non le ritrova. Restituisce (righe, nuove, aggiornate, conservate).
+    non le ritrova.
+
+    Ogni scheda porta `miss_streak` (run consecutive in cui non è stata
+    ritrovata) e `last_seen_at`: superata la soglia `miss_limit` la scheda viene
+    archiviata, cioè tolta dal catalogo. Le schede delle fonti che in questa run
+    non hanno risposto non incrementano il contatore.
+
+    Restituisce (righe, nuove, aggiornate, conservate, archiviate).
     """
+    failed = failed_sources or set()
+    # Fonti assenti da questa run (es. elenco nel codice più corto della tabella
+    # su Supabase): le loro schede non sono né ritrovate né perse.
+    scanned = scanned_sources - failed if scanned_sources else set()
+    targets = source_targets or {}
+
+    def with_target(row: dict) -> dict:
+        """Rimette il target della fonte sulle schede raccolte prima che
+        esistesse il campo: il filtro per destinatario deve funzionare su
+        tutto il catalogo, non solo sulle schede dell'ultima run."""
+        if row.get("target"):
+            return row
+        return {**row, "target": targets.get(row.get("source_name", ""), ["persona", "impresa"])}
+    now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    rows = [{**r, "miss_streak": 0, "last_seen_at": now} for r in rows]
     try:
         previous = json.loads(path.read_text(encoding="utf-8")).get("bonuses", [])
     except (OSError, ValueError):
         previous = []
     if not isinstance(previous, list) or not previous:
-        return rows, len(rows), 0, 0
+        return rows, len(rows), 0, 0, 0
 
-    merged: list[dict] = [r for r in previous if isinstance(r, dict)]
-    index = {normalize_title(r.get("title", "")): i for i, r in enumerate(merged)}
-    new = updated = 0
+    previous = [r for r in previous if isinstance(r, dict)]
+    known = {normalize_title(r.get("title", "")) for r in previous}
+
+    merged: list[dict] = []
+    found: set[str] = set()
+    new = updated = archived = 0
     for row in rows:
         key = normalize_title(row["title"])
-        if key in index:
-            merged[index[key]] = row
+        found.add(key)
+        if key in known:
             updated += 1
         else:
-            index[key] = len(merged)
-            merged.append(row)
             new += 1
-    kept = len(merged) - new - updated
-    return merged, new, updated, kept
+        merged.append(with_target(row))
+
+    # Schede non ritrovate: contatore di assenza, archiviazione oltre soglia.
+    for old in previous:
+        if normalize_title(old.get("title", "")) in found:
+            continue
+        if old.get("source_name") in failed or (
+            scanned and old.get("source_name") not in scanned
+        ):
+            # Fonte muta o non scansionata in questa run: non è una prova di
+            # scadenza, la scheda resta com'era.
+            merged.append(with_target(old))
+            continue
+        streak = int(old.get("miss_streak") or 0) + 1
+        if streak >= miss_limit:
+            archived += 1
+            continue
+        merged.append(with_target({**old, "miss_streak": streak}))
+
+    kept = len(previous) - updated - archived
+    return merged, new, updated, kept, archived
 
 
 def write_json(path: Path, rows: list[dict], sources_count: int, db_rows: int | None) -> None:
@@ -984,6 +1135,23 @@ def main() -> int:
             "catalogo esistente, così le schede non ritrovate non si perdono)"
         ),
     )
+    ap.add_argument(
+        "--retag",
+        action="store_true",
+        help=(
+            "solo ricalcolo del target di tutte le schede del JSON (dal testo, "
+            "con la fonte come fallback), senza scandire le fonti"
+        ),
+    )
+    ap.add_argument(
+        "--miss-limit",
+        type=int,
+        default=MISS_LIMIT,
+        help=(
+            "run consecutive senza ritrovare una scheda dopo le quali archiviarla "
+            f"(default: {MISS_LIMIT})"
+        ),
+    )
     args = ap.parse_args()
 
     print("BonusRadar scraper — avvio\n")
@@ -1014,11 +1182,28 @@ def main() -> int:
 
     sources_count = len(sources)
 
+    if args.retag:
+        return retag_catalog(Path(args.json), sources)
+
     # 1) raccolta
     rows: list[dict] = []
     seen: set[str] = set()
+    failed_sources: set[str] = set()
+    # Fonti "affidabili" in questa run: hanno risposto e hanno prodotto almeno
+    # una scheda. Solo per le loro schede un'assenza conta come indizio di
+    # obsolescenza: una pagina che risponde 200 ma non espone più l'elenco (JS,
+    # redesign) non è una prova che i bandi siano scaduti.
+    healthy_sources: set[str] = set()
+    source_targets = {
+        s["name"]: list(s.get("target") or ("persona", "impresa")) for s in sources
+    }
     for source in sources:
-        for bonus in scrape_source(source):
+        found, reached = scrape_source(source)
+        if not reached:
+            failed_sources.add(source["name"])
+        elif found:
+            healthy_sources.add(source["name"])
+        for bonus in found:
             key = normalize_title(bonus["title"])
             if key in seen:
                 continue
@@ -1035,11 +1220,34 @@ def main() -> int:
         if args.replace:
             print("ℹ︎ --replace: il catalogo sarà sostituito dalla sola run")
         else:
-            rows, new, updated, kept = merge_with_existing(rows, json_path)
+            rows, new, updated, kept, archived = merge_with_existing(
+                rows,
+                json_path,
+                healthy_sources,
+                failed_sources,
+                max(1, args.miss_limit),
+                source_targets,
+            )
             print(
                 f"✓ Catalogo unito: {new} nuove · {updated} aggiornate · "
-                f"{kept} conservate dal catalogo esistente"
+                f"{kept} conservate · {archived} archiviate "
+                f"(non ritrovate da {args.miss_limit} run)"
             )
+            if failed_sources:
+                print(
+                    "  fonti mute in questa run (schede non penalizzate): "
+                    + ", ".join(sorted(failed_sources))
+                )
+            idle = sorted(
+                s["name"]
+                for s in sources
+                if s["name"] not in failed_sources and s["name"] not in healthy_sources
+            )
+            if idle:
+                print(
+                    "  fonti che hanno risposto senza candidati (schede non "
+                    "penalizzate): " + ", ".join(idle)
+                )
 
     # 2) Supabase (se configurato)
     db_rows: int | None = None
@@ -1051,6 +1259,14 @@ def main() -> int:
                 "blocca la scrittura su bonuses. Finché il secret non c'è, resta aggiornato solo il JSON."
             )
         ok, detail = supabase_upsert(url, key, rows)
+        if not ok and "target" in detail.lower():
+            # Colonna `target` non ancora creata su bonuses: meglio perdere
+            # l'etichetta di pubblico che perdere l'aggiornamento del catalogo.
+            print(
+                "::warning::colonna target assente su bonuses: riscrivo senza target "
+                "(esegui supabase_schema.sql)"
+            )
+            ok, detail = supabase_upsert(url, key, rows, with_target=False)
         if not ok and "is_active" in detail.lower():
             # Colonna non ancora creata: meglio riscrivere senza stato dei bandi
             # che perdere l'aggiornamento della tabella.

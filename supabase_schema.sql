@@ -89,6 +89,9 @@ create table if not exists public.bonuses (
   required_documents text[] not null default '{}',
   source_url text not null default '',
   source_name text not null default '',
+  -- A chi si rivolge il bando, ereditato dalla fonte (persona, impresa,
+  -- artigiani, professionisti). Default ampio: nessuna scheda sparisce.
+  target text[] not null default '{persona,impresa}',
   eligibility eligibility_status not null default 'unknown',
   eligibility_reason text not null default '',
   is_new boolean not null default true,
@@ -138,6 +141,10 @@ create table if not exists public.document_folders (
 
 create index if not exists idx_sources_user on public.sources (user_id);
 create index if not exists idx_bonuses_eligibility on public.bonuses (eligibility);
+
+-- Migrazione per i database creati prima del target sui bandi (16/11/2026).
+alter table public.bonuses
+  add column if not exists target text[] not null default '{persona,impresa}';
 create index if not exists idx_questionnaires_user on public.questionnaires (user_id);
 create index if not exists idx_user_bonuses_user on public.user_bonuses (user_id);
 create index if not exists idx_documents_user on public.document_folders (user_id);

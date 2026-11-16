@@ -72,6 +72,11 @@ export interface Bonus {
   required_documents: string[];
   source_url: string;
   source_name: string;
+  /**
+   * A chi si rivolge il bando, ereditato dalla fonte: `persona`, `impresa`,
+   * `artigiani`, `professionisti`. Assente = vale per entrambi i pubblici.
+   */
+  target?: string[];
   eligibility: Eligibility;
   eligibility_reason: string;
   discovered_at: string;
