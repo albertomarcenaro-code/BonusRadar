@@ -41,6 +41,10 @@ jobs:
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
           SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          # Fallback LLM per i campi che le regex non leggono (Gemini, endpoint
+          # compatibile OpenAI). Se il secret non esiste la variabile arriva
+          # vuota e lo scraper lavora come prima, con le sole regex.
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python3 scripts/scraper.py
 
       - name: Commit catalogo JSON (se cambiato)
