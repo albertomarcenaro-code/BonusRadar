@@ -174,7 +174,17 @@ create or replace view public.verified_bonuses as
    where gate_status = 'bando'
      and is_active is true;
 
+-- La vista deve rispettare i permessi e le RLS di chi interroga, non del
+-- creatore (Supabase segnala le viste SECURITY DEFINER come problema).
+alter view public.verified_bonuses set (security_invoker = true);
+
 commit;
+
+-- ============================================================
+-- Fix mirato per un database che ha già eseguito la migrazione
+-- (risolve l'avviso "view is defined with the SECURITY DEFINER property"):
+--   alter view public.verified_bonuses set (security_invoker = true);
+-- ============================================================
 
 -- ============================================================
 -- Verifica dopo la migrazione (atteso: 1 riga, contatori coerenti)
