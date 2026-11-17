@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-11-16T21:27:35Z",
+  "generated_at": "2026-11-17T14:58:43Z",
   "source": "BonusRadar scraper v1",
-  "count": 6,
+  "count": 12,
   "stats": {
-    "bonuses": 6,
-    "active": 6,
-    "sources": 20
+    "bonuses": 12,
+    "active": 12,
+    "sources": 22
   },
   "bonuses": [
     {
@@ -33,16 +33,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-16T21:25:20Z",
+      "detail_fetched_at": "2026-11-17T14:56:56Z",
       "source_excerpts": {
         "deadline": "Data chiusura: 31 Dicembre 2027",
         "documents": "I datori di lavoro interessati e in possesso dei requisiti descritti all'interno del Paragrafo 6 dell'Avviso pubblico possono far domanda esclusivamente online , accedendo al sistema \" Bandi online \" di Filse, mediante S"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T21:27:35Z",
+      "last_seen_at": "2026-11-17T14:58:43Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza, documenti",
-      "discovered_at": "2026-11-16T21:27:35Z"
+      "discovered_at": "2026-11-17T14:58:43Z"
     },
     {
       "id": "scr-6cd57382c738",
@@ -66,17 +66,17 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-16T21:25:23Z",
+      "detail_fetched_at": "2026-11-17T14:56:59Z",
       "source_excerpts": {
         "deadline": "chiusura 20/1/2027 Compila la domanda Sezione dedicata sul sito del Mimit Incentivi e strumenti per le impre",
         "amount": "Le agevolazioni sono concesse nella forma del contributo a fondo perduto , fino al 50% delle spese ammissibili. Il contributo non può superare, in ogni caso, l’importo di 20.000 euro",
         "documents": "essere in possesso di un’identità digitale (SPID, CNS, CIE)"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T21:27:35Z",
+      "last_seen_at": "2026-11-17T14:58:43Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza, importo, documenti",
-      "discovered_at": "2026-11-16T21:27:35Z"
+      "discovered_at": "2026-11-17T14:58:43Z"
     },
     {
       "id": "scr-0e3dae2d1f29",
@@ -96,16 +96,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-16T21:25:23Z",
+      "detail_fetched_at": "2026-11-17T14:56:59Z",
       "source_excerpts": {
         "deadline": "chiusura 28/11/2026 Presenta la domanda Incentivi e strumenti per le imprese Stato incentivo o strumento Att",
         "amount": "Contributo in conto capitale fino a 300.000 euro e non superiore al 100% delle spese ammesse, sostenute tra l’8 maggio 2024 e il 31 dicembre 2028, per l'acquisto di macchinari, impianti, arredi, attrezzature nuovi di fab"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T21:27:35Z",
+      "last_seen_at": "2026-11-17T14:58:43Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza, importo",
-      "discovered_at": "2026-11-16T21:27:35Z"
+      "discovered_at": "2026-11-17T14:58:43Z"
     },
     {
       "id": "scr-83644461d463",
@@ -117,6 +117,7 @@
       "summary": "Avviso pubblicato su Lazio Innova: apri la fonte per i dettagli.",
       "requirements": [
         "Sede operativa o residenza nel Lazio",
+        "1. dimensione internazionale (rapporto tra fatturato estero e fatturato totale)",
         "Destinatari medie imprese piccole imprese"
       ],
       "required_documents": [],
@@ -128,17 +129,17 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-16T21:27:13Z",
+      "detail_fetched_at": "2026-11-17T14:58:09Z",
       "source_excerpts": {
         "deadline": "Le domande devono essere inviate dalle ore 12.00 del 10 dicembre 2026 ed entro le ore 17.00 del 21 gennaio 2027",
         "amount": "Il contributo è a fondo perduto (sovvenzione diretta in denaro) ed è concesso a titolo di De Minimis. Il contributo concedibile è pari ad euro 15.240,00 euro per ciascuna singola Fiera Internazionale Business to Business",
-        "requirements": "Destinatari medie imprese piccole imprese"
+        "requirements": "1. dimensione internazionale (rapporto tra fatturato estero e fatturato totale)"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T21:27:35Z",
+      "last_seen_at": "2026-11-17T14:58:43Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza, importo, requisiti",
-      "discovered_at": "2026-11-16T21:27:35Z"
+      "discovered_at": "2026-11-17T14:58:43Z"
     },
     {
       "id": "scr-171213fa3702",
@@ -163,7 +164,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-16T21:27:12Z",
+      "detail_fetched_at": "2026-11-17T14:58:09Z",
       "source_excerpts": {
         "deadline": "Accesso ai contributi in conto interessi : presentando domanda tramite la piattaforma GeCoWEB Plus a partire dalle ore 12:00 del 23 novembre 2026 e fino alle ore 17:00 del 3 ottobre 2028, salvo chiusura anticipata per es",
         "amount": "Importo: da 100.000 euro a 10 milioni di euro",
@@ -171,10 +172,10 @@
         "documents": "Prestiti a sostegno di progetti imprenditoriali realizzati da PMI dell’indotto del settore automotive. L’appartenenza all’indotto del settore automotive deve risultare da un attestato rilasciato dal Consorzio Industriale"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T21:27:35Z",
+      "last_seen_at": "2026-11-17T14:58:43Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza, importo, requisiti, documenti",
-      "discovered_at": "2026-11-16T21:27:35Z"
+      "discovered_at": "2026-11-17T14:58:43Z"
     },
     {
       "id": "scr-dc72123c2d6c",
@@ -182,7 +183,7 @@
       "authority": "Regione Lazio (Lazio Innova)",
       "category": "altro",
       "amount": "7.500,00 euro",
-      "deadline": "",
+      "deadline": "Il procedimento di concessione del contributo è a sportello",
       "summary": "Basket Bond Lazio – Contributo sui costi di emissione sostenuti dalle Pmi ammissibili",
       "requirements": [
         "Sede operativa o residenza nel Lazio",
@@ -201,17 +202,231 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-16T21:27:12Z",
+      "detail_fetched_at": "2026-11-17T14:58:09Z",
       "source_excerpts": {
+        "deadline": "Il procedimento di concessione del contributo è a sportello",
         "amount": "c) il costo per la prima certificazione del bilancio della PMI beneficiaria; è ammissibile solo il costo iniziale (una tantum) e il contributo massimo concedibile con riferimento a questa voce di costo è pari a 7.500,00 ",
         "requirements": "Destinatari medie imprese piccole imprese",
         "documents": "hanno già sostenuto i costi ammissibili oggetto del contributo, con l’eccezione disciplinata nell’Avviso per i costi di prima certificazione del bilancio"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T21:27:35Z",
+      "last_seen_at": "2026-11-17T14:58:43Z",
+      "status": "open",
+      "gate_reason": "evidenze: scadenza, importo, requisiti, documenti",
+      "discovered_at": "2026-11-17T14:58:43Z"
+    },
+    {
+      "id": "scr-ff1578b7f081",
+      "title": "Autoimpiego Centro-Nord",
+      "authority": "Invitalia",
+      "category": "lavoro",
+      "amount": "200.000 euro",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
+      "requirements": [
+        "L’incentivo è rivolto ai giovani tra i 18 anni compiuti e i 35 anni non ancora compiuti che sono in una condizione di inattività, inoccupazione o disoccupazione, nonché ai disoccupati del Programma GOL (Garanzia di occup",
+        "Smart&Start Italia: in quattro anni raccolti 65,8 milioni di euro di capitali privati nelle startup innovative"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/autoimpiego-centro-nord?from=/per-chi-vuole-fare-impresa/incentivi",
+      "source_name": "Invitalia — Autoimpiego e nuove imprese",
+      "target": [
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-17T14:58:11Z",
+      "source_excerpts": {
+        "amount": "contributo del 60% a fondo perduto per programmi di investimento che hanno un importo compreso tra 120.000 euro e 200.000 euro",
+        "requirements": "L’incentivo è rivolto ai giovani tra i 18 anni compiuti e i 35 anni non ancora compiuti che sono in una condizione di inattività, inoccupazione o disoccupazione, nonché ai disoccupati del Programma GOL (Garanzia di occup"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-17T14:58:43Z",
+      "status": "unknown",
+      "gate_reason": "evidenze: importo, requisiti",
+      "discovered_at": "2026-11-17T14:58:43Z"
+    },
+    {
+      "id": "scr-0026efe14789",
+      "title": "Resto al Sud 2.0",
+      "authority": "Invitalia",
+      "category": "lavoro",
+      "amount": "200.000 euro",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
+      "requirements": [
+        "L’incentivo è rivolto ai giovani tra i 18 anni compiuti e i 35 anni non ancora compiuti, che sono in una condizione di inattività, inoccupazione o disoccupazione, nonché ai disoccupati del Programma GOL (Garanzia di occu",
+        "Smart&Start Italia: in quattro anni raccolti 65,8 milioni di euro di capitali privati nelle startup innovative"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/resto-al-sud-20?from=/per-chi-vuole-fare-impresa/incentivi",
+      "source_name": "Invitalia — Autoimpiego e nuove imprese",
+      "target": [
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-17T14:58:11Z",
+      "source_excerpts": {
+        "amount": "contributo del 70% a fondo perduto per programmi di investimento che hanno un importo compreso tra 120.000 euro e 200.000 euro",
+        "requirements": "L’incentivo è rivolto ai giovani tra i 18 anni compiuti e i 35 anni non ancora compiuti, che sono in una condizione di inattività, inoccupazione o disoccupazione, nonché ai disoccupati del Programma GOL (Garanzia di occu"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-17T14:58:43Z",
+      "status": "unknown",
+      "gate_reason": "evidenze: importo, requisiti",
+      "discovered_at": "2026-11-17T14:58:43Z"
+    },
+    {
+      "id": "scr-d20a5b49c256",
+      "title": "Smart&Start Italia",
+      "authority": "Invitalia",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
+      "requirements": [
+        "Smart&Start Italia: in quattro anni raccolti 65,8 milioni di euro di capitali privati nelle startup innovative",
+        "La società pugliese è stata finanziata da Invitalia con Smart&Start"
+      ],
+      "required_documents": [
+        "La società pugliese è stata finanziata da Invitalia con Smart&Start"
+      ],
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/smartstart-italia",
+      "source_name": "Invitalia — Autoimpiego e nuove imprese",
+      "target": [
+        "impresa",
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-17T14:58:11Z",
+      "source_excerpts": {
+        "requirements": "Smart&Start Italia: in quattro anni raccolti 65,8 milioni di euro di capitali privati nelle startup innovative",
+        "documents": "La società pugliese è stata finanziata da Invitalia con Smart&Start"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-17T14:58:43Z",
+      "status": "unknown",
+      "gate_reason": "evidenze: requisiti, documenti",
+      "discovered_at": "2026-11-17T14:58:43Z"
+    },
+    {
+      "id": "scr-78272df3e744",
+      "title": "Assegno unico e universale per i figli a carico",
+      "authority": "INPS",
+      "category": "famiglia",
+      "amount": "46.582,71 euro",
+      "deadline": "",
+      "summary": "L'inserimento nei preferiti non è al momento disponibile. Riprovare più tardi.",
+      "requirements": [
+        "figli",
+        "Il servizio permette di richiedere l’Assegno unico per figli a carico fino a 21 anni, o senza limiti di età se disabili, in base alle nuove regole su residenza, lavoratori non residenti e figli residenti in altri Stati U",
+        "senza limiti di età per i figli disabili",
+        "alla condizione economica del nucleo familiare sulla base di ISEE valido al momento della domanda",
+        "È universale , perché garantito in misura minima a tutte le famiglie con figli a carico, anche in assenza di ISEE o con ISEE superiore alla soglia massima rivalutata annualmente: 46.582,71 per il 2026"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.assegno-unico-e-universale-per-i-figli-a-carico-55984.assegno-unico-e-universale-per-i-figli-a-carico.html",
+      "source_name": "INPS — Prestazioni e sussidi",
+      "target": [
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-17T14:58:38Z",
+      "source_excerpts": {
+        "amount": "una quota variabile progressiva in relazione alle soglie ISEE rivalutate annualmente ( da un massimo di 203,8 euro per ciascun figlio minore con ISEE fino a 17.468,51 euro a un minimo di 58,3 euro per ciascun figlio mino",
+        "requirements": "Il servizio permette di richiedere l’Assegno unico per figli a carico fino a 21 anni, o senza limiti di età se disabili, in base alle nuove regole su residenza, lavoratori non residenti e figli residenti in altri Stati U"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-17T14:58:43Z",
+      "status": "unknown",
+      "gate_reason": "evidenze: importo, requisiti",
+      "discovered_at": "2026-11-17T14:58:43Z"
+    },
+    {
+      "id": "scr-a097045913e8",
+      "title": "Assegno di Inclusione (ADI)",
+      "authority": "INPS",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "L'inserimento nei preferiti non è al momento disponibile. Riprovare più tardi.",
+      "requirements": [
+        "con disabilità, come definita ai sensi del regolamento di cui al decreto del Presidente del Consiglio dei ministri 5 dicembre 2013, n. 159",
+        "Requisiti di cittadinanza, soggiorno e residenza",
+        "Il richiedente, al momento della presentazione della domanda, deve essere residente in Italia da almeno cinque anni, di cui gli ultimi due in modo continuativo",
+        "Il nucleo familiare del richiedente deve possedere i seguenti requisiti economici"
+      ],
+      "required_documents": [
+        "un valore del reddito familiare inferiore a 10.140 euro nei casi in cui il nucleo familiare risiede in abitazione in locazione, secondo quanto risulta dalla Dichiarazione Sostitutiva Unica resa ai fini dell’ISEE",
+        "7.500 euro per ogni componente presente nel nucleo in condizione di disabilità grave o di non autosufficienza, come definita ai fini ISEE",
+        "Allegato Istruzioni per la gestione della domanda",
+        "Validazione delle certificazioni ADI"
+      ],
+      "source_url": "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.assegno-di-inclusione-adi.html",
+      "source_name": "INPS — Prestazioni e sussidi",
+      "target": [
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-17T14:58:38Z",
+      "source_excerpts": {
+        "requirements": "con disabilità, come definita ai sensi del regolamento di cui al decreto del Presidente del Consiglio dei ministri 5 dicembre 2013, n. 159",
+        "documents": "un valore del reddito familiare inferiore a 10.140 euro nei casi in cui il nucleo familiare risiede in abitazione in locazione, secondo quanto risulta dalla Dichiarazione Sostitutiva Unica resa ai fini dell’ISEE"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-17T14:58:43Z",
+      "status": "unknown",
+      "gate_reason": "evidenze: requisiti, documenti",
+      "discovered_at": "2026-11-17T14:58:43Z"
+    },
+    {
+      "id": "scr-f12d7a2a51be",
+      "title": "Superbonus",
+      "authority": "Agenzia delle Entrate",
+      "category": "altro",
+      "amount": "516.000 euro",
+      "deadline": "",
+      "summary": "Aree tematiche - Superbonus 110% - Superbonus - Agenzia delle Entrate",
+      "requirements": [
+        "per i condomini e le persone fisiche , al di fuori dell’esercizio di attività di impresa, arte e professione, per gli interventi su edifici composti da due a 4 unità immobiliari distintamente accatastate, anche se possed",
+        "Istituti autonomi case popolari (Iacp) comunque denominati o altri enti che rispondono ai requisiti della legislazione europea in materia di \"in house providing\" su immobili, di loro proprietà ovvero gestiti per conto de",
+        "cooperative di abitazione a proprietà indivisa su immobili dalle stesse posseduti e assegnati in godimento ai propri soci",
+        "associazioni e società sportive dilettantistiche, limitatamente ai lavori destinati ai soli immobili o parti di immobili adibiti a spogliatoi"
+      ],
+      "required_documents": [
+        "20 aprile 2023 Qualificazione delle imprese per l’accesso ai benefici di cui agli articoli 119 e 121 del decreto-legge 19 maggio 2020, n. 34 – Articolo 10-bis del decreto-legge 21 marzo 2022, n. 21 - Certificazione SOA (",
+        "associazioni e società sportive dilettantistiche, limitatamente ai lavori destinati ai soli immobili o parti di immobili adibiti a spogliatoi",
+        "interventi di efficientamento energetico",
+        "di altri soggetti (persone fisiche, anche esercenti attività di lavoro autonomo o d’impresa, società ed enti)"
+      ],
+      "source_url": "https://www.agenziaentrate.gov.it/portale/superbonus-110-",
+      "source_name": "Agenzia delle Entrate — Agevolazioni casa",
+      "target": [
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-17T14:51:36Z",
+      "source_excerpts": {
+        "amount": "L’articolo 10-bis del decreto legge n. 21/2022 ha previsto che dal 1° gennaio 2023, sia per la fruizione della detrazione sia per l’esercizio delle opzioni di sconto in fattura e cessione del credito, relativamente agli ",
+        "requirements": "per i condomini e le persone fisiche , al di fuori dell’esercizio di attività di impresa, arte e professione, per gli interventi su edifici composti da due a 4 unità immobiliari distintamente accatastate, anche se possed",
+        "documents": "20 aprile 2023 Qualificazione delle imprese per l’accesso ai benefici di cui agli articoli 119 e 121 del decreto-legge 19 maggio 2020, n. 34 – Articolo 10-bis del decreto-legge 21 marzo 2022, n. 21 - Certificazione SOA ("
+      },
+      "miss_streak": 2,
+      "last_seen_at": "2026-11-17T14:51:37Z",
       "status": "unknown",
       "gate_reason": "evidenze: importo, requisiti, documenti",
-      "discovered_at": "2026-11-16T21:27:35Z"
+      "discovered_at": "2026-11-17T14:51:37Z"
     }
   ],
   "quarantine": [
@@ -234,7 +449,7 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T21:27:35Z",
+      "last_seen_at": "2026-11-17T14:58:43Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
@@ -260,12 +475,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-16T21:25:26Z",
+      "detail_fetched_at": "2026-11-17T14:57:04Z",
       "source_excerpts": {
         "documents": "Fondo Nazionale Efficienza Energetica - Ministero dell'Ambiente e della Sicurezza energetica"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T21:27:35Z",
+      "last_seen_at": "2026-11-17T14:58:43Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
     },
     {
@@ -276,7 +491,9 @@
       "amount": "",
       "deadline": "",
       "summary": "Avviso pubblicato su MASE: apri la fonte per i dettagli.",
-      "requirements": [],
+      "requirements": [
+        "ENEA INTRAENEA (area riservata ai dipendenti dell'Agenzia)"
+      ],
       "required_documents": [
         "Dipartimento Unità per l'Efficienza Energetica",
         "Suggeriamo di prendere visione anche della sezione dedicata \"Come richiedere copia delle schede descrittive Ecobonus/Bonus Casa?\" al link https://www.efficienzaenergetica.enea.it/detrazioni-fiscali.html",
@@ -291,12 +508,13 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-16T21:25:29Z",
+      "detail_fetched_at": "2026-11-17T14:57:05Z",
       "source_excerpts": {
+        "requirements": "ENEA INTRAENEA (area riservata ai dipendenti dell'Agenzia)",
         "documents": "Dipartimento Unità per l'Efficienza Energetica"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T21:27:35Z",
+      "last_seen_at": "2026-11-17T14:58:43Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
     },
     {
@@ -318,12 +536,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-16T21:26:56Z",
+      "detail_fetched_at": "2026-11-17T14:57:55Z",
       "source_excerpts": {
         "deadline": "scadenza l’11 novembre 2026 per gli Ambiti Territoriali Sociali e i Comuni interessati all’assunzione di ass"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T21:27:35Z",
+      "last_seen_at": "2026-11-17T14:58:43Z",
       "gate_reason": "nessun segnale di bando"
     },
     {
@@ -345,10 +563,10 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-16T21:26:57Z",
+      "detail_fetched_at": "2026-11-17T14:57:54Z",
       "source_excerpts": {},
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T21:27:35Z",
+      "last_seen_at": "2026-11-17T14:58:43Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
@@ -359,7 +577,9 @@
       "amount": "",
       "deadline": "",
       "summary": "Brevetti+, Disegni+ e Marchi+: le misure a sostegno di proprietà intellettuale e creatività Rappresentano una concreta opportunità di crescita e di sviluppo industriale APPROFONDISCI",
-      "requirements": [],
+      "requirements": [
+        "La misura si rivolge alle PMI che intendono tutelare i propri segni distintivi attraverso le procedure previste presso l’EUIPO, l’Ufficio dell’Unione europea per la proprietà intellettuale. In questo caso la dotazione am"
+      ],
       "required_documents": [],
       "source_url": "https://www.cliclavoro.gov.it/news/trend-interviste/innovazione-e-solidita-tecnologica-i-nuovi-bandi-targati-brevetti-disegni-e?language_content_entity=it",
       "source_name": "Cliclavoro",
@@ -369,77 +589,54 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-16T21:27:00Z",
-      "source_excerpts": {},
+      "detail_fetched_at": "2026-11-17T14:57:57Z",
+      "source_excerpts": {
+        "requirements": "La misura si rivolge alle PMI che intendono tutelare i propri segni distintivi attraverso le procedure previste presso l’EUIPO, l’Ufficio dell’Unione europea per la proprietà intellettuale. In questo caso la dotazione am"
+      },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T21:27:35Z",
+      "last_seen_at": "2026-11-17T14:58:43Z",
       "gate_reason": "nessun segnale di bando"
     },
     {
-      "id": "scr-ff1578b7f081",
-      "title": "Autoimpiego Centro-Nord",
-      "authority": "Invitalia",
+      "id": "scr-8e2154ebc540",
+      "title": "Sport e inclusione sociale, le iniziative per lo sviluppo degli spazi civici",
+      "authority": "Ministero del Lavoro e delle Politiche Sociali",
       "category": "lavoro",
-      "amount": "200.000 euro",
+      "amount": "",
       "deadline": "",
-      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
+      "summary": "Sport e inclusione sociale, le iniziative per lo sviluppo degli spazi civici Incentivi e progetti per promuovere luoghi aperti, accessibili e inclusivi con modalità di formazione e orientamento",
       "requirements": [],
       "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/autoimpiego-centro-nord?from=/per-chi-vuole-fare-impresa/incentivi",
-      "source_name": "Invitalia — Autoimpiego e nuove imprese",
+      "source_url": "https://www.cliclavoro.gov.it/news/trend-interviste/sport-e-inclusione-sociale-le-iniziative-per-lo-sviluppo-degli-spazi-civici?language_content_entity=it",
+      "source_name": "Cliclavoro",
       "target": [
-        "impresa"
+        "impresa",
+        "persona"
       ],
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-16T21:27:14Z",
-      "source_excerpts": {
-        "amount": "contributo del 60% a fondo perduto per programmi di investimento che hanno un importo compreso tra 120.000 euro e 200.000 euro"
-      },
+      "detail_fetched_at": "2026-11-17T14:57:57Z",
+      "source_excerpts": {},
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T21:27:35Z",
-      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: importo"
-    },
-    {
-      "id": "scr-0026efe14789",
-      "title": "Resto al Sud 2.0",
-      "authority": "Invitalia",
-      "category": "lavoro",
-      "amount": "200.000 euro",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/resto-al-sud-20?from=/per-chi-vuole-fare-impresa/incentivi",
-      "source_name": "Invitalia — Autoimpiego e nuove imprese",
-      "target": [
-        "impresa"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "detail_fetched_at": "2026-11-16T21:27:14Z",
-      "source_excerpts": {
-        "amount": "contributo del 70% a fondo perduto per programmi di investimento che hanno un importo compreso tra 120.000 euro e 200.000 euro"
-      },
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-16T21:27:35Z",
-      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: importo"
+      "last_seen_at": "2026-11-17T14:58:43Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
       "id": "scr-3df33a7c0d4d",
       "title": "ON - Oltre Nuove imprese a tasso zero",
       "authority": "Invitalia",
-      "category": "lavoro",
+      "category": "altro",
       "amount": "",
       "deadline": "",
       "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
       "requirements": [
-        "Imprese costituite da non più di 60 mesi o persone fisiche che vogliono costituire una nuova impresa. La compagine deve essere composta, per oltre la metà numerica dei soci e di quote di partecipazione, da persone di età"
+        "Si comunica l’esaurimento delle risorse destinate ai contributi a fondo perduto di \"ON - Oltre Nuove imprese a tasso zero\". Per le domande presentate dal 1° luglio 2026 le agevolazioni verranno quindi concesse nella sola",
+        "Imprese costituite da non più di 60 mesi o persone fisiche che vogliono costituire una nuova impresa. La compagine deve essere composta, per oltre la metà numerica dei soci e di quote di partecipazione, da persone di età",
+        "Smart&Start Italia: in quattro anni raccolti 65,8 milioni di euro di capitali privati nelle startup innovative"
       ],
       "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/ON-nuove-imprese-tasso-zero?from=/per-chi-vuole-fare-impresa/incentivi",
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/ON-nuove-imprese-tasso-zero",
       "source_name": "Invitalia — Autoimpiego e nuove imprese",
       "target": [
         "impresa"
@@ -447,13 +644,13 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-16T21:27:14Z",
+      "detail_fetched_at": "2026-11-17T14:58:11Z",
       "source_excerpts": {
-        "requirements": "Imprese costituite da non più di 60 mesi o persone fisiche che vogliono costituire una nuova impresa. La compagine deve essere composta, per oltre la metà numerica dei soci e di quote di partecipazione, da persone di età"
+        "requirements": "Si comunica l’esaurimento delle risorse destinate ai contributi a fondo perduto di \"ON - Oltre Nuove imprese a tasso zero\". Per le domande presentate dal 1° luglio 2026 le agevolazioni verranno quindi concesse nella sola"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T21:27:35Z",
-      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
+      "last_seen_at": "2026-11-17T14:58:43Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: requisiti"
     },
     {
       "id": "scr-4bc5369a150a",
@@ -463,9 +660,12 @@
       "amount": "",
       "deadline": "",
       "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
-      "requirements": [],
+      "requirements": [
+        "L’iniziativa, al fine di raggiungere in modo più ampio e consistente gli obiettivi prefissati, è attuata con partner istituzionali tra cui Unioncamere , Società italiana di management , Ufficio Italiano Brevetti e Marchi",
+        "Smart&Start Italia: in quattro anni raccolti 65,8 milioni di euro di capitali privati nelle startup innovative"
+      ],
       "required_documents": [],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/imprenditoria-femminile",
+      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/imprenditoria-femminile?from=/per-le-imprese/incentivi",
       "source_name": "Invitalia — Autoimpiego e nuove imprese",
       "target": [
         "impresa"
@@ -473,40 +673,13 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-16T21:27:14Z",
-      "source_excerpts": {},
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-16T21:27:35Z",
-      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
-    },
-    {
-      "id": "scr-d20a5b49c256",
-      "title": "Smart&Start Italia",
-      "authority": "Invitalia",
-      "category": "lavoro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Invitalia — Autoimpiego e nuove imprese: apri la fonte per i dettagli.",
-      "requirements": [],
-      "required_documents": [
-        "La società pugliese è stata finanziata da Invitalia con Smart&Start"
-      ],
-      "source_url": "https://www.invitalia.it/incentivi-e-strumenti/smartstart-italia?from=/per-chi-vuole-fare-impresa/incentivi",
-      "source_name": "Invitalia — Autoimpiego e nuove imprese",
-      "target": [
-        "impresa",
-        "persona"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "detail_fetched_at": "2026-11-16T21:27:14Z",
+      "detail_fetched_at": "2026-11-17T14:58:11Z",
       "source_excerpts": {
-        "documents": "La società pugliese è stata finanziata da Invitalia con Smart&Start"
+        "requirements": "L’iniziativa, al fine di raggiungere in modo più ampio e consistente gli obiettivi prefissati, è attuata con partner istituzionali tra cui Unioncamere , Società italiana di management , Ufficio Italiano Brevetti e Marchi"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T21:27:35Z",
-      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
+      "last_seen_at": "2026-11-17T14:58:43Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: requisiti"
     },
     {
       "id": "scr-b05c66f7b9f1",
@@ -529,12 +702,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-16T21:27:14Z",
+      "detail_fetched_at": "2026-11-17T14:58:11Z",
       "source_excerpts": {
         "documents": "“Economia circolare” è l’incentivo che sostiene la transizione delle attività economiche verso un modello di economia circolare e favorisce la riconversione produttiva per un uso più efficiente e sostenibile delle risors"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T21:27:35Z",
+      "last_seen_at": "2026-11-17T14:58:43Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
     },
     {
@@ -557,25 +730,23 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T21:27:35Z",
+      "last_seen_at": "2026-11-17T14:58:43Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
-      "id": "scr-c4bce98ceef4",
-      "title": "Termini presentazione domande di contributo al CATA Artigianato FVG",
-      "authority": "Regione Autonoma Friuli Venezia Giulia",
-      "category": "altro",
+      "id": "scr-293ecd3aa158",
+      "title": "INCENTIVI ARTIGIANI – 15milioni di incentivi già a disposizione delle imprese artigiane della Sardegna. Fondo perduto al 40% e abbattimento interessi. Le strutt",
+      "authority": "Confartigianato Sud Sardegna",
+      "category": "lavoro",
       "amount": "",
       "deadline": "",
-      "summary": "Termini presentazione domande di contributo al CATA Artigianato FVG",
+      "summary": "INCENTIVI ARTIGIANI – 15milioni di incentivi già a disposizione delle imprese artigiane della Sardegna. Fondo perduto al 40% e abbattimento interessi. Le strutture di Confartigianato nell’isola già attive per supportare gli imprenditori negli investimenti. Matzutzi e Serra (Confartigianato Sardegna): “Oltre 200 richieste in 2 settimane: occasione forse unica e irripetibile”",
       "requirements": [
-        "Sede operativa o residenza in Friuli Venezia Giulia"
+        "Sede operativa in Sardegna"
       ],
-      "required_documents": [
-        "citati, e dal sito del CATA. I fac-simile della documentazione che dovrà essere allegata alla"
-      ],
-      "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/hp-new/in-evidenza/ultime/2945_f.html",
-      "source_name": "Regione Friuli Venezia Giulia",
+      "required_documents": [],
+      "source_url": "https://sardegnaimpresa.it/incentivi-949/",
+      "source_name": "Sardegna Impresa (Confartigianato)",
       "target": [
         "impresa",
         "artigiani"
@@ -583,13 +754,102 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-16T21:27:34Z",
+      "detail_fetched_at": "2026-11-17T14:58:21Z",
+      "source_excerpts": {},
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-17T14:58:43Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
+    },
+    {
+      "id": "scr-ba2ddcd7be67",
+      "title": "Secondo avviso di pubblicazione dell’elenco degli incarichi vacanti di medico pediatra di libera scelta per l’anno 2026",
+      "authority": "Regione Autonoma Friuli Venezia Giulia",
+      "category": "salute",
+      "amount": "",
+      "deadline": "",
+      "summary": "Secondo avviso di pubblicazione dell’elenco degli incarichi vacanti di medico pediatra di libera scelta per l’anno 2026 Direzione centrale salute, politiche sociali e disabilità",
+      "requirements": [
+        "Sede operativa o residenza in Friuli Venezia Giulia"
+      ],
+      "required_documents": [
+        "Allegato 1 - Domanda zone carenti PLS trasferimento [formato .pdf]",
+        "Allegato 2 - Domanda zone carenti PLS graduatoria [formato .pdf]",
+        "Allegato 3 - Domanda zone carenti PLS diploma [formato .pdf]",
+        "Allegato 4 - Domanda zone carenti PLS titolo [formato .pdf]"
+      ],
+      "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/MODULI/bandi_avvisi/BANDI/9173.html",
+      "source_name": "Regione Friuli Venezia Giulia",
+      "target": [
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-17T14:58:37Z",
       "source_excerpts": {
-        "documents": "citati, e dal sito del CATA. I fac-simile della documentazione che dovrà essere allegata alla"
+        "documents": "Allegato 1 - Domanda zone carenti PLS trasferimento [formato .pdf]"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-16T21:27:35Z",
+      "last_seen_at": "2026-11-17T14:58:43Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
+    },
+    {
+      "id": "scr-f3dfd02639cd",
+      "title": "Agevolazioni per le ristrutturazioni edilizie",
+      "authority": "Agenzia delle Entrate",
+      "category": "casa",
+      "amount": "96.000 euro",
+      "deadline": "",
+      "summary": "Aree tematiche - Agevolazioni per le ristrutturazioni edilizie - Agenzia delle Entrate",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.agenziaentrate.gov.it/portale/aree-tematiche/casa/agevolazioni/agevolazioni-per-le-ristrutturazioni-edilizie",
+      "source_name": "Agenzia delle Entrate — Agevolazioni casa",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-17T14:58:41Z",
+      "source_excerpts": {
+        "amount": "Tuttavia, per le spese sostenute nel 2026 sono prorogate le stesse condizioni previste per l’anno 2025: la detrazione spetta nella misura del 36% (50% in caso di abitazione principale) su un massimo di 96.000 euro per un"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-17T14:58:43Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: importo"
+    },
+    {
+      "id": "scr-96177f060c34",
+      "title": "APPRENDISTATO – Soddisfazione di Confartigianato Sardegna per il ripristino degli incentivi per l’assunzione di apprendisti",
+      "authority": "Confartigianato Sud Sardegna",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "APPRENDISTATO – Soddisfazione di Confartigianato Sardegna per il ripristino degli incentivi per l’assunzione di apprendisti.",
+      "requirements": [
+        "Sede operativa in Sardegna",
+        "APPRENDISTATO – Soddisfazione di Confartigianato Sardegna per il ripristino degli incentivi per l’assunzione di apprendisti. Il commento di Antonio Matzutzi (Presidente Confartigianato Sardegna): “ Norma sbloccata dopo 7",
+        "“ Da parte dell’Assessore Gianni Chessa c’è stata una grande attenzione sia verso il settore artigiano, sia per risolvere questo problema – commenta Antonio Matzutzi, Presidente di Confartigianato Imprese Sardegna – atte"
+      ],
+      "required_documents": [],
+      "source_url": "https://sardegnaimpresa.it/apprendistato-incentivi/",
+      "source_name": "Sardegna Impresa (Confartigianato)",
+      "target": [
+        "impresa",
+        "artigiani"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-17T14:54:57Z",
+      "source_excerpts": {
+        "requirements": "APPRENDISTATO – Soddisfazione di Confartigianato Sardegna per il ripristino degli incentivi per l’assunzione di apprendisti. Il commento di Antonio Matzutzi (Presidente Confartigianato Sardegna): “ Norma sbloccata dopo 7"
+      },
+      "miss_streak": 1,
+      "last_seen_at": "2026-11-17T14:55:26Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: requisiti"
     },
     {
       "id": "scr-2fcc05aadd72",
@@ -600,21 +860,28 @@
       "deadline": "",
       "summary": "INCENTIVI – 56 milioni di euro a disposizione per nuove aziende e microcredito",
       "requirements": [
-        "Sede operativa in Sardegna"
+        "Sede operativa in Sardegna",
+        "“In questo momento di scarsi incentivi per le imprese il Microcredito e gli incentivi a tasso zero sono una opportunità da non perdere per chi ha voglia di iniziare una nuova attività oppure per quelle imprese che hanno ",
+        "Le aziende devono essere costituite in forma di società da non più di 12 mesi rispetto alla data di presentazione della domanda. Anche le persone fisiche possono richiedere i finanziamenti, a patto che costituiscano la s",
+        "Le agevolazioni sono concesse nei limiti del regolamento de minimis e prevedono un finanziamento agevolato a tasso zero della durata massima di 8 anni, che può coprire fino al 75% delle spese totali. Le imprese devono ga"
       ],
       "required_documents": [],
       "source_url": "https://sardegnaimpresa.it/incentivi-56-milioni-di-euro-a-disposizione-per-nuove-aziende-e-microcredito/",
       "source_name": "Sardegna Impresa (Confartigianato)",
       "target": [
-        "impresa"
+        "impresa",
+        "artigiani"
       ],
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-16T20:53:34Z",
-      "discovered_at": "2026-11-16T20:53:34Z",
-      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
+      "detail_fetched_at": "2026-11-17T14:48:00Z",
+      "source_excerpts": {
+        "requirements": "“In questo momento di scarsi incentivi per le imprese il Microcredito e gli incentivi a tasso zero sono una opportunità da non perdere per chi ha voglia di iniziare una nuova attività oppure per quelle imprese che hanno "
+      },
+      "miss_streak": 2,
+      "last_seen_at": "2026-11-17T14:48:27Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: requisiti"
     },
     {
       "id": "scr-1b0da47a683b",
@@ -850,29 +1117,32 @@
       "reason": "comunicato («tutto quello che c'è da sapere»)"
     },
     {
-      "title": "Startup innovative: sostegni a un settore in crescita",
-      "source_name": "Cliclavoro",
-      "source_url": "https://www.cliclavoro.gov.it/news/trend-interviste/startup-innovative-sostegni-a-un-settore-in-crescita?language_content_entity=it",
-      "reason": "comunicato («in crescita»)"
+      "title": "Avviso presentazione istanza di concessione per derivare acqua mediante opere di presa da falda sotterranea in comune di Pocenia (UD) da parte della ditta Azien",
+      "source_name": "Regione Friuli Venezia Giulia",
+      "source_url": "https://www.regione.fvg.it/",
+      "reason": "atto amministrativo/gara («istanza di concessione»)"
     }
   ],
   "quality": {
-    "verified": 6,
-    "open": 5,
-    "unknown_deadline": 1,
-    "expired": 2,
-    "quarantine": 25,
+    "verified": 12,
+    "open": 6,
+    "unknown_deadline": 6,
+    "expired": 3,
+    "quarantine": 26,
     "news": 2,
     "fill": {
-      "deadline_pct": 83.3,
-      "amount_pct": 83.3,
-      "requirements_pct": 66.7,
-      "documents_pct": 66.7
+      "deadline_pct": 50.0,
+      "amount_pct": 75.0,
+      "requirements_pct": 83.3,
+      "documents_pct": 58.3
     },
     "by_source": {
       "Regione Liguria": 1,
       "Invitalia": 2,
-      "Lazio Innova": 3
+      "Lazio Innova": 3,
+      "Invitalia — Autoimpiego e nuove imprese": 3,
+      "INPS — Prestazioni e sussidi": 2,
+      "Agenzia delle Entrate — Agevolazioni casa": 1
     }
   }
 }

@@ -33,6 +33,12 @@ create table if not exists public.catalog_sources (
   target      text[] not null default '{persona,impresa}',
   enabled     boolean not null default false,
   priority    integer not null default 100,
+  -- 'list': si scansiona list_url e si seguono i link delle schede.
+  -- 'direct': si leggono direttamente gli URL in direct_urls (bandi
+  -- evergreen che non compaiono in nessun elenco di avvisi).
+  -- Vedi supabase_migration_verified_catalog.sql.
+  mode        text not null default 'list',
+  direct_urls text[] not null default '{}',
   note        text not null default '',
   created_at  timestamptz not null default now(),
   updated_at  timestamptz not null default now()

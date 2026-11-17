@@ -293,17 +293,46 @@ SOURCES: list[dict] = [
     {
         "name": "Regione Friuli Venezia Giulia",
         "authority": "Regione Autonoma Friuli Venezia Giulia",
-        "list_url": "https://www.regione.fvg.it/",
+        # La home regionale dava un solo candidato: la pagina "Incentivi e
+        # servizi" dell'agenzia regionale elenca le linee aperte con il periodo
+        # di validità ("dal … al …"), che è la scadenza vera.
+        # Pagina "bandi e avvisi" della Regione: ogni voce riporta data di
+        # pubblicazione e "scadenza GG.MM.AAAA", quindi il termine è nel testo.
+        "list_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/MODULI/bandi_avvisi",
         "base_url": "https://www.regione.fvg.it/",
         "residency": "Sede operativa o residenza in Friuli Venezia Giulia",
-        # Home molto ampia: senza filtro tematico entrano solo notizie.
-        # La home contiene anche bandi per Comuni, scuole ed ETS: il filtro
-        # tiene solo ciò che parla di imprese, artigiani e professionisti.
-        "topics": (
-            "impres", "artigian", "professionist", "pmi", "startup",
-            "innovazione", "internazional", "voucher",
-        ),
+        # Le voci vere contengono "bando"/"contributi": il filtro keyword basta
+        # e tiene fuori le voci di menu della pagina.
+        "exclude": ("cerca bandi", "parola chiave"),
         "target": ("impresa", "artigiani"),
+    },
+    # ---------------- Bandi "evergreen" (modalità direct) ----------------
+    # Non compaiono mai in una pagina di avvisi: esistono come pagina ufficiale
+    # permanente. Si leggono direttamente, senza elenco da scansionare.
+    {
+        "name": "INPS — Prestazioni e sussidi",
+        "authority": "INPS",
+        "mode": "direct",
+        "list_url": "https://www.inps.it/",
+        "base_url": "https://www.inps.it/",
+        "direct_urls": [
+            "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.assegno-unico-e-universale-per-i-figli-a-carico-55984.assegno-unico-e-universale-per-i-figli-a-carico.html",
+            "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.assegno-di-inclusione-adi.html",
+            "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.bonus-asilo-nido-e-forme-di-supporto-presso-la-propria-abitazione-51105.bonus-asilo-nido-e-forme-di-supporto-presso-la-propria-abitazione.html",
+        ],
+        "target": ("persona",),
+    },
+    {
+        "name": "Agenzia delle Entrate — Agevolazioni casa",
+        "authority": "Agenzia delle Entrate",
+        "mode": "direct",
+        "list_url": "https://www.agenziaentrate.gov.it/portale/aree-tematiche/casa",
+        "base_url": "https://www.agenziaentrate.gov.it/",
+        "direct_urls": [
+            "https://www.agenziaentrate.gov.it/portale/aree-tematiche/casa/agevolazioni/agevolazioni-per-le-ristrutturazioni-edilizie",
+            "https://www.agenziaentrate.gov.it/portale/superbonus-110-",
+        ],
+        "target": ("persona", "impresa"),
     },
 ]
 
@@ -686,12 +715,22 @@ def build_bonus(source: dict, url: str, raw_title: str, extra_text: str = "") ->
     # generica della card è la pubblicazione, non la scadenza. Nei link semplici
     # (extra_text vuoto) la data nel titolo è di solito la scadenza reale.
     if extra_text:
+        # "… - scadenza 20.11.2026 ### titolo" (elenchi regionali).
+        inline = re.search(
+            r"scadenz\w*\s*:?\s*(\d{1,2}[./-]\d{1,2}[./-]\d{2,4}|\d{1,2}\s+\w+\s+\d{4})",
+            f"{title} {extra_text}",
+            re.I,
+        )
         card_deadline = RE_DEADLINE_CARD.search(extra_text)
-        if card_deadline:
+        if inline:
+            deadline_text = inline.group(1)
+        elif card_deadline:
             inner = RE_DATE.search(card_deadline.group(0))
             deadline_text = inner.group(0) if inner else card_deadline.group(0).strip()
         else:
-            deadline_text = ""
+            # "dal … al 30/11/2026": la fine del periodo è il termine utile.
+            period = PERIOD_RE.search(extra_text)
+            deadline_text = period.group(1) if period else ""
     else:
         date_match = RE_DATE.search(title)
         deadline_text = date_match.group(0) if date_match else ""
@@ -721,12 +760,121 @@ def build_bonus(source: dict, url: str, raw_title: str, extra_text: str = "") ->
     }
 
 
+TITLE_JUNK_RE = re.compile(
+    r"^(menu principale|menu|salta|home|homepage|contenuto|indice|navigazione|area riservata)",
+    re.I,
+)
+# Titoli che sono solo il nome dell'ente (o un'etichetta di navigazione):
+# non descrivono nessun bando e finirebbero in catalogo come voce vuota.
+GENERIC_TITLE_RE = re.compile(
+    r"^(agenzia delle entrate|inps|inail|invitalia|ministero\b.*|regione\b.*|comune\b.*|"
+    r"agevolazioni|incentivi|contributi|servizi|bandi|documenti|casa|imprese|famiglie)$",
+    re.I,
+)
+
+
+def _usable_title(text: str) -> str:
+    text = re.sub(r"\s+", " ", text).strip(" -–—|•")
+    if TITLE_JUNK_RE.search(text) or GENERIC_TITLE_RE.search(text):
+        return ""
+    # "Superbonus" (10 caratteri) è un titolo vero; "Incentivi" no.
+    short_ok = len(text) >= 8 and re.search(
+        r"bonus|superbonus|assegno|voucher|contribut|indennit|carta|detrazion", text, re.I
+    )
+    if len(text) < 12 and not short_ok:
+        return ""
+    return text
+
+
+def page_title(markup: str) -> str:
+    """Titolo della pagina, dal `title` ripulito o dal primo `h1` utile.
+
+    Il `title` è più affidabile dell'h1 (che spesso è il menu): si tolgono le
+    parti che ripetono il nome del sito ("… - Agenzia delle Entrate").
+    """
+    def from_raw(raw: str) -> str:
+        raw = re.sub(r"\s+", " ", raw).strip()
+        parts = [p.strip() for p in re.split(r"\s+[|–—]\s+|\s+-\s+|\s+·\s+", raw) if p.strip()]
+        # La prima parte utile è il titolo vero; le successive ripetono il nome
+        # del sito ("Superbonus - Portale Agenzia Entrate").
+        for part in parts:
+            candidate = _usable_title(part)
+            if candidate:
+                return candidate
+        return ""
+
+    og = re.search(r'(?is)<meta[^>]+property="og:title"[^>]+content="([^"]+)"', markup)
+    if og:
+        candidate = from_raw(og.group(1))
+        if candidate:
+            return candidate
+    match = re.search(r"(?is)<title[^>]*>(.*?)</title>", markup)
+    if match:
+        candidate = from_raw(html_to_text(match.group(1)))
+        if candidate:
+            return candidate
+    for h1 in re.findall(r"(?is)<h1[^>]*>(.*?)</h1>", markup):
+        candidate = _usable_title(re.sub(r"\s+", " ", html_to_text(h1)).strip())
+        if candidate:
+            return candidate
+    return ""
+
+
+def first_paragraph(markup: str) -> str:
+    """Primo paragrafo utile del corpo pagina (per il riassunto della scheda)."""
+    for line in main_content(markup).split("\n"):
+        line = re.sub(r"\s+", " ", line).strip()
+        if 60 <= len(line) <= 400 and not JUNK_RE.search(line):
+            return line
+    return ""
+
+
+def scrape_direct(source: dict) -> tuple[list[dict], bool]:
+    """Fonti "direct": nessun elenco da scansionare, solo URL di schede.
+
+    Serve per i bandi evergreen (Assegno unico, ADI, detrazioni…), che non
+    compaiono mai in una pagina di avvisi ma esistono come pagina ufficiale.
+    """
+    urls = source.get("direct_urls") or []
+    print(f"→ Fonte: {source['name']} (modalità diretta, {len(urls)} URL)")
+    items: list[dict] = []
+    reached = False
+    last: object = ""
+    for url in urls:
+        html: str | None = None
+        for ua in (BROWSER_UA, USER_AGENT):
+            try:
+                html = fetch(url, user_agent=ua)
+                break
+            except FetchError as exc:
+                last = exc
+        if html is None:
+            print(f"  ⚠︎ non raggiungibile: {url} ({last})")
+            continue
+        reached = True
+        title = page_title(html)
+        bonus = build_bonus(source, url, title)
+        if not bonus:
+            print(f"  ⚠︎ titolo non utilizzabile: {title[:60]!r}")
+            continue
+        if source.get("detail", True):
+            bonus = enrich_from_detail(bonus)
+        summary = first_paragraph(html)
+        if summary:
+            bonus["summary"] = summary[:397]
+        items.append(bonus)
+        print(f"  ✓ {bonus['title'][:58]}")
+    return items, reached
+
+
 def scrape_source(source: dict) -> tuple[list[dict], bool]:
     """Scarica la pagina indice di una fonte e restituisce (schede, raggiunta).
 
     `raggiunta` è False quando la pagina non risponde: in quel caso le schede di
     quella fonte non vanno contate come "non più trovate" (obsolescenza).
     """
+    if source.get("mode") == "direct":
+        return scrape_direct(source)
     print(f"→ Fonte: {source['name']} ({source['list_url']})")
     html: str | None = None
     for ua, label in ((USER_AGENT, "UA bot"), (BROWSER_UA, "UA browser")):
@@ -775,7 +923,13 @@ def scrape_source(source: dict) -> tuple[list[dict], bool]:
 # ---------------------------------------------------------------
 
 def supabase_upsert(
-    url: str, key: str, rows: list[dict], *, mark_active: bool = True, with_target: bool = True
+    url: str,
+    key: str,
+    rows: list[dict],
+    *,
+    mark_active: bool = True,
+    with_target: bool = True,
+    with_gate: bool = True,
 ) -> tuple[bool, str]:
     """Upsert su PostgREST: POST /rest/v1/bonuses?on_conflict=norm_title.
 
@@ -798,6 +952,19 @@ def supabase_upsert(
                 "source_url": r["source_url"],
                 "source_name": r["source_name"],
                 **({"target": r.get("target") or ["persona", "impresa"]} if with_target else {}),
+                # Tutto ciò che arriva qui ha passato il gate: nel database la
+                # colonna dice perché, così la tabella resta allineata ai bandi
+                # verificati anche senza rieseguire la migrazione.
+                **(
+                    {
+                        "gate_status": "bando",
+                        "gate_reason": r.get("gate_reason") or "",
+                        "detail_fetched_at": r.get("detail_fetched_at"),
+                        "source_excerpts": r.get("source_excerpts") or {},
+                    }
+                    if with_gate
+                    else {}
+                ),
                 "is_new": r["is_new"],
                 **({"is_active": True} if mark_active else {}),
             }
@@ -839,7 +1006,7 @@ def supabase_sources(url: str, key: str) -> list[dict] | None:
     endpoint = (
         url.rstrip("/")
         + "/rest/v1/catalog_sources?enabled=is.true"
-        "&select=slug,name,authority,list_url,base_url,residency,topics,target,priority"
+        "&select=slug,name,authority,list_url,base_url,residency,topics,target,priority,mode,direct_urls"
         "&order=priority.asc"
     )
     headers = {"apikey": key, "Authorization": f"Bearer {key}", "Accept": "application/json"}
@@ -851,7 +1018,9 @@ def supabase_sources(url: str, key: str) -> list[dict] | None:
         # Colonna `target` non ancora creata (migrazione non eseguita): si
         # rilegge senza, invece di rinunciare alla tabella e alle sue fonti.
         if exc.code == 400:
-            retry = endpoint.replace(",target,", ",")
+            # Colonna `mode`/`direct_urls` mancante (migrazione non eseguita) o
+            # `target`: si rilegge senza, invece di perdere la tabella.
+            retry = endpoint.replace(",mode,direct_urls", "").replace(",target,", ",")
             try:
                 req = urllib.request.Request(retry, headers=headers)
                 with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as resp:
@@ -882,6 +1051,8 @@ def supabase_sources(url: str, key: str) -> list[dict] | None:
                 "residency": row.get("residency") or None,
                 "topics": tuple(row["topics"]) if row.get("topics") else None,
                 "target": tuple(row["target"]) if row.get("target") else None,
+                "mode": row.get("mode") or "list",
+                "direct_urls": list(row.get("direct_urls") or []),
             }
         )
     return sources or None
@@ -1036,7 +1207,8 @@ GATE_NOTIZIA_RE = re.compile(
 GATE_ATTO_RE = re.compile(
     r"procedura negoziata|avviso di indizione|affidament|concessione di derivazione|"
     r"derivazione idrica|concessione idrica|ricerca acque sotterranee|"
-    r"mobilità volontaria|graduatori|nomina del revisore|istanza concessione|"
+    r"mobilità volontaria|graduatori|nomina del revisore|istanza (di )?concessione|"
+    r"derivare acqua|concessione per derivare|"
     r"bandi? di concorso|concorso pubblico|gara|appalto|servizi di pulizia|"
     r"fornitura|incarico di|selezione di personale",
     re.I,
@@ -1046,11 +1218,18 @@ GATE_BANDO_RE = re.compile(
     r"\bfondo\b|detrazion|credito d'imposta|\bbonus\b|domanda|scadenz",
     re.I,
 )
+# Termini senza data. "sportello" da solo non basta ("sportello postale" è un
+# canale di pagamento, non un termine di presentazione).
 OPEN_WORDS = re.compile(
-    r"sempre aperto|sportello|fino a esaurimento|a sportello|in dichiarazione|"
-    r"domanda sempre",
+    r"fino ad? esaurimento|sempre aperto|a sportello|sportello apert|domande a sportello",
     re.I,
 )
+# Periodo di validità nelle card: "dal 29/06/2026 al 30/11/2026" → fine periodo.
+PERIOD_RE = re.compile(r"\bdal\s+[^.]{0,30}?\s+al\s+(\d{1,2}[/-]\d{1,2}[/-]\d{2,4}|\d{1,2}\s+\w+\s+\d{4})", re.I)
+# Date che non sono scadenze: norme citate nel testo ("legge 30 dicembre 2025").
+NORM_DATE_RE = re.compile(r"\b(legge|decreto|d\.lgs|delibera|regolamento|circolare)\b", re.I)
+THRESHOLD_RE = re.compile(r"reddito|patrimonio|ISEE|soglia|limite|massimale|non superiore", re.I)
+AMOUNT_HINT_TEXT = re.compile(r"importo|contributo|spettante|fino a|voucher|dotazione|bonus di", re.I)
 RE_IT_DATE = re.compile(
     r"\b(\d{1,2})[/-](\d{1,2})[/-](\d{4})\b"
     r"|\b(\d{1,2})\s+(gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|"
@@ -1113,6 +1292,46 @@ def classify_bonus(bonus: dict) -> tuple[str, str]:
     return "quarantena", "nessun segnale di bando"
 
 
+def _title_tokens(title: str) -> set[str]:
+    return {t for t in re.findall(r"[a-zà-ù0-9]+", title.lower()) if len(t) > 3}
+
+
+def _evidence_score(bonus: dict) -> int:
+    return (
+        (1 if (bonus.get("deadline") or "").strip() else 0)
+        + (1 if (bonus.get("amount") or "").strip() else 0)
+        + (1 if len(bonus.get("requirements") or []) >= 2 else 0)
+        + (1 if bonus.get("required_documents") else 0)
+    )
+
+
+def dedupe_similar(rows: list[dict], threshold: float = 0.7) -> list[dict]:
+    """Toglie i doppioni fra fonti diverse (stesso bando con titoli simili).
+
+    Resta la scheda con più evidenze (meglio una con scadenza e importo che due
+    con metà dei dati), a parità quella già in catalogo da più tempo.
+    """
+    kept: list[dict] = []
+    for row in rows:
+        tokens = _title_tokens(row.get("title") or "")
+        duplicate = None
+        for index, existing in enumerate(kept):
+            other = _title_tokens(existing.get("title") or "")
+            if not tokens or not other:
+                continue
+            similarity = len(tokens & other) / len(tokens | other)
+            if similarity >= threshold:
+                duplicate = index
+                break
+        if duplicate is None:
+            kept.append(row)
+            continue
+        rival = kept[duplicate]
+        if _evidence_score(row) > _evidence_score(rival):
+            kept[duplicate] = row
+    return kept
+
+
 def split_catalog(
     rows: list[dict], today: datetime | None = None
 ) -> tuple[list[dict], list[dict], list[dict], list[dict]]:
@@ -1126,6 +1345,17 @@ def split_catalog(
     news: list[dict] = []
     expired: list[dict] = []
     for row in rows:
+        # Titoli ereditati da run precedenti con il nome del sito in coda
+        # ("Superbonus - Portale Agenzia Entrate"): si ripuliscono qui.
+        row["title"] = re.sub(
+            r"\s+-\s+(portale|sito|regione|comune|ministero|agenzia)\b.*$", "", row.get("title") or "", flags=re.I
+        ).strip() or row.get("title")
+    rows = dedupe_similar(rows)
+    for row in rows:
+        # Titoli che sono solo il nome dell'ente non descrivono un bando: non
+        # entrano né in catalogo né in quarantena (spazzatura di navigazione).
+        if GENERIC_TITLE_RE.search((row.get("title") or "").strip()):
+            continue
         verdict, reason = classify_bonus(row)
         if verdict == "notizia":
             news.append({
@@ -1332,10 +1562,21 @@ def extract_detail_fields(markup: str) -> dict:
     excerpts: dict = {}
 
     for line in lines:
-        if JUNK_RE.search(line) or not RE_DETAIL_DEADLINE.search(line):
+        if JUNK_RE.search(line):
+            continue
+        # Sportello sempre aperto / fino a esaurimento: non è una data, ma è
+        # comunque un termine utile e va conservato come tale.
+        if OPEN_WORDS.search(line) and len(line) <= 200:
+            fields["deadline"] = _clean_sentence(line)
+            excerpts["deadline"] = _clean_sentence(line)
+            break
+        if not RE_DETAIL_DEADLINE.search(line):
             continue
         date = RE_IT_DATE.search(line)
         if not date:
+            continue
+        # "legge 30 dicembre 2025" non è la scadenza del bando.
+        if NORM_DATE_RE.search(line) and not re.search(r"scadenz|termine per", line, re.I):
             continue
         fields["deadline"] = date.group(0)
         excerpts["deadline"] = _clean_sentence(line)
@@ -1354,12 +1595,23 @@ def extract_detail_fields(markup: str) -> dict:
         # una cifra in una frase che parla di contributo vale più di un numero
         # qualsiasi trovato in pagina: a parità di contesto vince la più alta
         weight = 1.0 if AMOUNT_CONTEXT.search(line) else 0.4
+        # Soglie di reddito/patrimonio non sono l'importo del bonus.
+        if THRESHOLD_RE.search(line) and not AMOUNT_HINT_TEXT.search(line):
+            weight *= 0.15
+        # La dotazione del fondo non è il contributo per chi fa domanda.
+        if re.search(r"dotazione|milioni|stanziament|plafond", line, re.I):
+            weight *= 0.2
         for token in AMOUNT_TOKEN.findall(line):
             if not _plausible_amount(token):
                 continue
             score = (_amount_number(token) or 0.0) * weight
             if best is None or score > best[0]:
                 best = (score, token, _clean_sentence(line))
+    if best:
+        quote = best[2]
+        # Meglio nessun importo che una soglia di reddito spacciata per bonus.
+        if THRESHOLD_RE.search(quote) and not AMOUNT_HINT_TEXT.search(quote):
+            best = None
     if best:
         fields["amount"] = _clean_sentence(best[1])
         excerpts["amount"] = best[2]
@@ -1368,9 +1620,11 @@ def extract_detail_fields(markup: str) -> dict:
     for line in lines:
         if JUNK_RE.search(line) or not REQUISITO_SIGNAL.search(line):
             continue
-        if not (25 <= len(line) <= 320):
+        if not (15 <= len(line) <= 320):
             continue
-        if not (HEADING_HINT.search(line) or re.search(r"\b(essere|avere|possono|deve|devono|rivolt|riservat)\b", line, re.I)):
+        verb = re.search(r"\b(essere|avere|possono|deve|devono|rivolt|riservat|spetta|accede|presenta)\b", line, re.I)
+        strong = re.search(r"ISEE|partita iva|resident|età|anni|dipendenti|fatturato|contributi", line, re.I)
+        if not (HEADING_HINT.search(line) or verb or (strong and len(line) >= 30)):
             continue
         key = line.lower()[:60]
         if key in seen:
@@ -1791,6 +2045,14 @@ def main() -> int:
                 "blocca la scrittura su bonuses. Finché il secret non c'è, resta aggiornato solo il JSON."
             )
         ok, detail = supabase_upsert(url, key, rows)
+        if not ok and "gate_status" in detail.lower():
+            # Migrazione del gate non ancora eseguita: si riscrive senza le
+            # colonne di qualità, senza perdere l'aggiornamento del catalogo.
+            print(
+                "::warning::colonne del gate assenti su bonuses: esegui "
+                "supabase_migration_verified_catalog.sql. Riscrivo senza gate."
+            )
+            ok, detail = supabase_upsert(url, key, rows, with_gate=False)
         if not ok and "target" in detail.lower():
             # Colonna `target` non ancora creata su bonuses: meglio perdere
             # l'etichetta di pubblico che perdere l'aggiornamento del catalogo.
