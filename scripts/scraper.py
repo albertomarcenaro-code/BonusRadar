@@ -42,9 +42,10 @@ JSON. Sono previste due configurazioni, in ordine di preferenza:
 
   LLM_BASE_URL + LLM_API_KEY + LLM_MODEL   endpoint qualsiasi compatibile
                                            OpenAI (ha la precedenza)
-  DEEPSEEK_API_KEY                         DeepSeek, modello deepseek-flash
-                                           (a consumo minimo), override con
-                                           LLM_MODEL
+  GEMINI_API_KEY                           Google Gemini, endpoint
+                                           compatibile OpenAI, modello
+                                           gemini-3.5-flash-lite (piano
+                                           gratuito), override con LLM_MODEL
 
 Senza chiavi lo scraper funziona come prima. `LLM_MAX_CALLS` (default 20)
 limita le chiamate per run e `BONUSRADAR_NO_LLM=1` disattiva del tutto il
@@ -1706,11 +1707,12 @@ Per ogni campo valorizzato copia in "citazioni" la frase esatta del testo (max 2
 Rispondi solo con il JSON, senza commenti né blocchi di codice.
 """
 
-# DeepSeek è l'unico provider con preset: endpoint noto, modello noto e costo
-# di frazioni di centesimo per bando. Tutto il resto passa da LLM_BASE_URL,
-# così non resta in codice nessun endpoint o nome di modello non verificato.
-DEEPSEEK_BASE_URL = "https://api.deepseek.com"
-DEEPSEEK_MODEL = "deepseek-flash"
+# Gemini è l'unico provider con preset: Google espone un endpoint compatibile
+# OpenAI (…/v1beta/openai), quindi riusa lo stesso codice degli altri, e
+# gemini-3.5-flash-lite rientra nel piano gratuito. Tutto il resto passa da
+# LLM_BASE_URL, così non resta in codice nessun endpoint non verificato.
+GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai"
+GEMINI_MODEL = "gemini-3.5-flash-lite"
 
 _llm_calls = 0
 _llm_lock = threading.Lock()
@@ -1733,13 +1735,13 @@ def llm_provider() -> dict | None:
             print("  ! LLM_BASE_URL: indica il modello con LLM_MODEL", file=sys.stderr)
             return None
         return {"label": "LLM_BASE_URL", "base_url": base, "model": model, "key": key}
-    deepseek_key = _env("DEEPSEEK_API_KEY")
-    if deepseek_key:
+    gemini_key = _env("GEMINI_API_KEY")
+    if gemini_key:
         return {
-            "label": "DeepSeek",
-            "base_url": DEEPSEEK_BASE_URL,
-            "model": model or DEEPSEEK_MODEL,
-            "key": deepseek_key,
+            "label": "Gemini",
+            "base_url": GEMINI_BASE_URL,
+            "model": model or GEMINI_MODEL,
+            "key": gemini_key,
         }
     return None
 
@@ -1830,9 +1832,9 @@ def _normalize_llm(data: dict) -> dict:
 def _llm_completion(provider: dict, snippet: str) -> str:
     """Testo JSON restituito dal modello.
 
-    Due tolleranze: un retry su 429 (limite di richieste) e un secondo
-    tentativo senza `response_format`, che alcuni endpoint compatibili OpenAI
-    ma non completi rifiutano con 400/422.
+    Due tolleranze: un retry su 429 (limite di richieste, frequente sul piano
+    gratuito) e un secondo tentativo senza `response_format`, che alcuni
+    endpoint compatibili OpenAI ma non completi rifiutano con 400/422.
     """
     url = provider["base_url"].rstrip("/") + "/chat/completions"
     headers = {"Authorization": f"Bearer {provider['key']}"}
