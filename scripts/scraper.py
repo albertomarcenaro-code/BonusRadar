@@ -35,6 +35,20 @@ Uso:
     python3 scripts/scraper.py --json percorso.json
 
 Solo libreria standard (Python 3.10+): nessuna dipendenza esterna.
+
+Estrazione con LLM (opzionale): quando le regex non trovano scadenza, importo
+né requisiti, la pagina di dettaglio viene passata a un LLM che risponde in
+JSON. Sono previste due configurazioni, in ordine di preferenza:
+
+  LLM_BASE_URL + LLM_API_KEY + LLM_MODEL   endpoint qualsiasi compatibile
+                                           OpenAI (ha la precedenza)
+  DEEPSEEK_API_KEY                         DeepSeek, modello deepseek-flash
+                                           (a consumo minimo), override con
+                                           LLM_MODEL
+
+Senza chiavi lo scraper funziona come prima. `LLM_MAX_CALLS` (default 20)
+limita le chiamate per run e `BONUSRADAR_NO_LLM=1` disattiva del tutto il
+fallback.
 """
 
 from __future__ import annotations
@@ -45,6 +59,7 @@ import json
 import os
 import re
 import sys
+import threading
 import time
 import urllib.error
 import urllib.request
@@ -1656,6 +1671,240 @@ def extract_detail_fields(markup: str) -> dict:
     return fields
 
 
+# ---------------------------------------------------------------
+# Fase C: estrazione con LLM quando le regex non bastano
+# ---------------------------------------------------------------
+# Le regex leggono il linguaggio burocratico solo se è già strutturato ("la
+# domanda va presentata entro il …"): quando la pagina dice "le istanze
+# potranno essere inoltrate a partire dal …" o spalma l'importo su tre frasi,
+# l'estrazione resta vuota. In quel caso il testo principale va a un LLM, che
+# restituisce gli stessi campi in JSON insieme alla frase da cui li ha tratti.
+LLM_MAX_CHARS = 14000
+LLM_TIMEOUT = 45
+def _env_int(name: str, default: int) -> int:
+    try:
+        return max(0, int(os.environ.get(name, "") or default))
+    except ValueError:
+        return default
+
+
+LLM_MAX_CALLS = _env_int("LLM_MAX_CALLS", 20)
+
+LLM_PROMPT = """Sei un assistente che estrae dati strutturati da pagine web di bandi italiani.
+Dal testo seguente estrai SOLO queste informazioni, rispondendo in JSON:
+{
+  "importo": "importo massimo erogabile (es. '5.000 euro', 'fino a 30% delle spese')",
+  "scadenza": "data di scadenza in formato gg/mm/aaaa o testo (es. '31/12/2026', 'fondi esauriti')",
+  "requisiti": ["requisito 1", "requisito 2"],  // massimo 5, solo quelli oggettivi
+  "documenti": ["documento 1"],  // documenti richiesti per la domanda
+  "destinatari": ["famiglie", "imprese", "persona fisica"],  // chi può fare domanda
+  "citazioni": {"importo": "frase esatta del testo", "scadenza": "frase esatta", "requisiti": "frase esatta", "documenti": "frase esatta"}
+}
+Se un campo non è presente nel testo rispondi con null o [].
+NON inventare informazioni non presenti nel testo.
+Per ogni campo valorizzato copia in "citazioni" la frase esatta del testo (max 220 caratteri) da cui l'hai ricavato.
+Rispondi solo con il JSON, senza commenti né blocchi di codice.
+"""
+
+# DeepSeek è l'unico provider con preset: endpoint noto, modello noto e costo
+# di frazioni di centesimo per bando. Tutto il resto passa da LLM_BASE_URL,
+# così non resta in codice nessun endpoint o nome di modello non verificato.
+DEEPSEEK_BASE_URL = "https://api.deepseek.com"
+DEEPSEEK_MODEL = "deepseek-flash"
+
+_llm_calls = 0
+_llm_lock = threading.Lock()
+_llm_announced = False
+
+
+def _env(name: str) -> str:
+    return (os.environ.get(name) or "").strip()
+
+
+def llm_provider() -> dict | None:
+    """Provider scelto dalle variabili d'ambiente, o None se non c'è una chiave."""
+    if _env("BONUSRADAR_NO_LLM").lower() in {"1", "true", "yes"}:
+        return None
+    model = _env("LLM_MODEL")
+    base = _env("LLM_BASE_URL").rstrip("/")
+    key = _env("LLM_API_KEY")
+    if base and key:
+        if not model:
+            print("  ! LLM_BASE_URL: indica il modello con LLM_MODEL", file=sys.stderr)
+            return None
+        return {"label": "LLM_BASE_URL", "base_url": base, "model": model, "key": key}
+    deepseek_key = _env("DEEPSEEK_API_KEY")
+    if deepseek_key:
+        return {
+            "label": "DeepSeek",
+            "base_url": DEEPSEEK_BASE_URL,
+            "model": model or DEEPSEEK_MODEL,
+            "key": deepseek_key,
+        }
+    return None
+
+
+def llm_enabled() -> bool:
+    """True se c'è una chiave API e il fallback non è stato disattivato."""
+    return llm_provider() is not None
+
+
+def _http_json(url: str, headers: dict, payload: dict) -> dict:
+    """POST JSON via urllib (nessuna dipendenza esterna) e risposta decodificata."""
+    body = json.dumps(payload).encode("utf-8")
+    req = urllib.request.Request(
+        url, data=body, method="POST", headers={**headers, "Content-Type": "application/json"}
+    )
+    with urllib.request.urlopen(req, timeout=LLM_TIMEOUT) as resp:
+        return json.loads(resp.read().decode("utf-8", errors="replace"))
+
+
+def _parse_llm_json(raw: str) -> dict | None:
+    """JSON del modello, tollerando i fence ```json che a volte aggiunge."""
+    text = re.sub(r"^\s*```(?:json)?|```\s*$", "", (raw or "").strip(), flags=re.I)
+    start, end = text.find("{"), text.rfind("}")
+    if start < 0 or end <= start:
+        return None
+    try:
+        data = json.loads(text[start : end + 1])
+    except ValueError:
+        return None
+    return data if isinstance(data, dict) else None
+
+
+def _llm_text_field(data: dict, key: str, limit: int) -> str:
+    value = data.get(key)
+    if not isinstance(value, str):
+        return ""
+    value = re.sub(r"\s+", " ", value).strip()
+    if value.lower() in {"null", "none", "n/a", "non presente", "non indicato"}:
+        return ""
+    return value[:limit]
+
+
+def _llm_list_field(data: dict, key: str, limit: int, item_chars: int = 240) -> list[str]:
+    value = data.get(key)
+    if isinstance(value, str):
+        value = [value]
+    if not isinstance(value, list):
+        return []
+    out: list[str] = []
+    for item in value:
+        if not isinstance(item, str):
+            continue
+        line = re.sub(r"\s+", " ", item).strip(" .,;:-–—|•")
+        if len(line) < 4:
+            continue
+        out.append(line[:item_chars])
+        if len(out) >= limit:
+            break
+    return out
+
+
+def _normalize_llm(data: dict) -> dict:
+    """Campi LLM ripuliti, con le citazioni che li giustificano."""
+    citations = data.get("citazioni") if isinstance(data.get("citazioni"), dict) else {}
+    excerpts: dict = {}
+    for field, key in (
+        ("deadline", "scadenza"),
+        ("amount", "importo"),
+        ("requirements", "requisiti"),
+        ("documents", "documenti"),
+    ):
+        quote = citations.get(key)
+        if not isinstance(quote, str):
+            continue
+        quote = re.sub(r"\s+", " ", quote).strip()[:EXCERPT_CHARS]
+        if len(quote) >= 8:
+            excerpts[field] = quote
+    return {
+        "deadline": _llm_text_field(data, "scadenza", 120),
+        "amount": _llm_text_field(data, "importo", 120),
+        "requirements": _llm_list_field(data, "requisiti", 5),
+        "documents": _llm_list_field(data, "documenti", 5),
+        "destinatari": _llm_list_field(data, "destinatari", 6, 60),
+        "excerpts": excerpts,
+    }
+
+
+def _llm_completion(provider: dict, snippet: str) -> str:
+    """Testo JSON restituito dal modello.
+
+    Due tolleranze: un retry su 429 (limite di richieste) e un secondo
+    tentativo senza `response_format`, che alcuni endpoint compatibili OpenAI
+    ma non completi rifiutano con 400/422.
+    """
+    url = provider["base_url"].rstrip("/") + "/chat/completions"
+    headers = {"Authorization": f"Bearer {provider['key']}"}
+    payload: dict = {
+        "model": provider["model"],
+        "temperature": 0,
+        "max_tokens": 900,
+        "response_format": {"type": "json_object"},
+        "messages": [
+            {"role": "system", "content": LLM_PROMPT},
+            {"role": "user", "content": snippet},
+        ],
+    }
+    try:
+        data = _http_json(url, headers, payload)
+    except urllib.error.HTTPError as exc:
+        if exc.code == 429:
+            time.sleep(4)  # limite del piano gratuito: un secondo tentativo
+            data = _http_json(url, headers, payload)
+        elif exc.code in {400, 422}:
+            payload.pop("response_format", None)
+            data = _http_json(url, headers, payload)
+        else:
+            raise
+    return data["choices"][0]["message"]["content"]
+
+
+def llm_extract_fields(text: str) -> dict | None:
+    """Chiede all'LLM i campi del bando; None se manca la chiave o la chiamata fallisce.
+
+    Un errore del provider non interrompe la run: si tiene quello che le regex
+    hanno già trovato.
+    """
+    global _llm_calls, _llm_announced
+    if not text:
+        return None
+    provider = llm_provider()
+    if not provider:
+        return None
+    with _llm_lock:
+        if _llm_calls >= LLM_MAX_CALLS:
+            return None
+        _llm_calls += 1
+        announce = not _llm_announced
+        _llm_announced = True
+    if announce:
+        print(f"  · estrazione LLM: {provider['label']} / {provider['model']}", file=sys.stderr)
+    try:
+        raw = _llm_completion(provider, text[:LLM_MAX_CHARS])
+    except (urllib.error.URLError, TimeoutError, OSError, ValueError, KeyError, IndexError) as exc:
+        print(f"  ! estrazione LLM non riuscita ({provider['label']}): {exc}", file=sys.stderr)
+        return None
+    parsed = _parse_llm_json(raw if isinstance(raw, str) else "")
+    return _normalize_llm(parsed) if parsed else None
+
+
+TARGET_DESTINATARI = (
+    (re.compile(r"impres|aziend|pmi|ditta|artigian|professionist|partita iva|startup", re.I), "impresa"),
+    (re.compile(r"famigli|persona|person[ae] fisic|cittadin|privato|nucleo|studente|pensionat", re.I), "persona"),
+)
+
+
+def target_from_destinatari(destinatari: list[str]) -> list[str]:
+    """Target del catalogo (`persona`/`impresa`) dedotto dai destinatari dell'LLM."""
+    found: list[str] = []
+    for value in destinatari:
+        for pattern, label in TARGET_DESTINATARI:
+            if pattern.search(value) and label not in found:
+                found.append(label)
+    return found
+
+
 def enrich_from_detail(bonus: dict) -> dict:
     """Completa la scheda leggendo la pagina del bando.
 
@@ -1691,11 +1940,47 @@ def enrich_from_detail(bonus: dict) -> dict:
         detail["requirements"] = list(bonus.get("requirements") or []) + extra_req[:4]
     if fields["documents"]:
         detail["required_documents"] = list(bonus.get("required_documents") or []) + fields["documents"][:4]
+    excerpts = dict(fields["excerpts"])
+
+    # Regex a secco: il linguaggio burocratico non offre appigli. Se manca
+    # almeno uno tra scadenza, importo e requisiti si prova con l'LLM, che
+    # restituisce gli stessi campi con la frase da cui li ha tratti.
+    need_llm = (
+        not (detail.get("deadline") or (bonus.get("deadline") or "").strip())
+        or not (detail.get("amount") or (bonus.get("amount") or "").strip())
+        or not (detail.get("requirements") or bonus.get("requirements"))
+    )
+    llm = llm_extract_fields(text) if need_llm else None
+    if llm:
+        if llm["deadline"] and not detail.get("deadline") and not (bonus.get("deadline") or "").strip():
+            detail["deadline"] = llm["deadline"]
+            if llm["excerpts"].get("deadline"):
+                excerpts["deadline"] = llm["excerpts"]["deadline"]
+        if llm["amount"] and not detail.get("amount") and not (bonus.get("amount") or "").strip():
+            detail["amount"] = llm["amount"]
+            if llm["excerpts"].get("amount"):
+                excerpts["amount"] = llm["excerpts"]["amount"]
+        if llm["requirements"] and not detail.get("requirements") and not bonus.get("requirements"):
+            detail["requirements"] = llm["requirements"]
+            if llm["excerpts"].get("requirements"):
+                excerpts["requirements"] = llm["excerpts"]["requirements"]
+        if llm["documents"] and not detail.get("required_documents"):
+            detail["required_documents"] = llm["documents"]
+            if llm["excerpts"].get("documents"):
+                excerpts["documents"] = llm["excerpts"]["documents"]
+
     # Il testo del dettaglio è il segnale migliore per il destinatario.
     fallback = tuple(bonus.get("target") or ()) or ("persona", "impresa")
     detail["target"] = deduce_target(f"{bonus.get('title','')} {text[:4000]}", fallback)
+    # Se il lessico non dice nulla (target = quello della fonte) i destinatari
+    # letti dall'LLM sono un'informazione in più, non un'alternativa.
+    if llm and detail["target"] == list(fallback):
+        guessed = target_from_destinatari(llm["destinatari"])
+        if guessed:
+            detail["target"] = guessed
     detail["detail_fetched_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    detail["source_excerpts"] = fields["excerpts"]
+    if excerpts:
+        detail["source_excerpts"] = excerpts
     return {**bonus, **detail}
 
 
