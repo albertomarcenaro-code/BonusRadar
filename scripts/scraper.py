@@ -329,6 +329,8 @@ SOURCES: list[dict] = [
         "name": "INPS — Prestazioni e sussidi",
         "authority": "INPS",
         "mode": "direct",
+        # URL ufficiali verificati a mano: per il gate contano come prova.
+        "trusted": True,
         "list_url": "https://www.inps.it/",
         "base_url": "https://www.inps.it/",
         "direct_urls": [
@@ -342,6 +344,7 @@ SOURCES: list[dict] = [
         "name": "Agenzia delle Entrate — Agevolazioni casa",
         "authority": "Agenzia delle Entrate",
         "mode": "direct",
+        "trusted": True,
         "list_url": "https://www.agenziaentrate.gov.it/portale/aree-tematiche/casa",
         "base_url": "https://www.agenziaentrate.gov.it/",
         "direct_urls": [
@@ -773,6 +776,8 @@ def build_bonus(source: dict, url: str, raw_title: str, extra_text: str = "") ->
         "eligibility": "unknown",
         "eligibility_reason": "",
         "is_new": True,
+        # Fonte con URL diretti verificati: il gate è più permissivo.
+        "trusted": bool(source.get("trusted")),
     }
 
 
@@ -1069,6 +1074,8 @@ def supabase_sources(url: str, key: str) -> list[dict] | None:
                 "target": tuple(row["target"]) if row.get("target") else None,
                 "mode": row.get("mode") or "list",
                 "direct_urls": list(row.get("direct_urls") or []),
+                # Le fonti con URL diretti sono quelle verificate a mano.
+                "trusted": bool(row.get("direct_urls")),
             }
         )
     return sources or None
@@ -1290,6 +1297,13 @@ def classify_bonus(bonus: dict) -> tuple[str, str]:
     if GATE_ATTO_RE.search(title):
         return "notizia", f"atto amministrativo/gara («{GATE_ATTO_RE.search(title).group(0)}»)"
     evidence: list[str] = []
+    # Fonti con URL ufficiali verificati a mano (modalità "direct"): la pagina
+    # stessa è la prova che il bando esiste, quindi l'URL conta come evidenza e
+    # basta una sola evidenza di campo. Così non finisce in quarantena un bando
+    # vero la cui pagina di dettaglio non è tutta parsabile con le regex.
+    trusted = bool(bonus.get("trusted"))
+    if trusted:
+        evidence.append("url_ufficiale")
     if (bonus.get("deadline") or "").strip():
         evidence.append("scadenza")
     if (bonus.get("amount") or "").strip():
@@ -1298,7 +1312,7 @@ def classify_bonus(bonus: dict) -> tuple[str, str]:
         evidence.append("requisiti")
     if bonus.get("required_documents"):
         evidence.append("documenti")
-    if len(evidence) >= 2:
+    if len(evidence) >= (1 if trusted else 2):
         return "bando", "evidenze: " + ", ".join(evidence)
     if GATE_BANDO_RE.search(low):
         return "quarantena", (
@@ -1373,6 +1387,8 @@ def split_catalog(
         if GENERIC_TITLE_RE.search((row.get("title") or "").strip()):
             continue
         verdict, reason = classify_bonus(row)
+        # `trusted` serve solo al gate: non è un campo del catalogo pubblico.
+        row.pop("trusted", None)
         if verdict == "notizia":
             news.append({
                 "title": row.get("title", ""),
