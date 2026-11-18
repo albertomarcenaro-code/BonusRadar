@@ -12,11 +12,12 @@
  * riutilizzabile sia lato client che in eventuali job futuri.
  *
  * Criteri coperti:
- *   ISEE · residenza (comune o regione) · età del richiedente · età dei figli
+ *   destinatari (persona / impresa / artigiano / professionista) · ISEE ·
+ *   residenza (comune o regione) · età del richiedente · età dei figli
  *   (asilo nido 0–3 anni, figli minorenni) · numero di figli / nucleo ·
  *   condizione lavorativa · disabilità · termine di scadenza.
  */
-import type { Bonus, FamilyMember, Profile } from "@/lib/types";
+import type { Bonus, BonusTarget, FamilyMember, Profile } from "@/lib/types";
 
 export type MatchStatus = "eligible" | "maybe" | "not_eligible" | "unknown";
 
@@ -80,6 +81,73 @@ function ageLabel(birth: Date, ref: Date = new Date()): string {
 }
 
 const num = (v: number) => v.toLocaleString("it-IT");
+
+// ---------------------------------------------------------------
+// Destinatari (persona / impresa / artigiano / professionista)
+// ---------------------------------------------------------------
+/** Valori canonici; il catalogo più vecchio può contenere i plurali. */
+const TARGET_ALIASES: Record<string, BonusTarget> = {
+  persona: "persona",
+  persone: "persona",
+  privato: "persona",
+  privati: "persona",
+  impresa: "impresa",
+  imprese: "impresa",
+  azienda: "impresa",
+  aziende: "impresa",
+  artigiano: "artigiano",
+  artigiani: "artigiano",
+  professionista: "professionista",
+  professionisti: "professionista",
+};
+
+/** Target canonico di un valore del catalogo o del profilo, se riconosciuto. */
+export function normalizeTarget(value?: string | null): BonusTarget | null {
+  if (!value) return null;
+  return TARGET_ALIASES[value.trim().toLowerCase()] ?? null;
+}
+
+const TARGET_LABEL: Record<BonusTarget, string> = {
+  persona: "privati",
+  impresa: "imprese",
+  artigiano: "artigiani",
+  professionista: "professionisti",
+};
+
+/**
+ * Pubblici compatibili con quello del profilo: artigiani e professionisti hanno
+ * partita IVA e possono accedere anche ai bandi per imprese; un privato no.
+ */
+const TARGET_COMPATIBILI: Record<BonusTarget, BonusTarget[]> = {
+  persona: ["persona"],
+  impresa: ["impresa", "artigiano", "professionista"],
+  artigiano: ["artigiano", "impresa"],
+  professionista: ["professionista", "impresa"],
+};
+
+/**
+ * Primo controllo: il bando è rivolto al pubblico con cui si partecipa?
+ * Evita che un privato veda come "da verificare" un bando per imprese.
+ */
+function checkTarget(profile: Profile | null, bonus: Bonus): MatchCheck | null {
+  const targets = (bonus.target ?? [])
+    .map((t) => normalizeTarget(t))
+    .filter((t): t is BonusTarget => t !== null);
+  if (targets.length === 0) return null;
+
+  // Profilo senza `type`: vale privato, il caso più comune.
+  const mine = normalizeTarget(profile?.type) ?? "persona";
+  if (TARGET_COMPATIBILI[mine].some((t) => targets.includes(t))) return null;
+
+  const who = targets.map((t) => TARGET_LABEL[t]).join(" e ");
+  return {
+    label:
+      mine === "persona"
+        ? `Bando non destinato a privati: è riservato a ${who}`
+        : `Bando riservato a ${who}`,
+    state: "fail",
+  };
+}
 
 // ---------------------------------------------------------------
 // Requisito ISEE
@@ -546,6 +614,7 @@ const SCORE_WEIGHT = { ok: 100, warn: 50, fail: 0 } as const;
  */
 export function calculateBonusMatch(profile: Profile | null, bonus: Bonus): MatchResult {
   const checks = [
+    checkTarget(profile, bonus),
     checkIsee(profile, bonus),
     checkTerritorio(profile, bonus),
     checkEtaRichiedente(profile, bonus),

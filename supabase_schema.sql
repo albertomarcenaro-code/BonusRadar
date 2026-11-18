@@ -49,6 +49,7 @@ create table if not exists public.profiles (
   email text not null default '',
   iban text not null default '',
   employment_status text not null default '',
+  type text not null default 'persona',
   annual_income numeric,
   isee_value numeric,
   housing text not null default '',

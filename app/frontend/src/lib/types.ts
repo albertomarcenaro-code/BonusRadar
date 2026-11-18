@@ -25,6 +25,11 @@ export interface ProfileIn {
   email: string;
   iban: string;
   employment_status: string;
+  /**
+   * Pubblico con cui si partecipa ai bandi: `persona` (privato), `impresa`,
+   * `artigiano`, `professionista`. Assente = privato.
+   */
+  type?: BonusTarget;
   annual_income: number | null;
   isee_value: number | null;
   housing: string;
@@ -60,6 +65,13 @@ export interface ScanStatus {
 
 export type Eligibility = "eligible" | "maybe" | "not_eligible" | "unknown";
 
+/**
+ * Pubblico a cui è destinato un bando, o con cui l'utente partecipa.
+ * In catalogo i valori storici al plurale (`artigiani`, `professionisti`) sono
+ * accettati e normalizzati dal matching.
+ */
+export type BonusTarget = "persona" | "impresa" | "artigiano" | "professionista";
+
 export interface Bonus {
   id: string;
   title: string;
@@ -73,10 +85,10 @@ export interface Bonus {
   source_url: string;
   source_name: string;
   /**
-   * A chi si rivolge il bando, ereditato dalla fonte: `persona`, `impresa`,
-   * `artigiani`, `professionisti`. Assente = vale per entrambi i pubblici.
+   * A chi si rivolge il bando, dedotto dal testo e dalla fonte: `persona`,
+   * `impresa`, `artigiano`, `professionista`. Assente = vale per tutti.
    */
-  target?: string[];
+  target?: BonusTarget[];
   /**
    * Stato del bando dedotto dalla scadenza: `open`, `closed` (escluso dal
    * catalogo) o `unknown` quando la fonte non indica un termine.

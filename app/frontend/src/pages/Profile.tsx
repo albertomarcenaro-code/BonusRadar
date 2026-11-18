@@ -35,7 +35,7 @@ import {
   useUploadAttachment,
 } from "@/lib/queries";
 import { CATEGORY_LABEL, DOC_STATUS_LABEL, EMPLOYMENT_LABEL, fmtDate, fmtDateTime } from "@/lib/format";
-import type { FamilyMember, Profile, ProfileIn } from "@/lib/types";
+import type { BonusTarget, FamilyMember, Profile, ProfileIn } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 const EMPTY: ProfileIn = {
@@ -53,6 +53,7 @@ const EMPTY: ProfileIn = {
   email: "",
   iban: "",
   employment_status: "",
+  type: "persona",
   annual_income: null,
   isee_value: null,
   housing: "",
@@ -94,6 +95,12 @@ function ageText(months: number | null): string {
 const RELATIONS: Record<string, string> = { coniuge: "Coniuge / partner", figlio: "Figlio/a", genitore: "Genitore", altro: "Altro" };
 const HOUSING: Record<string, string> = { proprietario: "Proprietario", affitto: "In affitto", comodato: "Comodato / ospite", altro: "Altro" };
 const INTERESTS = ["casa", "famiglia", "lavoro", "mobilita", "studio", "salute", "energia"];
+const TARGET_OPTIONS: { value: BonusTarget; label: string }[] = [
+  { value: "persona", label: "Privato / famiglia" },
+  { value: "impresa", label: "Impresa" },
+  { value: "artigiano", label: "Artigiano" },
+  { value: "professionista", label: "Libero professionista" },
+];
 
 const SECTIONS = [
   { id: 0, label: "Anagrafica & Residenza", icon: UserRound },
@@ -314,6 +321,25 @@ function ProfileForm({ initial }: { initial: Profile | null }) {
       {section === 2 && (
         <section className="panel rounded-2xl p-5 sm:p-8" data-testid="profile-section-economia">
           <h2 className="mb-6 text-xl font-bold">3 · Parametri Economici (ISEE e Lavoro)</h2>
+          <div className="mb-4 flex flex-col gap-1.5">
+            <Label className="text-xs font-semibold uppercase tracking-wider text-muted">Soggetto richiedente</Label>
+            <Select value={form.type ?? "persona"} onValueChange={(v: string) => set("type", v as BonusTarget)}>
+              <SelectTrigger className="h-11 w-full sm:w-72" data-testid="select-profile-type">
+                <SelectValue placeholder="Seleziona…" />
+              </SelectTrigger>
+              <SelectContent>
+                {TARGET_OPTIONS.map((o) => (
+                  <SelectItem key={o.value} value={o.value} data-testid={`profile-type-option-${o.value}`}>
+                    {o.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <p className="text-xs text-muted">
+              Il matching scarta i bandi riservati a un altro pubblico. Imprese, artigiani e professionisti vedono anche
+              gli avvisi per le attività economiche.
+            </p>
+          </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {field("isee_value", "Valore ISEE (€)", {
               type: "number",

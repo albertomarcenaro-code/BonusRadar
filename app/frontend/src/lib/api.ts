@@ -117,11 +117,15 @@ export async function saveProfile(p: ProfileIn): Promise<Profile> {
   if (!isSupabaseConfigured) return demoStore.saveProfile(p);
   const user = await currentUser();
   if (!user) throw new DataError("Accedi per salvare il profilo");
-  const { data, error } = await requireSupabase()
-    .from("profiles")
-    .upsert({ ...p, id: user.id, email: p.email || user.email, updated_at: new Date().toISOString() })
-    .select()
-    .single();
+  const supabase = requireSupabase();
+  const row = { ...p, id: user.id, email: p.email || user.email, updated_at: new Date().toISOString() };
+  let { data, error } = await supabase.from("profiles").upsert(row).select().single();
+  // Colonna `type` non ancora creata (migrazione non eseguita): si salva il
+  // resto del profilo invece di perdere la modifica.
+  if (error && /could not find the ['"]type['"] column|schema cache/i.test(error.message)) {
+    const { type: _type, ...rest } = row;
+    ({ data, error } = await supabase.from("profiles").upsert(rest).select().single());
+  }
   dbx(error);
   return data as Profile;
 }

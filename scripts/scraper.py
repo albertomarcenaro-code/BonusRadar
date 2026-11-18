@@ -468,6 +468,33 @@ TARGET_PERSONE_RE = re.compile(
     re.I,
 )
 
+# Valori canonici del target: codice, tabella `catalog_sources` e cataloghi
+# più vecchi convivono con i plurali ("artigiani" → "artigiano").
+TARGET_CANON = {
+    "persona": "persona",
+    "persone": "persona",
+    "privato": "persona",
+    "privati": "persona",
+    "impresa": "impresa",
+    "imprese": "impresa",
+    "azienda": "impresa",
+    "aziende": "impresa",
+    "artigiano": "artigiano",
+    "artigiani": "artigiano",
+    "professionista": "professionista",
+    "professionisti": "professionista",
+}
+
+
+def canonical_target(values: tuple[str, ...] | list[str] | None) -> list[str]:
+    """Target in forma canonica: persona, impresa, artigiano, professionista."""
+    out: list[str] = []
+    for value in values or ():
+        key = TARGET_CANON.get(str(value).strip().lower())
+        if key and key not in out:
+            out.append(key)
+    return out
+
 
 def deduce_target(text: str, fallback: tuple[str, ...] | list[str]) -> list[str]:
     """Target del singolo bando dal suo testo, con la fonte come fallback.
@@ -487,13 +514,13 @@ def deduce_target(text: str, fallback: tuple[str, ...] | list[str]) -> list[str]
     if TARGET_IMPRESE_RE.search(low):
         target.append("impresa")
         if re.search(r"artigian", low):
-            target.append("artigiani")
+            target.append("artigiano")
         if re.search(r"professionist|libere professioni", low):
-            target.append("professionisti")
+            target.append("professionista")
     if TARGET_PERSONE_RE.search(low):
         target.append("persona")
     if not target:
-        return list(fallback)
+        return canonical_target(fallback) or ["persona", "impresa"]
     return list(dict.fromkeys(target))
 
 
@@ -2114,7 +2141,8 @@ def retag_catalog(path: Path, sources: list[dict]) -> int:
         print("⚠︎ nessun catalogo da rietichettare")
         return 1
     defaults = {
-        s["name"]: list(s.get("target") or ("persona", "impresa")) for s in sources
+        s["name"]: canonical_target(s.get("target") or ("persona", "impresa"))
+        for s in sources
     }
     changed = 0
     rows = data.get("bonuses", [])
@@ -2167,7 +2195,8 @@ def merge_with_existing(
         tutto il catalogo, non solo sulle schede dell'ultima run."""
         if row.get("target"):
             return row
-        return {**row, "target": targets.get(row.get("source_name", ""), ["persona", "impresa"])}
+        fallback = targets.get(row.get("source_name", "")) or ("persona", "impresa")
+        return {**row, "target": canonical_target(fallback) or ["persona", "impresa"]}
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     rows = [{**r, "miss_streak": 0, "last_seen_at": now} for r in rows]
     try:

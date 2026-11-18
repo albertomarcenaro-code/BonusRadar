@@ -6,12 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import PageHeader from "@/components/PageHeader";
 import { MatchBadge, MatchChecks, MatchFallbackCta } from "@/components/match";
-import { calculateBonusMatch } from "@/lib/matching";
+import { calculateBonusMatch, normalizeTarget } from "@/lib/matching";
 import type { MatchStatus } from "@/lib/matching";
 import { searchLocalBonuses } from "@/lib/webSearch";
 import { useBonuses, useDashboard, useDiscarded, useDocuments, useFavorites, useGenerateDocs, useProfile, useScanStatus, useScraperCatalog, useToggleDiscarded, useToggleFavorite, useWebSearch } from "@/lib/queries";
 import { CATEGORY_LABEL, fmtDateTime } from "@/lib/format";
-import type { Bonus, Profile as UserProfile } from "@/lib/types";
+import type { Bonus, BonusTarget, Profile as UserProfile } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 /** Filtri di idoneità basati sul matching con il profilo dell'utente. */
@@ -23,13 +23,14 @@ const FILTERS: { key: "all" | MatchStatus; label: string }[] = [
 ];
 
 /** Destinatario del bando: il target arriva dalla fonte che lo ha pubblicato. */
-type Audience = "tutti" | "persona" | "impresa" | "professionisti";
+type Audience = "tutti" | BonusTarget;
 
 const AUDIENCES: { key: Audience; label: string }[] = [
   { key: "tutti", label: "Tutti i destinatari" },
   { key: "persona", label: "Persone fisiche" },
-  { key: "impresa", label: "Imprese e artigiani" },
-  { key: "professionisti", label: "Professionisti" },
+  { key: "impresa", label: "Imprese" },
+  { key: "artigiano", label: "Artigiani" },
+  { key: "professionista", label: "Professionisti" },
 ];
 
 /**
@@ -38,8 +39,9 @@ const AUDIENCES: { key: Audience; label: string }[] = [
  */
 function matchesAudience(bonus: Bonus, audience: Audience): boolean {
   if (audience === "tutti") return true;
-  const target = bonus.target ?? ["persona", "impresa"];
-  if (audience === "impresa") return target.includes("impresa") || target.includes("artigiani");
+  const target = (bonus.target ?? ["persona", "impresa"])
+    .map((t) => normalizeTarget(t))
+    .filter((t): t is BonusTarget => t !== null);
   return target.includes(audience);
 }
 
