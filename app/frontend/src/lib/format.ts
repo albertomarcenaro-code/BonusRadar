@@ -37,6 +37,7 @@ export const DOC_STATUS_LABEL: Record<DocStatus, string> = {
 export const CATEGORY_LABEL: Record<string, string> = {
   casa: "Casa & Edilizia",
   famiglia: "Famiglia & Figli",
+  impresa: "Imprese & Startup",
   lavoro: "Lavoro & Impresa",
   mobilita: "Mobilità",
   studio: "Studio & Cultura",

@@ -56,6 +56,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import http.client
 import json
 import os
 import re
@@ -116,6 +117,10 @@ DEFAULT_JSON_PATH = os.environ.get(
 # `residency` (opzionale): requisito di residenza da aggiungere alle schede
 # estratte dalla fonte (Comune di Genova → residenza comunale, Regione
 # Liguria → residenza regionale).
+# `min_evidence` (opzionale): numero minimo di evidenze di campo (scadenza,
+# importo, requisiti, documenti) richieste dal gate. Default 2; le fonti
+# istituzionali che pubblicano pagine semplificate possono scendere a 1 senza
+# perdere affidabilità, perché l'ente è la fonte stessa dell'avviso.
 SOURCES: list[dict] = [
     {
         "name": "incentivi.gov.it",
@@ -150,6 +155,8 @@ SOURCES: list[dict] = [
         "list_url": "https://www.comune.genova.it/novita/avvisi",
         "base_url": "https://www.comune.genova.it/",
         "residency": "Residenza nel Comune di Genova",
+        # Fonte istituzionale: le pagine avviso hanno spesso solo la scadenza.
+        "min_evidence": 1,
         "topics": (
             # contributi casa/affitto
             "affitto", "casa", "abitaz", "alloggi", "ristrutturaz", "ediliz",
@@ -170,6 +177,7 @@ SOURCES: list[dict] = [
         "list_url": "https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetitions.html",
         "base_url": "https://www.regione.liguria.it/",
         "residency": "Residenza in Liguria",
+        "min_evidence": 1,
         "topics": (
             # efficientamento energetico
             "energet", "efficientament", "fotovoltaic", "caldaia", "isolament",
@@ -231,6 +239,8 @@ SOURCES: list[dict] = [
         # la variante minuscola senza estensione risponde 404) invece della home.
         "list_url": "https://www.lavoro.gov.it/strumenti-e-servizi/Pagine/default.aspx",
         "base_url": "https://www.lavoro.gov.it/",
+        # Ministero: schede sintetiche, spesso con la sola scadenza o il solo importo.
+        "min_evidence": 1,
         "target": ("persona", "impresa"),
     },
     {
@@ -238,6 +248,7 @@ SOURCES: list[dict] = [
         "authority": "Ministero del Lavoro e delle Politiche Sociali",
         "list_url": "https://www.cliclavoro.gov.it/",
         "base_url": "https://www.cliclavoro.gov.it/",
+        "min_evidence": 1,
         "target": ("persona", "impresa"),
     },
     {
@@ -245,6 +256,7 @@ SOURCES: list[dict] = [
         "authority": "INAIL",
         "list_url": "https://www.inail.it/cs/news",
         "base_url": "https://www.inail.it/",
+        "min_evidence": 1,
         "target": ("impresa", "persona"),
     },
     # ---------------- Fonti regionali aggiuntive ----------------
@@ -254,6 +266,7 @@ SOURCES: list[dict] = [
         "list_url": "https://www.regione.toscana.it/",
         "base_url": "https://www.regione.toscana.it/",
         "residency": "Residenza in Toscana",
+        "min_evidence": 1,
         "target": ("persona", "impresa"),
     },
     {
@@ -262,6 +275,7 @@ SOURCES: list[dict] = [
         "list_url": "https://www.regione.veneto.it/",
         "base_url": "https://www.regione.veneto.it/",
         "residency": "Residenza nel Veneto",
+        "min_evidence": 1,
         "target": ("persona", "impresa"),
     },
     # ---------------- Imprese, artigiani e professionisti ----------------
@@ -338,6 +352,80 @@ SOURCES: list[dict] = [
         "exclude": ("cerca bandi", "parola chiave"),
         "target": ("impresa", "artigiani"),
     },
+    # ---------------- Nuove fonti nazionali per privati e famiglie ----------------
+    # Aggiunte il 18/11/2026: il catalogo era troppo sbilanciato sulle imprese e
+    # molti bandi per persona fisica restavano fuori. `trusted` è False: la
+    # pagina di elenco non è una prova, quindi servono due evidenze di campo.
+    {
+        "name": "INPS — Bonus e agevolazioni famiglie",
+        "authority": "INPS",
+        # Sezione "sostegni e sussidi" per genitori: assegno unico, bonus nido,
+        # congedo, bonus mamme. La pagina per disabili è letta in aggiunta
+        # (EXTRA_LIST_URLS): è la stessa sezione, altro pubblico.
+        "list_url": "https://www.inps.it/it/it/sostegni-sussidi-indennita/per-genitori.html",
+        "base_url": "https://www.inps.it/",
+        "residency": "nazionale",
+        "trusted": False,
+        "target": ("persona",),
+    },
+    {
+        "name": "Ministero del Lavoro — Bonus occupazione",
+        "authority": "Ministero del Lavoro e delle Politiche Sociali",
+        # Focus sugli incentivi all'occupazione: elenca le misure (NEET, under
+        # 36, donne, decontribuzione Sud) con i link alle schede.
+        "list_url": "https://www.lavoro.gov.it/temi-e-priorita/occupazione/focus/pagine/incentivi-alloccupazione",
+        "base_url": "https://www.lavoro.gov.it/",
+        "residency": "nazionale",
+        "trusted": False,
+        "target": ("persona",),
+    },
+    {
+        "name": "incentivi.gov.it — Privati cittadini",
+        "authority": "Presidenza del Consiglio dei Ministri",
+        # Catalogo filtrato sul tipo soggetto "Cittadino" invece della home
+        # (già letta dalla fonte "incentivi.gov.it"): così si vedono le misure
+        # per le famiglie senza il rumore degli incentivi alle imprese.
+        # Nota: dal 18/11/2026 il dominio non risponde dalla rete della CI.
+        "list_url": "https://www.incentivi.gov.it/it/catalogo?tipo_soggetto=cittadino",
+        "base_url": "https://www.incentivi.gov.it/",
+        "residency": "nazionale",
+        "trusted": False,
+        "target": ("persona",),
+    },
+    {
+        "name": "Regione Toscana — Contributi famiglie",
+        "authority": "Regione Toscana",
+        # Seconda voce della Toscana (l'altra punta alla home): qui la sezione
+        # famiglia/minori, con i contributi sociali e i bandi per i nuclei.
+        "list_url": "https://www.regione.toscana.it/famiglia-e-minori",
+        "base_url": "https://www.regione.toscana.it/",
+        "residency": "Residenza in Toscana",
+        "trusted": False,
+        "topics": (
+            "contribut", "bonus", "assegno", "voucher", "famigl", "minori",
+            "nido", "maternit", "sociale", "disabilit", "bando", "avviso",
+        ),
+        "target": ("persona",),
+    },
+    {
+        "name": "Comune di Milano — Agevolazioni",
+        "authority": "Comune di Milano",
+        # Grande comune come proxy dei bandi comunali per persona fisica:
+        # contributi welfare, sostegno al reddito, titoli sociali.
+        # Il sito risponde 403 al primo UA: il retry con UA browser lo apre.
+        "list_url": "https://www.comune.milano.it/argomenti/welfare",
+        "base_url": "https://www.comune.milano.it/",
+        "residency": "Residenza nel Comune di Milano",
+        "trusted": False,
+        "topics": (
+            "contribut", "bonus", "assegno", "voucher", "agevolaz", "sostegno",
+            "famigl", "disabilit", "reddito", "bando", "avviso", "maternit",
+        ),
+        # Il menu della pagina produce voci che sembrano bandi.
+        "exclude": ("collegamenti", "convenzioni caf", "indice della pagina", "vai agli approfondimenti"),
+        "target": ("persona",),
+    },
+
     # ---------------- Bandi "evergreen" (modalità direct) ----------------
     # Non compaiono mai in una pagina di avvisi: esistono come pagina ufficiale
     # permanente. Si leggono direttamente, senza elenco da scansionare.
@@ -357,6 +445,19 @@ SOURCES: list[dict] = [
         "target": ("persona",),
     },
     {
+        "name": "INPS — Bonus mamme",
+        "authority": "INPS",
+        "mode": "direct",
+        # Pagina ufficiale permanente, verificata a mano il 18/11/2026.
+        "trusted": True,
+        "list_url": "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.nuovo-bonus-mamme.html",
+        "base_url": "https://www.inps.it/",
+        "direct_urls": [
+            "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.nuovo-bonus-mamme.html",
+        ],
+        "target": ("persona",),
+    },
+    {
         "name": "Agenzia delle Entrate — Agevolazioni casa",
         "authority": "Agenzia delle Entrate",
         "mode": "direct",
@@ -369,6 +470,89 @@ SOURCES: list[dict] = [
         ],
         "target": ("persona", "impresa"),
     },
+    # ---------------- Schede "evergreen" per privati (verificate 18/11/2026) ----------------
+    # Pagine ufficiali permanenti, una per misura: in modalità direct l'URL è la
+    # prova che il bando esiste, quindi il gate accetta con la sola scheda.
+    {
+        "name": "INPS — Bonus bebè",
+        "authority": "INPS",
+        "mode": "direct",
+        "trusted": True,
+        "list_url": "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.bonus-nuovi-nati.html",
+        "base_url": "https://www.inps.it/",
+        "residency": "nazionale",
+        "direct_urls": [
+            "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.bonus-nuovi-nati.html",
+        ],
+        "target": ("persona",),
+    },
+    {
+        "name": "INPS — Bonus psicologo",
+        "authority": "INPS",
+        "mode": "direct",
+        "trusted": True,
+        # Scheda permanente: il testo riporta la finestra dell'ultima annualità
+        # (15/09–14/11/2025), che non è la scadenza del bando ma il periodo in
+        # cui si è presentata la domanda quell'anno. Senza questo flag la scheda
+        # verrebbe pubblicata come "scaduta".
+        "ignore_deadline": True,
+        "list_url": "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.contributo-per-sostenere-le-spese-relative-a-sessioni-di-psicoterapia-bonus-psicologo.html",
+        "base_url": "https://www.inps.it/",
+        "residency": "nazionale",
+        "direct_urls": [
+            "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.contributo-per-sostenere-le-spese-relative-a-sessioni-di-psicoterapia-bonus-psicologo.html",
+        ],
+        "target": ("persona",),
+    },
+    {
+        "name": "INPS — Contributo caregivers",
+        "authority": "INPS",
+        "mode": "direct",
+        "trusted": True,
+        # Scheda del programma Home Care Premium: il contributo INPS per
+        # l'assistenza domiciliare a persone non autosufficienti (caregiver).
+        "list_url": "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.hcp-assistenza-domiciliare-per-persone-non-autosufficienti-home-care-premium--50014.hcp-assistenza-domiciliare-per-persone-non-autosufficienti-home-care-premium-domanda-e-gestione-benefici.html",
+        "base_url": "https://www.inps.it/",
+        "residency": "nazionale",
+        "direct_urls": [
+            "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.hcp-assistenza-domiciliare-per-persone-non-autosufficienti-home-care-premium--50014.hcp-assistenza-domiciliare-per-persone-non-autosufficienti-home-care-premium-domanda-e-gestione-benefici.html",
+        ],
+        "target": ("persona",),
+    },
+    {
+        "name": "Agenzia delle Entrate — Bonus affitto giovani",
+        "authority": "Agenzia delle Entrate",
+        "mode": "direct",
+        "trusted": True,
+        # Il portale AE non espone più una scheda dedicata alla detrazione dei
+        # canoni per gli under 31 (tutti gli slug /portale/la-detrazione-per-…
+        # rispondono 404): si legge la pagina ufficiale dell'Agenzia che
+        # documenta la detrazione nella dichiarazione precompilata.
+        "list_url": "https://infoprecompilata.agenziaentrate.gov.it/portale/w/faq-sono-inquilino-in-un-contratto-di-locazione-di-un-immobile-adibito-ad-abitazione-principale-ho-diritto-alla-detrazione-cosa-trovero-nella-mia-dich",
+        "base_url": "https://infoprecompilata.agenziaentrate.gov.it/",
+        "residency": "nazionale",
+        "direct_urls": [
+            "https://infoprecompilata.agenziaentrate.gov.it/portale/w/faq-sono-inquilino-in-un-contratto-di-locazione-di-un-immobile-adibito-ad-abitazione-principale-ho-diritto-alla-detrazione-cosa-trovero-nella-mia-dich",
+        ],
+        "title": "Detrazione canoni di locazione (bonus affitto giovani under 31)",
+        "target": ("persona",),
+    },
+    {
+        "name": "Agenzia delle Entrate — Detrazioni figli",
+        "authority": "Agenzia delle Entrate",
+        "mode": "direct",
+        "trusted": True,
+        # Pagina ufficiale sulla dichiarazione precompilata per i familiari a
+        # carico: detrazioni per figli (21-30 anni e figli con disabilità).
+        "list_url": "https://infoprecompilata.agenziaentrate.gov.it/portale/familiari",
+        "base_url": "https://infoprecompilata.agenziaentrate.gov.it/",
+        "residency": "nazionale",
+        "direct_urls": [
+            "https://infoprecompilata.agenziaentrate.gov.it/portale/familiari",
+        ],
+        "title": "Detrazioni per figli e familiari a carico",
+        "target": ("persona",),
+    },
 ]
 
 # Pagine indice aggiuntive per fonte, oltre a `list_url`: sono le pagine di
@@ -380,6 +564,16 @@ SOURCES: list[dict] = [
 EXTRA_LIST_URLS: dict[str, tuple[str, ...]] = {
     "INPS": ("https://www.inps.it/",),
     "Agenzia delle Entrate": ("https://www.agenziaentrate.gov.it/",),
+    # Sezioni sorelle delle nuove fonti per privati: stessa fonte, altro elenco.
+    "INPS — Bonus e agevolazioni famiglie": (
+        "https://www.inps.it/it/it/sostegni-sussidi-indennita/per-disabili-invalidi-inabili.html",
+    ),
+    "Regione Toscana — Contributi famiglie": (
+        "https://www.regione.toscana.it/bandi-aperti",
+    ),
+    "Comune di Milano — Agevolazioni": (
+        "https://www.comune.milano.it/servizi/welfare/sostegno-al-reddito-e-titoli-sociali",
+    ),
 }
 
 # Fonti in cui si seguono solo le schede con un certo URL (per la Liguria le
@@ -399,8 +593,12 @@ BONUS_KEYWORDS = (
 CATEGORY_KEYWORDS: dict[str, tuple[str, ...]] = {
     "casa": ("ristrutturaz", "affitto", "casa", "ediliz", "mutuo", "immobilia", "abitaz", "alloggi"),
     "famiglia": ("figli", "nido", "asilo", "famiglia", "maternit", "assegno unico", "nucleo", "scuola", "mensa"),
-    "lavoro": ("lavoro", "impresa", "assunzion", "apprendistat", "dipendente", "autonom", "formazion", "occupabilit", "commerc"),
-    "mobilita": ("mobilità", "mobilita", "auto", "scooter", "veicol", "trasporti"),
+    # Prima di "lavoro": un bando per imprese/artigiani non deve finire in
+    # "lavoro" solo perché parla di assunzioni o formazione.
+    "impresa": ("impresa", "imprenditore", "startup", "aziend", "pmi", "artigian", "commerciant"),
+    "lavoro": ("lavoro", "assunzion", "apprendistat", "dipendente", "autonom", "formazion", "occupabilit", "commerc"),
+    # "auto " con lo spazio: senza, "non autosufficienti" finiva in mobilità.
+    "mobilita": ("mobilità", "mobilita", "auto ", "automobil", "scooter", "veicol", "trasporti"),
     "studio": ("student", "universit", "bors", "merito", "scuola", "libri"),
     "salute": ("psicolog", "salute", "sanitar", "medic", "dentista"),
     "energia": ("energia", "fotovoltaic", "caldaia", "efficientament", "isolament"),
@@ -657,7 +855,14 @@ def fetch(url: str, user_agent: str = USER_AGENT) -> str:
     try:
         with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as resp:
             charset = resp.headers.get_content_charset() or "utf-8"
-            return resp.read().decode(charset, errors="replace")
+            try:
+                body = resp.read()
+            except http.client.IncompleteRead as exc:
+                # Risposta troncata (server che chiude a metà): il corpo
+                # parziale contiene comunque i link e il testo utile, meglio
+                # usarlo che far fallire l'intera run.
+                body = exc.partial
+            return body.decode(charset, errors="replace")
     except urllib.error.HTTPError as exc:
         raise FetchError(exc.code, exc.reason) from exc
     except (urllib.error.URLError, TimeoutError, OSError) as exc:
@@ -824,7 +1029,9 @@ def build_bonus(source: dict, url: str, raw_title: str, extra_text: str = "") ->
         "id": stable_id(normalize_title(title)),
         "title": title,
         "authority": source["authority"],
-        "category": guess_category(f"{title} {url}"),
+        # Titolo + testo della card + URL: il solo titolo (spesso un nome
+        # proprio, "Resto al Sud 2.0") non dice il settore e finiva in "altro".
+        "category": guess_category(f"{full_text} {url}"),
         "amount": amount_match.group(0).strip() if amount_match else "",
         "deadline": deadline_text,
         "summary": summary,
@@ -838,6 +1045,7 @@ def build_bonus(source: dict, url: str, raw_title: str, extra_text: str = "") ->
         "is_new": True,
         # Fonte con URL diretti verificati: il gate è più permissivo.
         "trusted": bool(source.get("trusted")),
+        "min_evidence": int(source.get("min_evidence") or 0),
     }
 
 
@@ -933,13 +1141,29 @@ def scrape_direct(source: dict) -> tuple[list[dict], bool]:
             print(f"  ⚠︎ non raggiungibile: {url} ({last})")
             continue
         reached = True
-        title = page_title(html)
+        # `title` (opzionale) forza il titolo della scheda: serve alle pagine
+        # ufficiali il cui <title> è generico ("Familiari - Dichiarazione…").
+        title = source.get("title") or page_title(html)
         bonus = build_bonus(source, url, title)
         if not bonus:
             print(f"  ⚠︎ titolo non utilizzabile: {title[:60]!r}")
             continue
+        # La scheda non ha una card: la categoria si ricava dal testo della
+        # pagina, altrimenti resta "altro" ("Bonus nuovi nati").
+        page_text = html_to_text(html)
+        if page_text:
+            bonus["category"] = guess_category(f"{title} {page_text[:3000]} {url}")
         if source.get("detail", True):
             bonus = enrich_from_detail(bonus)
+        if source.get("ignore_deadline"):
+            # Scheda permanente: la data in pagina è la finestra dell'annualità
+            # precedente, non un termine utile. Meglio "senza scadenza" che
+            # pubblicarla come scaduta.
+            bonus["deadline"] = ""
+            bonus.pop("deadline_year", None)
+            excerpts = bonus.get("source_excerpts")
+            if isinstance(excerpts, dict):
+                excerpts.pop("deadline", None)
         summary = first_paragraph(html)
         if summary:
             bonus["summary"] = summary[:397]
@@ -1322,6 +1546,8 @@ OPEN_WORDS = re.compile(
 PERIOD_RE = re.compile(r"\bdal\s+[^.]{0,30}?\s+al\s+(\d{1,2}[/-]\d{1,2}[/-]\d{2,4}|\d{1,2}\s+\w+\s+\d{4})", re.I)
 # Date che non sono scadenze: norme citate nel testo ("legge 30 dicembre 2025").
 NORM_DATE_RE = re.compile(r"\b(legge|decreto|d\.lgs|delibera|regolamento|circolare)\b", re.I)
+# Atti e comunicazioni citati nel testo: la loro data non è la scadenza.
+ACT_DATE_RE = re.compile(r"\b(messaggio|nota|determina|pubblicat|aggiornamento|comunicato)\b", re.I)
 THRESHOLD_RE = re.compile(r"reddito|patrimonio|ISEE|soglia|limite|massimale|non superiore", re.I)
 AMOUNT_HINT_TEXT = re.compile(r"importo|contributo|spettante|fino a|voucher|dotazione|bonus di", re.I)
 RE_IT_DATE = re.compile(
@@ -1373,6 +1599,9 @@ def classify_bonus(bonus: dict) -> tuple[str, str]:
     # basta una sola evidenza di campo. Così non finisce in quarantena un bando
     # vero la cui pagina di dettaglio non è tutta parsabile con le regex.
     trusted = bool(bonus.get("trusted"))
+    # Fonti istituzionali con pagine semplificate (`min_evidence`: 1): una sola
+    # evidenza di campo basta. Le altre restano a 2.
+    min_evidence = int(bonus.get("min_evidence") or 0)
     if trusted:
         evidence.append("url_ufficiale")
     if (bonus.get("deadline") or "").strip():
@@ -1383,7 +1612,7 @@ def classify_bonus(bonus: dict) -> tuple[str, str]:
         evidence.append("requisiti")
     if bonus.get("required_documents"):
         evidence.append("documenti")
-    if len(evidence) >= (1 if trusted else 2):
+    if len(evidence) >= (1 if trusted else max(min_evidence, 1) if min_evidence else 2):
         return "bando", "evidenze: " + ", ".join(evidence)
     if GATE_BANDO_RE.search(low):
         return "quarantena", (
@@ -1458,8 +1687,10 @@ def split_catalog(
         if GENERIC_TITLE_RE.search((row.get("title") or "").strip()):
             continue
         verdict, reason = classify_bonus(row)
-        # `trusted` serve solo al gate: non è un campo del catalogo pubblico.
+        # `trusted` e `min_evidence` servono solo al gate: non sono campi del
+        # catalogo pubblico (e PostgREST rifiuterebbe colonne inesistenti).
         row.pop("trusted", None)
+        row.pop("min_evidence", None)
         if verdict == "notizia":
             news.append({
                 "title": row.get("title", ""),
@@ -1680,6 +1911,10 @@ def extract_detail_fields(markup: str) -> dict:
             continue
         # "legge 30 dicembre 2025" non è la scadenza del bando.
         if NORM_DATE_RE.search(line) and not re.search(r"scadenz|termine per", line, re.I):
+            continue
+        # "con il messaggio 11 agosto 2025 l'INPS ha comunicato le date…": la
+        # data dell'atto non è il termine della domanda.
+        if ACT_DATE_RE.search(line) and not re.search(r"scadenz|termine|entro il", line, re.I):
             continue
         fields["deadline"] = date.group(0)
         excerpts["deadline"] = _clean_sentence(line)
