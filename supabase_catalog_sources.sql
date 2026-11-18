@@ -60,7 +60,7 @@ create policy "catalog_sources_select_authenticated" on public.catalog_sources
   for select using (auth.role () = 'authenticated');
 
 -- ============================================================
--- Seed — 23 fonti (15 abilitate, 8 censite ma non scansionabili)
+-- Seed — 24 fonti (15 abilitate, 9 censite ma non scansionabili)
 -- ============================================================
 insert into public.catalog_sources
   (slug, name, authority, description, url, list_url, base_url, residency, topics, enabled, priority, note)
@@ -75,16 +75,16 @@ values
   (
     'inps', 'INPS', 'INPS',
     $d$Portale dell'Istituto Nazionale della Previdenza Sociale dove vengono pubblicati e gestiti tutti i bonus per famiglie, genitori, studenti, lavoratori e pensionati (es. Assegno Unico, Bonus Nido, Bonus Mamme, Carta Dedicata a te, ADI).$d$,
-    'https://www.inps.it/', 'https://www.inps.it/', 'https://www.inps.it/',
+    'https://www.inps.it/', 'https://www.inps.it/it/it/tutti-i-servizi.html', 'https://www.inps.it/',
     null, '{}', true, 2,
-    'Fonte più produttiva: 12 candidati il 14/11/2026.'
+    'Elenca le prestazioni (tutti-i-servizi.html) invece della home; lo scraper legge anche la home come pagina aggiuntiva (EXTRA_LIST_URLS). 12 candidati il 14/11/2026.'
   ),
   (
     'agenzia-entrate', 'Agenzia delle Entrate', 'Agenzia delle Entrate',
     $d$Sezione ufficiale dedicata a tutte le detrazioni fiscali, crediti d'imposta e bonus edilizi/mobiliari per cittadini e aziende (es. Bonus Ristrutturazioni, Bonus Mobili, acquisto prima casa, crediti R&S).$d$,
-    'https://www.agenziaentrate.gov.it/portale/cittadini/agevolazioni', 'https://www.agenziaentrate.gov.it/', 'https://www.agenziaentrate.gov.it/',
+    'https://www.agenziaentrate.gov.it/portale/cittadini/agevolazioni', 'https://www.agenziaentrate.gov.it/portale/cittadini/agevolazioni', 'https://www.agenziaentrate.gov.it/',
     null, '{}', true, 3,
-    'La pagina /portale/cittadini/agevolazioni è un hub con 8 link e non produce bandi: si scansiona la home.'
+    'Pagina agevolazioni per i cittadini; la home resta letta come pagina aggiuntiva (EXTRA_LIST_URLS nello scraper) perché il 18/11/2026 la pagina agevolazioni rende 8 link ai client non-browser.'
   ),
   (
     'invitalia', 'Invitalia', 'Invitalia — Agenzia nazionale per lo sviluppo d''impresa',
@@ -107,7 +107,8 @@ values
     'https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetitions.html', 'https://www.regione.liguria.it/homepage-bandi-e-avvisi/publiccompetitions.html', 'https://www.regione.liguria.it/',
     'Residenza in Liguria',
     array['energet','efficientament','fotovoltaic','caldaia','isolament','riqualificaz','famiglia','figli','nido','maternit','assegno','trasport','mobilit','abbonament','ferrovi','treno','formazion','lavoro','occupabilit','apprendistat','impresa','inoccup','corsi','borse','student','iscrizion'],
-    true, 6, ''
+    true, 6,
+    'Si seguono solo le schede con URL /publiccompetitions (URL_PATTERNS nello scraper): il resto dei link è navigazione.'
   ),
   (
     'mase', 'MASE', 'Ministero dell''Ambiente e della Sicurezza Energetica',
@@ -147,8 +148,9 @@ values
   (
     'ministero-lavoro', 'Ministero del Lavoro', 'Ministero del Lavoro e delle Politiche Sociali',
     $d$Ministero del Lavoro e delle Politiche Sociali: incentivi all'occupazione, avvisi e comunicazioni su lavoro e politiche sociali.$d$,
-    'https://www.lavoro.gov.it/', 'https://www.lavoro.gov.it/', 'https://www.lavoro.gov.it/',
-    null, '{}', true, 12, ''
+    'https://www.lavoro.gov.it/', 'https://www.lavoro.gov.it/strumenti-e-servizi/Pagine/default.aspx', 'https://www.lavoro.gov.it/',
+    null, '{}', true, 12,
+    'Pagina Strumenti e Servizi (percorso con maiuscola e .aspx: la variante minuscola risponde 404).'
   ),
   (
     'cliclavoro', 'Cliclavoro', 'Ministero del Lavoro e delle Politiche Sociali',
@@ -225,6 +227,13 @@ values
     'https://ec.europa.eu/info/funding-tenders/opportunities/portal/', 'https://ec.europa.eu/info/funding-tenders/opportunities/portal/', 'https://ec.europa.eu/',
     null, '{}', false, 27,
     'Portale interamente JavaScript: 0 elementi estraibili dall''HTML (14/11/2026). Richiederebbe la loro API di ricerca.'
+  ),
+  (
+    'comuni-italiani', 'Comuni.it — Bandi comunali', 'Comuni-Italiani.it',
+    $d$Aggregatore dei bandi e degli avvisi pubblicati dai Comuni italiani, utile per intercettare contributi locali che non compaiono sui portali regionali.$d$,
+    'https://www.comuni-italiani.it/bandi/', 'https://www.comuni-italiani.it/bandi/', 'https://www.comuni-italiani.it/',
+    null, '{}', false, 28,
+    'Risponde 403 ai client non-browser (verificato il 18/11/2026, con UA browser e header Accept): fonte censita, da riabilitare se apre ai bot.'
   ),
   -- ---------------- Imprese, artigiani e professionisti (16/11/2026) ----------------
   -- Pagine verificate con il parser attuale prima di essere messe in mappa.

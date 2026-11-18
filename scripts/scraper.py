@@ -127,16 +127,19 @@ SOURCES: list[dict] = [
     {
         "name": "INPS",
         "authority": "INPS",
-        "list_url": "https://www.inps.it/",
+        # Elenco delle prestazioni, non la home (che resta letta come pagina
+        # aggiuntiva: vedi EXTRA_LIST_URLS).
+        "list_url": "https://www.inps.it/it/it/tutti-i-servizi.html",
         "base_url": "https://www.inps.it/",
         "target": ("persona",),
     },
     {
         "name": "Agenzia delle Entrate",
         "authority": "Agenzia delle Entrate",
-        # La vecchia pagina "/area-stampa/novita" risponde 404 da tempo:
-        # la home è raggiungibile e produce candidati reali.
-        "list_url": "https://www.agenziaentrate.gov.it/",
+        # La vecchia pagina "/area-stampa/novita" risponde 404 da tempo; la home
+        # resta letta come pagina aggiuntiva (EXTRA_LIST_URLS) perché è quella
+        # che con il parser attuale produce più candidati.
+        "list_url": "https://www.agenziaentrate.gov.it/portale/cittadini/agevolazioni",
         "base_url": "https://www.agenziaentrate.gov.it/",
         "target": ("persona", "impresa"),
     },
@@ -224,7 +227,9 @@ SOURCES: list[dict] = [
     {
         "name": "Ministero del Lavoro",
         "authority": "Ministero del Lavoro e delle Politiche Sociali",
-        "list_url": "https://www.lavoro.gov.it/",
+        # Pagina "Strumenti e Servizi" (percorso con la maiuscola e .aspx:
+        # la variante minuscola senza estensione risponde 404) invece della home.
+        "list_url": "https://www.lavoro.gov.it/strumenti-e-servizi/Pagine/default.aspx",
         "base_url": "https://www.lavoro.gov.it/",
         "target": ("persona", "impresa"),
     },
@@ -306,6 +311,17 @@ SOURCES: list[dict] = [
         "exclude": ("forum", "concorso", "premio", "video appuntamento", "convegno"),
         "target": ("professionisti",),
     },
+    # ---------------- Aggregatori di bandi comunali ----------------
+    {
+        "name": "Comuni.it — Bandi comunali",
+        "authority": "Comuni-Italiani.it",
+        # Aggregatore dei bandi pubblicati dai Comuni italiani. Al 18/11/2026
+        # risponde 403 ai client non-browser: la fonte resta censita, così quando
+        # apre ai bot produce schede senza toccare il codice.
+        "list_url": "https://www.comuni-italiani.it/bandi/",
+        "base_url": "https://www.comuni-italiani.it/",
+        "target": ("persona", "impresa"),
+    },
     {
         "name": "Regione Friuli Venezia Giulia",
         "authority": "Regione Autonoma Friuli Venezia Giulia",
@@ -354,6 +370,23 @@ SOURCES: list[dict] = [
         "target": ("persona", "impresa"),
     },
 ]
+
+# Pagine indice aggiuntive per fonte, oltre a `list_url`: sono le pagine di
+# elenco specifiche (tutti i servizi, agevolazioni) che affiancano la home
+# generica senza sostituirla. La chiave è il nome della fonte, quindi valgono
+# anche per le righe di `catalog_sources` (che non hanno una colonna dedicata).
+# Verificate il 18/11/2026: rispondono 200 ma sono molto JavaScript, quindi
+# rendono pochi link ai client non-browser.
+EXTRA_LIST_URLS: dict[str, tuple[str, ...]] = {
+    "INPS": ("https://www.inps.it/",),
+    "Agenzia delle Entrate": ("https://www.agenziaentrate.gov.it/",),
+}
+
+# Fonti in cui si seguono solo le schede con un certo URL (per la Liguria le
+# pagine "publiccompetitions.html"): il resto dei link è navigazione.
+URL_PATTERNS: dict[str, re.Pattern[str]] = {
+    "Regione Liguria": re.compile(r"/publiccompetitions", re.I),
+}
 
 # Parole-chiave: un link è candidato "bonus" se il testo le contiene.
 BONUS_KEYWORDS = (
@@ -889,46 +922,57 @@ def scrape_direct(source: dict) -> tuple[list[dict], bool]:
 
 
 def scrape_source(source: dict) -> tuple[list[dict], bool]:
-    """Scarica la pagina indice di una fonte e restituisce (schede, raggiunta).
+    """Scarica le pagine indice di una fonte e restituisce (schede, raggiunta).
 
-    `raggiunta` è False quando la pagina non risponde: in quel caso le schede di
+    Si legge `list_url` più le eventuali pagine specifiche di `EXTRA_LIST_URLS`.
+    `raggiunta` è False quando nessuna pagina risponde: in quel caso le schede di
     quella fonte non vanno contate come "non più trovate" (obsolescenza).
     """
     if source.get("mode") == "direct":
         return scrape_direct(source)
-    print(f"→ Fonte: {source['name']} ({source['list_url']})")
-    html: str | None = None
-    for ua, label in ((USER_AGENT, "UA bot"), (BROWSER_UA, "UA browser")):
-        try:
-            html = fetch(source["list_url"], user_agent=ua)
-            break
-        except FetchError as exc:
-            print(f"  ⚠︎ {label} fallito: {exc}")
-    if html is None:
-        print("  ⚠︎ fonte saltata (non raggiungibile): le altre proseguono")
-        return [], False
-
+    pages = [source["list_url"], *EXTRA_LIST_URLS.get(source["name"], ())]
+    print(f"→ Fonte: {source['name']} ({len(pages)} pagina/e indice)")
     topics = source.get("topics")
+    pattern = URL_PATTERNS.get(source["name"])
     items: list[dict] = []
-    for element in extract_items(html, source["base_url"]):
-        if len(items) >= MAX_ITEMS_PER_SOURCE:
-            break
-        hay = f"{element['title']} {element['text']}".lower()
-        # Pagine di elenco curate (es. Invitalia "incentivi e strumenti"): le
-        # card hanno solo il nome dell'incentivo, senza keyword nel testo, quindi
-        # il filtro per parole chiave le scarterebbe tutte.
-        if not source.get("all_items"):
-            if not any(k in hay for k in BONUS_KEYWORDS):
-                continue
-            # Filtro tematico delle fonti locali: solo gli avvisi in tema.
-            if topics and not any(t in hay for t in topics):
-                continue
-        # Esclusioni puntuali per fonte (voci della pagina che non sono bandi).
-        if any(x in hay for x in source.get("exclude", ())):
+    reached = False
+    for page_url in pages:
+        html: str | None = None
+        for ua, label in ((USER_AGENT, "UA bot"), (BROWSER_UA, "UA browser")):
+            try:
+                html = fetch(page_url, user_agent=ua)
+                break
+            except FetchError as exc:
+                print(f"  ⚠︎ {label} fallito su {page_url}: {exc}")
+        if html is None:
+            print(f"  ⚠︎ pagina saltata (non raggiungibile): {page_url}")
             continue
-        bonus = build_bonus(source, element["url"], element["title"], element["text"])
-        if bonus:
-            items.append(bonus)
+        reached = True
+        found = 0
+        for element in extract_items(html, source["base_url"]):
+            if len(items) >= MAX_ITEMS_PER_SOURCE:
+                break
+            # Filtro sull'URL delle schede, per le fonti che lo richiedono.
+            if pattern and not pattern.search(element["url"]):
+                continue
+            hay = f"{element['title']} {element['text']}".lower()
+            # Pagine di elenco curate (es. Invitalia "incentivi e strumenti"): le
+            # card hanno solo il nome dell'incentivo, senza keyword nel testo, quindi
+            # il filtro per parole chiave le scarterebbe tutte.
+            if not source.get("all_items"):
+                if not any(k in hay for k in BONUS_KEYWORDS):
+                    continue
+                # Filtro tematico delle fonti locali: solo gli avvisi in tema.
+                if topics and not any(t in hay for t in topics):
+                    continue
+            # Esclusioni puntuali per fonte (voci della pagina che non sono bandi).
+            if any(x in hay for x in source.get("exclude", ())):
+                continue
+            bonus = build_bonus(source, element["url"], element["title"], element["text"])
+            if bonus:
+                items.append(bonus)
+                found += 1
+        print(f"  · {page_url} → {found} candidati")
 
     print(f"  ✓ {len(items)} candidati estratti")
     if items and source.get("detail", True):
@@ -936,7 +980,7 @@ def scrape_source(source: dict) -> tuple[list[dict], bool]:
         filled = sum(1 for it in items if (it.get("deadline") or "").strip())
         priced = sum(1 for it in items if (it.get("amount") or "").strip())
         print(f"  ↳ dettaglio letto: {filled}/{len(items)} con scadenza · {priced} con importo")
-    return items, True
+    return items, reached
 
 
 # ---------------------------------------------------------------
