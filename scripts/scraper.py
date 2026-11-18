@@ -1746,11 +1746,6 @@ def llm_provider() -> dict | None:
     return None
 
 
-def llm_enabled() -> bool:
-    """True se c'è una chiave API e il fallback non è stato disattivato."""
-    return llm_provider() is not None
-
-
 def _http_json(url: str, headers: dict, payload: dict) -> dict:
     """POST JSON via urllib (nessuna dipendenza esterna) e risposta decodificata."""
     body = json.dumps(payload).encode("utf-8")
