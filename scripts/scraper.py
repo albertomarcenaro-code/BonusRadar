@@ -964,7 +964,7 @@ def supabase_upsert(
                 "deadline": r["deadline"],
                 "summary": r["summary"],
                 "requirements": r["requirements"],
-                "required_documents": r["required_documents"],
+                "required_documents": list(r.get("required_documents") or []),
                 "source_url": r["source_url"],
                 "source_name": r["source_name"],
                 **({"target": r.get("target") or ["persona", "impresa"]} if with_target else {}),
@@ -1780,11 +1780,12 @@ def _llm_text_field(data: dict, key: str, limit: int) -> str:
 
 
 def _llm_list_field(data: dict, key: str, limit: int, item_chars: int = 240) -> list[str]:
+    """Lista ripulita dei valori del modello: sempre una lista, mai None."""
     value = data.get(key)
     if isinstance(value, str):
         value = [value]
     if not isinstance(value, list):
-        return []
+        return []  # null, numero o oggetto: il catalogo vuole [] e non null
     out: list[str] = []
     for item in value:
         if not isinstance(item, str):
@@ -1798,8 +1799,52 @@ def _llm_list_field(data: dict, key: str, limit: int, item_chars: int = 240) -> 
     return out
 
 
+# Titoli di sezione che il modello a volte restituisce al posto di un
+# requisito (es. «Requisiti di cittadinanza, soggiorno e residenza»): nominali,
+# corti, senza punteggiatura finale e aperti da una parola da indice.
+LLM_SECTION_RE = re.compile(
+    r"^(requisiti|documenti|documentazione|destinatari|beneficiari|soggetti|"
+    r"a\s+chi\s+si\s+rivolge|chi\s+pu[òo]|come\s+funziona|tempi|modalit[àa]|"
+    r"importo|scadenza|maggiori\s+informazioni|riferimenti|normativa)\b",
+    re.I,
+)
+RE_HAS_DIGIT = re.compile(r"\d")
+
+
+def _looks_like_heading(line: str) -> bool:
+    """True se la riga è il titolo di una sezione, non un requisito."""
+    if len(line) > 80 or len(line.split()) > 8:
+        return False
+    if re.search(r"[.!?;:]", line):
+        return False
+    return bool(LLM_SECTION_RE.match(line))
+
+
+def _llm_amount(data: dict) -> str:
+    """Importo solo se contiene almeno una cifra: «fino a una soglia…» non lo è."""
+    value = _llm_text_field(data, "importo", 120)
+    return value if RE_HAS_DIGIT.search(value) else ""
+
+
+def _llm_requirements(data: dict) -> list[str]:
+    """Requisiti del modello, senza i titoli di sezione finiti nell'elenco."""
+    return [r for r in _llm_list_field(data, "requisiti", 5) if not _looks_like_heading(r)]
+
+
 def _normalize_llm(data: dict) -> dict:
-    """Campi LLM ripuliti, con le citazioni che li giustificano."""
+    """Campi LLM ripuliti, con le citazioni che li giustificano.
+
+    Una citazione resta solo se il campo a cui si riferisce è sopravvissuto
+    alla validazione: un importo scartato non deve lasciare dietro di sé un
+    excerpt che sembra giustificare un dato che in scheda non c'è.
+    """
+    values: dict = {
+        "deadline": _llm_text_field(data, "scadenza", 120),
+        "amount": _llm_amount(data),
+        "requirements": _llm_requirements(data),
+        "documents": _llm_list_field(data, "documenti", 5),
+        "destinatari": _llm_list_field(data, "destinatari", 6, 60),
+    }
     citations = data.get("citazioni") if isinstance(data.get("citazioni"), dict) else {}
     excerpts: dict = {}
     for field, key in (
@@ -1808,20 +1853,15 @@ def _normalize_llm(data: dict) -> dict:
         ("requirements", "requisiti"),
         ("documents", "documenti"),
     ):
+        if not values[field]:
+            continue
         quote = citations.get(key)
         if not isinstance(quote, str):
             continue
         quote = re.sub(r"\s+", " ", quote).strip()[:EXCERPT_CHARS]
         if len(quote) >= 8:
             excerpts[field] = quote
-    return {
-        "deadline": _llm_text_field(data, "scadenza", 120),
-        "amount": _llm_text_field(data, "importo", 120),
-        "requirements": _llm_list_field(data, "requisiti", 5),
-        "documents": _llm_list_field(data, "documenti", 5),
-        "destinatari": _llm_list_field(data, "destinatari", 6, 60),
-        "excerpts": excerpts,
-    }
+    return {**values, "excerpts": excerpts}
 
 
 def _llm_completion(provider: dict, snippet: str) -> str:
