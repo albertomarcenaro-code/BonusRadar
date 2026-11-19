@@ -1,0 +1,43 @@
+name: Anteprima open data Incentivi Italia
+
+# Workflow usa-e-getta (solo avvio manuale, nessun commit, nessuna scrittura
+# su Supabase): scarica il JSON open data stabile di Incentivi Italia e stampa
+# quante schede riguardano i cittadini. Serve a rispondere a una domanda
+# precisa: il portale MIMIT — irraggiungibile dalla VM di sviluppo — risponde
+# ai runner GitHub? Se sì, l'import può girare in CI.
+#
+# Quando la risposta è nota, questo file si può cancellare.
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Raggiungibilità dell'endpoint (diagnostica)
+        # Prima di leggere il JSON: status, content-type e dimensione, così un
+        # 403/406 anti-bot si distingue da un timeout di rete.
+        run: |
+          URL="https://www.incentivitalia.gov.it/open-data/incentivi/OpenData_Incentivi.json"
+          echo "GET $URL"
+          curl -sS -L --max-time 60 -A "Mozilla/5.0 (compatible; BonusRadarBot/1.0)" \
+            -o /tmp/opendata.json -w "HTTP %{http_code} | %{size_download} byte | %{content_type} | %{time_total}s\n" \
+            "$URL" || echo "curl ha fallito (rete o TLS)"
+          head -c 200 /tmp/opendata.json 2>/dev/null | tr -d '\000' ; echo
+
+      - name: Conteggio schede per i cittadini
+        run: python3 scripts/import_incentivi.py --examples 3
