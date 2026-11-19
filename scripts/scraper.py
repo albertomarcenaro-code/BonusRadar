@@ -327,13 +327,18 @@ SOURCES: list[dict] = [
     },
     # ---------------- Aggregatori di bandi comunali ----------------
     {
-        "name": "Comuni.it — Bandi comunali",
-        "authority": "Comuni-Italiani.it",
-        # Aggregatore dei bandi pubblicati dai Comuni italiani. Al 18/11/2026
-        # risponde 403 ai client non-browser: la fonte resta censita, così quando
-        # apre ai bot produce schede senza toccare il codice.
-        "list_url": "https://www.comuni-italiani.it/bandi/",
-        "base_url": "https://www.comuni-italiani.it/",
+        "name": "Comune di Firenze — Novità e avvisi",
+        "authority": "Comune di Firenze",
+        # Sostituisce l'aggregatore Comuni-Italiani.it, che al 18/11/2026
+        # risponde 428 ai bot e 403 ai browser (anti-bot) e non produceva
+        # nessuna scheda. `/novita` è il flusso generico di notizie del Comune
+        # (mostre, sport, cultura): le schede utili arrivano dalle sezioni
+        # elencate in EXTRA_LIST_URLS.
+        "list_url": "https://www.comune.firenze.it/novita",
+        "base_url": "https://www.comune.firenze.it/",
+        # Fonte istituzionale: le pagine avviso hanno spesso la sola scadenza,
+        # quindi una sola evidenza basta (come per Genova, Liguria, Toscana).
+        "min_evidence": 1,
         "target": ("persona", "impresa"),
     },
     {
@@ -375,19 +380,6 @@ SOURCES: list[dict] = [
         # 36, donne, decontribuzione Sud) con i link alle schede.
         "list_url": "https://www.lavoro.gov.it/temi-e-priorita/occupazione/focus/pagine/incentivi-alloccupazione",
         "base_url": "https://www.lavoro.gov.it/",
-        "residency": "nazionale",
-        "trusted": False,
-        "target": ("persona",),
-    },
-    {
-        "name": "incentivi.gov.it — Privati cittadini",
-        "authority": "Presidenza del Consiglio dei Ministri",
-        # Catalogo filtrato sul tipo soggetto "Cittadino" invece della home
-        # (già letta dalla fonte "incentivi.gov.it"): così si vedono le misure
-        # per le famiglie senza il rumore degli incentivi alle imprese.
-        # Nota: dal 18/11/2026 il dominio non risponde dalla rete della CI.
-        "list_url": "https://www.incentivi.gov.it/it/catalogo?tipo_soggetto=cittadino",
-        "base_url": "https://www.incentivi.gov.it/",
         "residency": "nazionale",
         "trusted": False,
         "target": ("persona",),
@@ -553,6 +545,89 @@ SOURCES: list[dict] = [
         "title": "Detrazioni per figli e familiari a carico",
         "target": ("persona",),
     },
+
+    # ---------------- Misure nazionali per privati (URL verificati 19/11/2026) ----------------
+    # Aggiunte perché il catalogo copriva solo alcune prestazioni INPS/AE:
+    # mancavano disoccupazione, invalidità e bonus sociali. Come le schede qui
+    # sopra sono pagine ufficiali permanenti, quindi il gate accetta con il solo
+    # URL; `category` fissa il settore perché il testo della scheda è troppo
+    # ampio per l'euristica ("nucleo familiare" scavalca "lavoro").
+    {
+        "name": "INPS — NASpI",
+        "authority": "INPS",
+        "mode": "direct",
+        "trusted": True,
+        "list_url": "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.50593.naspi-indennit-mensile-di-disoccupazione.html",
+        "base_url": "https://www.inps.it/",
+        "residency": "nazionale",
+        "direct_urls": [
+            "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.50593.naspi-indennit-mensile-di-disoccupazione.html",
+        ],
+        "category": "lavoro",
+        "target": ("persona",),
+    },
+    {
+        "name": "INPS — Indennità di accompagnamento",
+        "authority": "INPS",
+        "mode": "direct",
+        "trusted": True,
+        "list_url": "https://www.inps.it/it/it/dettaglio-approfondimento.schede-informative.indennit-di-accompagnamento-agli-invalidi-civili.html",
+        "base_url": "https://www.inps.it/",
+        "residency": "nazionale",
+        "direct_urls": [
+            "https://www.inps.it/it/it/dettaglio-approfondimento.schede-informative.indennit-di-accompagnamento-agli-invalidi-civili.html",
+        ],
+        "category": "salute",
+        "target": ("persona",),
+    },
+    {
+        "name": "INPS — Assegno ordinario di invalidità",
+        "authority": "INPS",
+        "mode": "direct",
+        "trusted": True,
+        "list_url": "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.assegno-ordinario-di-invalidit-per-persone-con-capacit-lavorativa-ridotta-50294.assegno-ordinario-di-invalidit-per-persone-con-capacit-lavorativa-ridotta.html",
+        "base_url": "https://www.inps.it/",
+        "residency": "nazionale",
+        "direct_urls": [
+            "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.assegno-ordinario-di-invalidit-per-persone-con-capacit-lavorativa-ridotta-50294.assegno-ordinario-di-invalidit-per-persone-con-capacit-lavorativa-ridotta.html",
+        ],
+        "category": "salute",
+        "target": ("persona",),
+    },
+    {
+        "name": "Agenzia delle Entrate — Detrazione spese sanitarie",
+        "authority": "Agenzia delle Entrate",
+        "mode": "direct",
+        "trusted": True,
+        # Pagina della dichiarazione precompilata: il <title> è vuoto, quindi il
+        # titolo della scheda va dichiarato qui.
+        "list_url": "https://infoprecompilata.agenziaentrate.gov.it/portale/spese-sanitarie",
+        "base_url": "https://infoprecompilata.agenziaentrate.gov.it/",
+        "residency": "nazionale",
+        "direct_urls": [
+            "https://infoprecompilata.agenziaentrate.gov.it/portale/spese-sanitarie",
+        ],
+        "title": "Detrazione delle spese sanitarie",
+        "category": "salute",
+        "target": ("persona",),
+    },
+    {
+        "name": "ARERA — Bonus sociale luce, gas e acqua",
+        "authority": "ARERA",
+        "mode": "direct",
+        "trusted": True,
+        # Bonus per disagio economico e disagio fisico: la pagina raccoglie
+        # elettrico, gas, teleriscaldamento, idrico e rifiuti.
+        "list_url": "https://www.arera.it/consumatori/bonus-sociale",
+        "base_url": "https://www.arera.it/",
+        "residency": "nazionale",
+        "direct_urls": [
+            "https://www.arera.it/consumatori/bonus-sociale",
+        ],
+        "title": "Bonus sociale per luce, gas e acqua",
+        "category": "energia",
+        "target": ("persona",),
+    },
 ]
 
 # Pagine indice aggiuntive per fonte, oltre a `list_url`: sono le pagine di
@@ -574,6 +649,13 @@ EXTRA_LIST_URLS: dict[str, tuple[str, ...]] = {
     "Comune di Milano — Agevolazioni": (
         "https://www.comune.milano.it/servizi/welfare/sostegno-al-reddito-e-titoli-sociali",
     ),
+    # Il flusso `/novita` è quasi tutto cronaca e cultura: avvisi e misure per
+    # i cittadini stanno in queste sezioni tematiche (18 schede al 19/11/2026).
+    "Comune di Firenze — Novità e avvisi": (
+        "https://www.comune.firenze.it/novita/avvisi",
+        "https://www.comune.firenze.it/argomenti/sociale",
+        "https://www.comune.firenze.it/argomenti/casa",
+    ),
 }
 
 # Fonti in cui si seguono solo le schede con un certo URL (per la Liguria le
@@ -592,11 +674,32 @@ BONUS_KEYWORDS = (
 # in app/frontend/src/lib/format.ts)
 CATEGORY_KEYWORDS: dict[str, tuple[str, ...]] = {
     "casa": ("ristrutturaz", "affitto", "casa", "ediliz", "mutuo", "immobilia", "abitaz", "alloggi"),
-    "famiglia": ("figli", "nido", "asilo", "famiglia", "maternit", "assegno unico", "nucleo", "scuola", "mensa"),
+    "famiglia": (
+        "figli", "nido", "asilo", "famiglia", "maternit", "assegno unico", "nucleo",
+        "scuola", "mensa", "sostegno al reddito", "titoli sociali",
+    ),
     # Prima di "lavoro": un bando per imprese/artigiani non deve finire in
     # "lavoro" solo perché parla di assunzioni o formazione.
-    "impresa": ("impresa", "imprenditore", "startup", "aziend", "pmi", "artigian", "commerciant"),
-    "lavoro": ("lavoro", "assunzion", "apprendistat", "dipendente", "autonom", "formazion", "occupabilit", "commerc"),
+    # Radici prese dai bandi che restavano in "altro": credito e garanzie
+    # ("finanziament"), fondi per aree produttive ("industrial"), voucher
+    # digitali ("cloud", "cyber…", "digital"), programmi per startup
+    # ("smart&start"). "digital" copre anche gli avvisi per la rete dei
+    # servizi digitali, che restano comunque opportunità per organizzazioni.
+    "impresa": (
+        "impresa", "imprenditore", "startup", "aziend", "pmi", "artigian",
+        "commerciant", "finanziament", "industrial", "cybersicur", "cybersecur",
+        "cloud", "smart&start", "smartstart", "digital",
+        # Programmi di autoimpiego (Autoimpiego Centro-Nord, Resto al Sud):
+        # senza questa radice restavano in "altro".
+        "autoimpiego",
+        # Il classificatore legge titolo e riassunto: per "Resto al Sud 2.0"
+        # l'unica parola utile è nel nome del programma.
+        "resto al sud",
+    ),
+    "lavoro": (
+        "lavoro", "assunzion", "apprendistat", "dipendente", "autonom", "formazion",
+        "occupabilit", "commerc", "pension", "previdenz",
+    ),
     # "auto " con lo spazio: senza, "non autosufficienti" finiva in mobilità.
     "mobilita": ("mobilità", "mobilita", "auto ", "automobil", "scooter", "veicol", "trasporti"),
     "studio": ("student", "universit", "bors", "merito", "scuola", "libri"),
@@ -1031,7 +1134,10 @@ def build_bonus(source: dict, url: str, raw_title: str, extra_text: str = "") ->
         "authority": source["authority"],
         # Titolo + testo della card + URL: il solo titolo (spesso un nome
         # proprio, "Resto al Sud 2.0") non dice il settore e finiva in "altro".
-        "category": guess_category(f"{full_text} {url}"),
+        # Una fonte può dichiarare la categoria della propria scheda: il testo
+        # delle pagine istituzionali è troppo ampio per l'euristica (la scheda
+        # NASpI contiene "nucleo familiare" e finiva in "famiglia").
+        "category": source.get("category") or guess_category(f"{full_text} {url}"),
         "amount": amount_match.group(0).strip() if amount_match else "",
         "deadline": deadline_text,
         "summary": summary,
@@ -1151,7 +1257,7 @@ def scrape_direct(source: dict) -> tuple[list[dict], bool]:
         # La scheda non ha una card: la categoria si ricava dal testo della
         # pagina, altrimenti resta "altro" ("Bonus nuovi nati").
         page_text = html_to_text(html)
-        if page_text:
+        if page_text and not source.get("category"):
             bonus["category"] = guess_category(f"{title} {page_text[:3000]} {url}")
         if source.get("detail", True):
             bonus = enrich_from_detail(bonus)
@@ -1778,12 +1884,19 @@ RE_DETAIL_DOCS = re.compile(
 )
 
 
+# Righe di servizio (cookie, menu, contatti) che non sono contenuto di un bando.
+# I termini ambigui sono ancorati alla parola intera: senza `\b`, "social"
+# scartava ogni frase su un "bonus sociale" e "accedi" ogni frase con
+# "accedere", lasciando senza riassunto pagine come quella di ARERA.
 JUNK_RE = re.compile(
-    r"cookie|privacy|newsletter|accedi|area personale|menu|skip to|homepage|\bhome\b|"
-    r"contatti|social|facebook|twitter|linkedin|youtube|instagram|telegram|copyright|"
-    r"©|p\.iva|pec\b|telefono|fax|posta certificata|mappa del sito|amministrazione trasparente|"
+    r"cookie|privacy|newsletter|\baccedi\b|area personale|\bmenu\b|skip to|homepage|\bhome\b|"
+    r"\bcontatti\b|\bsocial\b|facebook|twitter|linkedin|youtube|instagram|telegram|copyright|"
+    r"©|\bp\.iva\b|\bpec\b|\btelefono\b|\bfax\b|posta certificata|mappa del sito|"
+    r"amministrazione trasparente|"
     r"consiglio bandi e gare|ufficio relazioni con il pubblico|motore di ricerca|"
-    r"seguici|iscriviti|scarica l'app|torna su|leggi di più|share",
+    r"\bseguici\b|\biscriviti\b|scarica l'app|torna su|leggi di più|\bshare\b|"
+    # Righe di servizio delle schede INPS/ARERA: finivano come riassunto.
+    r"inserimento nei preferiti|informativa sul trattamento dei dati",
     re.I,
 )
 REQUISITO_SIGNAL = re.compile(
@@ -2480,6 +2593,60 @@ def merge_with_existing(
     return merged, new, updated, kept, archived
 
 
+# Etichette di pubblico usate nel JSON pubblico (sezione "Fonti" della
+# landing): l'elenco viaggia con il catalogo, così le fonti nuove compaiono
+# senza modificare il frontend.
+TARGET_LABELS = {
+    "persona": "persone",
+    "impresa": "imprese",
+    "artigiani": "artigiani",
+    "professionisti": "professionisti",
+}
+
+# Testi curati per le fonti storiche: il resto usa la descrizione dal target.
+SOURCE_SCOPES = {
+    "incentivi.gov.it": "Incentivi nazionali per imprese e cittadini",
+    "Comune di Firenze — Novità e avvisi": "Avvisi e bandi comunali",
+    "INPS": "Prestazioni e sussidi nazionali",
+    "Agenzia delle Entrate": "Detrazioni e agevolazioni fiscali",
+    "Comune di Genova": "Avvisi e bandi comunali",
+    "Regione Liguria": "Bandi e avvisi regionali",
+    "INPS — NASpI": "Disoccupazione e ammortizzatori sociali",
+    "INPS — Indennità di accompagnamento": "Invalidità civile e non autosufficienza",
+    "INPS — Assegno ordinario di invalidità": "Invalidità e capacità lavorativa ridotta",
+    "Agenzia delle Entrate — Detrazione spese sanitarie": "Detrazioni fiscali sulle spese sanitarie",
+    "ARERA — Bonus sociale luce, gas e acqua": "Bonus per disagio economico e fisico",
+}
+
+
+def _join_it(parts: list[str]) -> str:
+    if len(parts) <= 1:
+        return "".join(parts)
+    return ", ".join(parts[:-1]) + " e " + parts[-1]
+
+
+def public_sources(sources: list[dict]) -> list[dict]:
+    """Fonti monitorate nella forma pubblica: nome, URL e a chi si rivolgono."""
+    out: list[dict] = []
+    seen: set[str] = set()
+    for source in sources:
+        name = (source.get("name") or "").strip()
+        url = (
+            source.get("list_url") or source.get("url") or source.get("base_url") or ""
+        ).strip()
+        if not name or not url or name in seen:
+            continue
+        seen.add(name)
+        targets = [TARGET_LABELS.get(t, t) for t in (source.get("target") or ())]
+        scope = SOURCE_SCOPES.get(name) or (
+            "Bandi e agevolazioni per " + _join_it(targets)
+            if targets
+            else "Bandi e agevolazioni"
+        )
+        out.append({"name": name, "url": url, "scope": scope})
+    return out
+
+
 def write_json(
     path: Path,
     rows: list[dict],
@@ -2488,6 +2655,7 @@ def write_json(
     quarantine: list[dict] | None = None,
     news: list[dict] | None = None,
     quality: dict | None = None,
+    sources: list[dict] | None = None,
 ) -> None:
     """Scrive il file JSON letto dal frontend (catalogo per utenti anonimi).
 
@@ -2509,6 +2677,9 @@ def write_json(
             "active": len(rows),
             "sources": sources_count,
         },
+        # Fonti davvero scansionate in questa run: schede e contatori della
+        # landing si costruiscono su questo elenco, non sul codice del frontend.
+        "sources": public_sources(sources or []),
         # `discovered_at` di una scheda conservata resta quello originale: solo
         # le schede appena viste prendono la data di questa run.
         "bonuses": [{**r, "discovered_at": r.get("discovered_at") or now} for r in rows],
@@ -2759,6 +2930,7 @@ def main() -> int:
         quarantine=quarantine,
         news=news_items,
         quality=quality,
+        sources=sources,
     )
     return 0
 

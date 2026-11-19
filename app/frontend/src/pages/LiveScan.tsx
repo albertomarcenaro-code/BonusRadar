@@ -3,21 +3,36 @@ import { MatchBadge } from "@/components/match";
 import { Reveal } from "@/components/Reveal";
 import { calculateBonusMatch } from "@/lib/matching";
 import { useInView, usePrefersReducedMotion } from "@/hooks/motion";
-import type { Bonus, Profile } from "@/lib/types";
+import { hostOf } from "@/lib/format";
+import type { Bonus, CatalogQuality, CatalogSource, Profile } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
-/** Righe del log dello scraper (sequenza della slide "scansione"). */
-const LOG_LINES: { text: string; tone?: "ok" | "accent" | "muted" }[] = [
-  { text: "avvio scansione 5 portali", tone: "muted" },
-  { text: "comune.genova.it → 3 avvisi", tone: "accent" },
-  { text: "regione.liguria.it → 2 bandi", tone: "accent" },
-  { text: "inps.it → 7 prestazioni", tone: "accent" },
-  { text: "mimit.gov.it → 1 incentivo", tone: "accent" },
-  { text: "agenziaentrate.gov.it → 4 agevolazioni", tone: "accent" },
-  { text: "deduplica e verifica scadenze", tone: "muted" },
-  { text: "confronto con il profilo (ISEE, nucleo, residenza)", tone: "muted" },
-  { text: "compatibilità calcolata ✓", tone: "ok" },
-];
+type ScanLine = { text: string; tone?: "ok" | "accent" | "muted" };
+
+/**
+ * Righe del log costruite sull'ultimo snapshot: il numero di portali e i bandi
+ * per fonte arrivano dal catalogo pubblicato, non da un elenco fisso.
+ */
+function scanLogLines(sources: CatalogSource[], quality?: CatalogQuality): ScanLine[] {
+  const hostBySource = new Map(sources.map((s) => [s.name, hostOf(s.url)]));
+  const perHost = new Map<string, number>();
+  for (const [name, n] of Object.entries(quality?.by_source ?? {})) {
+    const host = hostBySource.get(name) ?? name;
+    perHost.set(host, (perHost.get(host) ?? 0) + n);
+  }
+  const top = [...perHost.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5);
+
+  const lines: ScanLine[] = [{ text: `avvio scansione ${sources.length} portali`, tone: "muted" }];
+  for (const [host, n] of top) {
+    lines.push({ text: `${host} → ${n} ${n === 1 ? "bando" : "bandi"}`, tone: "accent" });
+  }
+  lines.push(
+    { text: "deduplica e verifica scadenze", tone: "muted" },
+    { text: "confronto con il profilo (ISEE, nucleo, residenza)", tone: "muted" },
+    { text: "compatibilità calcolata ✓", tone: "ok" },
+  );
+  return lines;
+}
 
 /** Profilo demo per il matching della landing (non tocca i dati utente). */
 export const DEMO_PROFILE: Profile = {
@@ -74,19 +89,28 @@ export function demoMatches(bonuses: Bonus[], limit = 3): { bonus: Bonus; result
  * La sequenza parte solo quando la sezione entra in viewport; con
  * reduced-motion mostra tutto subito.
  */
-export default function LiveScan({ bonuses }: { bonuses: Bonus[] }) {
+export default function LiveScan({
+  bonuses,
+  sources = [],
+  quality,
+}: {
+  bonuses: Bonus[];
+  sources?: CatalogSource[];
+  quality?: CatalogQuality;
+}) {
   const { ref, inView } = useInView<HTMLDivElement>();
   const reduced = usePrefersReducedMotion();
   const [lines, setLines] = useState(0);
   const [scanning, setScanning] = useState(false);
   const timer = useRef<number | null>(null);
 
+  const logLines = useMemo(() => scanLogLines(sources, quality), [sources, quality]);
   const offers = useMemo(() => demoMatches(bonuses, 3), [bonuses]);
 
   useEffect(() => {
     if (!inView) return;
     if (reduced) {
-      setLines(LOG_LINES.length);
+      setLines(logLines.length);
       setScanning(false);
       return;
     }
@@ -96,7 +120,7 @@ export default function LiveScan({ bonuses }: { bonuses: Bonus[] }) {
     const tick = () => {
       i += 1;
       setLines(i);
-      if (i < LOG_LINES.length) {
+      if (i < logLines.length) {
         timer.current = window.setTimeout(tick, 620);
       } else {
         // pausa ~3.6s poi loop
@@ -111,11 +135,11 @@ export default function LiveScan({ bonuses }: { bonuses: Bonus[] }) {
     return () => {
       if (timer.current) window.clearTimeout(timer.current);
     };
-  }, [inView, reduced]);
+  }, [inView, reduced, logLines]);
 
-  const progress = Math.round((lines / LOG_LINES.length) * 100);
+  const progress = Math.round((lines / logLines.length) * 100);
   const statusChip =
-    scanning && lines < LOG_LINES.length ? (
+    scanning && lines < logLines.length ? (
       <span className="chip !border-signal/40 !bg-signal/10 !text-signal">
         <span className="size-1.5 animate-pulse-dot rounded-full bg-signal" />
         Scansione in corso
@@ -140,13 +164,13 @@ export default function LiveScan({ bonuses }: { bonuses: Bonus[] }) {
         </div>
 
         <div className="min-h-[248px] px-4 py-4 font-mono text-xs leading-relaxed sm:text-[0.8125rem]">
-          {LOG_LINES.slice(0, lines).map((l, i) => (
+          {logLines.slice(0, lines).map((l, i) => (
             <p key={i} className={cn("terminal-line flex gap-2 py-0.5", TONE_CLASS[l.tone ?? "muted"])}>
               <span className="text-dim">›</span>
               <span className={cn(l.tone === "muted" && "text-muted")}>{l.text}</span>
             </p>
           ))}
-          {lines < LOG_LINES.length && (
+          {lines < logLines.length && (
             <p className="flex gap-2 py-0.5 text-muted">
               <span className="text-dim">›</span>
               <span className="inline-block h-4 w-2 animate-pulse bg-accent/70" aria-hidden="true" />
@@ -170,7 +194,7 @@ export default function LiveScan({ bonuses }: { bonuses: Bonus[] }) {
 
       {/* ---------- Orbe radar + offerte ---------- */}
       <div className="min-w-0 flex flex-col items-center gap-8">
-        <RadarOrb scanning={scanning && lines < LOG_LINES.length} reduced={reduced} />
+        <RadarOrb scanning={scanning && lines < logLines.length} reduced={reduced} portals={sources.length} />
         <Offers offers={offers} />
       </div>
     </div>
@@ -178,7 +202,7 @@ export default function LiveScan({ bonuses }: { bonuses: Bonus[] }) {
 }
 
 /** Orbe radar: 4 anelli, sweep, 5 blip, box centrale "live". */
-function RadarOrb({ scanning, reduced }: { scanning: boolean; reduced: boolean }) {
+function RadarOrb({ scanning, reduced, portals }: { scanning: boolean; reduced: boolean; portals: number }) {
   const blips = [
     { top: "22%", left: "63%", delay: "0s" },
     { top: "38%", left: "78%", delay: "0.7s" },
@@ -217,7 +241,7 @@ function RadarOrb({ scanning, reduced }: { scanning: boolean; reduced: boolean }
         )}
       >
         <p className="font-mono text-[0.625rem] uppercase tracking-[0.24em] text-accent">live</p>
-        <p className="mt-0.5 text-[0.625rem] text-dim">5 portali</p>
+        <p className="mt-0.5 text-[0.625rem] text-dim">{portals} portali</p>
       </div>
     </div>
   );

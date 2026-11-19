@@ -49,13 +49,18 @@ export const useProfile = () =>
 export const useSources = () =>
   useQuery({ queryKey: ["sources"], queryFn: listSources, retry: false });
 
-/** Catalogo JSON dello scraper: espone generated_at per l'indicatore UI. */
+/**
+ * Catalogo JSON dello scraper: espone generated_at per l'indicatore UI.
+ * Si rilegge anche a pagina aperta, così bandi, fonti e data dell'ultima
+ * scansione seguono l'aggiornamento settimanale senza ricaricare.
+ */
 export const useScraperCatalog = () =>
   useQuery({
     queryKey: ["scraper-catalog"],
     queryFn: fetchScraperCatalog,
     retry: false,
     staleTime: 5 * 60_000,
+    refetchInterval: 10 * 60_000,
   });
 
 /**

@@ -17,27 +17,23 @@ import { Reveal } from "@/components/Reveal";
 import LiveScan, { demoMatches } from "@/pages/LiveScan";
 import { MatchBadge, MatchChecks } from "@/components/match";
 import { useCatalogStats, useScraperCatalog } from "@/lib/queries";
-import { fmtDateTime, fmtDate } from "@/lib/format";
+import type { CatalogSource } from "@/lib/types";
+import { fmtDateTime, fmtDate, hostOf } from "@/lib/format";
 import { usePrefersReducedMotion, useScrollProgress } from "@/hooks/motion";
 import { cn } from "@/lib/utils";
 
-/** Portali ufficiali scansionati dallo scraper (settimanale). */
-export const MONITORED_SOURCES: { name: string; scope: string; url: string }[] = [
-  { name: "Comune di Genova", scope: "Avvisi e bandi comunali", url: "https://www.comune.genova.it" },
-  { name: "Regione Liguria / Filse", scope: "Bandi e avvisi regionali", url: "https://www.regione.liguria.it" },
+/**
+ * Fonti di riserva: si usano solo finché il catalogo non espone `sources`.
+ * L'elenco vero viaggia con lo snapshot dello scraper, così schede e numeri
+ * della landing seguono ogni run senza modifiche al bundle.
+ */
+export const FALLBACK_SOURCES: CatalogSource[] = [
   { name: "INPS", scope: "Prestazioni e sussidi nazionali", url: "https://www.inps.it" },
-  { name: "MIMIT", scope: "Incentivi imprese ed energia", url: "https://www.mimit.gov.it" },
   { name: "Agenzia delle Entrate", scope: "Detrazioni e agevolazioni fiscali", url: "https://www.agenziaentrate.gov.it" },
+  { name: "Comune di Genova", scope: "Avvisi e bandi comunali", url: "https://www.comune.genova.it" },
+  { name: "Regione Liguria", scope: "Bandi e avvisi regionali", url: "https://www.regione.liguria.it" },
+  { name: "incentivi.gov.it", scope: "Incentivi nazionali per imprese e cittadini", url: "https://incentivi.gov.it" },
 ];
-
-/** Hostname leggibile per la griglia fonti (es. "comune.genova.it"). */
-function hostOf(url: string): string {
-  try {
-    return new URL(url).hostname.replace(/^www\./, "");
-  } catch {
-    return url;
-  }
-}
 
 /** Sezioni della storytelling (ordine = Parte 2.1, 4 chiare + 4 scure). */
 const RAIL = [
@@ -64,6 +60,13 @@ export default function Landing() {
   // Memoizzato: un `?? []` inline creerebbe un array nuovo a ogni render e
   // invaliderebbe i useMemo dipendenti da `bonuses`.
   const bonuses = useMemo(() => catalog?.bonuses ?? [], [catalog]);
+  // Fonti dell'ultimo snapshot: le schede della sezione "Fonti" e i contatori
+  // (numero portali, log del registro) leggono da qui.
+  const sources = useMemo<CatalogSource[]>(
+    () => (catalog?.sources?.length ? catalog.sources : FALLBACK_SOURCES),
+    [catalog],
+  );
+  const sourceHosts = useMemo(() => Array.from(new Set(sources.map((s) => hostOf(s.url)))), [sources]);
 
   // Ricerca: il valore iniziale arriva da ?q=
   useEffect(() => {
@@ -223,9 +226,9 @@ export default function Landing() {
 
           <Reveal delay={180}>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted" data-testid="landing-subtitle">
-              BonusRadar scansiona ogni settimana i portali istituzionali — Comune di Genova, Regione Liguria, INPS,
-              MIMIT, Agenzia delle Entrate — filtra i bonus compatibili con il tuo profilo ISEE e prepara le domande
-              precompilate pronte per la firma.
+              BonusRadar scansiona ogni settimana {sources.length} portali istituzionali — agenzie nazionali, regioni e
+              comuni — filtra i bonus compatibili con il tuo profilo ISEE e prepara le domande precompilate pronte per
+              la firma.
             </p>
           </Reveal>
 
@@ -325,7 +328,7 @@ export default function Landing() {
             <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
               {[
                 { value: "1.000+", label: "bandi pubblicati ogni anno tra i portali monitorati" },
-                { value: "5", label: "portali istituzionali scansionati a ogni ciclo" },
+                { value: String(sources.length), label: "portali istituzionali scansionati a ogni ciclo" },
                 { value: "~30′", label: "tempo medio perso a cercarli a mano, ogni volta" },
               ].map((f, i) => (
                 <Reveal key={f.value} delay={i * 100}>
@@ -394,13 +397,13 @@ export default function Landing() {
             </Reveal>
             <Reveal delay={100}>
               <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
-                Ogni lunedì il terminale parte da solo: cinque portali, deduplica, scadenze, confronto con il profilo.
-                Qui sotto lo vedi girare.
+                Ogni lunedì il terminale parte da solo: {sources.length} portali, deduplica, scadenze, confronto con il
+                profilo. Qui sotto lo vedi girare.
               </p>
             </Reveal>
           </div>
           <Reveal delay={160}>
-            <LiveScan bonuses={bonuses} />
+            <LiveScan bonuses={bonuses} sources={sources} quality={catalog?.quality} />
           </Reveal>
         </div>
       </section>
@@ -487,7 +490,7 @@ export default function Landing() {
           </div>
 
           <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="landing-sources-list">
-            {MONITORED_SOURCES.map((s, i) => (
+            {sources.map((s, i) => (
               <li key={s.name}>
                 <Reveal delay={i * 90}>
                   <div className="panel interactive flex h-full items-start gap-3 rounded-2xl p-5" data-testid="landing-source-card">
@@ -550,7 +553,9 @@ export default function Landing() {
                     test: "landing-stat-count",
                   },
                   {
-                    v: String(stats?.sources ?? catalog?.stats?.sources ?? MONITORED_SOURCES.length),
+                    // Coerente con le schede sopra: è il numero di fonti
+                    // elencate nello snapshot, non un contatore separato.
+                    v: String(sources.length),
                     l: "Fonti monitorate",
                     test: "landing-stat-portals",
                   },
@@ -571,8 +576,8 @@ export default function Landing() {
                 <div className="terminal p-4 font-mono text-xs leading-relaxed sm:text-[0.8125rem]" data-testid="landing-scan-log">
                   <p className="text-dim">[scraper] esecuzione schedulata · GitHub Actions</p>
                   <p className="text-dim">
-                    [scraper] fonti: comune.genova.it · regione.liguria.it · inps.it · mimit.gov.it ·
-                    agenziaentrate.gov.it
+                    [scraper] fonti: {sources.length} portali · {sourceHosts.slice(0, 4).join(" · ")}
+                    {sourceHosts.length > 4 ? " · …" : ""}
                   </p>
                   <p className="text-dim">[scraper] deduplica avvisi · verifica scadenze</p>
                   <p className="text-positive" data-testid="landing-scan-log-ok">

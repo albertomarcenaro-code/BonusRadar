@@ -7,6 +7,15 @@ export function fmtDate(iso: string | null | undefined): string {
   return d.toLocaleDateString("it-IT", { day: "2-digit", month: "2-digit", year: "numeric" });
 }
 
+/** Hostname leggibile da un URL (es. "comune.genova.it"); l'input se non è un URL. */
+export function hostOf(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
+}
+
 export function fmtDateTime(iso: string | null | undefined): string {
   if (!iso) return "—";
   const d = new Date(iso);
@@ -38,7 +47,7 @@ export const CATEGORY_LABEL: Record<string, string> = {
   casa: "Casa & Edilizia",
   famiglia: "Famiglia & Figli",
   impresa: "Imprese & Startup",
-  lavoro: "Lavoro & Impresa",
+  lavoro: "Lavoro & Occupazione",
   mobilita: "Mobilità",
   studio: "Studio & Cultura",
   salute: "Salute",

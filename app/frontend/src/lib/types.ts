@@ -151,10 +151,20 @@ export interface CatalogQuality {
   by_source: Record<string, number>;
 }
 
+/** Fonte monitorata, come la espone il catalogo pubblico (sezione "Fonti"). */
+export interface CatalogSource {
+  name: string;
+  url: string;
+  scope: string;
+}
+
 export interface BonusCatalogFile {
   generated_at: string;
   source: string;
   count: number;
+  /** Elenco delle fonti scansionate in questa run: la landing lo usa per le
+   *  schede e per i contatori, così segue il catalogo senza elenchi cablati. */
+  sources?: CatalogSource[];
   /** Snapshot dei contatori al momento della scansione (fallback pubblico). */
   stats?: CatalogStats;
   bonuses: Bonus[];
