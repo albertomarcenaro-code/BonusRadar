@@ -107,6 +107,27 @@ DEFAULT_JSON_PATH = os.environ.get(
     "BONUSES_JSON_PATH", "app/frontend/public/data/bonuses.json"
 )
 
+# Import dagli open data di Incentivi Italia (MIMIT): file separato prodotto da
+# scripts/import_incentivi.py, accanto al catalogo. Se manca, il run principale
+# prosegue senza: l'import è un'aggiunta, non un requisito.
+IMPORT_JSON_NAME = "incentivi_import.json"
+IMPORT_SOURCE = "incentivitalia"
+# Campi che una scheda importata può aggiornare su una già in catalogo: identità
+# (`id`), data di scoperta e contatori di obsolescenza restano quelli della run.
+IMPORT_UPDATABLE = (
+    "title",
+    "description",
+    "summary",
+    "amount",
+    "deadline",
+    "requirements",
+    "required_documents",
+    "category",
+    "target",
+    "authority",
+    "opening_date",
+)
+
 # Fonti di FALLBACK: usate solo se la tabella `catalog_sources` su Supabase
 # non è leggibile (assente, RLS o rete). L'elenco ufficiale vive nel database
 # (vedi supabase_catalog_sources.sql) e si aggiorna senza toccare il codice.
@@ -1676,6 +1697,18 @@ def deadline_status(deadline: str, today: datetime | None = None) -> str:
         return "unknown"
     if OPEN_WORDS.search(text):
         return "open"
+    # Scadenze ISO degli open data importati ("2026-11-30"): senza questo caso
+    # la scheda resterebbe "unknown" e un bando aperto sembrerebbe senza data.
+    iso = re.match(r"^(\d{4})-(\d{1,2})-(\d{1,2})", text)
+    if iso:
+        try:
+            date = datetime(
+                int(iso.group(1)), int(iso.group(2)), int(iso.group(3)), tzinfo=timezone.utc
+            )
+        except ValueError:
+            return "unknown"
+        ref = today or datetime.now(timezone.utc)
+        return "closed" if date < ref else "open"
     m = RE_IT_DATE.search(text)
     if not m:
         return "unknown"
@@ -2647,6 +2680,127 @@ def public_sources(sources: list[dict]) -> list[dict]:
     return out
 
 
+def load_imported_bonuses(path: Path) -> list[dict]:
+    """Schede importate dagli open data di Incentivi Italia.
+
+    Il file è prodotto da `scripts/import_incentivi.py` e vive accanto al
+    catalogo. Se manca, è illeggibile o non contiene un elenco, si restituisce
+    una lista vuota: il catalogo principale non dipende dall'import.
+    """
+    if not path.exists():
+        return []
+    try:
+        data = json.loads(path.read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError) as exc:
+        print(f"::warning::{path.name} non leggibile ({exc}): import saltato")
+        return []
+    rows = data.get("bonuses") if isinstance(data, dict) else data
+    if not isinstance(rows, list):
+        print(f"::warning::{path.name} senza elenco bandi: import saltato")
+        return []
+    valid = [
+        r
+        for r in rows
+        if isinstance(r, dict)
+        and str(r.get("source_url") or "").startswith(("http://", "https://"))
+    ]
+    # Schede con scadenza già passata: fuori dal catalogo, come fa il gate per
+    # le fonti dirette (i bandi chiusi non sono più proponibili).
+    current = [r for r in valid if not deadline_is_past(r.get("deadline") or "")]
+    skipped = len(valid) - len(current)
+    if skipped:
+        print(f"  import: {skipped} bandi con scadenza passata esclusi")
+    return current
+
+
+def deadline_is_past(deadline: str, today: datetime | None = None) -> bool:
+    """Vero se la scadenza è una data già passata.
+
+    Riconosce le date ISO degli open data (`2026-11-30`) oltre alle forme
+    italiane già gestite dal gate (`30/11/2026`, `30 novembre 2026`). Testi
+    non datati ("fondi esauriti", "sportello aperto") non sono considerati
+    scaduti: meglio una scheda incerta che un bando vero scartato.
+    """
+    text = (deadline or "").strip()
+    if not text:
+        return False
+    ref = today or datetime.now(timezone.utc)
+    iso = re.match(r"^(\d{4})-(\d{1,2})-(\d{1,2})", text)
+    try:
+        if iso:
+            year, month, day = int(iso.group(1)), int(iso.group(2)), int(iso.group(3))
+        else:
+            m = RE_IT_DATE.search(text)
+            if not m:
+                return False
+            if m.group(1):
+                day, month, year = int(m.group(1)), int(m.group(2)), int(m.group(3))
+            else:
+                day, month, year = int(m.group(4)), MESI[m.group(5).lower()], int(m.group(6))
+        when = datetime(year, month, day, tzinfo=timezone.utc)
+    except (ValueError, KeyError):
+        return False
+    return when.date() < ref.date()
+
+
+def merge_imported(rows: list[dict], imported: list[dict]) -> tuple[list[dict], int, int]:
+    """Unisce i bandi importati al catalogo della run.
+
+    Deduplica per `source_url`: se l'URL è già presente la scheda viene
+    aggiornata sul posto (identità, data di scoperta e obsolescenza restano),
+    altrimenti viene accodata in fondo — le schede da open data hanno priorità
+    bassa in elenco rispetto a quelle delle fonti dirette.
+    Restituisce (righe, aggiunte, aggiornate).
+    """
+    by_url = {
+        str(r.get("source_url") or "").rstrip("/").lower(): index
+        for index, r in enumerate(rows)
+        if r.get("source_url")
+    }
+    added = 0
+    updated = 0
+    for item in imported:
+        key = str(item["source_url"]).rstrip("/").lower()
+        index = by_url.get(key)
+        if index is not None:
+            existing = rows[index]
+            for field in IMPORT_UPDATABLE:
+                value = item.get(field)
+                if value not in (None, "", [], {}):
+                    existing[field] = value
+            existing["source"] = IMPORT_SOURCE
+            updated += 1
+            continue
+        # Scheda nuova: stessa forma di quelle estratte dalle fonti, così il
+        # frontend (che legge `required_documents.length`, `status`, …) regge.
+        rows.append(
+            {
+                "id": item.get("id") or stable_id(normalize_title(item.get("title") or "")),
+                "title": item.get("title") or "",
+                "authority": item.get("authority") or "Incentivi Italia",
+                "category": item.get("category") or "altro",
+                "amount": item.get("amount") or "",
+                "deadline": item.get("deadline") or "",
+                "summary": item.get("summary") or item.get("description") or "",
+                "description": item.get("description") or "",
+                "requirements": list(item.get("requirements") or []),
+                "required_documents": list(item.get("required_documents") or []),
+                "source_url": item["source_url"],
+                "source_name": item.get("source_name") or "Incentivi Italia — open data",
+                "target": list(item.get("target") or ["persona"]),
+                "opening_date": item.get("opening_date") or "",
+                "eligibility": "unknown",
+                "eligibility_reason": "",
+                "status": deadline_status(item.get("deadline") or ""),
+                "is_new": True,
+                "source": IMPORT_SOURCE,
+            }
+        )
+        by_url[key] = len(rows) - 1
+        added += 1
+    return rows, added, updated
+
+
 def write_json(
     path: Path,
     rows: list[dict],
@@ -2851,6 +3005,18 @@ def main() -> int:
             f"documenti {quality['fill']['documents_pct']}%"
         )
         rows = verified
+
+    # 1d) import dagli open data di Incentivi Italia (solo persone fisiche):
+    # entra nel catalogo prima di Supabase, così le schede compaiono anche per
+    # gli utenti loggati. Priorità bassa (in fondo all'elenco) e deduplica per
+    # `source_url`; le scadenze passate sono già scartate da `load_imported_bonuses`.
+    imported = load_imported_bonuses(json_path.parent / IMPORT_JSON_NAME)
+    if imported:
+        rows, added, updated = merge_imported(rows, imported)
+        print(
+            f"✓ Import Incentivi Italia ({IMPORT_JSON_NAME}): {added} nuove · "
+            f"{updated} aggiornate per URL"
+        )
 
     # 2) Supabase (se configurato)
     db_rows: int | None = None

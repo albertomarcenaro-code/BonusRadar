@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-19T10:57:13Z",
+  "generated_at": "2026-11-20T06:59:05Z",
   "source": "BonusRadar scraper v1",
-  "count": 34,
+  "count": 36,
   "stats": {
-    "bonuses": 34,
-    "active": 34,
+    "bonuses": 36,
+    "active": 36,
     "sources": 38
   },
   "sources": [
@@ -225,16 +225,47 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:54:01Z",
+      "detail_fetched_at": "2026-11-20T06:55:37Z",
       "source_excerpts": {
         "requirements": "Aliquote e contributi artigiani",
         "documents": "L’Estratto conto contributivo è il documento che elenca i contributi registrati in favore del lavoratore e che illustra i contributi da lavoro, figurativi, volontari e da riscatto, in base alla gestione pensionistica d'a"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "status": "unknown",
       "gate_reason": "evidenze: requisiti, documenti",
-      "discovered_at": "2026-11-19T10:57:13Z"
+      "discovered_at": "2026-11-20T06:59:05Z"
+    },
+    {
+      "id": "scr-e0fd2d87b168",
+      "title": "Avviso all'utenza",
+      "authority": "Comune di Genova",
+      "category": "casa",
+      "amount": "",
+      "deadline": "11 Gennaio 2027",
+      "summary": "Avviso pubblicato su Comune di Genova: apri la fonte per i dettagli.",
+      "requirements": [
+        "Residenza nel Comune di Genova"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.comune.genova.it/novita/avvisi/avviso-allutenza",
+      "source_name": "Comune di Genova",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T06:55:45Z",
+      "source_excerpts": {
+        "deadline": "scadenza 11 Gennaio 2027 Tempo di lettura Condividi Facebook Linkedin Whatsapp Vedi azioni Stampa Invia Argo"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "status": "open",
+      "gate_reason": "evidenze: scadenza",
+      "discovered_at": "2026-11-20T06:59:05Z"
     },
     {
       "id": "scr-6cd57382c738",
@@ -258,17 +289,17 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:54:18Z",
+      "detail_fetched_at": "2026-11-20T06:55:51Z",
       "source_excerpts": {
         "deadline": "chiusura 20/1/2027 Compila la domanda Sezione dedicata sul sito del Mimit Incentivi e strumenti per le impre",
         "amount": "Le agevolazioni sono concesse nella forma del contributo a fondo perduto , fino al 50% delle spese ammissibili. Il contributo non può superare, in ogni caso, l’importo di 20.000 euro",
         "documents": "essere in possesso di un’identità digitale (SPID, CNS, CIE)"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza, importo, documenti",
-      "discovered_at": "2026-11-19T10:57:13Z"
+      "discovered_at": "2026-11-20T06:59:05Z"
     },
     {
       "id": "scr-0e3dae2d1f29",
@@ -288,16 +319,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:54:18Z",
+      "detail_fetched_at": "2026-11-20T06:55:52Z",
       "source_excerpts": {
         "deadline": "chiusura 28/11/2026 Presenta la domanda Incentivi e strumenti per le imprese Stato incentivo o strumento Att",
         "amount": "Contributo in conto capitale fino a 300.000 euro e non superiore al 100% delle spese ammesse, sostenute tra l’8 maggio 2024 e il 31 dicembre 2028, per l'acquisto di macchinari, impianti, arredi, attrezzature nuovi di fab"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza, importo",
-      "discovered_at": "2026-11-19T10:57:13Z"
+      "discovered_at": "2026-11-20T06:59:05Z"
     },
     {
       "id": "scr-540230ba5dea",
@@ -318,15 +349,15 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:55:16Z",
+      "detail_fetched_at": "2026-11-20T06:56:54Z",
       "source_excerpts": {
         "amount": "Le stime indicano in 506mila i nuclei familiari che fino a fine anno sono potenziali destinatari di contributo massimo di 500 euro . Si ricorda che l’ADI, in presenza di minori nel nucleo familiare è incrementato dall’As"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "status": "unknown",
       "gate_reason": "evidenze: importo",
-      "discovered_at": "2026-11-19T10:57:13Z"
+      "discovered_at": "2026-11-20T06:59:05Z"
     },
     {
       "id": "scr-414ee40872db",
@@ -346,15 +377,15 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:55:19Z",
+      "detail_fetched_at": "2026-11-20T06:56:56Z",
       "source_excerpts": {
         "deadline": "Per agevolare la crescita di questo settore, tra la fine del 2026 e il 2028 sono previste una serie di agevolazioni per incentivare la crescita non solo del settore agricolo in sé, ma anche i suoi diversi settori, come q"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza",
-      "discovered_at": "2026-11-19T10:57:13Z"
+      "discovered_at": "2026-11-20T06:59:05Z"
     },
     {
       "id": "scr-5fba267abe7e",
@@ -375,15 +406,15 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:55:19Z",
+      "detail_fetched_at": "2026-11-20T06:56:57Z",
       "source_excerpts": {
         "deadline": "Le domande devono essere presentate tramite la piattaforma FINDOM , entro le ore 12:00 del 24 novembre 2026"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza",
-      "discovered_at": "2026-11-19T10:57:13Z"
+      "discovered_at": "2026-11-20T06:59:05Z"
     },
     {
       "id": "scr-83644461d463",
@@ -407,17 +438,17 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:55:32Z",
+      "detail_fetched_at": "2026-11-20T06:57:11Z",
       "source_excerpts": {
         "deadline": "Le domande devono essere inviate dalle ore 12.00 del 10 dicembre 2026 ed entro le ore 17.00 del 21 gennaio 2027",
         "amount": "Il contributo è a fondo perduto (sovvenzione diretta in denaro) ed è concesso a titolo di De Minimis. Il contributo concedibile è pari ad euro 15.240,00 euro per ciascuna singola Fiera Internazionale Business to Business",
         "requirements": "1. dimensione internazionale (rapporto tra fatturato estero e fatturato totale)"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza, importo, requisiti",
-      "discovered_at": "2026-11-19T10:57:13Z"
+      "discovered_at": "2026-11-20T06:59:05Z"
     },
     {
       "id": "scr-171213fa3702",
@@ -442,7 +473,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:55:32Z",
+      "detail_fetched_at": "2026-11-20T06:57:10Z",
       "source_excerpts": {
         "deadline": "Accesso ai contributi in conto interessi : presentando domanda tramite la piattaforma GeCoWEB Plus a partire dalle ore 12:00 del 23 novembre 2026 e fino alle ore 17:00 del 3 ottobre 2028, salvo chiusura anticipata per es",
         "amount": "Importo: da 100.000 euro a 10 milioni di euro",
@@ -450,10 +481,10 @@
         "documents": "Prestiti a sostegno di progetti imprenditoriali realizzati da PMI dell’indotto del settore automotive. L’appartenenza all’indotto del settore automotive deve risultare da un attestato rilasciato dal Consorzio Industriale"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza, importo, requisiti, documenti",
-      "discovered_at": "2026-11-19T10:57:13Z"
+      "discovered_at": "2026-11-20T06:59:05Z"
     },
     {
       "id": "scr-dc72123c2d6c",
@@ -480,7 +511,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:55:32Z",
+      "detail_fetched_at": "2026-11-20T06:57:10Z",
       "source_excerpts": {
         "deadline": "Il procedimento di concessione del contributo è a sportello",
         "amount": "c) il costo per la prima certificazione del bilancio della PMI beneficiaria; è ammissibile solo il costo iniziale (una tantum) e il contributo massimo concedibile con riferimento a questa voce di costo è pari a 7.500,00 ",
@@ -488,10 +519,10 @@
         "documents": "hanno già sostenuto i costi ammissibili oggetto del contributo, con l’eccezione disciplinata nell’Avviso per i costi di prima certificazione del bilancio"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza, importo, requisiti, documenti",
-      "discovered_at": "2026-11-19T10:57:13Z"
+      "discovered_at": "2026-11-20T06:59:05Z"
     },
     {
       "id": "scr-ff1578b7f081",
@@ -514,16 +545,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:55:34Z",
+      "detail_fetched_at": "2026-11-20T06:57:12Z",
       "source_excerpts": {
         "amount": "contributo del 60% a fondo perduto per programmi di investimento che hanno un importo compreso tra 120.000 euro e 200.000 euro",
         "requirements": "L’incentivo è rivolto ai giovani tra i 18 anni compiuti e i 35 anni non ancora compiuti che sono in una condizione di inattività, inoccupazione o disoccupazione, nonché ai disoccupati del Programma GOL (Garanzia di occup"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "status": "unknown",
       "gate_reason": "evidenze: importo, requisiti",
-      "discovered_at": "2026-11-19T10:57:13Z"
+      "discovered_at": "2026-11-20T06:59:05Z"
     },
     {
       "id": "scr-0026efe14789",
@@ -546,16 +577,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:55:34Z",
+      "detail_fetched_at": "2026-11-20T06:57:12Z",
       "source_excerpts": {
         "amount": "contributo del 70% a fondo perduto per programmi di investimento che hanno un importo compreso tra 120.000 euro e 200.000 euro",
         "requirements": "L’incentivo è rivolto ai giovani tra i 18 anni compiuti e i 35 anni non ancora compiuti, che sono in una condizione di inattività, inoccupazione o disoccupazione, nonché ai disoccupati del Programma GOL (Garanzia di occu"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "status": "unknown",
       "gate_reason": "evidenze: importo, requisiti",
-      "discovered_at": "2026-11-19T10:57:13Z"
+      "discovered_at": "2026-11-20T06:59:05Z"
     },
     {
       "id": "scr-d20a5b49c256",
@@ -581,16 +612,46 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:55:34Z",
+      "detail_fetched_at": "2026-11-20T06:57:13Z",
       "source_excerpts": {
         "requirements": "Smart&Start Italia: in quattro anni raccolti 65,8 milioni di euro di capitali privati nelle startup innovative",
         "documents": "La società pugliese è stata finanziata da Invitalia con Smart&Start"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "status": "unknown",
       "gate_reason": "evidenze: requisiti, documenti",
-      "discovered_at": "2026-11-19T10:57:13Z"
+      "discovered_at": "2026-11-20T06:59:05Z"
+    },
+    {
+      "id": "scr-d0ddd84fb591",
+      "title": "Contributo familiare caregiver - Anno 2026",
+      "authority": "Comune di Firenze",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Contributo familiare caregiver - Anno 2026 Avviso per l'assegnazione di contributi in favore di persone anziane assistite da familiari caregiver. Il contributo è destinato ad anziani in condizioni di non autosufficienza. Le domande possono essere presentate fino alle ore 12.00 di giovedì 3 dicembre 2026 Leggi sul sito tematico a proposito di Contributo familiare caregiver - Anno 2026",
+      "requirements": [],
+      "required_documents": [
+        "Avviso per l'assegnazione di contributi in favore di persone anziane assistite da familiari caregiver. Il contributo è destinato ad anziani in condizioni di non autosufficienza"
+      ],
+      "source_url": "https://sociale.comune.fi.it/node/266",
+      "source_name": "Comune di Firenze — Novità e avvisi",
+      "target": [
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T06:57:39Z",
+      "source_excerpts": {
+        "documents": "Avviso per l'assegnazione di contributi in favore di persone anziane assistite da familiari caregiver. Il contributo è destinato ad anziani in condizioni di non autosufficienza"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "status": "unknown",
+      "gate_reason": "evidenze: documenti",
+      "discovered_at": "2026-11-20T06:59:05Z"
     },
     {
       "id": "scr-c04b438e1cbb",
@@ -612,15 +673,15 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:56:04Z",
+      "detail_fetched_at": "2026-11-20T06:57:41Z",
       "source_excerpts": {
         "requirements": "Il Comune di Firenze concede, a titolo gratuito, appezzamenti di terreno di proprietà comunale ai cittadini residenti, anziani e non, per mantenere gli individui nel loro ambito sociale e favorire attività occupazionali "
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza",
-      "discovered_at": "2026-11-19T10:57:13Z"
+      "discovered_at": "2026-11-20T06:59:05Z"
     },
     {
       "id": "scr-f44a3e64b17f",
@@ -644,16 +705,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:56:03Z",
+      "detail_fetched_at": "2026-11-20T06:57:40Z",
       "source_excerpts": {
         "deadline": "Scadenza presentazione domande: 30 novembre 2026",
         "documents": "Modulo A (allegato alla richiesta contributo) - Centri Anziani"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza, documenti",
-      "discovered_at": "2026-11-19T10:57:13Z"
+      "discovered_at": "2026-11-20T06:59:05Z"
     },
     {
       "id": "scr-9ed9c1046ede",
@@ -679,16 +740,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:56:10Z",
+      "detail_fetched_at": "2026-11-20T06:57:46Z",
       "source_excerpts": {
         "deadline": "Al fine di individuare i due membri esterni della Commissione tecnico consultiva VIA di cui all’art. 4, comma 4, lettera f), L.R. 24/2021, le Associazioni di protezione ambientale operanti in Regione Friuli Venezia Giuli",
         "documents": "Allegato 1 [formato .doc]"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza, documenti",
-      "discovered_at": "2026-11-19T10:57:13Z"
+      "discovered_at": "2026-11-20T06:59:05Z"
     },
     {
       "id": "scr-8492262f66b3",
@@ -712,16 +773,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:56:49Z",
+      "detail_fetched_at": "2026-11-20T06:58:36Z",
       "source_excerpts": {
         "amount": "Il bonus consiste in un importo di 1.000 euro una tantum",
         "requirements": "Il contributo è riconosciuto a favore del genitore di un minore nato, in affido preadottivo o adottato dal 1° gennaio 2025, con un ISEE per specifiche prestazioni familiari e per l’inclusione, applicabile al minore al qu"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "status": "unknown",
       "gate_reason": "evidenze: url_ufficiale, importo, requisiti",
-      "discovered_at": "2026-11-19T10:57:13Z"
+      "discovered_at": "2026-11-20T06:59:05Z"
     },
     {
       "id": "scr-a097045913e8",
@@ -751,16 +812,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:56:41Z",
+      "detail_fetched_at": "2026-11-20T06:58:22Z",
       "source_excerpts": {
         "requirements": "con disabilità, come definita ai sensi del regolamento di cui al decreto del Presidente del Consiglio dei ministri 5 dicembre 2013, n. 159",
         "documents": "un valore del reddito familiare inferiore a 10.140 euro nei casi in cui il nucleo familiare risiede in abitazione in locazione, secondo quanto risulta dalla Dichiarazione Sostitutiva Unica resa ai fini dell’ISEE"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "status": "unknown",
       "gate_reason": "evidenze: url_ufficiale, requisiti, documenti",
-      "discovered_at": "2026-11-19T10:57:13Z"
+      "discovered_at": "2026-11-20T06:59:05Z"
     },
     {
       "id": "scr-46de15aa8416",
@@ -790,15 +851,516 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:56:17Z",
+      "detail_fetched_at": "2026-11-20T06:57:56Z",
       "source_excerpts": {
         "documents": "SPID è il sistema di accesso che consente di utilizzare, con un'identità digitale unica"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "status": "unknown",
       "gate_reason": "evidenze: requisiti, documenti",
-      "discovered_at": "2026-11-19T10:57:13Z"
+      "discovered_at": "2026-11-20T06:59:05Z"
+    },
+    {
+      "id": "scr-424b455ff955",
+      "title": "Sostegno al reddito e titoli sociali",
+      "authority": "Comune di Milano",
+      "category": "famiglia",
+      "amount": "500,00 euro",
+      "deadline": "16 dicembre 2026",
+      "summary": "Avviso pubblicato su Comune di Milano — Agevolazioni: apri la fonte per i dettagli.",
+      "requirements": [
+        "reddito",
+        "Residenza nel Comune di Milano",
+        "Il Comune di Milano realizza azioni di contrasto alla povertà sia attraverso interventi di sostegno al reddito, sia attraverso l’erogazione dei titoli sociali (contributi erogati a rimborso delle prestazioni richieste da",
+        "Il numero di protocollo DSU è riportato nella parte superiore dell’attestazione ISEE rilasciata dall’INPS, nel seguente formato",
+        "Misura B2 - Contributi per persone con disabilità/non autosufficienti",
+        "Contributi per soggiorni climatici per persone con disabilità"
+      ],
+      "required_documents": [
+        "Nel rispetto della normativa vigente in materia di protezione dei dati personali, nella graduatoria sarà indicato esclusivamente il numero di protocollo della Dichiarazione Sostitutiva Unica (DSU) 2026",
+        "un documento di identità in corso di validità",
+        "Misura B2 - Contributi per persone con disabilità/non autosufficienti"
+      ],
+      "source_url": "https://www.comune.milano.it/servizi/welfare/sostegno-al-reddito-e-titoli-sociali",
+      "source_name": "Comune di Milano — Agevolazioni",
+      "target": [
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T06:58:11Z",
+      "source_excerpts": {
+        "deadline": "Per non perdere il beneficio, è necessario effettuare almeno un acquisto entro il 16 dicembre 2026 . Il mancato utilizzo della Carta entro tale termine comporta la decadenza dal beneficio",
+        "amount": "La Carta Dedicata a Te è un contributo economico destinato ai nuclei familiari in possesso dei requisiti previsti dalla normativa. Per il 2026 il contributo è pari a 500,00 euro",
+        "requirements": "Il Comune di Milano realizza azioni di contrasto alla povertà sia attraverso interventi di sostegno al reddito, sia attraverso l’erogazione dei titoli sociali (contributi erogati a rimborso delle prestazioni richieste da",
+        "documents": "Nel rispetto della normativa vigente in materia di protezione dei dati personali, nella graduatoria sarà indicato esclusivamente il numero di protocollo della Dichiarazione Sostitutiva Unica (DSU) 2026"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "status": "open",
+      "gate_reason": "evidenze: scadenza, importo, requisiti, documenti",
+      "discovered_at": "2026-11-20T06:59:05Z"
+    },
+    {
+      "id": "scr-5d715052430f",
+      "title": "Avviso progetti PUC",
+      "authority": "Comune di Milano",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "31 dicembre 2026",
+      "summary": "Avviso pubblicato su Comune di Milano — Agevolazioni: apri la fonte per i dettagli.",
+      "requirements": [
+        "Residenza nel Comune di Milano",
+        "Possono presentare la domanda di Manifestazione di Interesse gli Enti del Terzo Settore con sede operativa nel territorio del Comune di Milano"
+      ],
+      "required_documents": [
+        "Alla domanda dovranno essere allegate",
+        "le schede contenenti le proposte di progetto, da presentarsi utilizzando l'Allegato C",
+        "copia di un documento di identità in corso di validità del legale rappresentante che presenta la domanda (e possibile non allegare il documento di identità nel caso in cui il modulo di domanda sia firmato digitalmente)"
+      ],
+      "source_url": "https://servizi.comune.milano.it/en/dettaglio-contenuto/-/asset_publisher/pqxq/content/avviso-pubblico-per-l-acquisizione-di-manifestazione-d-interesse-per-l-individuazione-di-enti-del-terzo-settore-per-lo-svolgimento-dei-progetti-puc-con-il-coinvolgimento-di-beneficiari-di-assegno-di-inclusione-adi-e-di-supporto-per-la-formazione-e-il-lavo",
+      "source_name": "Comune di Milano — Agevolazioni",
+      "target": [
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T06:58:11Z",
+      "source_excerpts": {
+        "deadline": "Il presente Avviso pubblico ha durata per il triennio 2024-2026 e scadenza il 31 dicembre 2026",
+        "requirements": "Possono presentare la domanda di Manifestazione di Interesse gli Enti del Terzo Settore con sede operativa nel territorio del Comune di Milano",
+        "documents": "Alla domanda dovranno essere allegate"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "status": "open",
+      "gate_reason": "evidenze: scadenza, requisiti, documenti",
+      "discovered_at": "2026-11-20T06:59:05Z"
+    },
+    {
+      "id": "scr-5f0f94cc6a32",
+      "title": "Carta Dedicata a Te 2026/2027",
+      "authority": "Comune di Milano",
+      "category": "lavoro",
+      "amount": "500,00 euro",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Comune di Milano — Agevolazioni: apri la fonte per i dettagli.",
+      "requirements": [
+        "Residenza nel Comune di Milano"
+      ],
+      "required_documents": [
+        "t��N+ �\u0006d�0�>\u0016� I���W$������� F�)c`���W]�� f�/:�Ӵ\u0006�I���~Z��\u000f3�\u0017���\u001bؤ���p�m���\u0007�@\u0013�\b�S��cie�x�D�(\u0007*�Yφ\b�\\�\u0002\u0001",
+        "t��\u0016;� ��oa�\u0011}, ;����W$������� F�9c`\u0013��W���/f�/:���\u0006�����~b������t� l�|�j��6���\u0003b��F�ѩ��cie�x�D�(\u0007*�YKC��A��\u0005� �S",
+        "p��� �\u0006`�0� cieüJ\"b� �ɬ��\bo�\\�\u0006�\u0014�p",
+        "O\u001a\u0003�t����q�bf���?Ml\u0000�t�����0~1��ٟ���&ݿ�\u001a����`�\u0001��D=��\u0014��cie�4L\"j�\u0003�άG]�c'�\u0001�L�"
+      ],
+      "source_url": "https://www.comune.milano.it/documents/20118/9859121/Graduatoria+definitiva+2026_Beneficiari+Selezionati.pdf/3ef20256-54e9-4993-86b4-f45e247b3aec?version=1.0&t=1793633605574&download=true",
+      "source_name": "Comune di Milano — Agevolazioni",
+      "target": [
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T06:58:17Z",
+      "source_excerpts": {
+        "documents": "t��N+ �\u0006d�0�>\u0016� I���W$������� F�)c`���W]�� f�/:�Ӵ\u0006�I���~Z��\u000f3�\u0017���\u001bؤ���p�m���\u0007�@\u0013�\b�S��cie�x�D�(\u0007*�Yφ\b�\\�\u0002\u0001"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "status": "unknown",
+      "gate_reason": "evidenze: importo, documenti",
+      "discovered_at": "2026-11-20T06:59:05Z"
+    },
+    {
+      "id": "scr-78272df3e744",
+      "title": "Assegno unico e universale per i figli a carico",
+      "authority": "INPS",
+      "category": "famiglia",
+      "amount": "46.582,71 euro",
+      "deadline": "",
+      "summary": "Il servizio permette di richiedere l’Assegno unico per figli a carico fino a 21 anni, o senza limiti di età se disabili, in base alle nuove regole su residenza, lavoratori non residenti e figli residenti in altri Stati UE.",
+      "requirements": [
+        "figli",
+        "Il servizio permette di richiedere l’Assegno unico per figli a carico fino a 21 anni, o senza limiti di età se disabili, in base alle nuove regole su residenza, lavoratori non residenti e figli residenti in altri Stati U",
+        "senza limiti di età per i figli disabili",
+        "alla condizione economica del nucleo familiare sulla base di ISEE valido al momento della domanda",
+        "È universale , perché garantito in misura minima a tutte le famiglie con figli a carico, anche in assenza di ISEE o con ISEE superiore alla soglia massima rivalutata annualmente: 46.582,71 per il 2026"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.assegno-unico-e-universale-per-i-figli-a-carico-55984.assegno-unico-e-universale-per-i-figli-a-carico.html",
+      "source_name": "INPS — Prestazioni e sussidi",
+      "target": [
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T06:58:20Z",
+      "source_excerpts": {
+        "amount": "una quota variabile progressiva in relazione alle soglie ISEE rivalutate annualmente ( da un massimo di 203,8 euro per ciascun figlio minore con ISEE fino a 17.468,51 euro a un minimo di 58,3 euro per ciascun figlio mino",
+        "requirements": "Il servizio permette di richiedere l’Assegno unico per figli a carico fino a 21 anni, o senza limiti di età se disabili, in base alle nuove regole su residenza, lavoratori non residenti e figli residenti in altri Stati U"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "status": "unknown",
+      "gate_reason": "evidenze: url_ufficiale, importo, requisiti",
+      "discovered_at": "2026-11-20T06:59:05Z"
+    },
+    {
+      "id": "scr-f3dfd02639cd",
+      "title": "Agevolazioni per le ristrutturazioni edilizie",
+      "authority": "Agenzia delle Entrate",
+      "category": "casa",
+      "amount": "96.000 euro",
+      "deadline": "",
+      "summary": "Aree tematiche - Agevolazioni per le ristrutturazioni edilizie - Agenzia delle Entrate",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.agenziaentrate.gov.it/portale/aree-tematiche/casa/agevolazioni/agevolazioni-per-le-ristrutturazioni-edilizie",
+      "source_name": "Agenzia delle Entrate — Agevolazioni casa",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T06:58:32Z",
+      "source_excerpts": {
+        "amount": "Tuttavia, per le spese sostenute nel 2026 sono prorogate le stesse condizioni previste per l’anno 2025: la detrazione spetta nella misura del 36% (50% in caso di abitazione principale) su un massimo di 96.000 euro per un"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "status": "unknown",
+      "gate_reason": "evidenze: url_ufficiale, importo",
+      "discovered_at": "2026-11-20T06:59:05Z"
+    },
+    {
+      "id": "scr-00da843bdc16",
+      "title": "Contributo per sostenere le spese relative a sessioni di psicoterapia",
+      "authority": "INPS",
+      "category": "famiglia",
+      "amount": "1.500 euro",
+      "deadline": "",
+      "summary": "Contributo per sostenere le spese relative a sessioni di psicoterapia - Bonus psicologo",
+      "requirements": [
+        "nazionale",
+        "ISEE in corso di validità, con valore non superiore a 50mila euro",
+        "In presenza di un ISEE non valido , la domanda non può essere accolta",
+        "a parità di valore ISEE, dell’ordine di presentazione della domanda",
+        "Il beneficio viene quantificato in base ai seguenti limiti di ISEE"
+      ],
+      "required_documents": [
+        "SPID (almeno di Livello 2 o superiore)",
+        "CIE 3.0 (Carta d’identità elettronica)",
+        "CNS (Carta Nazionale dei Servizi)",
+        "Al termine del periodo stabilito per la presentazione delle domande, sono redatte le graduatorie per l’assegnazione del beneficio nei limiti delle risorse stanziate (Tabella 1 allegata al decreto interministeriale 10 lug"
+      ],
+      "source_url": "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.contributo-per-sostenere-le-spese-relative-a-sessioni-di-psicoterapia-bonus-psicologo.html",
+      "source_name": "INPS — Bonus psicologo",
+      "target": [
+        "impresa",
+        "professionista",
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T06:58:38Z",
+      "source_excerpts": {
+        "amount": "in caso di ISEE inferiore a 15mila euro , l’importo del beneficio è erogato fino al raggiungimento dell’importo massimo di 1.500 euro per ogni beneficiario",
+        "requirements": "ISEE in corso di validità, con valore non superiore a 50mila euro",
+        "documents": "SPID (almeno di Livello 2 o superiore)"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "status": "unknown",
+      "gate_reason": "evidenze: url_ufficiale, importo, requisiti, documenti",
+      "discovered_at": "2026-11-20T06:59:05Z"
+    },
+    {
+      "id": "scr-8b37c38c13fc",
+      "title": "Assistenza domiciliare per persone non autosufficienti (Home Care Premium): domanda e gestione benefici",
+      "authority": "INPS",
+      "category": "famiglia",
+      "amount": "",
+      "deadline": "",
+      "summary": "Il servizio permette di presentare domanda per beneficiare di assistenza domiciliare e contributo economico per persone non autosufficienti. Per iscritti alla Gestione Unitaria delle prestazioni creditizie e sociali e loro familiari e parenti beneficiari.",
+      "requirements": [
+        "nazionale",
+        "dipendenti iscritti alla Gestione Unitaria delle prestazioni creditizie e sociali",
+        "I beneficiari devono essere individuati tra i soggetti maggiori o minori di età, con disabilità",
+        "I beneficiari, in seguito alla pubblicazione delle graduatorie, possono gestire i benefici tramite il servizio “Portale gestione benefici e professionisti”",
+        "delle condizioni economiche (valore ISEE)"
+      ],
+      "required_documents": [
+        "Il servizio permette di presentare domanda per beneficiare di assistenza domiciliare e contributo economico per persone non autosufficienti. Per iscritti alla Gestione Unitaria delle prestazioni creditizie e sociali e lo",
+        "Nella tabella (pdf 210KB) allegata al Regolamento sono riportati sia i termini di definizione dei provvedimenti stabiliti dall’Istituto superiori a quello di norma di 30 giorni, che l’indicazione del relativo responsabil",
+        "Il servizio permette di consultare le domande e i documenti presentati per l’ottenimento del beneficio di prestazioni di assistenza domiciliare HCP per persone non autosufficienti. Per domande inoltrate non oltre il 31 g",
+        "Il servizio consente di richiedere l'adesione al programma HCP di assistenza domiciliare per persone non autosufficienti e gestire prestazioni per periodi anteriori al 31 gennaio 2025 per Ambiti territoriali o enti pubbl"
+      ],
+      "source_url": "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.hcp-assistenza-domiciliare-per-persone-non-autosufficienti-home-care-premium--50014.hcp-assistenza-domiciliare-per-persone-non-autosufficienti-home-care-premium-domanda-e-gestione-benefici.html",
+      "source_name": "INPS — Contributo caregivers",
+      "target": [
+        "impresa",
+        "professionista",
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T06:58:41Z",
+      "source_excerpts": {
+        "requirements": "dipendenti iscritti alla Gestione Unitaria delle prestazioni creditizie e sociali",
+        "documents": "Il servizio permette di presentare domanda per beneficiare di assistenza domiciliare e contributo economico per persone non autosufficienti. Per iscritti alla Gestione Unitaria delle prestazioni creditizie e sociali e lo"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "status": "unknown",
+      "gate_reason": "evidenze: url_ufficiale, requisiti, documenti",
+      "discovered_at": "2026-11-20T06:59:05Z"
+    },
+    {
+      "id": "scr-56255d7110e3",
+      "title": "Detrazione canoni di locazione (bonus affitto giovani under 31)",
+      "authority": "Agenzia delle Entrate",
+      "category": "casa",
+      "amount": "",
+      "deadline": "",
+      "summary": "FAQ: Sono inquilino in un contratto di locazione di un immobile adibito ad abitazione principale, ho diritto alla detrazione? Cosa troverò nella mia dichiarazione precompilata? - Dichiarazione precompilata Info e assistenza",
+      "requirements": [
+        "nazionale"
+      ],
+      "required_documents": [],
+      "source_url": "https://infoprecompilata.agenziaentrate.gov.it/portale/w/faq-sono-inquilino-in-un-contratto-di-locazione-di-un-immobile-adibito-ad-abitazione-principale-ho-diritto-alla-detrazione-cosa-trovero-nella-mia-dich",
+      "source_name": "Agenzia delle Entrate — Bonus affitto giovani",
+      "target": [
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T06:58:45Z",
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "status": "unknown",
+      "gate_reason": "evidenze: url_ufficiale",
+      "discovered_at": "2026-11-20T06:59:05Z"
+    },
+    {
+      "id": "scr-d61800c12c8e",
+      "title": "Detrazioni per figli e familiari a carico",
+      "authority": "Agenzia delle Entrate",
+      "category": "famiglia",
+      "amount": "",
+      "deadline": "",
+      "summary": "730 Compilazione semplificata - Redditi dipendenti e pensionati",
+      "requirements": [
+        "figli",
+        "nazionale",
+        "730 Compilazione semplificata - Redditi dipendenti e pensionati",
+        "730 Compilazione ordinaria - Redditi dipendenti e pensionati",
+        "In questo prospetto devono essere inseriti i dati relativi ai familiari che nel 2025 sono stati fiscalmente a carico del contribuente, al fine di fruire delle detrazioni dall’imposta per il coniuge, i figli o gli ascende",
+        "Nel limite di reddito di 2.840,51 euro (o 4.000 euro) che il familiare deve possedere per essere considerato fiscalmente a carico, devono essere computate anche le seguenti somme, che non sono comprese nel reddito comple"
+      ],
+      "required_documents": [
+        "Se lo spazio disponibile nel modello non è sufficiente per i dati che devi inserire, clicca su \"Aggiungi modulo\" in alto a destra per compilare altri moduli"
+      ],
+      "source_url": "https://infoprecompilata.agenziaentrate.gov.it/portale/familiari",
+      "source_name": "Agenzia delle Entrate — Detrazioni figli",
+      "target": [
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T06:58:48Z",
+      "source_excerpts": {
+        "requirements": "730 Compilazione semplificata - Redditi dipendenti e pensionati",
+        "documents": "Se lo spazio disponibile nel modello non è sufficiente per i dati che devi inserire, clicca su \"Aggiungi modulo\" in alto a destra per compilare altri moduli"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "status": "unknown",
+      "gate_reason": "evidenze: url_ufficiale, requisiti, documenti",
+      "discovered_at": "2026-11-20T06:59:05Z"
+    },
+    {
+      "id": "scr-221b09cf88e0",
+      "title": "NASpI: indennità mensile di disoccupazione",
+      "authority": "INPS",
+      "category": "lavoro",
+      "amount": "8.174 euro",
+      "deadline": "",
+      "summary": "Il servizio permette di presentare la domanda di indennità mensile NASpI per lavoratori con rapporto subordinato che hanno perduto involontariamente l'occupazione.",
+      "requirements": [
+        "nazionale",
+        "dipendenti a tempo determinato delle pubbliche amministrazioni",
+        "A partire dal 1° gennaio 2022 la prestazione spetta anche agli operai agricoli a tempo indeterminato dipendenti dalle cooperative e loro consorzi che trasformano, manipolano e commercializzano prodotti agricoli e zootecn",
+        "dipendenti a tempo indeterminato delle pubbliche amministrazioni",
+        "L'indennità può essere riscossa tramite accredito su conto corrente bancario o postale, su libretto postale o tramite bonifico presso ufficio postale nel CAP di residenza o domicilio del richiedente. Il conto corrente de"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.50593.naspi-indennit-mensile-di-disoccupazione.html",
+      "source_name": "INPS — NASpI",
+      "target": [
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T06:58:51Z",
+      "source_excerpts": {
+        "amount": "se il titolare di due o più rapporti di lavoro subordinato a tempo parziale cessa da uno dei rapporti – a seguito di licenziamento, dimissioni per giusta causa, o di risoluzione consensuale del rapporto di lavoro interve",
+        "requirements": "dipendenti a tempo determinato delle pubbliche amministrazioni"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "status": "unknown",
+      "gate_reason": "evidenze: url_ufficiale, importo, requisiti",
+      "discovered_at": "2026-11-20T06:59:05Z"
+    },
+    {
+      "id": "scr-781872594aa8",
+      "title": "Indennità di accompagnamento agli invalidi civili",
+      "authority": "INPS",
+      "category": "salute",
+      "amount": "551,53 euro",
+      "deadline": "",
+      "summary": "Tutte le informazioni che riguardano la domanda di indennità di accompagnamento per soggetti mutilati o invalidi totali con impossibilità di deambulare autonomamente o con incapacità di compiere azioni quotidiane.",
+      "requirements": [
+        "nazionale",
+        "Spetta a tutti i cittadini in possesso dei requisiti sanitari residenti in forma stabile in Italia, indipendentemente dal reddito personale annuo e dall’età",
+        "I minori titolari dell’indennità di accompagnamento, al compimento della maggiore età devono presentare il modulo AP70 per l’erogazione della prestazione da maggiorenne (pensione di inabilità) senza necessità di effettua"
+      ],
+      "required_documents": [
+        "La domanda può essere presentata direttamente online sul sito dell’INPS, con accesso tramite SPID/CIE/CNS, oppure tramite un ente di patronato o un’associazione di categoria (ANMIC, ENS, UIC, ANFASS)"
+      ],
+      "source_url": "https://www.inps.it/it/it/dettaglio-approfondimento.schede-informative.indennit-di-accompagnamento-agli-invalidi-civili.html",
+      "source_name": "INPS — Indennità di accompagnamento",
+      "target": [
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T06:58:53Z",
+      "source_excerpts": {
+        "amount": "Per il 2026 l’importo dell’indennità è di 551,53 euro",
+        "requirements": "Spetta a tutti i cittadini in possesso dei requisiti sanitari residenti in forma stabile in Italia, indipendentemente dal reddito personale annuo e dall’età",
+        "documents": "La domanda può essere presentata direttamente online sul sito dell’INPS, con accesso tramite SPID/CIE/CNS, oppure tramite un ente di patronato o un’associazione di categoria (ANMIC, ENS, UIC, ANFASS)"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "status": "unknown",
+      "gate_reason": "evidenze: url_ufficiale, importo, requisiti, documenti",
+      "discovered_at": "2026-11-20T06:59:05Z"
+    },
+    {
+      "id": "scr-bfefbbd6e16c",
+      "title": "Assegno ordinario di invalidità per persone con capacità lavorativa ridotta",
+      "authority": "INPS",
+      "category": "salute",
+      "amount": "",
+      "deadline": "",
+      "summary": "Assegno ordinario di invalidità per persone con capacità lavorativa ridotta",
+      "requirements": [
+        "nazionale",
+        "Il servizio permette di presentare la domanda di Assegno ordinario di invalidità per lavoratori dipendenti (AGO), autonomi e iscritti alla Gestione Separata la cui capacità lavorativa è ridotta a meno di un terzo a causa",
+        "dipendenti iscritti all’ Assicurazione Generale Obbligatoria",
+        "si trasforma d'ufficio in pensione di vecchiaia , al compimento dell’età pensionabile e in presenza di tutti i requisiti",
+        "Il servizio permette di richiedere la conferma dell’assegno ordinario di invalidità per lavoratori dipendenti, autonomi e gli iscritti alla Gestione Separata la cui capacità lavorativa è ridotta a meno di un terzo a caus"
+      ],
+      "required_documents": [
+        "Domanda Pensione, Ricostituzione, Ratei, Certificazioni, APE Sociale e Beneficio precoci",
+        "Alla domanda deve essere allegata la certificazione medica (mod. SS3)"
+      ],
+      "source_url": "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.assegno-ordinario-di-invalidit-per-persone-con-capacit-lavorativa-ridotta-50294.assegno-ordinario-di-invalidit-per-persone-con-capacit-lavorativa-ridotta.html",
+      "source_name": "INPS — Assegno ordinario di invalidità",
+      "target": [
+        "impresa",
+        "artigiano",
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T06:58:56Z",
+      "source_excerpts": {
+        "requirements": "Il servizio permette di presentare la domanda di Assegno ordinario di invalidità per lavoratori dipendenti (AGO), autonomi e iscritti alla Gestione Separata la cui capacità lavorativa è ridotta a meno di un terzo a causa",
+        "documents": "Domanda Pensione, Ricostituzione, Ratei, Certificazioni, APE Sociale e Beneficio precoci"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "status": "unknown",
+      "gate_reason": "evidenze: url_ufficiale, requisiti, documenti",
+      "discovered_at": "2026-11-20T06:59:05Z"
+    },
+    {
+      "id": "scr-2c1440c6882f",
+      "title": "Detrazione delle spese sanitarie",
+      "authority": "Agenzia delle Entrate",
+      "category": "salute",
+      "amount": "",
+      "deadline": "",
+      "summary": "Spese sanitarie - Dichiarazione precompilata Info e assistenza",
+      "requirements": [
+        "nazionale"
+      ],
+      "required_documents": [
+        "l'acquisto di farmaci presso farmacie e parafarmacie",
+        "certificazioni mediche",
+        "La data di emissione del documento",
+        "Il soggetto che ha emesso il documento di spesa"
+      ],
+      "source_url": "https://infoprecompilata.agenziaentrate.gov.it/portale/spese-sanitarie",
+      "source_name": "Agenzia delle Entrate — Detrazione spese sanitarie",
+      "target": [
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T06:59:00Z",
+      "source_excerpts": {
+        "documents": "l'acquisto di farmaci presso farmacie e parafarmacie"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "status": "unknown",
+      "gate_reason": "evidenze: url_ufficiale, documenti",
+      "discovered_at": "2026-11-20T06:59:05Z"
+    },
+    {
+      "id": "scr-817d412ce842",
+      "title": "Bonus sociale per luce, gas e acqua",
+      "authority": "ARERA",
+      "category": "energia",
+      "amount": "",
+      "deadline": "",
+      "summary": "Scopri le informazioni per accedere ai bonus sociali per i nuclei familiari in condizioni di disagio economico o fisico.",
+      "requirements": [
+        "nazionale"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.arera.it/consumatori/bonus-sociale",
+      "source_name": "ARERA — Bonus sociale luce, gas e acqua",
+      "target": [
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T06:59:04Z",
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "status": "unknown",
+      "gate_reason": "evidenze: url_ufficiale",
+      "discovered_at": "2026-11-20T06:59:05Z"
     },
     {
       "id": "scr-0abd0c8fefc3",
@@ -836,507 +1398,6 @@
       "last_seen_at": "2026-11-19T10:57:13Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza, importo, documenti",
-      "discovered_at": "2026-11-19T10:57:13Z"
-    },
-    {
-      "id": "scr-424b455ff955",
-      "title": "Sostegno al reddito e titoli sociali",
-      "authority": "Comune di Milano",
-      "category": "famiglia",
-      "amount": "500,00 euro",
-      "deadline": "16 dicembre 2026",
-      "summary": "Avviso pubblicato su Comune di Milano — Agevolazioni: apri la fonte per i dettagli.",
-      "requirements": [
-        "reddito",
-        "Residenza nel Comune di Milano",
-        "Il Comune di Milano realizza azioni di contrasto alla povertà sia attraverso interventi di sostegno al reddito, sia attraverso l’erogazione dei titoli sociali (contributi erogati a rimborso delle prestazioni richieste da",
-        "Il numero di protocollo DSU è riportato nella parte superiore dell’attestazione ISEE rilasciata dall’INPS, nel seguente formato",
-        "Misura B2 - Contributi per persone con disabilità/non autosufficienti",
-        "Contributi per soggiorni climatici per persone con disabilità"
-      ],
-      "required_documents": [
-        "Nel rispetto della normativa vigente in materia di protezione dei dati personali, nella graduatoria sarà indicato esclusivamente il numero di protocollo della Dichiarazione Sostitutiva Unica (DSU) 2026",
-        "un documento di identità in corso di validità",
-        "Misura B2 - Contributi per persone con disabilità/non autosufficienti"
-      ],
-      "source_url": "https://www.comune.milano.it/servizi/welfare/sostegno-al-reddito-e-titoli-sociali",
-      "source_name": "Comune di Milano — Agevolazioni",
-      "target": [
-        "persona"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:56:34Z",
-      "source_excerpts": {
-        "deadline": "Per non perdere il beneficio, è necessario effettuare almeno un acquisto entro il 16 dicembre 2026 . Il mancato utilizzo della Carta entro tale termine comporta la decadenza dal beneficio",
-        "amount": "La Carta Dedicata a Te è un contributo economico destinato ai nuclei familiari in possesso dei requisiti previsti dalla normativa. Per il 2026 il contributo è pari a 500,00 euro",
-        "requirements": "Il Comune di Milano realizza azioni di contrasto alla povertà sia attraverso interventi di sostegno al reddito, sia attraverso l’erogazione dei titoli sociali (contributi erogati a rimborso delle prestazioni richieste da",
-        "documents": "Nel rispetto della normativa vigente in materia di protezione dei dati personali, nella graduatoria sarà indicato esclusivamente il numero di protocollo della Dichiarazione Sostitutiva Unica (DSU) 2026"
-      },
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "status": "open",
-      "gate_reason": "evidenze: scadenza, importo, requisiti, documenti",
-      "discovered_at": "2026-11-19T10:57:13Z"
-    },
-    {
-      "id": "scr-5d715052430f",
-      "title": "Avviso progetti PUC",
-      "authority": "Comune di Milano",
-      "category": "lavoro",
-      "amount": "",
-      "deadline": "31 dicembre 2026",
-      "summary": "Avviso pubblicato su Comune di Milano — Agevolazioni: apri la fonte per i dettagli.",
-      "requirements": [
-        "Residenza nel Comune di Milano",
-        "Possono presentare la domanda di Manifestazione di Interesse gli Enti del Terzo Settore con sede operativa nel territorio del Comune di Milano"
-      ],
-      "required_documents": [
-        "Alla domanda dovranno essere allegate",
-        "le schede contenenti le proposte di progetto, da presentarsi utilizzando l'Allegato C",
-        "copia di un documento di identità in corso di validità del legale rappresentante che presenta la domanda (e possibile non allegare il documento di identità nel caso in cui il modulo di domanda sia firmato digitalmente)"
-      ],
-      "source_url": "https://servizi.comune.milano.it/en/dettaglio-contenuto/-/asset_publisher/pqxq/content/avviso-pubblico-per-l-acquisizione-di-manifestazione-d-interesse-per-l-individuazione-di-enti-del-terzo-settore-per-lo-svolgimento-dei-progetti-puc-con-il-coinvolgimento-di-beneficiari-di-assegno-di-inclusione-adi-e-di-supporto-per-la-formazione-e-il-lavo",
-      "source_name": "Comune di Milano — Agevolazioni",
-      "target": [
-        "impresa"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:56:33Z",
-      "source_excerpts": {
-        "deadline": "Il presente Avviso pubblico ha durata per il triennio 2024-2026 e scadenza il 31 dicembre 2026",
-        "requirements": "Possono presentare la domanda di Manifestazione di Interesse gli Enti del Terzo Settore con sede operativa nel territorio del Comune di Milano",
-        "documents": "Alla domanda dovranno essere allegate"
-      },
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "status": "open",
-      "gate_reason": "evidenze: scadenza, requisiti, documenti",
-      "discovered_at": "2026-11-19T10:57:13Z"
-    },
-    {
-      "id": "scr-5f0f94cc6a32",
-      "title": "Carta Dedicata a Te 2026/2027",
-      "authority": "Comune di Milano",
-      "category": "lavoro",
-      "amount": "500,00 euro",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Comune di Milano — Agevolazioni: apri la fonte per i dettagli.",
-      "requirements": [
-        "Residenza nel Comune di Milano"
-      ],
-      "required_documents": [
-        "t��N+ �\u0006d�0�>\u0016� I���W$������� F�)c`���W]�� f�/:�Ӵ\u0006�I���~Z��\u000f3�\u0017���\u001bؤ���p�m���\u0007�@\u0013�\b�S��cie�x�D�(\u0007*�Yφ\b�\\�\u0002\u0001",
-        "t��\u0016;� ��oa�\u0011}, ;����W$������� F�9c`\u0013��W���/f�/:���\u0006�����~b������t� l�|�j��6���\u0003b��F�ѩ��cie�x�D�(\u0007*�YKC��A��\u0005� �S",
-        "p��� �\u0006`�0� cieüJ\"b� �ɬ��\bo�\\�\u0006�\u0014�p",
-        "O\u001a\u0003�t����q�bf���?Ml\u0000�t�����0~1��ٟ���&ݿ�\u001a����`�\u0001��D=��\u0014��cie�4L\"j�\u0003�άG]�c'�\u0001�L�"
-      ],
-      "source_url": "https://www.comune.milano.it/documents/20118/9859121/Graduatoria+definitiva+2026_Beneficiari+Selezionati.pdf/3ef20256-54e9-4993-86b4-f45e247b3aec?version=1.0&t=1793633605574&download=true",
-      "source_name": "Comune di Milano — Agevolazioni",
-      "target": [
-        "persona"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:56:38Z",
-      "source_excerpts": {
-        "documents": "t��N+ �\u0006d�0�>\u0016� I���W$������� F�)c`���W]�� f�/:�Ӵ\u0006�I���~Z��\u000f3�\u0017���\u001bؤ���p�m���\u0007�@\u0013�\b�S��cie�x�D�(\u0007*�Yφ\b�\\�\u0002\u0001"
-      },
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "status": "unknown",
-      "gate_reason": "evidenze: importo, documenti",
-      "discovered_at": "2026-11-19T10:57:13Z"
-    },
-    {
-      "id": "scr-78272df3e744",
-      "title": "Assegno unico e universale per i figli a carico",
-      "authority": "INPS",
-      "category": "famiglia",
-      "amount": "46.582,71 euro",
-      "deadline": "",
-      "summary": "Il servizio permette di richiedere l’Assegno unico per figli a carico fino a 21 anni, o senza limiti di età se disabili, in base alle nuove regole su residenza, lavoratori non residenti e figli residenti in altri Stati UE.",
-      "requirements": [
-        "figli",
-        "Il servizio permette di richiedere l’Assegno unico per figli a carico fino a 21 anni, o senza limiti di età se disabili, in base alle nuove regole su residenza, lavoratori non residenti e figli residenti in altri Stati U",
-        "senza limiti di età per i figli disabili",
-        "alla condizione economica del nucleo familiare sulla base di ISEE valido al momento della domanda",
-        "È universale , perché garantito in misura minima a tutte le famiglie con figli a carico, anche in assenza di ISEE o con ISEE superiore alla soglia massima rivalutata annualmente: 46.582,71 per il 2026"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.assegno-unico-e-universale-per-i-figli-a-carico-55984.assegno-unico-e-universale-per-i-figli-a-carico.html",
-      "source_name": "INPS — Prestazioni e sussidi",
-      "target": [
-        "persona"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:56:40Z",
-      "source_excerpts": {
-        "amount": "una quota variabile progressiva in relazione alle soglie ISEE rivalutate annualmente ( da un massimo di 203,8 euro per ciascun figlio minore con ISEE fino a 17.468,51 euro a un minimo di 58,3 euro per ciascun figlio mino",
-        "requirements": "Il servizio permette di richiedere l’Assegno unico per figli a carico fino a 21 anni, o senza limiti di età se disabili, in base alle nuove regole su residenza, lavoratori non residenti e figli residenti in altri Stati U"
-      },
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "status": "unknown",
-      "gate_reason": "evidenze: url_ufficiale, importo, requisiti",
-      "discovered_at": "2026-11-19T10:57:13Z"
-    },
-    {
-      "id": "scr-f3dfd02639cd",
-      "title": "Agevolazioni per le ristrutturazioni edilizie",
-      "authority": "Agenzia delle Entrate",
-      "category": "casa",
-      "amount": "96.000 euro",
-      "deadline": "",
-      "summary": "Aree tematiche - Agevolazioni per le ristrutturazioni edilizie - Agenzia delle Entrate",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.agenziaentrate.gov.it/portale/aree-tematiche/casa/agevolazioni/agevolazioni-per-le-ristrutturazioni-edilizie",
-      "source_name": "Agenzia delle Entrate — Agevolazioni casa",
-      "target": [
-        "persona",
-        "impresa"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:56:46Z",
-      "source_excerpts": {
-        "amount": "Tuttavia, per le spese sostenute nel 2026 sono prorogate le stesse condizioni previste per l’anno 2025: la detrazione spetta nella misura del 36% (50% in caso di abitazione principale) su un massimo di 96.000 euro per un"
-      },
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "status": "unknown",
-      "gate_reason": "evidenze: url_ufficiale, importo",
-      "discovered_at": "2026-11-19T10:57:13Z"
-    },
-    {
-      "id": "scr-00da843bdc16",
-      "title": "Contributo per sostenere le spese relative a sessioni di psicoterapia",
-      "authority": "INPS",
-      "category": "famiglia",
-      "amount": "1.500 euro",
-      "deadline": "",
-      "summary": "Contributo per sostenere le spese relative a sessioni di psicoterapia - Bonus psicologo",
-      "requirements": [
-        "nazionale",
-        "ISEE in corso di validità, con valore non superiore a 50mila euro",
-        "In presenza di un ISEE non valido , la domanda non può essere accolta",
-        "a parità di valore ISEE, dell’ordine di presentazione della domanda",
-        "Il beneficio viene quantificato in base ai seguenti limiti di ISEE"
-      ],
-      "required_documents": [
-        "SPID (almeno di Livello 2 o superiore)",
-        "CIE 3.0 (Carta d’identità elettronica)",
-        "CNS (Carta Nazionale dei Servizi)",
-        "Al termine del periodo stabilito per la presentazione delle domande, sono redatte le graduatorie per l’assegnazione del beneficio nei limiti delle risorse stanziate (Tabella 1 allegata al decreto interministeriale 10 lug"
-      ],
-      "source_url": "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.contributo-per-sostenere-le-spese-relative-a-sessioni-di-psicoterapia-bonus-psicologo.html",
-      "source_name": "INPS — Bonus psicologo",
-      "target": [
-        "impresa",
-        "professionista",
-        "persona"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:56:50Z",
-      "source_excerpts": {
-        "amount": "in caso di ISEE inferiore a 15mila euro , l’importo del beneficio è erogato fino al raggiungimento dell’importo massimo di 1.500 euro per ogni beneficiario",
-        "requirements": "ISEE in corso di validità, con valore non superiore a 50mila euro",
-        "documents": "SPID (almeno di Livello 2 o superiore)"
-      },
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "status": "unknown",
-      "gate_reason": "evidenze: url_ufficiale, importo, requisiti, documenti",
-      "discovered_at": "2026-11-19T10:57:13Z"
-    },
-    {
-      "id": "scr-8b37c38c13fc",
-      "title": "Assistenza domiciliare per persone non autosufficienti (Home Care Premium): domanda e gestione benefici",
-      "authority": "INPS",
-      "category": "famiglia",
-      "amount": "",
-      "deadline": "",
-      "summary": "Il servizio permette di presentare domanda per beneficiare di assistenza domiciliare e contributo economico per persone non autosufficienti. Per iscritti alla Gestione Unitaria delle prestazioni creditizie e sociali e loro familiari e parenti beneficiari.",
-      "requirements": [
-        "nazionale",
-        "dipendenti iscritti alla Gestione Unitaria delle prestazioni creditizie e sociali",
-        "I beneficiari devono essere individuati tra i soggetti maggiori o minori di età, con disabilità",
-        "I beneficiari, in seguito alla pubblicazione delle graduatorie, possono gestire i benefici tramite il servizio “Portale gestione benefici e professionisti”",
-        "delle condizioni economiche (valore ISEE)"
-      ],
-      "required_documents": [
-        "Il servizio permette di presentare domanda per beneficiare di assistenza domiciliare e contributo economico per persone non autosufficienti. Per iscritti alla Gestione Unitaria delle prestazioni creditizie e sociali e lo",
-        "Nella tabella (pdf 210KB) allegata al Regolamento sono riportati sia i termini di definizione dei provvedimenti stabiliti dall’Istituto superiori a quello di norma di 30 giorni, che l’indicazione del relativo responsabil",
-        "Il servizio permette di consultare le domande e i documenti presentati per l’ottenimento del beneficio di prestazioni di assistenza domiciliare HCP per persone non autosufficienti. Per domande inoltrate non oltre il 31 g",
-        "Il servizio consente di richiedere l'adesione al programma HCP di assistenza domiciliare per persone non autosufficienti e gestire prestazioni per periodi anteriori al 31 gennaio 2025 per Ambiti territoriali o enti pubbl"
-      ],
-      "source_url": "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.hcp-assistenza-domiciliare-per-persone-non-autosufficienti-home-care-premium--50014.hcp-assistenza-domiciliare-per-persone-non-autosufficienti-home-care-premium-domanda-e-gestione-benefici.html",
-      "source_name": "INPS — Contributo caregivers",
-      "target": [
-        "impresa",
-        "professionista",
-        "persona"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:56:51Z",
-      "source_excerpts": {
-        "requirements": "dipendenti iscritti alla Gestione Unitaria delle prestazioni creditizie e sociali",
-        "documents": "Il servizio permette di presentare domanda per beneficiare di assistenza domiciliare e contributo economico per persone non autosufficienti. Per iscritti alla Gestione Unitaria delle prestazioni creditizie e sociali e lo"
-      },
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "status": "unknown",
-      "gate_reason": "evidenze: url_ufficiale, requisiti, documenti",
-      "discovered_at": "2026-11-19T10:57:13Z"
-    },
-    {
-      "id": "scr-56255d7110e3",
-      "title": "Detrazione canoni di locazione (bonus affitto giovani under 31)",
-      "authority": "Agenzia delle Entrate",
-      "category": "casa",
-      "amount": "",
-      "deadline": "",
-      "summary": "FAQ: Sono inquilino in un contratto di locazione di un immobile adibito ad abitazione principale, ho diritto alla detrazione? Cosa troverò nella mia dichiarazione precompilata? - Dichiarazione precompilata Info e assistenza",
-      "requirements": [
-        "nazionale"
-      ],
-      "required_documents": [],
-      "source_url": "https://infoprecompilata.agenziaentrate.gov.it/portale/w/faq-sono-inquilino-in-un-contratto-di-locazione-di-un-immobile-adibito-ad-abitazione-principale-ho-diritto-alla-detrazione-cosa-trovero-nella-mia-dich",
-      "source_name": "Agenzia delle Entrate — Bonus affitto giovani",
-      "target": [
-        "persona"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:56:55Z",
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "status": "unknown",
-      "gate_reason": "evidenze: url_ufficiale",
-      "discovered_at": "2026-11-19T10:57:13Z"
-    },
-    {
-      "id": "scr-d61800c12c8e",
-      "title": "Detrazioni per figli e familiari a carico",
-      "authority": "Agenzia delle Entrate",
-      "category": "famiglia",
-      "amount": "",
-      "deadline": "",
-      "summary": "730 Compilazione semplificata - Redditi dipendenti e pensionati",
-      "requirements": [
-        "figli",
-        "nazionale",
-        "730 Compilazione semplificata - Redditi dipendenti e pensionati",
-        "730 Compilazione ordinaria - Redditi dipendenti e pensionati",
-        "In questo prospetto devono essere inseriti i dati relativi ai familiari che nel 2025 sono stati fiscalmente a carico del contribuente, al fine di fruire delle detrazioni dall’imposta per il coniuge, i figli o gli ascende",
-        "Nel limite di reddito di 2.840,51 euro (o 4.000 euro) che il familiare deve possedere per essere considerato fiscalmente a carico, devono essere computate anche le seguenti somme, che non sono comprese nel reddito comple"
-      ],
-      "required_documents": [
-        "Se lo spazio disponibile nel modello non è sufficiente per i dati che devi inserire, clicca su \"Aggiungi modulo\" in alto a destra per compilare altri moduli"
-      ],
-      "source_url": "https://infoprecompilata.agenziaentrate.gov.it/portale/familiari",
-      "source_name": "Agenzia delle Entrate — Detrazioni figli",
-      "target": [
-        "persona"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:56:58Z",
-      "source_excerpts": {
-        "requirements": "730 Compilazione semplificata - Redditi dipendenti e pensionati",
-        "documents": "Se lo spazio disponibile nel modello non è sufficiente per i dati che devi inserire, clicca su \"Aggiungi modulo\" in alto a destra per compilare altri moduli"
-      },
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "status": "unknown",
-      "gate_reason": "evidenze: url_ufficiale, requisiti, documenti",
-      "discovered_at": "2026-11-19T10:57:13Z"
-    },
-    {
-      "id": "scr-221b09cf88e0",
-      "title": "NASpI: indennità mensile di disoccupazione",
-      "authority": "INPS",
-      "category": "lavoro",
-      "amount": "8.174 euro",
-      "deadline": "",
-      "summary": "Il servizio permette di presentare la domanda di indennità mensile NASpI per lavoratori con rapporto subordinato che hanno perduto involontariamente l'occupazione.",
-      "requirements": [
-        "nazionale",
-        "dipendenti a tempo determinato delle pubbliche amministrazioni",
-        "A partire dal 1° gennaio 2022 la prestazione spetta anche agli operai agricoli a tempo indeterminato dipendenti dalle cooperative e loro consorzi che trasformano, manipolano e commercializzano prodotti agricoli e zootecn",
-        "dipendenti a tempo indeterminato delle pubbliche amministrazioni",
-        "L'indennità può essere riscossa tramite accredito su conto corrente bancario o postale, su libretto postale o tramite bonifico presso ufficio postale nel CAP di residenza o domicilio del richiedente. Il conto corrente de"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.50593.naspi-indennit-mensile-di-disoccupazione.html",
-      "source_name": "INPS — NASpI",
-      "target": [
-        "impresa"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:57:00Z",
-      "source_excerpts": {
-        "amount": "se il titolare di due o più rapporti di lavoro subordinato a tempo parziale cessa da uno dei rapporti – a seguito di licenziamento, dimissioni per giusta causa, o di risoluzione consensuale del rapporto di lavoro interve",
-        "requirements": "dipendenti a tempo determinato delle pubbliche amministrazioni"
-      },
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "status": "unknown",
-      "gate_reason": "evidenze: url_ufficiale, importo, requisiti",
-      "discovered_at": "2026-11-19T10:57:13Z"
-    },
-    {
-      "id": "scr-781872594aa8",
-      "title": "Indennità di accompagnamento agli invalidi civili",
-      "authority": "INPS",
-      "category": "salute",
-      "amount": "551,53 euro",
-      "deadline": "",
-      "summary": "Tutte le informazioni che riguardano la domanda di indennità di accompagnamento per soggetti mutilati o invalidi totali con impossibilità di deambulare autonomamente o con incapacità di compiere azioni quotidiane.",
-      "requirements": [
-        "nazionale",
-        "Spetta a tutti i cittadini in possesso dei requisiti sanitari residenti in forma stabile in Italia, indipendentemente dal reddito personale annuo e dall’età",
-        "I minori titolari dell’indennità di accompagnamento, al compimento della maggiore età devono presentare il modulo AP70 per l’erogazione della prestazione da maggiorenne (pensione di inabilità) senza necessità di effettua"
-      ],
-      "required_documents": [
-        "La domanda può essere presentata direttamente online sul sito dell’INPS, con accesso tramite SPID/CIE/CNS, oppure tramite un ente di patronato o un’associazione di categoria (ANMIC, ENS, UIC, ANFASS)"
-      ],
-      "source_url": "https://www.inps.it/it/it/dettaglio-approfondimento.schede-informative.indennit-di-accompagnamento-agli-invalidi-civili.html",
-      "source_name": "INPS — Indennità di accompagnamento",
-      "target": [
-        "persona"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:57:01Z",
-      "source_excerpts": {
-        "amount": "Per il 2026 l’importo dell’indennità è di 551,53 euro",
-        "requirements": "Spetta a tutti i cittadini in possesso dei requisiti sanitari residenti in forma stabile in Italia, indipendentemente dal reddito personale annuo e dall’età",
-        "documents": "La domanda può essere presentata direttamente online sul sito dell’INPS, con accesso tramite SPID/CIE/CNS, oppure tramite un ente di patronato o un’associazione di categoria (ANMIC, ENS, UIC, ANFASS)"
-      },
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "status": "unknown",
-      "gate_reason": "evidenze: url_ufficiale, importo, requisiti, documenti",
-      "discovered_at": "2026-11-19T10:57:13Z"
-    },
-    {
-      "id": "scr-bfefbbd6e16c",
-      "title": "Assegno ordinario di invalidità per persone con capacità lavorativa ridotta",
-      "authority": "INPS",
-      "category": "salute",
-      "amount": "",
-      "deadline": "",
-      "summary": "Assegno ordinario di invalidità per persone con capacità lavorativa ridotta",
-      "requirements": [
-        "nazionale",
-        "Il servizio permette di presentare la domanda di Assegno ordinario di invalidità per lavoratori dipendenti (AGO), autonomi e iscritti alla Gestione Separata la cui capacità lavorativa è ridotta a meno di un terzo a causa",
-        "dipendenti iscritti all’ Assicurazione Generale Obbligatoria",
-        "si trasforma d'ufficio in pensione di vecchiaia , al compimento dell’età pensionabile e in presenza di tutti i requisiti",
-        "Il servizio permette di richiedere la conferma dell’assegno ordinario di invalidità per lavoratori dipendenti, autonomi e gli iscritti alla Gestione Separata la cui capacità lavorativa è ridotta a meno di un terzo a caus"
-      ],
-      "required_documents": [
-        "Domanda Pensione, Ricostituzione, Ratei, Certificazioni, APE Sociale e Beneficio precoci",
-        "Alla domanda deve essere allegata la certificazione medica (mod. SS3)"
-      ],
-      "source_url": "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.assegno-ordinario-di-invalidit-per-persone-con-capacit-lavorativa-ridotta-50294.assegno-ordinario-di-invalidit-per-persone-con-capacit-lavorativa-ridotta.html",
-      "source_name": "INPS — Assegno ordinario di invalidità",
-      "target": [
-        "impresa",
-        "artigiano",
-        "persona"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:57:04Z",
-      "source_excerpts": {
-        "requirements": "Il servizio permette di presentare la domanda di Assegno ordinario di invalidità per lavoratori dipendenti (AGO), autonomi e iscritti alla Gestione Separata la cui capacità lavorativa è ridotta a meno di un terzo a causa",
-        "documents": "Domanda Pensione, Ricostituzione, Ratei, Certificazioni, APE Sociale e Beneficio precoci"
-      },
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "status": "unknown",
-      "gate_reason": "evidenze: url_ufficiale, requisiti, documenti",
-      "discovered_at": "2026-11-19T10:57:13Z"
-    },
-    {
-      "id": "scr-2c1440c6882f",
-      "title": "Detrazione delle spese sanitarie",
-      "authority": "Agenzia delle Entrate",
-      "category": "salute",
-      "amount": "",
-      "deadline": "",
-      "summary": "Spese sanitarie - Dichiarazione precompilata Info e assistenza",
-      "requirements": [
-        "nazionale"
-      ],
-      "required_documents": [
-        "l'acquisto di farmaci presso farmacie e parafarmacie",
-        "certificazioni mediche",
-        "La data di emissione del documento",
-        "Il soggetto che ha emesso il documento di spesa"
-      ],
-      "source_url": "https://infoprecompilata.agenziaentrate.gov.it/portale/spese-sanitarie",
-      "source_name": "Agenzia delle Entrate — Detrazione spese sanitarie",
-      "target": [
-        "persona"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:57:07Z",
-      "source_excerpts": {
-        "documents": "l'acquisto di farmaci presso farmacie e parafarmacie"
-      },
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "status": "unknown",
-      "gate_reason": "evidenze: url_ufficiale, documenti",
-      "discovered_at": "2026-11-19T10:57:13Z"
-    },
-    {
-      "id": "scr-817d412ce842",
-      "title": "Bonus sociale per luce, gas e acqua",
-      "authority": "ARERA",
-      "category": "energia",
-      "amount": "",
-      "deadline": "",
-      "summary": "Scopri le informazioni per accedere ai bonus sociali per i nuclei familiari in condizioni di disagio economico o fisico.",
-      "requirements": [
-        "nazionale"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.arera.it/consumatori/bonus-sociale",
-      "source_name": "ARERA — Bonus sociale luce, gas e acqua",
-      "target": [
-        "persona"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:57:12Z",
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "status": "unknown",
-      "gate_reason": "evidenze: url_ufficiale",
       "discovered_at": "2026-11-19T10:57:13Z"
     },
     {
@@ -1400,12 +1461,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:54:09Z",
+      "detail_fetched_at": "2026-11-20T06:55:42Z",
       "source_excerpts": {
         "documents": "Cittadini - Canone TV - Dichiarazione sostitutiva (invio online) - Agenzia delle Entrate"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
     },
     {
@@ -1427,7 +1488,7 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
@@ -1454,12 +1515,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:54:22Z",
+      "detail_fetched_at": "2026-11-20T06:55:56Z",
       "source_excerpts": {
         "documents": "Fondo Nazionale Efficienza Energetica - Ministero dell'Ambiente e della Sicurezza energetica"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
     },
     {
@@ -1487,13 +1548,13 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:54:24Z",
+      "detail_fetched_at": "2026-11-20T06:55:59Z",
       "source_excerpts": {
         "requirements": "ENEA INTRAENEA (area riservata ai dipendenti dell'Agenzia)",
         "documents": "Dipartimento Unità per l'Efficienza Energetica"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
     },
     {
@@ -1515,9 +1576,9 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:55:17Z",
+      "detail_fetched_at": "2026-11-20T06:56:51Z",
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
@@ -1541,12 +1602,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:55:16Z",
+      "detail_fetched_at": "2026-11-20T06:56:51Z",
       "source_excerpts": {
         "requirements": "Attraverso il Sistema, datori di lavoro e intermediari possono consultare i benefici contributivi disponibili, simulare quelli applicabili in relazione alle caratteristiche dell’impresa, del lavoratore e della posizione "
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
@@ -1568,9 +1629,9 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:55:17Z",
+      "detail_fetched_at": "2026-11-20T06:56:51Z",
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
@@ -1593,12 +1654,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:55:19Z",
+      "detail_fetched_at": "2026-11-20T06:56:56Z",
       "source_excerpts": {
         "requirements": "La misura si rivolge alle PMI che intendono tutelare i propri segni distintivi attraverso le procedure previste presso l’EUIPO, l’Ufficio dell’Unione europea per la proprietà intellettuale. In questo caso la dotazione am"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "gate_reason": "nessun segnale di bando"
     },
     {
@@ -1623,12 +1684,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:55:35Z",
+      "detail_fetched_at": "2026-11-20T06:57:13Z",
       "source_excerpts": {
         "requirements": "Si comunica l’esaurimento delle risorse destinate ai contributi a fondo perduto di \"ON - Oltre Nuove imprese a tasso zero\". Per le domande presentate dal 1° luglio 2026 le agevolazioni verranno quindi concesse nella sola"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: requisiti"
     },
     {
@@ -1652,12 +1713,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:55:34Z",
+      "detail_fetched_at": "2026-11-20T06:57:13Z",
       "source_excerpts": {
         "requirements": "L’iniziativa, al fine di raggiungere in modo più ampio e consistente gli obiettivi prefissati, è attuata con partner istituzionali tra cui Unioncamere , Società italiana di management , Ufficio Italiano Brevetti e Marchi"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: requisiti"
     },
     {
@@ -1681,12 +1742,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:55:35Z",
+      "detail_fetched_at": "2026-11-20T06:57:14Z",
       "source_excerpts": {
         "documents": "“Economia circolare” è l’incentivo che sostiene la transizione delle attività economiche verso un modello di economia circolare e favorisce la riconversione produttiva per un uso più efficiente e sostenibile delle risors"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
     },
     {
@@ -1709,7 +1770,296 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
+    },
+    {
+      "id": "scr-299c344e6418",
+      "title": "Bando contributo affitto 2026",
+      "authority": "Comune di Firenze",
+      "category": "casa",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Comune di Firenze — Novità e avvisi: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://sociale.comune.fi.it/dalle-redazioni/bando-contributo-affitto-2026",
+      "source_name": "Comune di Firenze — Novità e avvisi",
+      "target": [
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
+    },
+    {
+      "id": "scr-21caf7e12089",
+      "title": "Assegno di maternità",
+      "authority": "Comune di Firenze",
+      "category": "famiglia",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Comune di Firenze — Novità e avvisi: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.comune.firenze.it/istruzione/servizi/salute-benessere-e-assistenza/assegno-di-maternita",
+      "source_name": "Comune di Firenze — Novità e avvisi",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
+    },
+    {
+      "id": "scr-430cdb72cecd",
+      "title": "Bonus elettrico per disagio fisico",
+      "authority": "Comune di Firenze",
+      "category": "salute",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su Comune di Firenze — Novità e avvisi: apri la fonte per i dettagli.",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.comune.firenze.it/istruzione/servizi/salute-benessere-e-assistenza/bonus-elettrico-disagio-fisico",
+      "source_name": "Comune di Firenze — Novità e avvisi",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
+    },
+    {
+      "id": "scr-d3ffc56b5d2d",
+      "title": "Bonus sociale idrico integrativo - Anno 2026",
+      "authority": "Comune di Firenze",
+      "category": "salute",
+      "amount": "",
+      "deadline": "",
+      "summary": "Bonus sociale idrico integrativo - Anno 2026",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.comune.firenze.it/istruzione/servizi/salute-benessere-e-assistenza/bonus-sociale-idrico-integrativo-anno-2026",
+      "source_name": "Comune di Firenze — Novità e avvisi",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
+    },
+    {
+      "id": "scr-e3b358eff411",
+      "title": "Contributi familiari caregiver - Anno 2026",
+      "authority": "Comune di Firenze",
+      "category": "salute",
+      "amount": "",
+      "deadline": "",
+      "summary": "Contributi familiari caregiver - Anno 2026",
+      "requirements": [],
+      "required_documents": [],
+      "source_url": "https://www.comune.firenze.it/istruzione/servizi/salute-benessere-e-assistenza/contributi-familiari-caregiver-anno-2026",
+      "source_name": "Comune di Firenze — Novità e avvisi",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
+    },
+    {
+      "id": "scr-1fce87e678d7",
+      "title": "Bando per contributi per iniziative per la prevenzione e la sensibilizzazione sul tema delle truffe e dei raggiri, anche informatici, nell’ambito del Protocollo",
+      "authority": "Regione Autonoma Friuli Venezia Giulia",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Bando per contributi per iniziative per la prevenzione e la sensibilizzazione sul tema delle truffe e dei raggiri, anche informatici, nell’ambito del Protocollo d’intesa per la sicurezza urbana integrata Direzione centrale autonomie locali, sicurezza e politiche dell'immigrazione",
+      "requirements": [
+        "Sede operativa o residenza in Friuli Venezia Giulia"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/MODULI/bandi_avvisi/BANDI/9174.html",
+      "source_name": "Regione Friuli Venezia Giulia",
+      "target": [
+        "impresa",
+        "artigiano"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T06:57:45Z",
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
+    },
+    {
+      "id": "scr-889e4d4da66e",
+      "title": "Bando per la concessione di contributi, a favore delle organizzazioni di volontariato iscritte al Registro Unico Nazionale del Terzo Settore, per la realizzazio",
+      "authority": "Regione Autonoma Friuli Venezia Giulia",
+      "category": "lavoro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Bando per la concessione di contributi, a favore delle organizzazioni di volontariato iscritte al Registro Unico Nazionale del Terzo Settore, per la realizzazione di attività informative in materia di sicurezza stradale rivolte agli studenti delle istituzioni scolastiche di secondo grado, nonché agli istituti comprensivi del territorio regionale Direzione centrale autonomie locali, funzione pub…",
+      "requirements": [
+        "Sede operativa o residenza in Friuli Venezia Giulia"
+      ],
+      "required_documents": [
+        "Modulo di domanda [formato .doc]"
+      ],
+      "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/MODULI/bandi_avvisi/BANDI/9171.html",
+      "source_name": "Regione Friuli Venezia Giulia",
+      "target": [
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T06:57:45Z",
+      "source_excerpts": {
+        "documents": "Modulo di domanda [formato .doc]"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
+    },
+    {
+      "id": "scr-39989a1168f1",
+      "title": "Assegno unico e universale",
+      "authority": "INPS",
+      "category": "famiglia",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su INPS — Bonus e agevolazioni famiglie: apri la fonte per i dettagli.",
+      "requirements": [
+        "nazionale"
+      ],
+      "required_documents": [
+        "SPID è il sistema di accesso che consente di utilizzare, con un'identità digitale unica",
+        "Nota: si informa che non è consentito l'accesso mediante credenziali SPID, CIE, CNS o eIDAS intestate",
+        "Maggiori informazioni su SPID",
+        "Entra con SPID"
+      ],
+      "source_url": "https://servizi2.inps.it/servizi/AssegnoUnicoFigli",
+      "source_name": "INPS — Bonus e agevolazioni famiglie",
+      "target": [
+        "impresa",
+        "professionista",
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T06:57:53Z",
+      "source_excerpts": {
+        "documents": "SPID è il sistema di accesso che consente di utilizzare, con un'identità digitale unica"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
+    },
+    {
+      "id": "scr-ce1568f52766",
+      "title": "Bonus nuovi nati - 2025",
+      "authority": "INPS",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Avviso pubblicato su INPS — Bonus e agevolazioni famiglie: apri la fonte per i dettagli.",
+      "requirements": [
+        "nazionale"
+      ],
+      "required_documents": [
+        "SPID è il sistema di accesso che consente di utilizzare, con un'identità digitale unica",
+        "Nota: si informa che non è consentito l'accesso mediante credenziali SPID, CIE, CNS o eIDAS intestate",
+        "Maggiori informazioni su SPID",
+        "Entra con SPID"
+      ],
+      "source_url": "https://servizi2.inps.it/servizi/HUBPNPInternet/prestazione/49",
+      "source_name": "INPS — Bonus e agevolazioni famiglie",
+      "target": [
+        "impresa",
+        "professionista",
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T06:57:53Z",
+      "source_excerpts": {
+        "documents": "SPID è il sistema di accesso che consente di utilizzare, con un'identità digitale unica"
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
+    },
+    {
+      "id": "scr-255e085bcbac",
+      "title": "Prestazioni a sostegno del reddito - Domande",
+      "authority": "INPS",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Prestazioni a sostegno del reddito - Domande Rivolto a: Cittadini Utilizza il servizio Prestazioni a sostegno del reddito - Domande",
+      "requirements": [
+        "reddito",
+        "nazionale"
+      ],
+      "required_documents": [],
+      "source_url": "https://serviziweb2.inps.it/PSRSVSCweb/initSportello.do?S=S",
+      "source_name": "INPS — Bonus e agevolazioni famiglie",
+      "target": [
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
+      "gate_reason": "nessun segnale di bando"
+    },
+    {
+      "id": "scr-7390920de045",
+      "title": "Contributi per soggiorni climatici per persone con disabilità",
+      "authority": "Comune di Milano",
+      "category": "altro",
+      "amount": "",
+      "deadline": "",
+      "summary": "Contributi per soggiorni climatici per persone con disabilità",
+      "requirements": [
+        "Residenza nel Comune di Milano"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.comune.milano.it/servizi/welfare/contributi-per-soggiorni-climatici-per-persone-con-disabilita",
+      "source_name": "Comune di Milano — Agevolazioni",
+      "target": [
+        "persona"
+      ],
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T06:59:05Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
@@ -1743,121 +2093,6 @@
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: requisiti"
     },
     {
-      "id": "scr-299c344e6418",
-      "title": "Bando contributo affitto 2026",
-      "authority": "Comune di Firenze",
-      "category": "casa",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Comune di Firenze — Novità e avvisi: apri la fonte per i dettagli.",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://sociale.comune.fi.it/dalle-redazioni/bando-contributo-affitto-2026",
-      "source_name": "Comune di Firenze — Novità e avvisi",
-      "target": [
-        "persona"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:56:05Z",
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
-    },
-    {
-      "id": "scr-21caf7e12089",
-      "title": "Assegno di maternità",
-      "authority": "Comune di Firenze",
-      "category": "famiglia",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Comune di Firenze — Novità e avvisi: apri la fonte per i dettagli.",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.comune.firenze.it/servizi/salute-benessere-e-assistenza/assegno-di-maternita",
-      "source_name": "Comune di Firenze — Novità e avvisi",
-      "target": [
-        "persona",
-        "impresa"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
-    },
-    {
-      "id": "scr-430cdb72cecd",
-      "title": "Bonus elettrico per disagio fisico",
-      "authority": "Comune di Firenze",
-      "category": "salute",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su Comune di Firenze — Novità e avvisi: apri la fonte per i dettagli.",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.comune.firenze.it/servizi/salute-benessere-e-assistenza/bonus-elettrico-disagio-fisico",
-      "source_name": "Comune di Firenze — Novità e avvisi",
-      "target": [
-        "persona",
-        "impresa"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
-    },
-    {
-      "id": "scr-d3ffc56b5d2d",
-      "title": "Bonus sociale idrico integrativo - Anno 2026",
-      "authority": "Comune di Firenze",
-      "category": "salute",
-      "amount": "",
-      "deadline": "",
-      "summary": "Bonus sociale idrico integrativo - Anno 2026",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.comune.firenze.it/servizi/salute-benessere-e-assistenza/bonus-sociale-idrico-integrativo-anno-2026",
-      "source_name": "Comune di Firenze — Novità e avvisi",
-      "target": [
-        "persona",
-        "impresa"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
-    },
-    {
-      "id": "scr-e3b358eff411",
-      "title": "Contributi familiari caregiver - Anno 2026",
-      "authority": "Comune di Firenze",
-      "category": "salute",
-      "amount": "",
-      "deadline": "",
-      "summary": "Contributi familiari caregiver - Anno 2026",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.comune.firenze.it/servizi/salute-benessere-e-assistenza/contributi-familiari-caregiver-anno-2026",
-      "source_name": "Comune di Firenze — Novità e avvisi",
-      "target": [
-        "persona",
-        "impresa"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
-    },
-    {
       "id": "scr-204efaf04ac3",
       "title": "Sportello consulenza per amministratore di sostegno",
       "authority": "Comune di Firenze",
@@ -1876,7 +2111,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "miss_streak": 0,
+      "miss_streak": 1,
       "last_seen_at": "2026-11-19T10:57:13Z",
       "gate_reason": "nessun segnale di bando"
     },
@@ -1899,182 +2134,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
-    },
-    {
-      "id": "scr-1fce87e678d7",
-      "title": "Bando per contributi per iniziative per la prevenzione e la sensibilizzazione sul tema delle truffe e dei raggiri, anche informatici, nell’ambito del Protocollo",
-      "authority": "Regione Autonoma Friuli Venezia Giulia",
-      "category": "lavoro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Bando per contributi per iniziative per la prevenzione e la sensibilizzazione sul tema delle truffe e dei raggiri, anche informatici, nell’ambito del Protocollo d’intesa per la sicurezza urbana integrata Direzione centrale autonomie locali, sicurezza e politiche dell'immigrazione",
-      "requirements": [
-        "Sede operativa o residenza in Friuli Venezia Giulia"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/MODULI/bandi_avvisi/BANDI/9174.html",
-      "source_name": "Regione Friuli Venezia Giulia",
-      "target": [
-        "impresa",
-        "artigiano"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:56:09Z",
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
-    },
-    {
-      "id": "scr-889e4d4da66e",
-      "title": "Bando per la concessione di contributi, a favore delle organizzazioni di volontariato iscritte al Registro Unico Nazionale del Terzo Settore, per la realizzazio",
-      "authority": "Regione Autonoma Friuli Venezia Giulia",
-      "category": "lavoro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Bando per la concessione di contributi, a favore delle organizzazioni di volontariato iscritte al Registro Unico Nazionale del Terzo Settore, per la realizzazione di attività informative in materia di sicurezza stradale rivolte agli studenti delle istituzioni scolastiche di secondo grado, nonché agli istituti comprensivi del territorio regionale Direzione centrale autonomie locali, funzione pub…",
-      "requirements": [
-        "Sede operativa o residenza in Friuli Venezia Giulia"
-      ],
-      "required_documents": [
-        "Modulo di domanda [formato .doc]"
-      ],
-      "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/MODULI/bandi_avvisi/BANDI/9171.html",
-      "source_name": "Regione Friuli Venezia Giulia",
-      "target": [
-        "persona"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:56:09Z",
-      "source_excerpts": {
-        "documents": "Modulo di domanda [formato .doc]"
-      },
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
-    },
-    {
-      "id": "scr-39989a1168f1",
-      "title": "Assegno unico e universale",
-      "authority": "INPS",
-      "category": "famiglia",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su INPS — Bonus e agevolazioni famiglie: apri la fonte per i dettagli.",
-      "requirements": [
-        "nazionale"
-      ],
-      "required_documents": [
-        "SPID è il sistema di accesso che consente di utilizzare, con un'identità digitale unica",
-        "Nota: si informa che non è consentito l'accesso mediante credenziali SPID, CIE, CNS o eIDAS intestate",
-        "Maggiori informazioni su SPID",
-        "Entra con SPID"
-      ],
-      "source_url": "https://servizi2.inps.it/servizi/AssegnoUnicoFigli",
-      "source_name": "INPS — Bonus e agevolazioni famiglie",
-      "target": [
-        "impresa",
-        "professionista",
-        "persona"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:56:14Z",
-      "source_excerpts": {
-        "documents": "SPID è il sistema di accesso che consente di utilizzare, con un'identità digitale unica"
-      },
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
-    },
-    {
-      "id": "scr-ce1568f52766",
-      "title": "Bonus nuovi nati - 2025",
-      "authority": "INPS",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Avviso pubblicato su INPS — Bonus e agevolazioni famiglie: apri la fonte per i dettagli.",
-      "requirements": [
-        "nazionale"
-      ],
-      "required_documents": [
-        "SPID è il sistema di accesso che consente di utilizzare, con un'identità digitale unica",
-        "Nota: si informa che non è consentito l'accesso mediante credenziali SPID, CIE, CNS o eIDAS intestate",
-        "Maggiori informazioni su SPID",
-        "Entra con SPID"
-      ],
-      "source_url": "https://servizi2.inps.it/servizi/HUBPNPInternet/prestazione/49",
-      "source_name": "INPS — Bonus e agevolazioni famiglie",
-      "target": [
-        "impresa",
-        "professionista",
-        "persona"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "detail_fetched_at": "2026-11-19T10:56:14Z",
-      "source_excerpts": {
-        "documents": "SPID è il sistema di accesso che consente di utilizzare, con un'identità digitale unica"
-      },
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
-    },
-    {
-      "id": "scr-255e085bcbac",
-      "title": "Prestazioni a sostegno del reddito - Domande",
-      "authority": "INPS",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Prestazioni a sostegno del reddito - Domande Rivolto a: Cittadini Utilizza il servizio Prestazioni a sostegno del reddito - Domande",
-      "requirements": [
-        "reddito",
-        "nazionale"
-      ],
-      "required_documents": [],
-      "source_url": "https://serviziweb2.inps.it/PSRSVSCweb/initSportello.do?S=S",
-      "source_name": "INPS — Bonus e agevolazioni famiglie",
-      "target": [
-        "persona"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "miss_streak": 0,
-      "last_seen_at": "2026-11-19T10:57:13Z",
-      "gate_reason": "nessun segnale di bando"
-    },
-    {
-      "id": "scr-7390920de045",
-      "title": "Contributi per soggiorni climatici per persone con disabilità",
-      "authority": "Comune di Milano",
-      "category": "altro",
-      "amount": "",
-      "deadline": "",
-      "summary": "Contributi per soggiorni climatici per persone con disabilità",
-      "requirements": [
-        "Residenza nel Comune di Milano"
-      ],
-      "required_documents": [],
-      "source_url": "https://www.comune.milano.it/servizi/welfare/contributi-per-soggiorni-climatici-per-persone-con-disabilita",
-      "source_name": "Comune di Milano — Agevolazioni",
-      "target": [
-        "persona"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "miss_streak": 0,
+      "miss_streak": 1,
       "last_seen_at": "2026-11-19T10:57:13Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
@@ -2123,7 +2183,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "miss_streak": 1,
+      "miss_streak": 2,
       "last_seen_at": "2026-11-19T10:47:53Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
@@ -2331,31 +2391,31 @@
     }
   ],
   "quality": {
-    "verified": 34,
-    "open": 14,
-    "unknown_deadline": 20,
+    "verified": 36,
+    "open": 15,
+    "unknown_deadline": 21,
     "expired": 9,
     "quarantine": 36,
     "news": 2,
     "fill": {
-      "deadline_pct": 41.2,
-      "amount_pct": 50.0,
-      "requirements_pct": 79.4,
-      "documents_pct": 58.8
+      "deadline_pct": 41.7,
+      "amount_pct": 47.2,
+      "requirements_pct": 77.8,
+      "documents_pct": 58.3
     },
     "by_source": {
       "INPS": 1,
+      "Comune di Genova": 1,
       "Invitalia": 2,
       "Ministero del Lavoro": 1,
       "Cliclavoro": 2,
       "Lazio Innova": 3,
       "Invitalia — Autoimpiego e nuove imprese": 3,
-      "Comune di Firenze — Novità e avvisi": 2,
+      "Comune di Firenze — Novità e avvisi": 3,
       "Regione Friuli Venezia Giulia": 1,
       "INPS — Bonus bebè": 1,
       "INPS — Prestazioni e sussidi": 2,
       "INPS — Bonus e agevolazioni famiglie": 1,
-      "Regione Toscana — Contributi famiglie": 1,
       "Comune di Milano — Agevolazioni": 3,
       "Agenzia delle Entrate — Agevolazioni casa": 1,
       "INPS — Bonus psicologo": 1,
@@ -2367,6 +2427,7 @@
       "INPS — Assegno ordinario di invalidità": 1,
       "Agenzia delle Entrate — Detrazione spese sanitarie": 1,
       "ARERA — Bonus sociale luce, gas e acqua": 1,
+      "Regione Toscana — Contributi famiglie": 1,
       "Regione Liguria": 1
     }
   }
