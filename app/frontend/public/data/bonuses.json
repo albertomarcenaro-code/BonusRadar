@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-20T06:59:05Z",
+  "generated_at": "2026-11-20T10:27:05Z",
   "source": "BonusRadar scraper v1",
-  "count": 36,
+  "count": 67,
   "stats": {
-    "bonuses": 36,
-    "active": 36,
+    "bonuses": 67,
+    "active": 67,
     "sources": 38
   },
   "sources": [
@@ -225,16 +225,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:55:37Z",
+      "detail_fetched_at": "2026-11-20T10:22:26Z",
       "source_excerpts": {
         "requirements": "Aliquote e contributi artigiani",
         "documents": "L’Estratto conto contributivo è il documento che elenca i contributi registrati in favore del lavoratore e che illustra i contributi da lavoro, figurativi, volontari e da riscatto, in base alla gestione pensionistica d'a"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "unknown",
       "gate_reason": "evidenze: requisiti, documenti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-e0fd2d87b168",
@@ -257,15 +257,15 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:55:45Z",
+      "detail_fetched_at": "2026-11-20T10:22:37Z",
       "source_excerpts": {
         "deadline": "scadenza 11 Gennaio 2027 Tempo di lettura Condividi Facebook Linkedin Whatsapp Vedi azioni Stampa Invia Argo"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-6cd57382c738",
@@ -289,17 +289,17 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:55:51Z",
+      "detail_fetched_at": "2026-11-20T10:22:42Z",
       "source_excerpts": {
         "deadline": "chiusura 20/1/2027 Compila la domanda Sezione dedicata sul sito del Mimit Incentivi e strumenti per le impre",
         "amount": "Le agevolazioni sono concesse nella forma del contributo a fondo perduto , fino al 50% delle spese ammissibili. Il contributo non può superare, in ogni caso, l’importo di 20.000 euro",
         "documents": "essere in possesso di un’identità digitale (SPID, CNS, CIE)"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza, importo, documenti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-0e3dae2d1f29",
@@ -319,16 +319,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:55:52Z",
+      "detail_fetched_at": "2026-11-20T10:22:42Z",
       "source_excerpts": {
         "deadline": "chiusura 28/11/2026 Presenta la domanda Incentivi e strumenti per le imprese Stato incentivo o strumento Att",
         "amount": "Contributo in conto capitale fino a 300.000 euro e non superiore al 100% delle spese ammesse, sostenute tra l’8 maggio 2024 e il 31 dicembre 2028, per l'acquisto di macchinari, impianti, arredi, attrezzature nuovi di fab"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza, importo",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-540230ba5dea",
@@ -349,15 +349,15 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:56:54Z",
+      "detail_fetched_at": "2026-11-20T10:23:40Z",
       "source_excerpts": {
         "amount": "Le stime indicano in 506mila i nuclei familiari che fino a fine anno sono potenziali destinatari di contributo massimo di 500 euro . Si ricorda che l’ADI, in presenza di minori nel nucleo familiare è incrementato dall’As"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "unknown",
       "gate_reason": "evidenze: importo",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-414ee40872db",
@@ -377,15 +377,15 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:56:56Z",
+      "detail_fetched_at": "2026-11-20T10:23:43Z",
       "source_excerpts": {
         "deadline": "Per agevolare la crescita di questo settore, tra la fine del 2026 e il 2028 sono previste una serie di agevolazioni per incentivare la crescita non solo del settore agricolo in sé, ma anche i suoi diversi settori, come q"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-5fba267abe7e",
@@ -406,15 +406,15 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:56:57Z",
+      "detail_fetched_at": "2026-11-20T10:23:43Z",
       "source_excerpts": {
         "deadline": "Le domande devono essere presentate tramite la piattaforma FINDOM , entro le ore 12:00 del 24 novembre 2026"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-83644461d463",
@@ -438,17 +438,17 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:57:11Z",
+      "detail_fetched_at": "2026-11-20T10:23:58Z",
       "source_excerpts": {
         "deadline": "Le domande devono essere inviate dalle ore 12.00 del 10 dicembre 2026 ed entro le ore 17.00 del 21 gennaio 2027",
         "amount": "Il contributo è a fondo perduto (sovvenzione diretta in denaro) ed è concesso a titolo di De Minimis. Il contributo concedibile è pari ad euro 15.240,00 euro per ciascuna singola Fiera Internazionale Business to Business",
         "requirements": "1. dimensione internazionale (rapporto tra fatturato estero e fatturato totale)"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza, importo, requisiti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-171213fa3702",
@@ -473,7 +473,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:57:10Z",
+      "detail_fetched_at": "2026-11-20T10:23:58Z",
       "source_excerpts": {
         "deadline": "Accesso ai contributi in conto interessi : presentando domanda tramite la piattaforma GeCoWEB Plus a partire dalle ore 12:00 del 23 novembre 2026 e fino alle ore 17:00 del 3 ottobre 2028, salvo chiusura anticipata per es",
         "amount": "Importo: da 100.000 euro a 10 milioni di euro",
@@ -481,10 +481,10 @@
         "documents": "Prestiti a sostegno di progetti imprenditoriali realizzati da PMI dell’indotto del settore automotive. L’appartenenza all’indotto del settore automotive deve risultare da un attestato rilasciato dal Consorzio Industriale"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza, importo, requisiti, documenti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-dc72123c2d6c",
@@ -511,7 +511,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:57:10Z",
+      "detail_fetched_at": "2026-11-20T10:23:58Z",
       "source_excerpts": {
         "deadline": "Il procedimento di concessione del contributo è a sportello",
         "amount": "c) il costo per la prima certificazione del bilancio della PMI beneficiaria; è ammissibile solo il costo iniziale (una tantum) e il contributo massimo concedibile con riferimento a questa voce di costo è pari a 7.500,00 ",
@@ -519,10 +519,10 @@
         "documents": "hanno già sostenuto i costi ammissibili oggetto del contributo, con l’eccezione disciplinata nell’Avviso per i costi di prima certificazione del bilancio"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza, importo, requisiti, documenti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-ff1578b7f081",
@@ -545,16 +545,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:57:12Z",
+      "detail_fetched_at": "2026-11-20T10:24:00Z",
       "source_excerpts": {
         "amount": "contributo del 60% a fondo perduto per programmi di investimento che hanno un importo compreso tra 120.000 euro e 200.000 euro",
         "requirements": "L’incentivo è rivolto ai giovani tra i 18 anni compiuti e i 35 anni non ancora compiuti che sono in una condizione di inattività, inoccupazione o disoccupazione, nonché ai disoccupati del Programma GOL (Garanzia di occup"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "unknown",
       "gate_reason": "evidenze: importo, requisiti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-0026efe14789",
@@ -577,16 +577,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:57:12Z",
+      "detail_fetched_at": "2026-11-20T10:24:00Z",
       "source_excerpts": {
         "amount": "contributo del 70% a fondo perduto per programmi di investimento che hanno un importo compreso tra 120.000 euro e 200.000 euro",
         "requirements": "L’incentivo è rivolto ai giovani tra i 18 anni compiuti e i 35 anni non ancora compiuti, che sono in una condizione di inattività, inoccupazione o disoccupazione, nonché ai disoccupati del Programma GOL (Garanzia di occu"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "unknown",
       "gate_reason": "evidenze: importo, requisiti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-d20a5b49c256",
@@ -612,16 +612,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:57:13Z",
+      "detail_fetched_at": "2026-11-20T10:24:00Z",
       "source_excerpts": {
         "requirements": "Smart&Start Italia: in quattro anni raccolti 65,8 milioni di euro di capitali privati nelle startup innovative",
         "documents": "La società pugliese è stata finanziata da Invitalia con Smart&Start"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "unknown",
       "gate_reason": "evidenze: requisiti, documenti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-d0ddd84fb591",
@@ -643,15 +643,15 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:57:39Z",
+      "detail_fetched_at": "2026-11-20T10:24:29Z",
       "source_excerpts": {
         "documents": "Avviso per l'assegnazione di contributi in favore di persone anziane assistite da familiari caregiver. Il contributo è destinato ad anziani in condizioni di non autosufficienza"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "unknown",
       "gate_reason": "evidenze: documenti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-c04b438e1cbb",
@@ -673,15 +673,15 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:57:41Z",
+      "detail_fetched_at": "2026-11-20T10:24:31Z",
       "source_excerpts": {
         "requirements": "Il Comune di Firenze concede, a titolo gratuito, appezzamenti di terreno di proprietà comunale ai cittadini residenti, anziani e non, per mantenere gli individui nel loro ambito sociale e favorire attività occupazionali "
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-f44a3e64b17f",
@@ -705,16 +705,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:57:40Z",
+      "detail_fetched_at": "2026-11-20T10:24:30Z",
       "source_excerpts": {
         "deadline": "Scadenza presentazione domande: 30 novembre 2026",
         "documents": "Modulo A (allegato alla richiesta contributo) - Centri Anziani"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza, documenti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-9ed9c1046ede",
@@ -740,16 +740,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:57:46Z",
+      "detail_fetched_at": "2026-11-20T10:24:48Z",
       "source_excerpts": {
         "deadline": "Al fine di individuare i due membri esterni della Commissione tecnico consultiva VIA di cui all’art. 4, comma 4, lettera f), L.R. 24/2021, le Associazioni di protezione ambientale operanti in Regione Friuli Venezia Giuli",
         "documents": "Allegato 1 [formato .doc]"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza, documenti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-8492262f66b3",
@@ -773,16 +773,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:58:36Z",
+      "detail_fetched_at": "2026-11-20T10:25:41Z",
       "source_excerpts": {
         "amount": "Il bonus consiste in un importo di 1.000 euro una tantum",
         "requirements": "Il contributo è riconosciuto a favore del genitore di un minore nato, in affido preadottivo o adottato dal 1° gennaio 2025, con un ISEE per specifiche prestazioni familiari e per l’inclusione, applicabile al minore al qu"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "unknown",
       "gate_reason": "evidenze: url_ufficiale, importo, requisiti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-a097045913e8",
@@ -812,16 +812,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:58:22Z",
+      "detail_fetched_at": "2026-11-20T10:25:32Z",
       "source_excerpts": {
         "requirements": "con disabilità, come definita ai sensi del regolamento di cui al decreto del Presidente del Consiglio dei ministri 5 dicembre 2013, n. 159",
         "documents": "un valore del reddito familiare inferiore a 10.140 euro nei casi in cui il nucleo familiare risiede in abitazione in locazione, secondo quanto risulta dalla Dichiarazione Sostitutiva Unica resa ai fini dell’ISEE"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "unknown",
       "gate_reason": "evidenze: url_ufficiale, requisiti, documenti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-46de15aa8416",
@@ -851,15 +851,15 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:57:56Z",
+      "detail_fetched_at": "2026-11-20T10:25:06Z",
       "source_excerpts": {
         "documents": "SPID è il sistema di accesso che consente di utilizzare, con un'identità digitale unica"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "unknown",
       "gate_reason": "evidenze: requisiti, documenti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-424b455ff955",
@@ -890,7 +890,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:58:11Z",
+      "detail_fetched_at": "2026-11-20T10:25:25Z",
       "source_excerpts": {
         "deadline": "Per non perdere il beneficio, è necessario effettuare almeno un acquisto entro il 16 dicembre 2026 . Il mancato utilizzo della Carta entro tale termine comporta la decadenza dal beneficio",
         "amount": "La Carta Dedicata a Te è un contributo economico destinato ai nuclei familiari in possesso dei requisiti previsti dalla normativa. Per il 2026 il contributo è pari a 500,00 euro",
@@ -898,10 +898,10 @@
         "documents": "Nel rispetto della normativa vigente in materia di protezione dei dati personali, nella graduatoria sarà indicato esclusivamente il numero di protocollo della Dichiarazione Sostitutiva Unica (DSU) 2026"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza, importo, requisiti, documenti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-5d715052430f",
@@ -928,17 +928,17 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:58:11Z",
+      "detail_fetched_at": "2026-11-20T10:25:24Z",
       "source_excerpts": {
         "deadline": "Il presente Avviso pubblico ha durata per il triennio 2024-2026 e scadenza il 31 dicembre 2026",
         "requirements": "Possono presentare la domanda di Manifestazione di Interesse gli Enti del Terzo Settore con sede operativa nel territorio del Comune di Milano",
         "documents": "Alla domanda dovranno essere allegate"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "open",
       "gate_reason": "evidenze: scadenza, requisiti, documenti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-5f0f94cc6a32",
@@ -965,15 +965,15 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:58:17Z",
+      "detail_fetched_at": "2026-11-20T10:25:29Z",
       "source_excerpts": {
         "documents": "t��N+ �\u0006d�0�>\u0016� I���W$������� F�)c`���W]�� f�/:�Ӵ\u0006�I���~Z��\u000f3�\u0017���\u001bؤ���p�m���\u0007�@\u0013�\b�S��cie�x�D�(\u0007*�Yφ\b�\\�\u0002\u0001"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "unknown",
       "gate_reason": "evidenze: importo, documenti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-78272df3e744",
@@ -999,16 +999,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:58:20Z",
+      "detail_fetched_at": "2026-11-20T10:25:31Z",
       "source_excerpts": {
         "amount": "una quota variabile progressiva in relazione alle soglie ISEE rivalutate annualmente ( da un massimo di 203,8 euro per ciascun figlio minore con ISEE fino a 17.468,51 euro a un minimo di 58,3 euro per ciascun figlio mino",
         "requirements": "Il servizio permette di richiedere l’Assegno unico per figli a carico fino a 21 anni, o senza limiti di età se disabili, in base alle nuove regole su residenza, lavoratori non residenti e figli residenti in altri Stati U"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "unknown",
       "gate_reason": "evidenze: url_ufficiale, importo, requisiti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-f3dfd02639cd",
@@ -1029,15 +1029,15 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:58:32Z",
+      "detail_fetched_at": "2026-11-20T10:25:39Z",
       "source_excerpts": {
         "amount": "Tuttavia, per le spese sostenute nel 2026 sono prorogate le stesse condizioni previste per l’anno 2025: la detrazione spetta nella misura del 36% (50% in caso di abitazione principale) su un massimo di 96.000 euro per un"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "unknown",
       "gate_reason": "evidenze: url_ufficiale, importo",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-00da843bdc16",
@@ -1070,17 +1070,17 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:58:38Z",
+      "detail_fetched_at": "2026-11-20T10:25:43Z",
       "source_excerpts": {
         "amount": "in caso di ISEE inferiore a 15mila euro , l’importo del beneficio è erogato fino al raggiungimento dell’importo massimo di 1.500 euro per ogni beneficiario",
         "requirements": "ISEE in corso di validità, con valore non superiore a 50mila euro",
         "documents": "SPID (almeno di Livello 2 o superiore)"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "unknown",
       "gate_reason": "evidenze: url_ufficiale, importo, requisiti, documenti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-8b37c38c13fc",
@@ -1113,16 +1113,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:58:41Z",
+      "detail_fetched_at": "2026-11-20T10:25:44Z",
       "source_excerpts": {
         "requirements": "dipendenti iscritti alla Gestione Unitaria delle prestazioni creditizie e sociali",
         "documents": "Il servizio permette di presentare domanda per beneficiare di assistenza domiciliare e contributo economico per persone non autosufficienti. Per iscritti alla Gestione Unitaria delle prestazioni creditizie e sociali e lo"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "unknown",
       "gate_reason": "evidenze: url_ufficiale, requisiti, documenti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-56255d7110e3",
@@ -1144,12 +1144,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:58:45Z",
+      "detail_fetched_at": "2026-11-20T10:25:47Z",
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "unknown",
       "gate_reason": "evidenze: url_ufficiale",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-d61800c12c8e",
@@ -1178,16 +1178,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:58:48Z",
+      "detail_fetched_at": "2026-11-20T10:25:50Z",
       "source_excerpts": {
         "requirements": "730 Compilazione semplificata - Redditi dipendenti e pensionati",
         "documents": "Se lo spazio disponibile nel modello non è sufficiente per i dati che devi inserire, clicca su \"Aggiungi modulo\" in alto a destra per compilare altri moduli"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "unknown",
       "gate_reason": "evidenze: url_ufficiale, requisiti, documenti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-221b09cf88e0",
@@ -1213,16 +1213,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:58:51Z",
+      "detail_fetched_at": "2026-11-20T10:25:52Z",
       "source_excerpts": {
         "amount": "se il titolare di due o più rapporti di lavoro subordinato a tempo parziale cessa da uno dei rapporti – a seguito di licenziamento, dimissioni per giusta causa, o di risoluzione consensuale del rapporto di lavoro interve",
         "requirements": "dipendenti a tempo determinato delle pubbliche amministrazioni"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "unknown",
       "gate_reason": "evidenze: url_ufficiale, importo, requisiti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-781872594aa8",
@@ -1248,17 +1248,17 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:58:53Z",
+      "detail_fetched_at": "2026-11-20T10:25:53Z",
       "source_excerpts": {
         "amount": "Per il 2026 l’importo dell’indennità è di 551,53 euro",
         "requirements": "Spetta a tutti i cittadini in possesso dei requisiti sanitari residenti in forma stabile in Italia, indipendentemente dal reddito personale annuo e dall’età",
         "documents": "La domanda può essere presentata direttamente online sul sito dell’INPS, con accesso tramite SPID/CIE/CNS, oppure tramite un ente di patronato o un’associazione di categoria (ANMIC, ENS, UIC, ANFASS)"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "unknown",
       "gate_reason": "evidenze: url_ufficiale, importo, requisiti, documenti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-bfefbbd6e16c",
@@ -1289,16 +1289,16 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:58:56Z",
+      "detail_fetched_at": "2026-11-20T10:25:55Z",
       "source_excerpts": {
         "requirements": "Il servizio permette di presentare la domanda di Assegno ordinario di invalidità per lavoratori dipendenti (AGO), autonomi e iscritti alla Gestione Separata la cui capacità lavorativa è ridotta a meno di un terzo a causa",
         "documents": "Domanda Pensione, Ricostituzione, Ratei, Certificazioni, APE Sociale e Beneficio precoci"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "unknown",
       "gate_reason": "evidenze: url_ufficiale, requisiti, documenti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-2c1440c6882f",
@@ -1325,15 +1325,15 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:59:00Z",
+      "detail_fetched_at": "2026-11-20T10:25:58Z",
       "source_excerpts": {
         "documents": "l'acquisto di farmaci presso farmacie e parafarmacie"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "unknown",
       "gate_reason": "evidenze: url_ufficiale, documenti",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-817d412ce842",
@@ -1355,12 +1355,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:59:04Z",
+      "detail_fetched_at": "2026-11-20T10:26:02Z",
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "status": "unknown",
       "gate_reason": "evidenze: url_ufficiale",
-      "discovered_at": "2026-11-20T06:59:05Z"
+      "discovered_at": "2026-11-20T10:27:05Z"
     },
     {
       "id": "scr-0abd0c8fefc3",
@@ -1435,6 +1435,1146 @@
       "status": "open",
       "gate_reason": "evidenze: scadenza, documenti",
       "discovered_at": "2026-11-17T21:20:07Z"
+    },
+    {
+      "id": "inc-1534f3d84cd1",
+      "title": "Contributo a proprietari e gestori di rifugi alpini per la realizzazione di opere infrastrutturali di approvvigionamento idrico",
+      "authority": "Provincia Autonoma di Trento",
+      "category": "mobilita",
+      "amount": "Dotazione: € 40.640",
+      "deadline": "",
+      "summary": "Cos'è Con il bando si vogliono sostenere le opere infrastrutturali permanenti di approvvigionamento idrico a servizio dei rifugi alpini. Sono ammissibili le spese relative ad interventi di nuova costruzione, manutenzione straordinaria o restauro su opere di presa, tubazioni di adduzione e relative opere connesse (es. sghiaiatori, pozzetti di ispezione, ecc.), vasche di accumulo, sistemi di pomp…",
+      "description": "Cos'è Con il bando si vogliono sostenere le opere infrastrutturali permanenti di approvvigionamento idrico a servizio dei rifugi alpini. Sono ammissibili le spese relative ad interventi di nuova costruzione, manutenzione straordinaria o restauro su opere di presa, tubazioni di adduzione e relative opere connesse (es. sghiaiatori, pozzetti di ispezione, ecc.), vasche di accumulo, sistemi di pompaggio, impianti di filtrazione, chiarificazione e/o sistemi di potabilizzazione dell'acqua, nonché il trasporto in quota dei materiali. A chi si rivolge Possono presentare domanda i proprietari e i gestori di rifugi alpini iscritti nell'elenco delle strutture alpinistiche della Provincia Autonoma di Trento. Cosa prevede Il contributo è concesso nella misura dell'80% della spesa ammissibile. Il limite minimo di spesa ammissibile non può essere inferiore ad euro 5.000,00 e superiore ad euro 150.000,00 . Il contributo è concesso a titolo di \"de minimis\", quando il richiedente è qualificabile come impresa ai sensi della normativa comunitaria sugli aiuti di Stato.",
+      "requirements": [
+        "Destinatari: Impresa, Cooperative/Associazioni Non Profit, Ente Pubblico, Cittadino",
+        "Regioni: Trentino-Alto Adige/Südtirol",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.provincia.tn.it/Servizi/Contributi-per-opere-di-approvvigionamento-idrico-in-rifugi-alpini",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "impresa",
+        "persona"
+      ],
+      "opening_date": "2023-10-06",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Impresa, Cooperative/Associazioni Non Profit, Ente Pubblico, Cittadino | Regioni: Trentino-Alto Adige/Südtirol | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "unknown",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-bcdb6b3045cf",
+      "title": "Sostegno alle imprese: contributi regionali per la stipula di contratti di solidarietà - Regione autonoma Friuli Venezia Giulia",
+      "authority": "REGIONE AUTONOMA FRIULI VENEZIA GIULIA - DIREZIONE CENTRALE LAVORO, FORMAZIONE, ISTRUZIONE E FAMIGLIA",
+      "category": "lavoro",
+      "amount": "Dotazione: € 5.344.602",
+      "deadline": "2030-12-31",
+      "summary": "Cos'è La Regione concede un contributo per il sostegno alle imprese che stipulano contratti di solidarietà difensivi, ovvero stipulino contratti di espansione, e per l'integrazione della retribuzione dei lavoratori impiegati sul territorio regionale interessati alla conseguente riduzione di orario A chi si rivolge Imprese che utilizzano il contratto di solidarietà e lavoratori interessati dalla…",
+      "description": "Cos'è La Regione concede un contributo per il sostegno alle imprese che stipulano contratti di solidarietà difensivi, ovvero stipulino contratti di espansione, e per l'integrazione della retribuzione dei lavoratori impiegati sul territorio regionale interessati alla conseguente riduzione di orario A chi si rivolge Imprese che utilizzano il contratto di solidarietà e lavoratori interessati dalla conseguente riduzione dell'orario di lavoro Cosa prevede Un contributo pari a 3 euro per ciascuna ora di effettiva riduzione dell'orario di lavoro utilizzata ripartiti: a) per la quota del 20 per cento a titolo di sostegno all'impresa; b) per la quota dell'80 per cento a titolo di sostegno al reddito dei lavoratori",
+      "requirements": [
+        "Destinatari: Cittadino, Impresa",
+        "Regioni: Friuli-Venezia Giulia",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto', 'Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "http://www.regione.fvg.it/rafvg/cms/RAFVG/formazione-lavoro/lavoro/FOGLIA34/",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "opening_date": "2014-05-08",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino, Impresa | Regioni: Friuli-Venezia Giulia | Forma dell'agevolazione: ['Contributo/Fondo perduto', 'Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "open",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-4ef47a459efc",
+      "title": "Progetto “Rete su ruote” per la valorizzazione delle produzioni agroalimentari dell’Area Protetta del Gran Sasso e Monti della Laga",
+      "authority": "ENTE PARCO NAZIONALE DEL GRAN SASSO E MONTI DELLA LAGA",
+      "category": "casa",
+      "amount": "Dotazione: € 100.000",
+      "deadline": "",
+      "summary": "Cos'è L'incentivo \"Rete su ruote\" prevede un rimborso spese fino ad un massimo di 25.000 euro per l'acquisto di food truck elettrici per la commercializzazione e o trasformazione di prodotti agroalimentari dell'Area Protetta del Parco Nazionale del Gran Sasso e Monti della Laga. A chi si rivolge L'incentivo è rivolto ai residenti dell'Area Protetta del Parco Nazionale del Gran Sasso e Monti del…",
+      "description": "Cos'è L'incentivo \"Rete su ruote\" prevede un rimborso spese fino ad un massimo di 25.000 euro per l'acquisto di food truck elettrici per la commercializzazione e o trasformazione di prodotti agroalimentari dell'Area Protetta del Parco Nazionale del Gran Sasso e Monti della Laga. A chi si rivolge L'incentivo è rivolto ai residenti dell'Area Protetta del Parco Nazionale del Gran Sasso e Monti della Laga. Possono essere soggetti interessati: - Residenti nei comuni del Parco, che si impegnano ad avviare una nuova attività di somministrazione/vendita itinerante di prodotti agroalimentari. - Saranno beneficiari dell’iniziativa 4 soggetti interessati provenienti rispettivamente dalle 4 aree del Parco e, più specificatamente, da: Area Vestina, Area delle Baronie e Alto Aterno, Area Laziale e Marchigiana, Area della Laga e del Gran Sasso teramano . Nello specifico, si creeranno 4 distinti elenchi di interessati suddivise per territorio, tenendo presente che i soggetti inseriti in tali elenchi dovranno risiedere rispettivamente nelle seguenti quattro aree del Parco: - Area vestina Comprendente i Comuni di: Bussi sul Tirino, Castiglione a Casauria, Pescosansonesco, Corvara, Brittoli, Carpineto della Nora, Civitella Casanova, Villa Celiera, Montebello di Bertona, Farindola; - Area Terre delle Baronie e Alto Aterno Comprendente i Comuni di: Capestrano, Villa Santa Lucia, Castel del Monte, Carapelle Calvisio, Castelvecchio Calvisio, Calascio, Santo Stefano di Sessanio, Barisciano, Ofena, L’Aquila, Pizzoli, Barete, Cagnano Amiterno, Montereale, Capitignano, Campotosto; - Area laziale e marchigiana: Comprendente i Comuni di: Amatrice, Accumoli, Acquasanta Terme, Arquata del Tronto; - Area della Laga e del Gran Sasso teramano: Comprendente i Comuni di: Torricella Sicura, Campli, Civitella del Tronto, Cortino, Crognaleto, Valle Castellana, Rocca Santa Maria, Isola del Gran Sasso, Castelli, Tossicia, Arsita, Montorio al Vomano, Pietracamela, Fano Adriano. Cosa prevede Il Progetto prev",
+      "requirements": [
+        "Destinatari: Cittadino",
+        "Regioni: Abruzzo",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.gransassolagapark.it/albOnline/2023/PNGSLdocumento65420.pdf",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona"
+      ],
+      "opening_date": "2023-10-17",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino | Regioni: Abruzzo | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "unknown",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-5f89685f47c1",
+      "title": "Contributi per la partecipazione ad azioni di formazione continua - Provincia di Bolzano",
+      "authority": "Provincia autonoma di Bolzano - Direzione Istruzione e Formazione italiana - Intendenza scolastica italiana",
+      "category": "lavoro",
+      "amount": "Dotazione: € 100.000",
+      "deadline": "",
+      "summary": "Cos'è Contributi a favore di lavoratori e lavoratrici dipendenti e di persone in cerca di occupazione che partecipano ad azioni di formazione continua. A chi si rivolge Persone richiedenti che al momento della presentazione della domanda sono in possesso di uno dei due seguenti requisiti: • Lavoratori e lavoratrici dipendenti, residenti in provincia di Bolzano e che prestano la propria attività…",
+      "description": "Cos'è Contributi a favore di lavoratori e lavoratrici dipendenti e di persone in cerca di occupazione che partecipano ad azioni di formazione continua. A chi si rivolge Persone richiedenti che al momento della presentazione della domanda sono in possesso di uno dei due seguenti requisiti: • Lavoratori e lavoratrici dipendenti, residenti in provincia di Bolzano e che prestano la propria attività lavorativa presso un datore di lavoro privato, in una sede aziendale in provincia di Bolzano, nell’ambito di un rapporto di lavoro disciplinato da contratti collettivi conclusi per il settore privato. • Presone residenti in provincia di Bolzano, in possesso dello stato di disoccupazione e immediatamente disponibili ad accettare una congrua offerta di lavoro. Cosa prevede Per la partecipazione ad azioni formative può essere concesso a ogni richiedente un contributo dell’80% della quota riconosciuta fino ad un massimo di € 3.000,00 IVA inclusa per anno solare; nel caso di priorità (disoccupati di lunga durata) l’importo massimo sale a € 3.500,00 IVA inclusa. La quota di partecipazione specificata nella domanda deve ammontare almeno a € 400,00 IVA inclusa.",
+      "requirements": [
+        "Destinatari: Cittadino",
+        "Regioni: Trentino-Alto Adige/Südtirol",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://civis.bz.it/it/servizi/servizio.html?id=1038487",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona"
+      ],
+      "opening_date": "2024-01-18",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino | Regioni: Trentino-Alto Adige/Südtirol | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "unknown",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-7581f9f7cb4e",
+      "title": "Fondo comuni marginali: annualità 2022 - comune di Santa Elisabetta",
+      "authority": "COMUNE DI SANTA ELISABETTA",
+      "category": "impresa",
+      "amount": "Dotazione: € 53.844",
+      "deadline": "",
+      "summary": "Cos'è Assegnazione di contributi straordinari a favore di nuove attività commerciali, artigianali e agricole nel Comune di Santa Elisabetta, ai sensi del Decreto del Presidente del Consiglio dei Ministri - DPCM 30 settembre 2021. A chi si rivolge L'iniziativa è destinata alle attività commerciali, artigianali e agricole che operano nel Comune. Cosa prevede Realizzare interventi di sostegno alle…",
+      "description": "Cos'è Assegnazione di contributi straordinari a favore di nuove attività commerciali, artigianali e agricole nel Comune di Santa Elisabetta, ai sensi del Decreto del Presidente del Consiglio dei Ministri - DPCM 30 settembre 2021. A chi si rivolge L'iniziativa è destinata alle attività commerciali, artigianali e agricole che operano nel Comune. Cosa prevede Realizzare interventi di sostegno alle popolazioni residenti nei comuni svantaggiati, per ciascuno degli anni dal 2021 al 2023.",
+      "requirements": [
+        "Destinatari: Cittadino",
+        "Regioni: Sicilia",
+        "Forma dell'agevolazione: ['Capitale di rischio', 'Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.comunesantaelisabetta.it/2-uncategorised/563-avviso-pubblico-per-assegnazione-fondi-marginali-anno-2022.html",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona"
+      ],
+      "opening_date": "2023-12-12",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino | Regioni: Sicilia | Forma dell'agevolazione: ['Capitale di rischio', 'Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "unknown",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-1f927f440f0d",
+      "title": "Contributi per l'imboschimento dei terreni agricoli - Regione Autonoma Friuli-Venezia Giulia - Annualità 2022",
+      "authority": "Regione Autonoma Friuli-Venezia Giulia",
+      "category": "mobilita",
+      "amount": "Dotazione: € 150.000",
+      "deadline": "",
+      "summary": "Cos'è Contributi ai proprietari e ai titolari di altro diritto reale o personale di godimento sui terreni agricoli, inseriti nelle zone E degli strumenti urbanistici comunali, in cui sono stati attuati piani di riordino fondiario promossi da Consorzi di bonifica, per l'imboschimento dei terreni medesimi con specie prevalentemente arboree compatibili con le condizioni ecologiche stazionali. A ch…",
+      "description": "Cos'è Contributi ai proprietari e ai titolari di altro diritto reale o personale di godimento sui terreni agricoli, inseriti nelle zone E degli strumenti urbanistici comunali, in cui sono stati attuati piani di riordino fondiario promossi da Consorzi di bonifica, per l'imboschimento dei terreni medesimi con specie prevalentemente arboree compatibili con le condizioni ecologiche stazionali. A chi si rivolge Ai proprietari e ai titolari di altro diritto reale o personale di godimento sui terreni agricoli, inseriti nelle zone E degli strumenti urbanistici comunali, in cui sono stati attuati piani di riordino fondiario promossi da Consorzi di bonifica. Cosa prevede Il contributo viene concesso in misura pari all'80 per cento della spesa ammessa, con il procedimento a sportello secondo le condizioni e i limiti previsti del regolamento (UE) 2023/2831 della Commissione, del 13 dicembre 2023. La spesa ammessa non può eccedere 6.500 euro per ettaro.",
+      "requirements": [
+        "Destinatari: Cittadino, Consorzio, Cooperative/Associazioni Non Profit, Ente Pubblico, Impresa",
+        "Regioni: Friuli-Venezia Giulia",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://lexview-int.regione.fvg.it/FontiNormative/xml/xmlLex.aspx?anno=2021&legge=24&ID=art3&lista=0&fx=lex",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "opening_date": "2021-12-29",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino, Consorzio, Cooperative/Associazioni Non Profit, Ente Pubblico, Impresa | Regioni: Friuli-Venezia Giulia | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "unknown",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-2da8dade355c",
+      "title": "Contributi Fondo Comuni Marginali per l'avvio di attività commerciali artigianali e agricole nel Comune di Giuliana",
+      "authority": "Comune di Giuliana",
+      "category": "impresa",
+      "amount": "Dotazione: € 142.891",
+      "deadline": "2026-12-31",
+      "summary": "Cos'è Contributi a valere sul Fondo Comuni Marginali per l’avvio di nuove attività commerciali, artigianali e agricole nel Comune di Giuliana. A chi si rivolge Il bando è rivolto a coloro i quali intendano costituire nuove attività economiche sul territorio comunale. Possono beneficiare del contributo anche le imprese regolarmente costituite e iscritte al registro delle imprese purché intrapren…",
+      "description": "Cos'è Contributi a valere sul Fondo Comuni Marginali per l’avvio di nuove attività commerciali, artigianali e agricole nel Comune di Giuliana. A chi si rivolge Il bando è rivolto a coloro i quali intendano costituire nuove attività economiche sul territorio comunale. Possono beneficiare del contributo anche le imprese regolarmente costituite e iscritte al registro delle imprese purché intraprendano una \"nuova attività economica\" dopo la pubblicazione del presente bando sottolineando che per “nuova attività economica” si intende anche l'attivazione di nuovi e ulteriori codici ATECO. Tali concorrenti, a pena di esclusione, devono essere in possesso dei seguenti requisiti: • Iscrizione nel registro tenuto dalla Camera di commercio industria, artigianato e agricoltura oppure nel registro delle commissioni provinciali per l'artigianato. • Possesso dei requisiti di cui all'articolo 80, comma 5, lett. b) del Codice: - Imprese che non si trovano in stato di fallimento; - Imprese che non si trovano in stato di liquidazione coatta; - Imprese che non sono soggette a procedure di fallimento o di concordato preventivo. • Che non sussistono nei confronti dei soggetti di cui all'art. 85 del D.Lgs. 159/2011, pertinenti in riferimento alla propria situazione aziendale, le cause di decadenza, di sospensione o di divieto previste dall'articolo 67 del decreto legislativo 6 settembre 2011, n. 159 o di un tentativo di infiltrazione mafiosa di cui all'articolo 84, comma 4, del Pag. 3 medesimo decreto; • Di non aver riportato condanne penali e di non essere destinatario di provvedimenti che riguardano l'applicazione di misure di prevenzione, di decisioni civili e di provvedimenti amministrativi iscritti nel casellario giudiziale ai sensi della vigente normativa. Cosa prevede Il bando finanzia la costituzione di una nuova attività economica sul territorio del Comune di Giuliana.",
+      "requirements": [
+        "Destinatari: Impresa, Impresa da costituire - Altro, Impresa - SU/PMI innovativa, Cittadino, Consorzio, Cooperative/Associazioni Non Profit, Professionista, Impresa da costituire - Giovanile",
+        "Regioni: Sicilia",
+        "Forma dell'agevolazione: ['Interventi a garanzia']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.comune.giuliana.pa.it/",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "impresa",
+        "persona",
+        "professionista"
+      ],
+      "opening_date": "2022-01-01",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Impresa, Impresa da costituire - Altro, Impresa - SU/PMI innovativa, Cittadino, Consorzio, Cooperative/Associazioni Non Profit, Professionista, Impresa da costituire - Giovanile | Regioni: Sicilia | Forma dell'agevolazione: ['Interventi a garanzia']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "open",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-5979226d3b0d",
+      "title": "Contributi a valere sul Fondo comuni marginali - Comune di Camastra",
+      "authority": "Comune di Camastra",
+      "category": "impresa",
+      "amount": "Dotazione: € 176.463",
+      "deadline": "2026-12-31",
+      "summary": "Cos'è Bando a valere sul Fondo di sostegno ai comuni marginali per favorire la coesione sociale e lo sviluppo economico nei comuni colpiti da spopolamento e per i quali si riscontrano rilevanti carenze di attrattività per la ridotta offerta di servizi materiali e immateriali alle persone e alle attività economiche. A chi si rivolge L'avviso pubblico è destinato a operatori economici che intendo…",
+      "description": "Cos'è Bando a valere sul Fondo di sostegno ai comuni marginali per favorire la coesione sociale e lo sviluppo economico nei comuni colpiti da spopolamento e per i quali si riscontrano rilevanti carenze di attrattività per la ridotta offerta di servizi materiali e immateriali alle persone e alle attività economiche. A chi si rivolge L'avviso pubblico è destinato a operatori economici che intendono aprire attività commerciali, artigianali e agricole nel territorio del Comune di Rivello: - per attività già esistenti; - per l'attivazione di nuovi e ulteriori codici Ateco. Cosa prevede L'incentivo prevede la concessione di contributi per l'avvio delle attività commerciali, artigianali e agricole attraverso un'unità operativa ubicata nei territori dei comuni marginali e svantaggiati, per attività già esistenti o che attivano nuovi e ulteriori codici Ateco, purché nei suddetti territori comunali.",
+      "requirements": [
+        "Destinatari: Cittadino, Consorzio, Cooperative/Associazioni Non Profit, Ente Pubblico, Impresa, Impresa da costituire - Altro, Impresa da costituire - Femminile, Impresa da costituire - Giovanile, Impresa - prevalenza femminile, Impresa - prevalenza giovanile, Impresa - SU/PMI innovativa, Istituto finanziario, Professionista, Rete d'impresa, Università/Ente di Ricerca",
+        "Regioni: Sicilia",
+        "Forma dell'agevolazione: ['Agevolazione fiscale', 'Contributo/Fondo perduto', 'Prestito/Anticipo rimborsabile', 'Riduzione dei contributi di previdenza sociale', 'Capitale di rischio', 'Interventi a garanzia']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.comune.camastra.ag.it/",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona",
+        "impresa",
+        "professionista"
+      ],
+      "opening_date": "2024-05-10",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino, Consorzio, Cooperative/Associazioni Non Profit, Ente Pubblico, Impresa, Impresa da costituire - Altro, Impresa da costituire - Femminile, Impresa da costituire - Giovanile, Impresa - prevalenza femminile, Impresa - prevalenza giovanile, Impresa - SU/PMI innovativa, Istituto finanziario, Professionista, Rete d'impresa, Università/Ente di Ricerca | Regioni: Sicilia | Forma dell'agevolazione: ['Agevolazione fiscale', 'Contributo/Fondo perduto', 'Prestito/Anticipo rimborsabile', 'Riduzione dei contributi di previdenza sociale', 'Capitale di rischio', 'Interventi a garanzia']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "open",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-3615e97811c2",
+      "title": "Interventi per la riqualificazione e riconversione produttiva sostenibile - Regione autonoma Friuli Venezia Giulia",
+      "authority": "Regione Autonoma Friuli-Venezia Giulia",
+      "category": "casa",
+      "amount": "Dotazione: € 5.285.000",
+      "deadline": "2030-12-31",
+      "summary": "Cos'è Contributi a fondo perduto in regime de minimis, nella misura massima del 50 per cento delle spese ammissibili, finalizzati a sostenere gli interventi per la riqualificazione e la riconversione produttiva sostenibile dei complessi produttivi degradati. Per complessi produttivi degradati si intendono edifici e relative aree di pertinenza non utilizzati da più di tre anni o con caratteristi…",
+      "description": "Cos'è Contributi a fondo perduto in regime de minimis, nella misura massima del 50 per cento delle spese ammissibili, finalizzati a sostenere gli interventi per la riqualificazione e la riconversione produttiva sostenibile dei complessi produttivi degradati. Per complessi produttivi degradati si intendono edifici e relative aree di pertinenza non utilizzati da più di tre anni o con caratteristiche tali da non essere più idonei ad attività legate alla produzione, come individuati dalla deliberazione della Giunta regionale n. 1820 del 24/11/2022 e successive integrazioni. Riferimenti normativi Legge Regionale 3/2021 art. 84 A chi si rivolge Sono beneficiari dei contributi le imprese, i privati ed i Consorzi di sviluppo economico locale, titolari di diritto di proprietà o altro diritto reale di godimento su edifici ed immobili qualificati come complessi produttivi degradati. Cosa prevede Sono ammissibili al finanziamento gli interventi per la riqualificazione e riconversione produttiva sostenibile, la realizzazione di interventi quali la demolizione, la demolizione per riconversione, la demolizione con ricostruzione, la manutenzione straordinaria, la ristrutturazione, l'allacciamento alle reti infrastrutturali di edifici produttivi, finalizzati al riutilizzo a fini produttivi dei complessi produttivi degradati.",
+      "requirements": [
+        "Destinatari: Cittadino, Consorzio, Impresa",
+        "Regioni: Friuli-Venezia Giulia",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/economia-imprese/sviluppoimpresa/FOGLIA2/",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "opening_date": "2022-12-05",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino, Consorzio, Impresa | Regioni: Friuli-Venezia Giulia | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "open",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-9c693d1979dc",
+      "title": "Provincia Autonoma di Trento - Contributi per iniziative di interesse provinciale",
+      "authority": "Provincia Autonoma di Trento",
+      "category": "mobilita",
+      "amount": "Dotazione: € 200",
+      "deadline": "2028-12-31",
+      "summary": "Cos'è La Provincia concede contributi sulle spese sostenute per la realizzazione di iniziative e manifestazioni su temi che rivestono particolare rilevanza per il Trentino. A chi si rivolge Possono beneficiare del contributo finanziario per iniziative di rilevanza provinciale: a) enti pubblici e privati; b) imprese iscritte nel Registro delle imprese. Cosa prevede Concessione di un contributo p…",
+      "description": "Cos'è La Provincia concede contributi sulle spese sostenute per la realizzazione di iniziative e manifestazioni su temi che rivestono particolare rilevanza per il Trentino. A chi si rivolge Possono beneficiare del contributo finanziario per iniziative di rilevanza provinciale: a) enti pubblici e privati; b) imprese iscritte nel Registro delle imprese. Cosa prevede Concessione di un contributo per la parziale copertura di costi.",
+      "requirements": [
+        "Destinatari: Cittadino",
+        "Regioni: Trentino-Alto Adige/Südtirol",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.provincia.tn.it/Servizi/Contributi-per-iniziative-di-particolare-rilevanza-per-il-Trentino",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona"
+      ],
+      "opening_date": "2024-05-01",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino | Regioni: Trentino-Alto Adige/Südtirol | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "open",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-f6b9b6ccd044",
+      "title": "Friuli Venezia Giulia - Concessione di contributi a Comuni, operatori economici, proprietari di immobili, associazioni per progetti unitari di alberghi diffusi - 2023 - (Legge Regionale 3/2021, art. 35, c. 7)",
+      "authority": "Regione autonoma Friuli Venezia Giulia - Direzione centrale attività produttive",
+      "category": "altro",
+      "amount": "Dotazione: € 2.000.000",
+      "deadline": "2026-12-31",
+      "summary": "Cos'è L'incentivo prevede la concessione di contributi ad amministrazioni comunali, operatori economici, proprietari di immobili da destinare all’esercizio dell’attività di albergo diffuso e associazioni del territorio per la realizzazione di progetti unitari finalizzati alla creazione di alberghi diffusi o al potenziamento degli esistenti, ai sensi dell'articolo 35, comma 7 della legge regiona…",
+      "description": "Cos'è L'incentivo prevede la concessione di contributi ad amministrazioni comunali, operatori economici, proprietari di immobili da destinare all’esercizio dell’attività di albergo diffuso e associazioni del territorio per la realizzazione di progetti unitari finalizzati alla creazione di alberghi diffusi o al potenziamento degli esistenti, ai sensi dell'articolo 35, comma 7 della legge regionale 22 febbraio 2021, n. 3. A chi si rivolge Amministrazioni comunali, operatori economici, proprietari di immobili e associazioni del territorio. Cosa prevede L'incentivo prevede la concessione di contributi: - nell’ambito di progetti unitari per la creazione di alberghi diffusi o al potenziamento degli esistenti anche in contesti urbani caratterizzati dalla presenza di edifici da riqualificare: - nell'ambito di borghi che possono costituire elementi di attrattività per lo sviluppo turistico. Nello specifico, si prevede il finanziamento dei seguenti interventi: a) ammodernamento ai fini del recupero e valorizzazione di immobili di proprietà privata e pubblica esistenti per la realizzazione o l’adeguamento di unità abitative da destinarsi ad albergo diffuso; b) ammodernamento dell’ufficio di ricevimento e della sala ad uso comune dell’albergo diffuso esistente o realizzazione dell’ufficio di ricevimento e della sala ad uso comune del nuovo albergo diffuso mediante ammodernamento ai fini del recupero e valorizzazione di immobili di proprietà privata e pubblica esistenti; c) realizzazione, da parte delle amministrazioni comunali, di opere infrastrutturali di arredo urbano funzionali e strettamente collegate all’iniziativa di albergo diffuso.",
+      "requirements": [
+        "Destinatari: Cittadino, Consorzio, Cooperative/Associazioni Non Profit, Ente Pubblico, Impresa",
+        "Regioni: Friuli-Venezia Giulia",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.fvg.it/rafvg/cms/RAFVG/economia-imprese/turismo/FOGLIA22/",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "opening_date": "2023-03-15",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino, Consorzio, Cooperative/Associazioni Non Profit, Ente Pubblico, Impresa | Regioni: Friuli-Venezia Giulia | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "open",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-92313afe5de1",
+      "title": "Dote Impresa Collocamento Mirato Disabili - Annualità 2025 - Provincia di Pavia",
+      "authority": "Provincia di Pavia",
+      "category": "lavoro",
+      "amount": "Dotazione: € 952.403",
+      "deadline": "",
+      "summary": "Cos'è Il Bando stabilisce le modalità di concessione di contributi economici destinati alle imprese del territorio lombardo, allo scopo di favorire l'inserimento e la permanenza nel mercato del lavoro dei soggetti con disabilità, come definiti dalla Legge n. 68/99. Mediante tali contributi si intende contrastare i rischi di emarginazione sociale e precarietà lavorativa, nonché promuovere una pi…",
+      "description": "Cos'è Il Bando stabilisce le modalità di concessione di contributi economici destinati alle imprese del territorio lombardo, allo scopo di favorire l'inserimento e la permanenza nel mercato del lavoro dei soggetti con disabilità, come definiti dalla Legge n. 68/99. Mediante tali contributi si intende contrastare i rischi di emarginazione sociale e precarietà lavorativa, nonché promuovere una più efficace integrazione tra il sistema imprenditoriale e la cultura dell'inclusione. Le misure previste rivestono la specifica finalità di incentivare l'assunzione ed il consolidamento dei rapporti di lavoro, nonché di contribuire alle spese connesse alle assunzioni e all'inserimento nei percorsi di formazione e orientamento. In tale prospettiva le misure del presente Avviso rispondono anche alla più ampia finalità di sviluppare una collaborazione fra servizi del Collocamento Mirato previsti dalla Legge n. 68/99 e le imprese che intendono promuovere, nel proprio progetto imprenditoriale, la responsabilità sociale di impresa. La Dote Impresa – Collocamento Mirato costituisce lo strumento mediante il quale viene assegnata alle imprese lombarde una dotazione di risorse e servizi per l'inserimento o il mantenimento occupazionale dei soggetti con disabilità. Tale strumento si pone in linea con gli obiettivi delineati dalla Commissione Europea nella comunicazione \"Un'Unione dell'uguaglianza: strategia per i diritti delle persone con disabilità 2021-2030\". Il Bando afferma altresì il principio della pari opportunità di genere, ai sensi del \"Codice delle pari opportunità tra uomo e donna\", in ogni situazione e per ogni condizione, riducendo i rischi di precarietà, segregazione e marginalità, implementando rapporti sempre più consolidati con le imprese attraverso forme di sostegno all'assunzione di soggetti in condizione di svantaggio nel mercato del lavoro. A chi si rivolge Sono ammesse a presentare domanda di agevolazione le imprese private di qualsiasi dimensione e settore di attivi",
+      "requirements": [
+        "Destinatari: Cittadino",
+        "Regioni: Lombardia",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.provincia.pv.it/it/page/dote-impresa",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona"
+      ],
+      "opening_date": "2025-01-10",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino | Regioni: Lombardia | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "unknown",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-fc9b86c5fcec",
+      "title": "Fondo Imprese Femminili - FIF - Regione Calabria",
+      "authority": "Regione Calabria",
+      "category": "impresa",
+      "amount": "Dotazione: € 6.000.000",
+      "deadline": "",
+      "summary": "Cos'è Il Fondo ha come obiettivo primario sostenere, attraverso la concessione di finanziamenti a tasso agevolato e contributi a fondo perduto, l’avvio di nuove iniziative imprenditoriali da parte di donne che hanno seguito e completato il percorso di accompagnamento e autoimprenditorialità “Yes I Startup Calabria Donne”. La misura di sostegno è concessa sotto forma sia di finanziamento a tasso…",
+      "description": "Cos'è Il Fondo ha come obiettivo primario sostenere, attraverso la concessione di finanziamenti a tasso agevolato e contributi a fondo perduto, l’avvio di nuove iniziative imprenditoriali da parte di donne che hanno seguito e completato il percorso di accompagnamento e autoimprenditorialità “Yes I Startup Calabria Donne”. La misura di sostegno è concessa sotto forma sia di finanziamento a tasso zero, sia di contributo a fondo perduto, nel rispetto delle condizioni e delle intensità massime di aiuto previste dalle normative in materia di aiuti di stato applicabili. A chi si rivolge Possono presentare domanda donne, con status di disoccupate, inoccupate, persone con disabilità e a rischio discriminazione, incluse le lavoratrici prossime al termine della fruizione di ammortizzatori sociali o da essi fuoriusciti o donne occupate, che abbiano già seguito e completato le fasi A e B del “percorso di accompagnamento e autoimprenditorialità Yes I Startup Calabria Donne” e che intendono costituire, o hanno già costituito da meno di 12 mesi, una nuova impresa a prevalente composizione e gestione femminile. Cosa prevede La misura di sostegno è concessa sotto forma sia di finanziamento a tasso zero, sia di contributo a fondo perduto, nel rispetto delle condizioni e delle intensità massime di aiuto previste dalle normative in materia di aiuti di stato applicabili. Il finanziamento complessivo può essere concesso nel limite massimo di euro 62.500 così ripartito: - Concessione di un aiuto sotto forma di finanziamento a tasso agevolato (tasso zero): l’importo massimo del prestito è pari ad euro 32.500; - Concessione aiuto sotto forma di sovvenzione a fondo perduto pari a euro 30.000; - Concessione di un aiuto sotto forma di supporto specialistico, per un massimo di 24 mesi (tutorship e mentorship), per un importo pari a euro 6.000 per singola azienda finanziata.",
+      "requirements": [
+        "Destinatari: Cittadino, Impresa",
+        "Regioni: Calabria",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto', 'Prestito/Anticipo rimborsabile']"
+      ],
+      "required_documents": [],
+      "source_url": "https://calabriaeuropa.regione.calabria.it/bando/avviso-pubblico-fondo-imprese-femminili-fif/",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "opening_date": "2024-07-08",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino, Impresa | Regioni: Calabria | Forma dell'agevolazione: ['Contributo/Fondo perduto', 'Prestito/Anticipo rimborsabile']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "unknown",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-91c7f773abc0",
+      "title": "Comune di Padria - Contributi De Minimis 2026",
+      "authority": "Comune di Padria",
+      "category": "lavoro",
+      "amount": "Dotazione: € 2.000",
+      "deadline": "2026-12-31",
+      "summary": "Cos'è L'incentivo consiste nella concessione dei contributi a nuove imprese e/o allo sviluppo di quelle preesistenti, nell’ambito del programma comunale degli investimenti finalizzati all’occupazione ed allo sviluppo produttivo locale. A chi si rivolge I soggetti beneficiari sono individuati nelle PMI (piccole e medie imprese), secondo la definizione del Decreto Ministeriale 18 aprile 2005, già…",
+      "description": "Cos'è L'incentivo consiste nella concessione dei contributi a nuove imprese e/o allo sviluppo di quelle preesistenti, nell’ambito del programma comunale degli investimenti finalizzati all’occupazione ed allo sviluppo produttivo locale. A chi si rivolge I soggetti beneficiari sono individuati nelle PMI (piccole e medie imprese), secondo la definizione del Decreto Ministeriale 18 aprile 2005, già costituite o da costituirsi nelle more dell’approvazione e finanziamento del progetto. Possono essere concessi contributi esclusivamente alle imprese che presentino la forma giuridica delle ditte individuali, delle libere professioni, società di persone, società di capitali e società cooperative. Sono escluse tutte le altre forme giuridiche comprese le Onlus, le Associazioni in genere. Nel caso di ditte individuali e libere professioni, i titolari devono essere residenti nel Comune di Padria da almeno due anni dalla data di pubblicazione del presente bando. E’ ammessa a contributo una sola idea imprenditoriale. Cosa prevede Ai soggetti risultanti beneficiari sarà erogato un contributo a fondo perduto in regime di De Minimis. L'agevolazione concedibile è costituita da un contributo a fondo perduto nella misura del 50% della spesa effettivamente sostenuta, al netto dell’IVA, nel rispetto dell’art. 8 del presente avviso, sia per le nuove attività che per il consolidamento e lo sviluppo di quelle esistenti, nel limite massimo di € 1.000,00 per ditta beneficiaria.",
+      "requirements": [
+        "Destinatari: Cittadino, Impresa, Professionista, Impresa - SU/PMI innovativa, Impresa - prevalenza giovanile, Impresa - prevalenza femminile, Impresa da costituire - Giovanile, Impresa da costituire - Femminile, Impresa da costituire - Altro",
+        "Regioni: Sardegna",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://comune.padria.ss.it/it/",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona",
+        "impresa",
+        "professionista"
+      ],
+      "opening_date": "2026-01-01",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino, Impresa, Professionista, Impresa - SU/PMI innovativa, Impresa - prevalenza giovanile, Impresa - prevalenza femminile, Impresa da costituire - Giovanile, Impresa da costituire - Femminile, Impresa da costituire - Altro | Regioni: Sardegna | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "open",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-bb986bbeb15d",
+      "title": "Comune di Morano Calabro - Fondo di sostegno ai Comuni marginali",
+      "authority": "Comune di Morano Calabro",
+      "category": "impresa",
+      "amount": "Dotazione: € 58.462",
+      "deadline": "",
+      "summary": "Cos'è Il bando del Comune di Morano Calabro prevede contributi a valere sul Fondo di sostegno ai Comuni marginali. Il Fondo di sostegno ai Comuni marginali é finalizzato a favorire la coesione sociale e lo sviluppo economico nei comuni particolarmente colpiti dal fenomeno dello spopolamento e per i quali si riscontrano rilevanti carenze di attrattività per la ridotta offerta di servizi material…",
+      "description": "Cos'è Il bando del Comune di Morano Calabro prevede contributi a valere sul Fondo di sostegno ai Comuni marginali. Il Fondo di sostegno ai Comuni marginali é finalizzato a favorire la coesione sociale e lo sviluppo economico nei comuni particolarmente colpiti dal fenomeno dello spopolamento e per i quali si riscontrano rilevanti carenze di attrattività per la ridotta offerta di servizi materiali e immateriali alle persone e alle attività' economiche, nel rispetto della complementarità con la strategia nazionale per le aree interne. Normativa: DPCM 30 settembre 2021. A chi si rivolge Il bando è rivolto rispettivamente a persone fisiche identificate con codice fiscale e persone fisiche/giuridiche titolari di partita iva. Cosa prevede L'agevolazione consiste nella concessione di un contributo per persone fisiche che spostano la residenza nel comune di Morano Calabro e la concessione di un contributo per persone fisiche/giuridiche che avviano nuove attività imprenditoriali nel Comune di Morano Calabro.",
+      "requirements": [
+        "Destinatari: Cittadino, Impresa",
+        "Regioni: Calabria",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.comunemoranocalabro.it/",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "opening_date": "",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino, Impresa | Regioni: Calabria | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "unknown",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-0e83e3fb34b9",
+      "title": "CCIAA Bari - Bando \"Giovani Laureati per le Imprese\"- Anno 2026",
+      "authority": "Camera di Commercio, Industria, Artigianato e Agricoltura di Bari",
+      "category": "lavoro",
+      "amount": "Dotazione: € 150.000",
+      "deadline": "2026-11-30",
+      "summary": "Cos'è Il bando ha la finalità di sostenere le imprese nel trasferimento di competenze e innovazione, nonchè di favorire l’inserimento lavorativo di laureati nei principali ambiti disciplinari (scientifico-tecnologico, biologico-agrario-veterinario, umanistico-sociale ed economico-giuridico), contribuendo al rilancio produttivo del territorio. La misura prevede la concessione di contributi a fon…",
+      "description": "Cos'è Il bando ha la finalità di sostenere le imprese nel trasferimento di competenze e innovazione, nonchè di favorire l’inserimento lavorativo di laureati nei principali ambiti disciplinari (scientifico-tecnologico, biologico-agrario-veterinario, umanistico-sociale ed economico-giuridico), contribuendo al rilancio produttivo del territorio. La misura prevede la concessione di contributi a fondo perduto sotto forma di voucher a sostegno delle imprese che attivino in favore di laureati (triennali, magistrali o a ciclo unico), di età non superiore a 32 anni che abbiano conseguito almeno un titolo presso l’Università degli Studi di Bari “Aldo Moro” a partire dall’anno accademico 2020/2021, i seguenti contratti: - tirocini extracurricolari della durata di 6 mesi; - contratti di lavoro a tempo determinato (minimo 6 mesi); - contratti a tempo indeterminato. Le candidature dei laureati saranno gestite tramite la piattaforma “Portiamo Valore” dell’Università degli Studi di Bari, con selezione effettuata dalle imprese mediante colloquio. Il “Progetto” oggetto della domanda di partecipazione al Bando dovrà essere realizzato nella sede legale e/o produttiva dell’impresa ricadente nel territorio di competenza dell’Ente camerale. Le domande devono essere trasmesse esclusivamente in modalità telematica, attraverso lo sportello on line “Contributi alle imprese”, all’interno del sistema Restart di Infocamere dalle ore 09:00 del 30.06.2026 fino alle ore 12:00 del 30/11/2026. A chi si rivolge Soggetti beneficiari sono le MPMI aventi sede legale e/o unità locale operativa nella circoscrizione territoriale di competenza della Camera di Commercio I.A.A. di Bari. Sono esclusi dalla partecipazione i Consorzi, le Associazioni e gli altri Enti od Organismi che non esercitino, in via esclusiva o principale, attività economica in forma di impresa e che, pertanto, non siano iscritti al Registro delle Imprese della C.C.I.A.A. di Bari. Cosa prevede Caratteristiche dell’agevolazione: Il contribu",
+      "requirements": [
+        "Destinatari: Cittadino, Impresa",
+        "Regioni: Puglia",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.ba.camcom.it/info/bando-giovani-laureati-per-le-imprese-anno-2026",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "opening_date": "2026-06-30",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino, Impresa | Regioni: Puglia | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "open",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-b0656fb5415b",
+      "title": "Le Marche per i giovani imprenditori: Start&Innova Giovani – Sostegno alla creazione di imprese innovative da parte di giovani disoccupati",
+      "authority": "Regione Marche",
+      "category": "lavoro",
+      "amount": "Dotazione: € 1.000.000",
+      "deadline": "2027-03-18",
+      "summary": "Cos'è L'intervento punta a favorire l'occupazione di giovani disoccupati laureati o diplomati ITS Academy nel territorio della Regione Marche under 36, promuovendo il loro inserimento in contesti imprenditoriali innovativi. Le finalità principali sono sostenere la creazione di start-up innovative e spin-off universitari negli ambiti della Strategia di Specializzazione Intelligente (S3), support…",
+      "description": "Cos'è L'intervento punta a favorire l'occupazione di giovani disoccupati laureati o diplomati ITS Academy nel territorio della Regione Marche under 36, promuovendo il loro inserimento in contesti imprenditoriali innovativi. Le finalità principali sono sostenere la creazione di start-up innovative e spin-off universitari negli ambiti della Strategia di Specializzazione Intelligente (S3), supportare lo sviluppo di idee imprenditoriali lungo l'intera catena del valore, dalla fase di ideazione fino all'avvio e alla crescita, e valorizzare i risultati della ricerca e il trasferimento tecnologico. I cittadini beneficiano così di opportunità di occupazione ad alta specializzazione, mentre le nuove imprese ottengono il supporto finanziario per la realizzazione di prodotti e soluzioni tecnologicamente avanzate A chi si rivolge Possono presentare domanda di contributo i soggetti che, al momento della presentazione della domanda, soddisfano tutti i seguenti requisiti: • laureati o diplomati ITS Accademy under il 36; • residenti o domiciliati in uno dei Comuni della regione Marche • disoccupati ai sensi del D.Lgs. n. 150/2015 e ss.mm.ii., iscritti ai Centri per l’impiego della Regione Marche • i giovani aventi i requisiti di cui al precedente punto 1, iscritti all’Anagrafe degli Italiani Residenti all’Estero (AIRE), per i quali il requisito della disoccupazione ai sensi del D.Lgs. n. 150/2015 e ss.mm.ii. e di residenza nella regione Marche dovranno essere posseduti al momento della costituzione dell’impresa Cosa prevede La domanda deve essere presentata dal soggetto richiedente esclusivamente per via telematica, tramite il sistema informativo SIFORM2. Il contributo a fondo perduto, pari complessivamente a € 40.000,00, è concesso sotto forma di somma forfettaria ed è erogato in due tranche, dopo l’ammissione a contributo: - La prima tranche (anticipo): pari a € 20.000,00, a seguito della verifica dell’avvio dell’attività da parte dell’impresa; - La seconda tranche (saldo): pari ",
+      "requirements": [
+        "Destinatari: Cittadino",
+        "Regioni: Marche",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.marche.it/Entra-in-Regione/Bandi-e-opportunita/Bandi-attivi?idb=26327",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona"
+      ],
+      "opening_date": "2026-07-06",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino | Regioni: Marche | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "open",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-4be358aec160",
+      "title": "Avviso \"Marche per le imprese - Sostegno alla creazione di nuove imprese\" - PR FSE+ 2021-2027 – Asse 1 Occupazione OS 4.a (8) - Annualità 2026-2027",
+      "authority": "Regione Marche",
+      "category": "lavoro",
+      "amount": "Dotazione: € 6.905.000",
+      "deadline": "2027-09-30",
+      "summary": "Cos'è L’Avviso “Marche per le imprese – Sostegno alla creazione di nuove imprese – Over 36” è rivolto a persone disoccupate di età compresa tra 36 e 65 anni e mira a favorire la nascita di nuove attività imprenditoriali nel territorio marchigiano. L’intervento sostiene percorsi di autoimpiego e imprenditorialità capaci di generare occupazione e valore economico, contribuendo al rafforzamento e…",
+      "description": "Cos'è L’Avviso “Marche per le imprese – Sostegno alla creazione di nuove imprese – Over 36” è rivolto a persone disoccupate di età compresa tra 36 e 65 anni e mira a favorire la nascita di nuove attività imprenditoriali nel territorio marchigiano. L’intervento sostiene percorsi di autoimpiego e imprenditorialità capaci di generare occupazione e valore economico, contribuendo al rafforzamento e al rinnovamento del tessuto produttivo regionale. Attraverso contributi dedicati, la Regione Marche intende promuovere nuove opportunità di lavoro, valorizzare competenze e professionalità e sostenere uno sviluppo economico duraturo e inclusivo. A chi si rivolge I soggetti che possono presentare domanda di contributo devono, al momento della presentazione della domanda: 1. essere disoccupati iscritti ai sensi del D.lgs. n. 150/2015 e ss.mm.ii, da almeno 6 mesi (da almeno 180 giorni) ed aver sottoscritto il Patto di Servizio con uno dei Centri per l’Impiego competenti; 2. essere residenti nel territorio della Regione Marche alla data di presentazione della domanda; 3. avere un’età compresa tra 36 e 65 anni; 4. non aver beneficiato, nei 5 anni antecedenti alla data di presentazione della domanda, di contributi pubblici finalizzati alla creazione d'impresa, finanziati con risorse regionali, nazionali e/o dell'Unione europea; 5. che non si trovino in alcuna delle cause di esclusione previste dall’articolo 9, lettere a), b), del decreto legislativo n. 184 del 27 novembre 2025 (Codice degli incentivi). Sono ammessi anche i soggetti AIRE. Cosa prevede La richiesta del contributo deve essere effettuata entro 4 mesi dal decreto di impegno e la liquidazione avviene entro 60 giorni dalla presentazione della documentazione completa. Il contributo a fondo perduto, pari complessivamente a € 20.000,00, è concesso sotto forma di somma forfettaria ed è erogato in un’unica tranche. Entro 60 giorni dalla fine del progetto si deve presentare la documentazione finale che prevede tra l’altro una re",
+      "requirements": [
+        "Destinatari: Cittadino",
+        "Regioni: Marche",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.marche.it/RicercaBandi/id_32790/28591",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona"
+      ],
+      "opening_date": "2026-09-16",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino | Regioni: Marche | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "open",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-dd84925e1094",
+      "title": "Le Marche per i giovani: sostegno all’imprenditorialità giovanile",
+      "authority": "Regione Marche",
+      "category": "studio",
+      "amount": "Dotazione: € 5.100.000",
+      "deadline": "2027-11-30",
+      "summary": "Cos'è Contributo, erogabile in regime “De Minimis” ai sensi del Reg. UE 2831/2023, consistente in una somma forfettaria a fondo perduto di € 20.000,00 per ogni neo-impresa costituita. A chi si rivolge Soggetti di età compresa tra 18 e 35 anni (36 anni non compiuti alla data di presentazione della domanda) residenti nella regione Marche, disoccupati ai sensi del D. Lgs n. 150/2015 e ss.mm.ii. da…",
+      "description": "Cos'è Contributo, erogabile in regime “De Minimis” ai sensi del Reg. UE 2831/2023, consistente in una somma forfettaria a fondo perduto di € 20.000,00 per ogni neo-impresa costituita. A chi si rivolge Soggetti di età compresa tra 18 e 35 anni (36 anni non compiuti alla data di presentazione della domanda) residenti nella regione Marche, disoccupati ai sensi del D. Lgs n. 150/2015 e ss.mm.ii. da almeno 3 mesi, in possesso di almeno un diploma di scuola secondaria di secondo grado. Cosa prevede L’intervento consiste nella concessione di un contributo a fondo perduto in regime “de minimis”, ai sensi del Regolamento (UE) 2023/2831, pari a 20.000 euro per ciascuna nuova impresa costituita. Il contributo non è correlato alla rendicontazione di specifiche spese ammissibili ma è riconosciuto come somma forfettaria (UCS - Unità di Costo Standard) per il sostegno alla creazione d'impresa. L'Avviso \"Le Marche per i giovani: sostegno all'imprenditorialità giovanile\" è finalizzato a favorire la nascita di nuove imprese da parte di giovani disoccupati marchigiani tra i 18 e i 35 anni, sostenendo la trasformazione di competenze, percorsi formativi ed esperienze professionali in attività imprenditoriali concrete. L'intervento mira in particolare a: • promuovere nuove opportunità occupazionali; • favorire l'autoimpiego e l'autonomia professionale dei giovani; • contrastare la fuoriuscita di competenze qualificate dal territorio regionale; • incentivare il rientro nelle Marche di giovani che hanno maturato esperienze di studio o lavoro fuori regione; • rafforzare il tessuto produttivo regionale attraverso la nascita di nuove iniziative imprenditoriali innovative e competitive. Possono presentare domanda giovani: • disoccupati da almeno 90 giorni; • di età compresa tra 18 e 35 anni; • residenti nelle Marche (con specifiche disposizioni per gli iscritti AIRE); • in possesso almeno di un diploma di scuola secondaria di secondo grado. Il contributo sarà successivamente erogato a: • micro",
+      "requirements": [
+        "Destinatari: Cittadino",
+        "Regioni: Marche",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.marche.it/Entra-in-Regione/Bandi-e-opportunita/Bandi-attivi/p/1/t/112?idb=28754",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona"
+      ],
+      "opening_date": "2026-10-16",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino | Regioni: Marche | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "open",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-8ab5d9bd8cdc",
+      "title": "Regime di aiuti a sostegno dell'occupazione di determinati lavoratori in Italia e nel Mezzogiorno",
+      "authority": "Ministero del Lavoro e delle Politiche Sociali",
+      "category": "lavoro",
+      "amount": "Dotazione: € 1.013.800.000",
+      "deadline": "",
+      "summary": "Cos'è Regime di aiuti a sostegno dell'occupazione di determinati lavoratori in Italia e nel Mezzogiorno (Bonus Giovani). Articolo 22, del decreto - legge 7 maggio 2024, n. 60, convertito con modificazioni dalla legge 4 luglio 2024, n. 95. A chi si rivolge Ai datori di lavoro privati che, ai sensi dell’articolo 22 del decreto-legge 7 maggio 2024, n. 60, convertito, con modificazioni, dalla legge…",
+      "description": "Cos'è Regime di aiuti a sostegno dell'occupazione di determinati lavoratori in Italia e nel Mezzogiorno (Bonus Giovani). Articolo 22, del decreto - legge 7 maggio 2024, n. 60, convertito con modificazioni dalla legge 4 luglio 2024, n. 95. A chi si rivolge Ai datori di lavoro privati che, ai sensi dell’articolo 22 del decreto-legge 7 maggio 2024, n. 60, convertito, con modificazioni, dalla legge 4 luglio 2024, n. 95, assumono personale non dirigenziale con contratto di lavoro subordinato a tempo indeterminato o effettuano la trasformazione del contratto a tempo determinato in contratto a tempo indeterminato è riconosciuto, per un periodo massimo di ventiquattro mesi, un esonero dal versamento del 100 per cento dei complessivi contributi previdenziali a carico dei datori di lavoro privati, con esclusione dei premi e contributi dovuti all'Istituto nazionale per l'assicurazione contro gli infortuni sul lavoro (INAIL), nel limite massimo di importo pari a 500 euro su base mensile per ciascun lavoratore e comunque nei limiti della spesa autorizzata ai sensi dell’articolo 22, comma 7, del decreto-legge 7 maggio 2024. Si precisa inoltre che ai datori di lavoro privati che, dalla data di autorizzazione della Commissione europea e fino al 31 dicembre 2025, assumono, ai sensi dell’articolo 4, comma 3, lavoratori con sede di lavoro effettiva, presso la quale il lavoratore è tenuto a prestare fisicamente servizio, ubicata nelle regioni Abruzzo, Molise, Campania, Basilicata, Sicilia, Puglia, Calabria e Sardegna, l’esonero spetta nel limite massimo di importo pari a 650 euro su base mensile per ciascun lavoratore e comunque nei limiti della spesa autorizzata ai sensi dell’articolo 22, comma 7, del decreto-legge 7 maggio 2024, n. 60, convertito, con modificazioni, dalla legge 4 luglio 2024, n. 95, Cosa prevede La fruizione dell’esonero contributivo è subordinata al rispetto delle condizioni di cui all’articolo 1, commi 1175 e 1176, della legge 27 dicembre 2006, n. 296 e successive ",
+      "requirements": [
+        "Destinatari: Cittadino, Consorzio, Cooperative/Associazioni Non Profit, Ente Pubblico, Impresa, Impresa da costituire - Altro, Impresa da costituire - Femminile, Impresa da costituire - Giovanile, Impresa - prevalenza femminile, Impresa - prevalenza giovanile, Impresa - SU/PMI innovativa, Istituto finanziario, Professionista, Rete d'impresa, Università/Ente di Ricerca",
+        "Regioni: Piemonte, Lombardia, Valle d'Aosta/Vallée d'Aoste, Liguria, Abruzzo, Molise, Basilicata, Calabria, Campania, Puglia, Sicilia, Trentino-Alto Adige/Südtirol, Veneto, Sardegna, Toscana, Friuli-Venezia Giulia, Emilia-Romagna, Umbria, Marche, Lazio",
+        "Forma dell'agevolazione: ['Riduzione dei contributi di previdenza sociale']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.lavoro.gov.it/priorita/pagine/decreto-legge-coesione-novita-lavoro",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona",
+        "impresa",
+        "professionista"
+      ],
+      "opening_date": "2024-07-01",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino, Consorzio, Cooperative/Associazioni Non Profit, Ente Pubblico, Impresa, Impresa da costituire - Altro, Impresa da costituire - Femminile, Impresa da costituire - Giovanile, Impresa - prevalenza femminile, Impresa - prevalenza giovanile, Impresa - SU/PMI innovativa, Istituto finanziario, Professionista, Rete d'impresa, Università/Ente di Ricerca | Regioni: Piemonte, Lombardia, Valle d'Aosta/Vallée d'Aoste, Liguria, Abruzzo, Molise, Basilicata, Calabria, Campania, Puglia, Sicilia, Trentino-Alto Adige/Südtirol, Veneto, Sardegna, Toscana, Friuli-Venezia Giulia, Emilia-Romagna, Umbria, Marche, Lazio | Forma dell'agevolazione: ['Riduzione dei contributi di previdenza sociale']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "unknown",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-c06bda2f5288",
+      "title": "Sostegno al lavoro autonomo attraverso misure di autoimprenditorialità e autoimpiego a favore di disoccupati, occupati a rischio di perdita di occupazione, giovani e donne",
+      "authority": "Regione Campania",
+      "category": "lavoro",
+      "amount": "Dotazione: € 18.000.000",
+      "deadline": "2026-12-31",
+      "summary": "Cos'è Il bando finanzia iniziative di autoimpresa e autoimpiego. A chi si rivolge Sono destinatari del sostegno disoccupati, occupati a rischio di perdita di occupazione, giovani e donne con residenza nella Regione Campania. Cosa prevede Contributo in conto capitale fino a un massimo di € 25.000.",
+      "description": "Cos'è Il bando finanzia iniziative di autoimpresa e autoimpiego. A chi si rivolge Sono destinatari del sostegno disoccupati, occupati a rischio di perdita di occupazione, giovani e donne con residenza nella Regione Campania. Cosa prevede Contributo in conto capitale fino a un massimo di € 25.000.",
+      "requirements": [
+        "Destinatari: Cittadino",
+        "Regioni: Campania",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://lavoro.regione.campania.it/index.php/home/servizi/la-rete-regionale-dei-servizi/rete-dei-servizi/autoimprenditorialita/pr-2021-2027-priorita-occupazione-avviso-pubblico-per-il-sostegno-al-lavoro-autonomo",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona"
+      ],
+      "opening_date": "2024-12-06",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino | Regioni: Campania | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "open",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-fecbfc1dd1a5",
+      "title": "Bandi per la partecipazione alle procedure competitive per l'accesso agli incentivi previsti dal DM FER2",
+      "authority": "Ministero dell'ambiente e della sicurezza energetica",
+      "category": "energia",
+      "amount": "Dotazione: € 36.715.000.000",
+      "deadline": "2028-12-31",
+      "summary": "Cos'è Bando unico aperto ai sensi dell’articolo 4 del D.M. 19 giugno 2024 recante \"Incentivazione degli impianti a fonte rinnovabile innovativi o con costi di generazione elevati che presentino caratteristiche di innovazione e ridotto impatto sull’ambiente e sul territorio” (DM FER2). Lo stesso si riferisce a specifici bandi (procedure competitive) dedicati alle tipologia d'impianto indicate da…",
+      "description": "Cos'è Bando unico aperto ai sensi dell’articolo 4 del D.M. 19 giugno 2024 recante \"Incentivazione degli impianti a fonte rinnovabile innovativi o con costi di generazione elevati che presentino caratteristiche di innovazione e ridotto impatto sull’ambiente e sul territorio” (DM FER2). Lo stesso si riferisce a specifici bandi (procedure competitive) dedicati alle tipologia d'impianto indicate dall'art.4 del DM FER2, in cui il GSE rende noti i criteri, le modalità e i termini per la presentazione delle richieste di partecipazione alla procedura competitiva per l’assegnazione del relativo contingente di potenza. A chi si rivolge Il bando si rivolge si soggetti che intendano richiedere supporto per gli impianti indicati nel DM FER2. Cosa prevede Ogni bando prevede una procedura competitiva per l’assegnazione di un incentivo a ogni iniziativa che partecipa con esito positivo alla stessa. In particolare, il bando specifica informazioni quali il periodo di apertura della procedura, le modalità di partecipazione, il contingente di capacità produttiva da assegnare, criteri di formazione della graduatoria, le cause di esclusione dalla graduatoria.",
+      "requirements": [
+        "Destinatari: Cittadino, Ente Pubblico, Impresa, Università/Ente di Ricerca",
+        "Regioni: Piemonte, Lombardia, Valle d'Aosta/Vallée d'Aoste, Liguria, Abruzzo, Molise, Basilicata, Calabria, Campania, Puglia, Sicilia, Trentino-Alto Adige/Südtirol, Veneto, Sardegna, Toscana, Friuli-Venezia Giulia, Emilia-Romagna, Umbria, Marche, Lazio",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.gse.it/servizi-per-te/fonti-rinnovabili/fer2/bandi",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "opening_date": "2024-08-13",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino, Ente Pubblico, Impresa, Università/Ente di Ricerca | Regioni: Piemonte, Lombardia, Valle d'Aosta/Vallée d'Aoste, Liguria, Abruzzo, Molise, Basilicata, Calabria, Campania, Puglia, Sicilia, Trentino-Alto Adige/Südtirol, Veneto, Sardegna, Toscana, Friuli-Venezia Giulia, Emilia-Romagna, Umbria, Marche, Lazio | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "open",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-a4d6d7701a87",
+      "title": "Bando formazione aggiuntiva INAIL 2025 - Provincia Autonoma di Trento",
+      "authority": "Provincia Autonoma di Trento",
+      "category": "salute",
+      "amount": "Dotazione: € 95.789",
+      "deadline": "2026-12-31",
+      "summary": "Cos'è L’affidamento ha per oggetto la progettazione, comunicazione, attivazione e organizzazione di eventi di formazione aggiuntiva in relazione all’accordo quadro di collaborazione tra INAIL e la Conferenza delle Regioni e Province autonome sottoscritto in data 14 luglio 2023 (d’ora in avanti, l’Accordo - allegato 1), per la promozione di una campagna nazionale di rafforzamento della formazion…",
+      "description": "Cos'è L’affidamento ha per oggetto la progettazione, comunicazione, attivazione e organizzazione di eventi di formazione aggiuntiva in relazione all’accordo quadro di collaborazione tra INAIL e la Conferenza delle Regioni e Province autonome sottoscritto in data 14 luglio 2023 (d’ora in avanti, l’Accordo - allegato 1), per la promozione di una campagna nazionale di rafforzamento della formazione quale occasione per supportare la cultura della salute e sicurezza nei luoghi di lavoro e favorire un concreto trasferimento di conoscenze, a sostegno della consapevolezza dei rischi e per l’adozione delle più corrette misure di prevenzione. A chi si rivolge Destinatari degli interventi formativi, sono i lavoratori delle imprese coinvolte nella realizzazione di opere oggetto di diversi cantieri interessati finanziati con risorse PNRR, che fanno riferimento ai codici ATECO C23, C33, E, F41, F42 e F43. Le imprese di riferimento dei lavoratori devono avere la sede interessata dalla formazione (sede legale, unità locale o secondaria) sul territorio provinciale ed essere iscritte al registro delle imprese della Camera di Commercio di competenza. Cosa prevede Il programma formativo, dovrà prevedere corsi di formazione così come declinati nel Catalogo degli interventi formativi di cui all’allegato 1 dell’Accordo, composto da specifici moduli aventi standard comuni in termini di obiettivi, contenuti, durata e metodologie, a garanzia di qualità e uniformità territoriale, e attraverso il ricorso a docenti qualificati. In particolare, si farà riferimento alle schede corsi che si allegano al presente disciplinare (allegato A).",
+      "requirements": [
+        "Destinatari: Cittadino, Impresa",
+        "Regioni: Trentino-Alto Adige/Südtirol",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.provincia.tn.it",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "opening_date": "2025-01-01",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino, Impresa | Regioni: Trentino-Alto Adige/Südtirol | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "open",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-307ed7abe34f",
+      "title": "Bando Natalinsieme 2025 - Comune di San Donà di Piave",
+      "authority": "Comune di San Dona' di Piave",
+      "category": "altro",
+      "amount": "Dotazione: € 4.000",
+      "deadline": "2026-12-31",
+      "summary": "Cos'è Il bando prevede la concessione di un contributo per la realizzazione dell'iniziativa \"Natale insieme 2025\". A chi si rivolge Il bando è rivolto alle imprese. Cosa prevede L'agevolazione consiste nell'erogazione di un contributo per l'acquisizione di tutti i servizi necessari.",
+      "description": "Cos'è Il bando prevede la concessione di un contributo per la realizzazione dell'iniziativa \"Natale insieme 2025\". A chi si rivolge Il bando è rivolto alle imprese. Cosa prevede L'agevolazione consiste nell'erogazione di un contributo per l'acquisizione di tutti i servizi necessari.",
+      "requirements": [
+        "Destinatari: Impresa, Cittadino",
+        "Regioni: Veneto",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.comune.sandonadipiave.ve.it/home/tassonomia?contentType=pnrr_news&firstTaxonomyLevel=avviso",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "impresa",
+        "persona"
+      ],
+      "opening_date": "2025-11-04",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Impresa, Cittadino | Regioni: Veneto | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "open",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-cd7ae610b8da",
+      "title": "Comune di Alzano Lombardo - Contributi Start-Up 2025",
+      "authority": "Comune di Alzano Lombardo",
+      "category": "altro",
+      "amount": "Dotazione: € 2.201",
+      "deadline": "2026-12-31",
+      "summary": "Cos'è L'incentivo del comune di Alzano Lombardo riguarda l'erogazione di contributi Start-Up 2025. A chi si rivolge L'agevolazione è rivolta a cittadini e imprese. Cosa prevede E' prevista l'erogazione di un contributo, come da regolamento per i negozi start-up.",
+      "description": "Cos'è L'incentivo del comune di Alzano Lombardo riguarda l'erogazione di contributi Start-Up 2025. A chi si rivolge L'agevolazione è rivolta a cittadini e imprese. Cosa prevede E' prevista l'erogazione di un contributo, come da regolamento per i negozi start-up.",
+      "requirements": [
+        "Destinatari: Cittadino, Impresa, Istituto finanziario",
+        "Regioni: Lombardia",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.comune.alzano.bg.it/",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "opening_date": "2026-01-01",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino, Impresa, Istituto finanziario | Regioni: Lombardia | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "open",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-75c5c953f3ff",
+      "title": "Comune di Africo - Fondo di sostegno ai comuni marginali - Annualità 2021/2022/2023",
+      "authority": "Comune di Africo",
+      "category": "altro",
+      "amount": "Dotazione: € 146.586",
+      "deadline": "2026-12-31",
+      "summary": "Cos'è BANDO FONDO COMUNI MARGINALI ANNUALITA 2021/22/23 A chi si rivolge CITTADINI IMPRESE Cosa prevede SOSTEGNO ECONOMICO ALLE IMPRESE E ALLE NUOVE ATTIVITà PRODUTTIVE",
+      "description": "Cos'è BANDO FONDO COMUNI MARGINALI ANNUALITA 2021/22/23 A chi si rivolge CITTADINI IMPRESE Cosa prevede SOSTEGNO ECONOMICO ALLE IMPRESE E ALLE NUOVE ATTIVITà PRODUTTIVE",
+      "requirements": [
+        "Destinatari: Cittadino, Impresa",
+        "Regioni: Calabria",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto', 'Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.comune.africo.rc.it/it",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "opening_date": "2025-12-11",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino, Impresa | Regioni: Calabria | Forma dell'agevolazione: ['Contributo/Fondo perduto', 'Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "open",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-07ee33e4bb59",
+      "title": "AVVISO NEO IMPRESA 2025",
+      "authority": "Regione Autonoma Valle D'Aosta",
+      "category": "lavoro",
+      "amount": "Dotazione: € 200.000",
+      "deadline": "2026-12-31",
+      "summary": "Cos'è Sostegno all'autoimpiego A chi si rivolge Ai disoccupati, tra i 18 e i 60 anni, residenti in Valle d'Aosta Cosa prevede un contributo compreso tra i 5.000 e i 9.000 euro",
+      "description": "Cos'è Sostegno all'autoimpiego A chi si rivolge Ai disoccupati, tra i 18 e i 60 anni, residenti in Valle d'Aosta Cosa prevede un contributo compreso tra i 5.000 e i 9.000 euro",
+      "requirements": [
+        "Destinatari: Cittadino",
+        "Regioni: Piemonte, Lombardia, Valle d'Aosta/Vallée d'Aoste, Liguria, Abruzzo, Molise, Basilicata, Calabria, Campania, Puglia, Sicilia, Trentino-Alto Adige/Südtirol, Veneto, Sardegna, Toscana, Friuli-Venezia Giulia, Emilia-Romagna, Umbria, Marche, Lazio",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://lavoro.regione.vda.it/cittadini/lavoro/bando-neoimpresa",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona"
+      ],
+      "opening_date": "2025-01-07",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino | Regioni: Piemonte, Lombardia, Valle d'Aosta/Vallée d'Aoste, Liguria, Abruzzo, Molise, Basilicata, Calabria, Campania, Puglia, Sicilia, Trentino-Alto Adige/Südtirol, Veneto, Sardegna, Toscana, Friuli-Venezia Giulia, Emilia-Romagna, Umbria, Marche, Lazio | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "open",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-f556f02cdf62",
+      "title": "NuovaImpresa FVG - Accompagnamento e consulenza (PO7) e Start-UP innovative (PO10) – Regione Friuli Venezia Giulia",
+      "authority": "Regione Autonoma Friuli-Venezia Giulia",
+      "category": "impresa",
+      "amount": "Dotazione: € 500.000",
+      "deadline": "2028-03-30",
+      "summary": "Cos'è NuovaImpresa FVG è un’Operazione di Importanza Strategica (OIS) del Programma Regionale del Fondo Sociale Europeo Plus 21-27 della Regione Autonoma Friuli Venezia Giulia, che intende incoraggiare e sostenere l’imprenditorialità in Friuli Venezia Giulia. A chi si rivolge -giovani -studenti di scuole superiori, ITS, IFTS, universitari, laureati e ricercatori -lavoratori -occupati, disoccupa…",
+      "description": "Cos'è NuovaImpresa FVG è un’Operazione di Importanza Strategica (OIS) del Programma Regionale del Fondo Sociale Europeo Plus 21-27 della Regione Autonoma Friuli Venezia Giulia, che intende incoraggiare e sostenere l’imprenditorialità in Friuli Venezia Giulia. A chi si rivolge -giovani -studenti di scuole superiori, ITS, IFTS, universitari, laureati e ricercatori -lavoratori -occupati, disoccupati e persone provenienti da crisi aziendali -imprenditori, lavoratori autonomi e start-up: -imprese neo-costituite, aziende in fase di cambiamento generazionale o organizzativo, imprese artigiane e start-up innovative Cosa prevede Il progetto NuovaImpresa FVG mette a disposizione attività di formazione, consulenza e accompagnamento affidate a professionisti con competenze specialistiche ed esperienza concreta nel supporto all’avvio e allo sviluppo d’impresa.",
+      "requirements": [
+        "Destinatari: Cittadino, Impresa, Impresa da costituire - Altro, Impresa da costituire - Femminile, Impresa da costituire - Giovanile, Impresa - prevalenza giovanile, Impresa - prevalenza femminile, Impresa - SU/PMI innovativa",
+        "Regioni: Friuli-Venezia Giulia",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.nuovaimpresafvg.it/",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "opening_date": "2026-05-16",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino, Impresa, Impresa da costituire - Altro, Impresa da costituire - Femminile, Impresa da costituire - Giovanile, Impresa - prevalenza giovanile, Impresa - prevalenza femminile, Impresa - SU/PMI innovativa | Regioni: Friuli-Venezia Giulia | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "open",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-205ca78d6a6f",
+      "title": "FERX definitivo - Accesso diretto per impianti fino a 1 MW",
+      "authority": "Ministero dell'ambiente e della sicurezza energetica",
+      "category": "energia",
+      "amount": "Dotazione: € 17.782.000.000",
+      "deadline": "2026-12-31",
+      "summary": "Cos'è Il presente bando è predisposto secondo quanto previsto dal DM 18 giugno 2026 (c.d. DM FER-X Definitivo), in continuità al DM 30 dicembre 2024 (c.d. FER-X Transitorio) da cui eredita parte della struttura, disciplina il meccanismo di supporto per la produzione di energia elettrica da impianti a fonti rinnovabili con costi di generazione vicini alla competitività di mercato. Il meccanismo…",
+      "description": "Cos'è Il presente bando è predisposto secondo quanto previsto dal DM 18 giugno 2026 (c.d. DM FER-X Definitivo), in continuità al DM 30 dicembre 2024 (c.d. FER-X Transitorio) da cui eredita parte della struttura, disciplina il meccanismo di supporto per la produzione di energia elettrica da impianti a fonti rinnovabili con costi di generazione vicini alla competitività di mercato. Il meccanismo di supporto, i cui destinatari sono gli impianti solari fotovoltaici, eolici, idroelettrici e a gas residuati dai processi di depurazione di qualsiasi taglia. A chi si rivolge Il presente bando si rivolge agli impianti di potenza fino a 1 MW che possono accedere direttamente al meccanismo di supporto a seguito dell'entrata in esercizio, nel limite di 10 GW di potenza complessivamente disponibile per tali iniziative. Cosa prevede Il DM 18 giugno 2026 prevede il riconoscimento di un incentivo economico al fine di supportare lo sviluppo di nuova capacità da fonti rinnovabili d'energia. In particolare, i pagamenti sono regolati con il Soggetto Richiedente sulla base di un contratto alle differenze a due vie per un periodo pari a 20 anni, lasciando l'energia elettrica prodotta nella disponibilità del produttore, che provvede autonomamente alla valorizzazione sul mercato. Nel caso di interventi di potenza inferiore a 200 kW è possibile richiedere l’erogazione dei prezzi di aggiudicazione nella forma di Tariffa Omnicomprensiva. In tali casi il GSE provvede al ritiro e alla vendita dell'energia elettrica prodotta e immessa in rete.",
+      "requirements": [
+        "Destinatari: Ente Pubblico, Cittadino, Impresa, Università/Ente di Ricerca",
+        "Regioni: Piemonte, Lombardia, Valle d'Aosta/Vallée d'Aoste, Liguria, Abruzzo, Molise, Basilicata, Calabria, Campania, Puglia, Sicilia, Trentino-Alto Adige/Südtirol, Veneto, Sardegna, Toscana, Friuli-Venezia Giulia, Emilia-Romagna, Umbria, Marche, Lazio",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.gse.it/servizi-per-te/fonti-rinnovabili/fer-x-definitivo",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona",
+        "impresa"
+      ],
+      "opening_date": "2026-08-07",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Ente Pubblico, Cittadino, Impresa, Università/Ente di Ricerca | Regioni: Piemonte, Lombardia, Valle d'Aosta/Vallée d'Aoste, Liguria, Abruzzo, Molise, Basilicata, Calabria, Campania, Puglia, Sicilia, Trentino-Alto Adige/Südtirol, Veneto, Sardegna, Toscana, Friuli-Venezia Giulia, Emilia-Romagna, Umbria, Marche, Lazio | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "open",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-907f7f1f7ffc",
+      "title": "Finanziamento di percorsi formativi in materia di formazione obbligatoria per lo svolgimento dell’attività professionale di operatrice/operatore forestale - Regione Toscana",
+      "authority": "Regione Toscana",
+      "category": "lavoro",
+      "amount": "Dotazione: € 400.000",
+      "deadline": "2027-01-15",
+      "summary": "Cos'è Il presente Avviso si propone di sostenere e incentivare la realizzazione di progetti formativi per consentire alle/agli operatrici/ operatori forestali di conseguire la relativa qualificazione (entro la data del 01 Gennaio 2028) a seguito di completamento positivo del percorso di formazione obbligatoria, ottenendo le competenze essenziali per operare in sicurezza e nel rispetto dei lavor…",
+      "description": "Cos'è Il presente Avviso si propone di sostenere e incentivare la realizzazione di progetti formativi per consentire alle/agli operatrici/ operatori forestali di conseguire la relativa qualificazione (entro la data del 01 Gennaio 2028) a seguito di completamento positivo del percorso di formazione obbligatoria, ottenendo le competenze essenziali per operare in sicurezza e nel rispetto dei lavori di abbattimento. A chi si rivolge a) organismi formativi in partenariato accreditati ai sensi della d.g.r n. 1407 del 27.12.2016 e della d.g.r. n. 894 del 7.8.2017, b) Consorzio o fondazione o rete di imprese (rete-soggetto), c) associazione temporanea di imprese o di scopo (ATI/ATS) - una rete di imprese (rete-contratto) o altra forma di partenariato già costituita attraverso apposito atto pubblico o scrittura privata autenticata. Cosa prevede Progetti formativi rivolti a lavoratrici/lavoratori delle imprese con Codice Ateco, primario o secondario, 02 (Silvicoltura ed utilizzo di aree forestali) con sede interessata alla formazione (sede legale o unità locale o sede secondaria) sul territorio della Regione Toscana ed iscritte al Registro Imprese della Camera di Commercio di competenza o al REA (Repertorio economico amministrativo). Progetti da realizzare in coerenza con lo Standard Formativo “FORMAZIONE OBBLIGATORIA PER OPERATRICE/OPERATORE FORESTALE”. I progetti sono finanziabili per un importo di contributo pubblico non superiore a € 76.348,80 e non inferiore a € 25.449,60. L’importo verrà riconosciuto per un numero di ore non frazionabile. Ogni progetto dovrà prevedere lavoratrici/lavoratori in formazione in gruppi classe di massimo 15 partecipanti, fermo restando il limite di 3 partecipanti per ogni istruttore forestale durante le 32 ore di esercitazioni pratiche. Possono essere previste più edizioni della stessa attività per per allieve/i diverse/i. Durata massima intervento per singolo/a lavoratore/lavoratrice pari a 40 ore. I percorsi formativi non devono prevedere o",
+      "requirements": [
+        "Destinatari: Impresa - SU/PMI innovativa, Rete d'impresa, Università/Ente di Ricerca, Cittadino, Consorzio, Cooperative/Associazioni Non Profit, Ente Pubblico, Impresa, Impresa da costituire - Altro, Impresa da costituire - Femminile, Impresa da costituire - Giovanile, Impresa - prevalenza femminile, Impresa - prevalenza giovanile",
+        "Regioni: Toscana",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.regione.toscana.it/-/finanziamento-di-percorsi-formativi-per-operatrice-e-operatore-forestale",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "impresa",
+        "persona"
+      ],
+      "opening_date": "2026-10-22",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Impresa - SU/PMI innovativa, Rete d'impresa, Università/Ente di Ricerca, Cittadino, Consorzio, Cooperative/Associazioni Non Profit, Ente Pubblico, Impresa, Impresa da costituire - Altro, Impresa da costituire - Femminile, Impresa da costituire - Giovanile, Impresa - prevalenza femminile, Impresa - prevalenza giovanile | Regioni: Toscana | Forma dell'agevolazione: ['Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "open",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
+    },
+    {
+      "id": "inc-0ddb5877c896",
+      "title": "Programma Nazionale (PN) Metro Plus e Città Medie Sud 2021- 2027 – Piano Operativo Città di Cagliari – Priorità 4 “Servizi per l'inclusione e l'innovazione sociale” – Obiettivo specifico ESO4.11 - Azione 4.4.11.2 Operazione CA 4.4.11.2A – Cagliari Città A",
+      "authority": "Comune di Cagliari",
+      "category": "altro",
+      "amount": "Dotazione: € 1.364.700",
+      "deadline": "2026-11-22",
+      "summary": "Cos'è Il presente avviso è finalizzato a sovvenzionare, mediante contributi a fondo perduto, la realizzazione di progetti di partecipazione socio-culturale promossi da soggetti del Terzo Settore ed Enti no profit, singoli o riuniti in partenariato. A chi si rivolge ETS e soggetti no profit. Cosa prevede Finanziamenti di spese correnti per la realizzazione delle attività previste nei progetti. E…",
+      "description": "Cos'è Il presente avviso è finalizzato a sovvenzionare, mediante contributi a fondo perduto, la realizzazione di progetti di partecipazione socio-culturale promossi da soggetti del Terzo Settore ed Enti no profit, singoli o riuniti in partenariato. A chi si rivolge ETS e soggetti no profit. Cosa prevede Finanziamenti di spese correnti per la realizzazione delle attività previste nei progetti. Erogazione di sovvenzioni per la realizzazione di attività e progetti culturali e artistici nel quartiere della Marina a Cagliari.",
+      "requirements": [
+        "Destinatari: Cittadino, Cooperative/Associazioni Non Profit",
+        "Regioni: Sardegna",
+        "Forma dell'agevolazione: ['Contributo/Fondo perduto', 'Contributo/Fondo perduto']"
+      ],
+      "required_documents": [],
+      "source_url": "https://www.comune.cagliari.it/portale/page/it/progetto_marea_cagliari_citta_aperta_multiculturale_e_dinamica",
+      "source_name": "MIMIT — Incentivi Italia",
+      "target": [
+        "persona"
+      ],
+      "opening_date": "2026-10-06",
+      "eligibility": "unknown",
+      "eligibility_reason": "",
+      "is_new": true,
+      "detail_fetched_at": "2026-11-20T10:27:05Z",
+      "source_excerpts": {
+        "requirements": "Destinatari: Cittadino, Cooperative/Associazioni Non Profit | Regioni: Sardegna | Forma dell'agevolazione: ['Contributo/Fondo perduto', 'Contributo/Fondo perduto']",
+        "documents": ""
+      },
+      "miss_streak": 0,
+      "last_seen_at": "2026-11-20T10:27:05Z",
+      "status": "open",
+      "gate_reason": "import open data MIMIT",
+      "discovered_at": "2026-11-20T10:27:05Z",
+      "source": "incentivitalia"
     }
   ],
   "quarantine": [
@@ -1461,12 +2601,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:55:42Z",
+      "detail_fetched_at": "2026-11-20T10:22:31Z",
       "source_excerpts": {
         "documents": "Cittadini - Canone TV - Dichiarazione sostitutiva (invio online) - Agenzia delle Entrate"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
     },
     {
@@ -1488,7 +2628,7 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
@@ -1515,12 +2655,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:55:56Z",
+      "detail_fetched_at": "2026-11-20T10:22:46Z",
       "source_excerpts": {
         "documents": "Fondo Nazionale Efficienza Energetica - Ministero dell'Ambiente e della Sicurezza energetica"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
     },
     {
@@ -1548,13 +2688,13 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:55:59Z",
+      "detail_fetched_at": "2026-11-20T10:22:48Z",
       "source_excerpts": {
         "requirements": "ENEA INTRAENEA (area riservata ai dipendenti dell'Agenzia)",
         "documents": "Dipartimento Unità per l'Efficienza Energetica"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
     },
     {
@@ -1576,9 +2716,9 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:56:51Z",
+      "detail_fetched_at": "2026-11-20T10:23:40Z",
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
@@ -1602,12 +2742,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:56:51Z",
+      "detail_fetched_at": "2026-11-20T10:23:40Z",
       "source_excerpts": {
         "requirements": "Attraverso il Sistema, datori di lavoro e intermediari possono consultare i benefici contributivi disponibili, simulare quelli applicabili in relazione alle caratteristiche dell’impresa, del lavoratore e della posizione "
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
@@ -1629,9 +2769,9 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:56:51Z",
+      "detail_fetched_at": "2026-11-20T10:23:40Z",
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
@@ -1654,12 +2794,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:56:56Z",
+      "detail_fetched_at": "2026-11-20T10:23:43Z",
       "source_excerpts": {
         "requirements": "La misura si rivolge alle PMI che intendono tutelare i propri segni distintivi attraverso le procedure previste presso l’EUIPO, l’Ufficio dell’Unione europea per la proprietà intellettuale. In questo caso la dotazione am"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "nessun segnale di bando"
     },
     {
@@ -1684,12 +2824,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:57:13Z",
+      "detail_fetched_at": "2026-11-20T10:24:00Z",
       "source_excerpts": {
         "requirements": "Si comunica l’esaurimento delle risorse destinate ai contributi a fondo perduto di \"ON - Oltre Nuove imprese a tasso zero\". Per le domande presentate dal 1° luglio 2026 le agevolazioni verranno quindi concesse nella sola"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: requisiti"
     },
     {
@@ -1713,12 +2853,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:57:13Z",
+      "detail_fetched_at": "2026-11-20T10:24:00Z",
       "source_excerpts": {
         "requirements": "L’iniziativa, al fine di raggiungere in modo più ampio e consistente gli obiettivi prefissati, è attuata con partner istituzionali tra cui Unioncamere , Società italiana di management , Ufficio Italiano Brevetti e Marchi"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: requisiti"
     },
     {
@@ -1742,12 +2882,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:57:14Z",
+      "detail_fetched_at": "2026-11-20T10:24:00Z",
       "source_excerpts": {
         "documents": "“Economia circolare” è l’incentivo che sostiene la transizione delle attività economiche verso un modello di economia circolare e favorisce la riconversione produttiva per un uso più efficiente e sostenibile delle risors"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
     },
     {
@@ -1770,7 +2910,7 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
@@ -1792,7 +2932,7 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
@@ -1805,7 +2945,7 @@
       "summary": "Avviso pubblicato su Comune di Firenze — Novità e avvisi: apri la fonte per i dettagli.",
       "requirements": [],
       "required_documents": [],
-      "source_url": "https://www.comune.firenze.it/istruzione/servizi/salute-benessere-e-assistenza/assegno-di-maternita",
+      "source_url": "https://www.comune.firenze.it/istruzione/istruzione/istruzione/servizi/salute-benessere-e-assistenza/assegno-di-maternita",
       "source_name": "Comune di Firenze — Novità e avvisi",
       "target": [
         "persona",
@@ -1815,7 +2955,7 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
@@ -1828,7 +2968,7 @@
       "summary": "Avviso pubblicato su Comune di Firenze — Novità e avvisi: apri la fonte per i dettagli.",
       "requirements": [],
       "required_documents": [],
-      "source_url": "https://www.comune.firenze.it/istruzione/servizi/salute-benessere-e-assistenza/bonus-elettrico-disagio-fisico",
+      "source_url": "https://www.comune.firenze.it/istruzione/istruzione/istruzione/servizi/salute-benessere-e-assistenza/bonus-elettrico-disagio-fisico",
       "source_name": "Comune di Firenze — Novità e avvisi",
       "target": [
         "persona",
@@ -1838,7 +2978,7 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
@@ -1851,7 +2991,7 @@
       "summary": "Bonus sociale idrico integrativo - Anno 2026",
       "requirements": [],
       "required_documents": [],
-      "source_url": "https://www.comune.firenze.it/istruzione/servizi/salute-benessere-e-assistenza/bonus-sociale-idrico-integrativo-anno-2026",
+      "source_url": "https://www.comune.firenze.it/istruzione/istruzione/istruzione/servizi/salute-benessere-e-assistenza/bonus-sociale-idrico-integrativo-anno-2026",
       "source_name": "Comune di Firenze — Novità e avvisi",
       "target": [
         "persona",
@@ -1861,7 +3001,7 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
@@ -1874,7 +3014,7 @@
       "summary": "Contributi familiari caregiver - Anno 2026",
       "requirements": [],
       "required_documents": [],
-      "source_url": "https://www.comune.firenze.it/istruzione/servizi/salute-benessere-e-assistenza/contributi-familiari-caregiver-anno-2026",
+      "source_url": "https://www.comune.firenze.it/istruzione/istruzione/istruzione/servizi/salute-benessere-e-assistenza/contributi-familiari-caregiver-anno-2026",
       "source_name": "Comune di Firenze — Novità e avvisi",
       "target": [
         "persona",
@@ -1884,7 +3024,7 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
@@ -1908,9 +3048,9 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:57:45Z",
+      "detail_fetched_at": "2026-11-20T10:24:47Z",
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
@@ -1935,12 +3075,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:57:45Z",
+      "detail_fetched_at": "2026-11-20T10:24:47Z",
       "source_excerpts": {
         "documents": "Modulo di domanda [formato .doc]"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
     },
     {
@@ -1970,12 +3110,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:57:53Z",
+      "detail_fetched_at": "2026-11-20T10:24:57Z",
       "source_excerpts": {
         "documents": "SPID è il sistema di accesso che consente di utilizzare, con un'identità digitale unica"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
     },
     {
@@ -2005,12 +3145,12 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "detail_fetched_at": "2026-11-20T06:57:53Z",
+      "detail_fetched_at": "2026-11-20T10:25:03Z",
       "source_excerpts": {
         "documents": "SPID è il sistema di accesso che consente di utilizzare, con un'identità digitale unica"
       },
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: evidenze insufficienti: documenti"
     },
     {
@@ -2035,7 +3175,7 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "nessun segnale di bando"
     },
     {
@@ -2059,7 +3199,7 @@
       "eligibility_reason": "",
       "is_new": true,
       "miss_streak": 0,
-      "last_seen_at": "2026-11-20T06:59:05Z",
+      "last_seen_at": "2026-11-20T10:26:03Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
     {
@@ -2111,7 +3251,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "miss_streak": 1,
+      "miss_streak": 2,
       "last_seen_at": "2026-11-19T10:57:13Z",
       "gate_reason": "nessun segnale di bando"
     },
@@ -2134,7 +3274,7 @@
       "eligibility": "unknown",
       "eligibility_reason": "",
       "is_new": true,
-      "miss_streak": 1,
+      "miss_streak": 2,
       "last_seen_at": "2026-11-19T10:57:13Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
@@ -2161,29 +3301,6 @@
       "is_new": true,
       "detail_fetched_at": "2026-11-19T10:46:10Z",
       "miss_streak": 1,
-      "last_seen_at": "2026-11-19T10:47:53Z",
-      "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
-    },
-    {
-      "id": "scr-a83e3b1c2651",
-      "title": "Contributi familiari caregiver - Anno 2025",
-      "authority": "Comune di Firenze",
-      "category": "salute",
-      "amount": "",
-      "deadline": "",
-      "summary": "Contributi familiari caregiver - Anno 2025",
-      "requirements": [],
-      "required_documents": [],
-      "source_url": "https://www.comune.firenze.it/servizi/salute-benessere-e-assistenza/contributi-familiari-caregiver-anno-2025",
-      "source_name": "Comune di Firenze — Novità e avvisi",
-      "target": [
-        "persona",
-        "impresa"
-      ],
-      "eligibility": "unknown",
-      "eligibility_reason": "",
-      "is_new": true,
-      "miss_streak": 2,
       "last_seen_at": "2026-11-19T10:47:53Z",
       "gate_reason": "parla di bandi ma senza scadenza/importo/requisiti: nessuna scadenza né importo"
     },
@@ -2395,7 +3512,7 @@
     "open": 15,
     "unknown_deadline": 21,
     "expired": 9,
-    "quarantine": 36,
+    "quarantine": 35,
     "news": 2,
     "fill": {
       "deadline_pct": 41.7,

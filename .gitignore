@@ -8,3 +8,6 @@ dist/
 storage/
 isolate/
 /freebuff-sites-build/
+
+# open data grezzi (file MIMIT da 22 MB): fuori dal repo e dal build
+data/raw/
