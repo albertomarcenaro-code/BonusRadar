@@ -49,7 +49,7 @@ Porta alternative se la 587 è bloccata: `465` (SSL) o `2525` (fonte: help.brevo
 Salva. Supabase inizia subito a usare il provider dedicato.
 
 ### 3. Verifica
-1. Registrati con un indirizzo reale su `https://bonusradar.freebuff.app/auth`.
+1. Registrati con un indirizzo reale su `https://bonusradar.freebuff.page/auth`.
 2. Arriva la mail di conferma → clicca il link → login.
 3. Se non arriva: Supabase Dashboard → **Authentication → Logs** (invii/rate limit)
    e nella casella **Spam**.
