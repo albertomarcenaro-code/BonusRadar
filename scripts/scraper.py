@@ -2743,25 +2743,141 @@ def deadline_is_past(deadline: str, today: datetime | None = None) -> bool:
     return when.date() < ref.date()
 
 
+IMPORT_REFRESH_ENV = "BONUSRADAR_SKIP_IMPORT_REFRESH"
+IMPORT_REFRESH_TIMEOUT = 15
+IMPORT_REFRESH_RETRIES = 1
+IMPORT_REFRESH_MAX_RESOURCES = 4
+
+
+def refresh_import_file(json_path: Path) -> bool:
+    """Scarica gli open data MIMIT via CKAN e rigenera il file di import.
+
+    Chiude il vecchio fail-open manuale: il passo 1d non dipende più da un
+    comando lanciato a mano, perché il file `incentivi_import.json` viene
+    prodotto dentro la pipeline. Resta fail-open sulla rete: se gli host MIMIT
+    sono bloccati (timeout) il catalogo prosegue con il file già presente.
+    Restituisce True se il file è stato riscritto.
+    """
+    if os.environ.get(IMPORT_REFRESH_ENV):
+        print(f"  import: refresh saltato ({IMPORT_REFRESH_ENV} impostata)")
+        return False
+    script_dir = Path(__file__).resolve().parent
+    if str(script_dir) not in sys.path:
+        sys.path.insert(0, str(script_dir))
+    try:
+        import download_incentivi  # noqa: PLC0415  (import locale, opzionale)
+    except ImportError as exc:
+        print(f"::warning::refresh import non disponibile ({exc})")
+        return False
+
+    try:
+        packages = download_incentivi.ckan_packages(
+            IMPORT_REFRESH_TIMEOUT, IMPORT_REFRESH_RETRIES, download_incentivi.CKAN_ROWS
+        )
+        candidates, _ = download_incentivi.select_candidates(packages)
+        records, errors, _ = download_incentivi.fetch_candidates(
+            candidates,
+            IMPORT_REFRESH_TIMEOUT,
+            IMPORT_REFRESH_RETRIES,
+            IMPORT_REFRESH_MAX_RESOURCES,
+        )
+    except Exception as exc:  # rete o formato: il catalogo non deve cadere
+        print(f"::warning::open data MIMIT non scaricabili ({exc}): uso {IMPORT_JSON_NAME} esistente")
+        return False
+
+    if not records:
+        reason = errors[0] if errors else "nessuna risorsa JSON/CSV"
+        print(f"::warning::open data MIMIT non scaricabili ({reason}): uso {IMPORT_JSON_NAME} esistente")
+        return False
+
+    cleaned = [download_incentivi.clean_record(r) for r in records]
+    unique, _ = download_incentivi.dedupe([r for r in cleaned if r])
+    out = json_path.parent / IMPORT_JSON_NAME
+    try:
+        written, citizens = download_incentivi.import_into_catalog(unique, out)
+    except Exception as exc:
+        print(f"::warning::normalizzazione import fallita ({exc})")
+        return False
+    print(
+        f"  import: {len(unique)} schede scaricate · {citizens} \"Cittadino\" · "
+        f"{written} bandi scritti in {IMPORT_JSON_NAME}"
+    )
+    return written > 0
+
+
+def imported_row(item: dict, now: str) -> dict:
+    """Scheda importata nella stessa forma delle 36 schede estratte dalle fonti."""
+    requirements = list(item.get("requirements") or [])
+    documents = list(item.get("required_documents") or [])
+    deadline = item.get("deadline") or ""
+    return {
+        "id": item.get("id") or stable_id(normalize_title(item.get("title") or "")),
+        "title": item.get("title") or "",
+        "authority": item.get("authority") or "Incentivi Italia",
+        "category": item.get("category") or "altro",
+        "amount": item.get("amount") or "",
+        "deadline": deadline,
+        "summary": item.get("summary") or item.get("description") or "",
+        "description": item.get("description") or "",
+        "requirements": requirements,
+        "required_documents": documents,
+        "source_url": item["source_url"],
+        "source_name": item.get("source_name") or "MIMIT — Incentivi Italia",
+        "target": list(item.get("target") or ["persona"]),
+        "opening_date": item.get("opening_date") or "",
+        "eligibility": "unknown",
+        "eligibility_reason": "",
+        "is_new": True,
+        "detail_fetched_at": now,
+        "source_excerpts": {
+            "requirements": " | ".join(requirements[:3]),
+            "documents": " | ".join(documents[:3]),
+        },
+        "miss_streak": 0,
+        "last_seen_at": now,
+        "status": deadline_status(deadline),
+        "gate_reason": "import open data MIMIT",
+        "discovered_at": now,
+        "source": IMPORT_SOURCE,
+    }
+
+
 def merge_imported(rows: list[dict], imported: list[dict]) -> tuple[list[dict], int, int]:
     """Unisce i bandi importati al catalogo della run.
 
-    Deduplica per `source_url`: se l'URL è già presente la scheda viene
-    aggiornata sul posto (identità, data di scoperta e obsolescenza restano),
-    altrimenti viene accodata in fondo — le schede da open data hanno priorità
-    bassa in elenco rispetto a quelle delle fonti dirette.
+    Deduplica per `source_url`, poi per titolo normalizzato e per `id`: così la
+    stessa misura non entra due volte se è già coperta da una fonte diretta o
+    se il dataset MIMIT la ripete con un link diverso.
+    Se la scheda esiste viene aggiornata sul posto (identità, data di scoperta e
+    obsolescenza restano), altrimenti viene accodata in fondo — le schede da
+    open data hanno priorità bassa rispetto a quelle delle fonti dirette.
     Restituisce (righe, aggiunte, aggiornate).
     """
-    by_url = {
-        str(r.get("source_url") or "").rstrip("/").lower(): index
-        for index, r in enumerate(rows)
-        if r.get("source_url")
-    }
+    by_url: dict[str, int] = {}
+    by_title: dict[str, int] = {}
+    by_id: dict[str, int] = {}
+    for index, row in enumerate(rows):
+        url = str(row.get("source_url") or "").rstrip("/").lower()
+        if url:
+            by_url.setdefault(url, index)
+        title = normalize_title(str(row.get("title") or ""))
+        if title:
+            by_title.setdefault(title, index)
+        if row.get("id"):
+            by_id.setdefault(str(row["id"]), index)
+
+    now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     added = 0
     updated = 0
     for item in imported:
         key = str(item["source_url"]).rstrip("/").lower()
+        title_key = normalize_title(str(item.get("title") or ""))
+        id_key = str(item.get("id") or "")
         index = by_url.get(key)
+        if index is None and title_key:
+            index = by_title.get(title_key)
+        if index is None and id_key:
+            index = by_id.get(id_key)
         if index is not None:
             existing = rows[index]
             for field in IMPORT_UPDATABLE:
@@ -2769,34 +2885,16 @@ def merge_imported(rows: list[dict], imported: list[dict]) -> tuple[list[dict], 
                 if value not in (None, "", [], {}):
                     existing[field] = value
             existing["source"] = IMPORT_SOURCE
+            # Una scheda già in catalogo non è "nuova" e non si duplica.
             updated += 1
             continue
-        # Scheda nuova: stessa forma di quelle estratte dalle fonti, così il
-        # frontend (che legge `required_documents.length`, `status`, …) regge.
-        rows.append(
-            {
-                "id": item.get("id") or stable_id(normalize_title(item.get("title") or "")),
-                "title": item.get("title") or "",
-                "authority": item.get("authority") or "Incentivi Italia",
-                "category": item.get("category") or "altro",
-                "amount": item.get("amount") or "",
-                "deadline": item.get("deadline") or "",
-                "summary": item.get("summary") or item.get("description") or "",
-                "description": item.get("description") or "",
-                "requirements": list(item.get("requirements") or []),
-                "required_documents": list(item.get("required_documents") or []),
-                "source_url": item["source_url"],
-                "source_name": item.get("source_name") or "Incentivi Italia — open data",
-                "target": list(item.get("target") or ["persona"]),
-                "opening_date": item.get("opening_date") or "",
-                "eligibility": "unknown",
-                "eligibility_reason": "",
-                "status": deadline_status(item.get("deadline") or ""),
-                "is_new": True,
-                "source": IMPORT_SOURCE,
-            }
-        )
+        row = imported_row(item, now)
+        rows.append(row)
         by_url[key] = len(rows) - 1
+        if title_key:
+            by_title[title_key] = len(rows) - 1
+        if id_key:
+            by_id[id_key] = len(rows) - 1
         added += 1
     return rows, added, updated
 
@@ -3010,6 +3108,10 @@ def main() -> int:
     # entra nel catalogo prima di Supabase, così le schede compaiono anche per
     # gli utenti loggati. Priorità bassa (in fondo all'elenco) e deduplica per
     # `source_url`; le scadenze passate sono già scartate da `load_imported_bonuses`.
+    # Il file lo rigenera la pipeline stessa dalle API CKAN di dati.gov.it:
+    # nessun passo manuale, e se la rete blocca gli host MIMIT resta quello
+    # dell'ultima run andata a buon fine (fail-open).
+    refresh_import_file(json_path)
     imported = load_imported_bonuses(json_path.parent / IMPORT_JSON_NAME)
     if imported:
         rows, added, updated = merge_imported(rows, imported)

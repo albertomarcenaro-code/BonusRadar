@@ -11,9 +11,15 @@ tiene le sole schede rivolte alle **persone fisiche** — cioè i record in cui
 `Tipologia_Soggetto` contiene "Cittadino" — e le converte nel formato bando di
 BonusRadar.
 
-L'output è un file **separato**, `app/frontend/public/data/incentivi_import.json`:
-`app/frontend/public/data/bonuses.json` non viene toccato. Lo script non scrive
-su Supabase e non modifica `SOURCES`.
+L'output è `app/frontend/public/data/incentivi_import.json`, il file che il
+passo 1d di `scripts/scraper.py` fonde nel catalogo principale
+(`app/frontend/public/data/bonuses.json`). Lo script non scrive su Supabase e
+non modifica `SOURCES`.
+
+Il download può arrivare anche da `scripts/download_incentivi.py`, che scopre le
+risorse via API CKAN di dati.gov.it quando l'host MIMIT è bloccato: le funzioni
+`bonuses_from_records` e `write_import_file` sono condivise con quel comando
+(`download_incentivi.py --import`).
 
 Uso:
     python3 scripts/import_incentivi.py                       # URL ufficiale
@@ -54,6 +60,9 @@ DEFAULT_URLS = (
 )
 
 DEFAULT_OUT = "app/frontend/public/data/incentivi_import.json"
+
+# Fonte mostrata sulle schede importate: il dataset è del MIMIT.
+DEFAULT_SOURCE_NAME = "MIMIT — Incentivi Italia"
 
 USER_AGENT = (
     "Mozilla/5.0 (compatible; BonusRadarBot/1.0; "
@@ -317,6 +326,50 @@ def stable_id(record: dict) -> str:
     return "inc-" + hashlib.sha1(key.encode("utf-8")).hexdigest()[:12]
 
 
+def bonuses_from_records(
+    records: list[dict], source_name: str = DEFAULT_SOURCE_NAME
+) -> tuple[list[dict], int]:
+    """Schede per i cittadini normalizzate, già deduplicate.
+
+    Restituisce (bandi, schede con "Cittadino" in `Tipologia_Soggetto`).
+    """
+    citizens = [r for r in records if is_citizen(r)]
+    bonuses = [b for b in (to_bonus(r, source_name) for r in citizens) if b]
+    return dedupe_bonuses(bonuses), len(citizens)
+
+
+def dedupe_bonuses(bonuses: list[dict]) -> list[dict]:
+    """Una scheda per misura: dedupe per link ufficiale, id e titolo normalizzato."""
+    seen_urls: set[str] = set()
+    seen_titles: set[str] = set()
+    unique: list[dict] = []
+    for bonus in bonuses:
+        url = str(bonus.get("source_url") or "").rstrip("/").lower()
+        title = re.sub(r"[^a-z0-9]+", " ", str(bonus.get("title") or "").lower()).strip()
+        if (url and url in seen_urls) or (title and title in seen_titles):
+            continue
+        if url:
+            seen_urls.add(url)
+        if title:
+            seen_titles.add(title)
+        unique.append(bonus)
+    return unique
+
+
+def write_import_file(bonuses: list[dict], out: Path) -> Path:
+    """Scrive il file di import nel formato atteso dal passo 1d della pipeline."""
+    out.parent.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "source": DEFAULT_SOURCE_NAME,
+        "count": len(bonuses),
+        "bonuses": bonuses,
+    }
+    out.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"\nOutput: {out} ({len(bonuses)} bandi)")
+    return out
+
+
 def to_bonus(record: dict, source_name: str) -> dict | None:
     """Converte una scheda open data nel formato bando del catalogo."""
     title = clean_text(record.get("Titolo"))
@@ -404,30 +457,20 @@ def main(argv: list[str] | None = None) -> int:
         print(f"ERRORE: {exc}", file=sys.stderr)
         return 2
 
+    bonuses, citizens_count = bonuses_from_records(records)
     citizens = [r for r in records if is_citizen(r)]
-    source_name = "Incentivi Italia — open data"
-    bonuses = [b for b in (to_bonus(r, source_name) for r in citizens) if b]
-    skipped = len(citizens) - len(bonuses)
+    skipped = citizens_count - len(bonuses)
 
     print(f"Sorgente: {used_source}")
     print(f"Schede totali scaricate: {len(records)}")
-    print(f"Schede con \"Cittadino\" in Tipologia_Soggetto: {len(citizens)}")
-    print(f"Scartate per dati mancanti (titolo o link ufficiale): {skipped}")
+    print(f"Schede con \"Cittadino\" in Tipologia_Soggetto: {citizens_count}")
+    print(f"Scartate per dati mancanti (titolo o link ufficiale) o duplicate: {skipped}")
     print(f"Scritte nel file di import: {len(bonuses)}")
 
     show_examples(citizens, args.examples)
 
     if bonuses:
-        out = Path(args.out)
-        out.parent.mkdir(parents=True, exist_ok=True)
-        payload = {
-            "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-            "source": source_name,
-            "count": len(bonuses),
-            "bonuses": bonuses,
-        }
-        out.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
-        print(f"\nOutput: {out} ({len(bonuses)} bandi)")
+        write_import_file(bonuses, Path(args.out))
     else:
         print("\nNessun bando importabile: file di output non scritto.")
 
